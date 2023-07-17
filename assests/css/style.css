@@ -1,0 +1,24 @@
+:root{
+    --primary:rgb(55, 69, 171);
+    --secondary:rgb(117, 237, 179);
+    --btn-color1:
+}
+
+.navbar{
+    --bs-bg-opacity: .75;
+}
+.navbar .navbar-brand{ 
+    font-size: 1.75rem;
+    font-weight:500;
+}
+
+/* .navbar ion-icon {
+    font-size: 1.0rem;
+} */
+
+footer ion-icon{
+    font-size: 1.5rem;
+}
+footer p {
+    font-size: 1.0rem;
+}
