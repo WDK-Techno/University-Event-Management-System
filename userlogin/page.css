@@ -1,0 +1,9 @@
+.bgimg {
+	background-image: url('cover.jpg');
+	min-height: 100%;
+	background-position: center;
+	background-size: cover;
+  }
+body {
+	background: linear-gradient(90deg, #C7C5F4, #776BCC);		
+}
