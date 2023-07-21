@@ -7,13 +7,13 @@
 	font-family: Raleway, sans-serif;
 }
 .bgimg {
-	background-image: url('cover.jpg');
+	background-image: url('cover_new.jpg');
 	min-height: 100%;
 	background-position: center;
 	background-size: cover;
   }
 body {
-	background: linear-gradient(90deg, #C7C5F4, #776BCC);		
+	background: linear-gradient(90deg, #C7C5F4);		
 }
 
 .header{
