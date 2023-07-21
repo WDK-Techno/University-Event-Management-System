@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <!-- ====== CSS Files ==== -->
-    <link rel="stylesheet" href="assests/css/style.css">
-    <link rel="stylesheet" href="assests/scss/style.scss">
-    <link rel="stylesheet" href="assests/css/home.css">
 
-    <!-- ===== Boostrap CSS ==== -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <!-- ====== CSS Files ==== -->
+  <link rel="stylesheet" href="assests/css/style.css">
+  <link rel="stylesheet" href="assests/scss/style.scss">
+  <link rel="stylesheet" href="assests/css/home.css">
+
+  <!-- ===== Boostrap CSS ==== -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
 </head>
+
 <body>
-    <!-- ======= Navigation Bar =======    -->
+  <!-- ======= Navigation Bar =======    -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid px-4">
-      <a class="navbar-brand text-primary" href="index.html">UWU<span class="text-dark">Event</span><span class="text-warning">z</span></a>
+      <a class="navbar-brand text-primary" href="index.html">UWU<span class="text-dark">Event</span><span
+          class="text-warning">z</span></a>
       <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button> -->
@@ -29,41 +33,529 @@
           </li> -->
         </ul>
         <form class="d-flex">
-          <button class="btn btn-outline-secondary d-flex align-items-center" type="submit"><Span class="d-none d-lg-inline pe-2">SignUp</Span><ion-icon style="font-size: 1.0rem;;"" name="person-add-outline"></ion-icon></button>
-          <button class="btn btn-outline-primary ms-2 d-flex align-items-center" type="submit"><Span class="d-none d-lg-inline-block pe-2">LogIn</Span><ion-icon style="font-size: 1.5rem;" name="log-in-outline"></ion-icon></button>
+          <button class="btn btn-outline-secondary d-flex align-items-center" type="submit"><Span
+              class="d-none d-lg-inline pe-2">SignUp</Span>
+            <ion-icon style="font-size: 1.0rem;;"" name=" person-add-outline"></ion-icon>
+          </button>
+          <button class="btn btn-outline-primary ms-2 d-flex align-items-center" type="submit"><Span
+              class="d-none d-lg-inline-block pe-2">LogIn</Span>
+            <ion-icon style="font-size: 1.5rem;" name="log-in-outline"></ion-icon>
+          </button>
         </form>
       </div>
     </div>
   </nav>
 
-    <!-- ======= Main Content ====== -->
-    <div class="w-100" style="height: 100vh;">
-    
-    
+  <!-- ======= Main Content ====== -->
+  <section class="w-auto">
+    <div class="calendar">
+      <div class="calendar-tools">
+        <div class="d-flex justify-content-center align-items-center">
+          <div class=" d-flex justify-content-center"><button data-mdb-ripple-color="dark"
+              class="btn btn-link text-dark">Today</button><button data-mdb-ripple-color="dark"
+              class="btn btn-link text-dark"><i class="fas fa-chevron-left"></i></button><button
+              data-mdb-ripple-color="dark" class="btn btn-link text-dark"><i class="fas fa-chevron-right"></i></button>
+          </div><span class="calendar-heading">July 2023</span>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div id="select-wrapper-748449" class="select-wrapper">
+            <div class="form-outline d-flex py-2 collapsed">
+              
+              <div class="form-label select-fake-value"><b>Month</b></div>
+            </div><select class="select select-initialized">
+              <option value="month" selected="">Month</option>
+              <option value="week" false="">Week</option>
+              <option value="list" false="">List</option>
+            </select>
+          </div><button class="btn btn-success d-block text-sm-center" id="submitBtn" type="submit"> Add Event </button>
+        </div>
+      </div>
+      <div class="col-6 px-4 py-5 d-lg-inline-grid">
+        <table class="month">
+          <thead>
+            <tr>
+              <th>Sun</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Sat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="disabled" data-date="25/06/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">25</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td class="disabled" data-date="26/06/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">26</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td class="disabled" data-date="27/06/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">27</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td class="disabled" data-date="28/06/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">28</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td class="disabled" data-date="29/06/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">29</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td class="disabled" data-date="30/06/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">30</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td data-date="01/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">1</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+            </tr>
+            <tr>
+              <td data-date="02/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">2</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td data-date="03/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">3</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td data-date="04/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">4</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td data-date="05/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">5</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td data-date="06/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">6</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td data-date="07/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">7</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td data-date="08/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">8</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+            </tr>
+            <tr>
+              <td data-date="09/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">9</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td data-date="10/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">10</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td data-date="11/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">11</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td data-date="12/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">12</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td data-date="13/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">13</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td data-date="14/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">14</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td data-date="15/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">15</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+            </tr>
+            <tr>
+              <td data-date="16/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">16</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td data-date="17/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">17</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td data-date="18/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">18</div>
+                </div>
+                <div class="events-wrapper">
+                  <div class="event event-1" data-mdb-event-key="1" data-mdb-event-order="0" draggable="true"
+                    data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 1; background: rgb(199, 245, 217); color: rgb(11, 65, 33);" data-mdb-original-title="<h6><strong>Angular Meetup</strong></h6><p><small><em>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</em></small></p><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    18/07/2023 <small class=&quot;fw-light&quot;>10:00</small> -
+    24/07/2023 <small class=&quot;fw-light&quot;>14:00</small></small></p>"></div>
+                </div>
+              </td>
+              <td data-date="19/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">19</div>
+                </div>
+                <div class="events-wrapper">
+                  <div data-mdb-event-key="1" data-mdb-event-order="0" class="event event-1 event-long" draggable="true"
+                    data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 1; background: rgb(199, 245, 217); color: rgb(11, 65, 33);" aria-label="<h6><strong>Angular Meetup</strong></h6><p><small><em>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</em></small></p><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    18/07/2023 <small class=&quot;fw-light&quot;>10:00</small> -
+    24/07/2023 <small class=&quot;fw-light&quot;>14:00</small></small></p>" data-mdb-original-title="<h6><strong>Angular Meetup</strong></h6><p><small><em>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</em></small></p><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    18/07/2023 <small class=&quot;fw-light&quot;>10:00</small> -
+    24/07/2023 <small class=&quot;fw-light&quot;>14:00</small></small></p>">&nbsp;</div>
+                </div>
+              </td>
+              <td data-date="20/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">20</div>
+                </div>
+                <div class="events-wrapper">
+                  <div data-mdb-event-key="1" data-mdb-event-order="0" class="event event-1 event-long" draggable="true"
+                    data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 1; background: rgb(199, 245, 217); color: rgb(11, 65, 33);" aria-label="<h6><strong>Angular Meetup</strong></h6><p><small><em>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</em></small></p><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    18/07/2023 <small class=&quot;fw-light&quot;>10:00</small> -
+    24/07/2023 <small class=&quot;fw-light&quot;>14:00</small></small></p>" data-mdb-original-title="<h6><strong>Angular Meetup</strong></h6><p><small><em>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</em></small></p><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    18/07/2023 <small class=&quot;fw-light&quot;>10:00</small> -
+    24/07/2023 <small class=&quot;fw-light&quot;>14:00</small></small></p>">&nbsp;</div>
+                </div>
+              </td>
+              <td data-date="21/07/2023" class="today">
+                <div class="day-field-wrapper">
+                  <div class="day-field">21</div>
+                </div>
+                <div class="events-wrapper">
+                  <div data-mdb-event-key="1" data-mdb-event-order="0" class="event event-1 event-long" draggable="true"
+                    data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 1; background: rgb(199, 245, 217); color: rgb(11, 65, 33);" aria-label="<h6><strong>Angular Meetup</strong></h6><p><small><em>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</em></small></p><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    18/07/2023 <small class=&quot;fw-light&quot;>10:00</small> -
+    24/07/2023 <small class=&quot;fw-light&quot;>14:00</small></small></p>" data-mdb-original-title="<h6><strong>Angular Meetup</strong></h6><p><small><em>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</em></small></p><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    18/07/2023 <small class=&quot;fw-light&quot;>10:00</small> -
+    24/07/2023 <small class=&quot;fw-light&quot;>14:00</small></small></p>">&nbsp;</div>
+                  <div class="event event-2 event-end" data-mdb-event-key="2" data-mdb-event-order="1" draggable="true"
+                    data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 2; background: rgb(207, 224, 252); color: rgb(10, 71, 169);" data-mdb-original-title="<h6><strong>JS Conference</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    21/07/2023</small></p>"></div>
+                </div>
+              </td>
+              <td data-date="22/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">22</div>
+                </div>
+                <div class="events-wrapper">
+                  <div data-mdb-event-key="1" data-mdb-event-order="0" class="event event-1 event-long" draggable="true"
+                    data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 1; background: rgb(199, 245, 217); color: rgb(11, 65, 33);" aria-label="<h6><strong>Angular Meetup</strong></h6><p><small><em>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</em></small></p><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    18/07/2023 <small class=&quot;fw-light&quot;>10:00</small> -
+    24/07/2023 <small class=&quot;fw-light&quot;>14:00</small></small></p>" data-mdb-original-title="<h6><strong>Angular Meetup</strong></h6><p><small><em>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</em></small></p><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    18/07/2023 <small class=&quot;fw-light&quot;>10:00</small> -
+    24/07/2023 <small class=&quot;fw-light&quot;>14:00</small></small></p>">&nbsp;</div>
+                  <div class="event event-3" data-mdb-event-key="3" data-mdb-event-order="1" draggable="true"
+                    data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 3; background: rgb(235, 205, 254); color: rgb(110, 2, 177);" data-mdb-original-title="<h6><strong>Vue Meetup</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    22/07/2023 -
+    26/07/2023</small></p>"></div>
+                  <div class="event event-4 event-short event-end" data-mdb-event-key="4" data-mdb-event-order="2"
+                    draggable="true" data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 4;" data-mdb-original-title="<h6><strong>Meeting</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    22/07/2023 <small class=&quot;fw-light&quot;>08:00 - 12:00</small></small></p>"><i
+                      class="fas fa-circle pe-1 event-circle" style="color: rgb(207, 224, 252);"></i></div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td data-date="23/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">23</div>
+                </div>
+                <div class="events-wrapper">
+                  <div data-mdb-event-key="1" data-mdb-event-order="0" class="event event-1 event-long" draggable="true"
+                    data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 1; background: rgb(199, 245, 217); color: rgb(11, 65, 33); padding-left: 7px;"
+                    data-mdb-original-title="<h6><strong>Angular Meetup</strong></h6><p><small><em>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</em></small></p><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    18/07/2023 <small class=&quot;fw-light&quot;>10:00</small> -
+    24/07/2023 <small class=&quot;fw-light&quot;>14:00</small></small></p>"></div>
+                  <div data-mdb-event-key="3" data-mdb-event-order="1" class="event event-3 event-long" draggable="true"
+                    data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 3; background: rgb(235, 205, 254); color: rgb(110, 2, 177); padding-left: 7px;"
+                    data-mdb-original-title="<h6><strong>Vue Meetup</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    22/07/2023 -
+    26/07/2023</small></p>"></div>
+                  <div class="event event-5 event-short event-end" data-mdb-event-key="5" data-mdb-event-order="2"
+                    draggable="true" data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 5;" data-mdb-original-title="<h6><strong>Call</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    23/07/2023 <small class=&quot;fw-light&quot;>11:00 - 14:00</small></small></p>"><i
+                      class="fas fa-circle pe-1 event-circle" style="color: rgb(41, 41, 41);"></i></div>
+                </div>
+              </td>
+              <td data-date="24/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">24</div>
+                </div>
+                <div class="events-wrapper">
+                  <div data-mdb-event-key="1" data-mdb-event-order="0" class="event event-1 event-long event-end"
+                    draggable="true" data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 1; background: rgb(199, 245, 217); color: rgb(11, 65, 33);" aria-label="<h6><strong>Angular Meetup</strong></h6><p><small><em>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</em></small></p><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    18/07/2023 <small class=&quot;fw-light&quot;>10:00</small> -
+    24/07/2023 <small class=&quot;fw-light&quot;>14:00</small></small></p>" data-mdb-original-title="<h6><strong>Angular Meetup</strong></h6><p><small><em>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</em></small></p><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    18/07/2023 <small class=&quot;fw-light&quot;>10:00</small> -
+    24/07/2023 <small class=&quot;fw-light&quot;>14:00</small></small></p>" aria-describedby="tooltip379779">&nbsp;
+                  </div>
+                  <div data-mdb-event-key="3" data-mdb-event-order="1" class="event event-3 event-long" draggable="true"
+                    data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 3; background: rgb(235, 205, 254); color: rgb(110, 2, 177);" aria-label="<h6><strong>Vue Meetup</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    22/07/2023 -
+    26/07/2023</small></p>" data-mdb-original-title="<h6><strong>Vue Meetup</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    22/07/2023 -
+    26/07/2023</small></p>">&nbsp;</div>
+                </div>
+              </td>
+              <td data-date="25/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">25</div>
+                </div>
+                <div class="events-wrapper">
+                  <div class="fake-event" style="order: 1;">&nbsp;</div>
+                  <div data-mdb-event-key="3" data-mdb-event-order="1" class="event event-3 event-long" draggable="true"
+                    data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 3; background: rgb(235, 205, 254); color: rgb(110, 2, 177);" aria-label="<h6><strong>Vue Meetup</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    22/07/2023 -
+    26/07/2023</small></p>" data-mdb-original-title="<h6><strong>Vue Meetup</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    22/07/2023 -
+    26/07/2023</small></p>">&nbsp;</div>
+                </div>
+              </td>
+              <td data-date="26/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">26</div>
+                </div>
+                <div class="events-wrapper">
+                  <div class="fake-event" style="order: 1;">&nbsp;</div>
+                  <div data-mdb-event-key="3" data-mdb-event-order="1" class="event event-3 event-long event-end"
+                    draggable="true" data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 3; background: rgb(235, 205, 254); color: rgb(110, 2, 177);" aria-label="<h6><strong>Vue Meetup</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    22/07/2023 -
+    26/07/2023</small></p>" data-mdb-original-title="<h6><strong>Vue Meetup</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    22/07/2023 -
+    26/07/2023</small></p>">&nbsp;</div>
+                  <div class="event event-6" data-mdb-event-key="6" data-mdb-event-order="2" draggable="true"
+                    data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 6; background: rgb(253, 216, 222); color: rgb(121, 6, 25);" data-mdb-original-title="<h6><strong>React Meetup</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    26/07/2023 -
+    29/07/2023</small></p>"></div>
+                </div>
+              </td>
+              <td data-date="27/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">27</div>
+                </div>
+                <div class="events-wrapper">
+                  <div class="fake-event" style="order: 2;">&nbsp;</div>
+                  <div class="fake-event" style="order: 2;">&nbsp;</div>
+                  <div data-mdb-event-key="6" data-mdb-event-order="2" class="event event-6 event-long" draggable="true"
+                    data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 6; background: rgb(253, 216, 222); color: rgb(121, 6, 25);" aria-label="<h6><strong>React Meetup</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    26/07/2023 -
+    29/07/2023</small></p>" data-mdb-original-title="<h6><strong>React Meetup</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    26/07/2023 -
+    29/07/2023</small></p>">&nbsp;</div>
+                </div>
+              </td>
+              <td data-date="28/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">28</div>
+                </div>
+                <div class="events-wrapper">
+                  <div class="fake-event" style="order: 2;">&nbsp;</div>
+                  <div class="fake-event" style="order: 2;">&nbsp;</div>
+                  <div data-mdb-event-key="6" data-mdb-event-order="2" class="event event-6 event-long" draggable="true"
+                    data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 6; background: rgb(253, 216, 222); color: rgb(121, 6, 25);" aria-label="<h6><strong>React Meetup</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    26/07/2023 -
+    29/07/2023</small></p>" data-mdb-original-title="<h6><strong>React Meetup</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    26/07/2023 -
+    29/07/2023</small></p>">&nbsp;</div>
+                </div>
+              </td>
+              <td data-date="29/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">29</div>
+                </div>
+                <div class="events-wrapper">
+                  <div class="fake-event" style="order: 2;">&nbsp;</div>
+                  <div class="fake-event" style="order: 2;">&nbsp;</div>
+                  <div data-mdb-event-key="6" data-mdb-event-order="2" class="event event-6 event-long event-end"
+                    draggable="true" data-mdb-toggle="tooltip" data-mdb-offset="0,10" data-mdb-html="true"
+                    style="order: 6; background: rgb(253, 216, 222); color: rgb(121, 6, 25);" aria-label="<h6><strong>React Meetup</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    26/07/2023 -
+    29/07/2023</small></p>" data-mdb-original-title="<h6><strong>React Meetup</strong></h6><p class=&quot;mb-0&quot;><small>
+    <i class=&quot;fas fa-calendar-alt pr-1&quot;></i>
+    26/07/2023 -
+    29/07/2023</small></p>">&nbsp;</div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td data-date="30/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">30</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td data-date="31/07/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">31</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td class="disabled" data-date="01/08/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">1</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td class="disabled" data-date="02/08/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">2</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td class="disabled" data-date="03/08/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">3</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td class="disabled" data-date="04/08/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">4</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+              <td class="disabled" data-date="05/08/2023">
+                <div class="day-field-wrapper">
+                  <div class="day-field">5</div>
+                </div>
+                <div class="events-wrapper"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    
-    <!-- ======== Footer ======== -->
-    <footer class="py-0 px-5 text-dark">
-        <div class="row">
-        <!-- <h1>zdhfudkslfsudhli</h1> -->
-        </div>
-        <div class="d-flex flex-column align-items-center flex-lg-row justify-content-lg-between py-4 my-4 border-top">
-        <p class="text-center">© 2023 UWUEventz, Inc. <span class="d-block d-md-inline">All rights reserved.</span></p>
-        <ul class="list-unstyled d-flex">
-            <li class="m-1"><a class="link-dark" href="#"><ion-icon name="logo-tumblr"></ion-icon></a></li>
-            <li class="m-1"><a class="link-dark" href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
-            <li class="m-1"><a class="link-dark" href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
-        </ul>
-        </div>
-    </footer>
-    
-    <!-- ==== Boostrap Script ==== -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <!-- ========= Ionicons Scripts ===== -->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    
-    <!-- ====== Script files ===== -->
-    <script src="assests/js/home.js"></script>
+  </section>
+
+  </div>
+
+  <!-- ======== Footer ======== -->
+  <footer class="py-0 px-5 text-dark">
+    <div class="row">
+      <!-- <h1>zdhfudkslfsudhli</h1> -->
+    </div>
+    <div class="d-flex flex-column align-items-center flex-lg-row justify-content-lg-between py-4 my-4 border-top">
+      <p class="text-center">© 2023 UWUEventz, Inc. <span class="d-block d-md-inline">All rights reserved.</span></p>
+      <ul class="list-unstyled d-flex">
+        <li class="m-1"><a class="link-dark" href="#">
+            <ion-icon name="logo-tumblr"></ion-icon>
+          </a></li>
+        <li class="m-1"><a class="link-dark" href="#">
+            <ion-icon name="logo-instagram"></ion-icon>
+          </a></li>
+        <li class="m-1"><a class="link-dark" href="#">
+            <ion-icon name="logo-facebook"></ion-icon>
+          </a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- ==== Boostrap Script ==== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+  </script>
+  <!-- ========= Ionicons Scripts ===== -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <!-- ====== Script files ===== -->
+  <script src="assests/js/home.js"></script>
 </body>
+
 </html>
