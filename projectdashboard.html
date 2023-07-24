@@ -7,7 +7,7 @@
     <title>Document</title>
 
     <!-- ====== CSS Files ==== -->
-    <!-- <link rel="stylesheet" href="assests/css/style.css"> -->
+    <link rel="stylesheet" href="assests/css/style.css">
     <!-- <link rel="stylesheet" href="assests/scss/style.scss"> -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="assests/css/projectdashboard.css">
@@ -21,47 +21,48 @@
 <body>
 
     <!-- =======  side bar ======= -->
-    <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:block;" id="mySidebar">
+    <div class="sideBar w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:block;" id="mySidebar">
 
 
         <!-- ======== side bar content ======= -->
-        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
+        <div class="d-flex flex-column flex-shrink-0 p-3">
 
-            <button id="openNav" onclick="sideBarControl()"><ion-icon name="chevron-forward-circle-outline"></ion-icon></button>
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-
-                <span class="fs-4">Sidebar</span>
-            </a>
+            <ion-icon id="openNav" class="d-block m-2" onclick="sideBarControl()" name="chevron-back-circle-outline"></ion-icon>
+            
+            <!-- <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <span class="fs-4 m-2">Sidebar</span>
+            </a> -->
+            
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item btn-toggle-nav">
-                    <a href="#" class="nav-link active" aria-current="page">
+                <li class="sideBar-btn btn-toggle-nav">
+                    <a href="#" class="nav-link active d-flex justify-content-start" aria-current="page">
                         <ion-icon name="people-circle-outline"></ion-icon>
-                        Team Members
+                        <span class="sideBar-btn-text">Team Members</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link text-white">
+                <li class="sideBar-btn">
+                    <a href="#" class="nav-link d-flex justify-content-start">
                         <ion-icon name="calendar-outline"></ion-icon>
-                        Grantt Chart
+                        <span class="sideBar-btn-text">Grantt Chart</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link text-white">
+                <li class="sideBar-btn">
+                    <a href="#" class="nav-link d-flex justify-content-start">
                         <ion-icon name="walk-outline"></ion-icon>
-                        Activitty Plan
+                        <span class="sideBar-btn-text">Activitty Plan</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link text-white">
+                <li class="sideBar-btn">
+                    <a href="#" class="nav-link d-flex justify-content-start">
                         <ion-icon name="accessibility-outline"></ion-icon>
-                        PR Plan
+                        <span class="sideBar-btn-text">PR Plan</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link text-white">
+                <li class="sideBar-btn">
+                    <a href="#" class="nav-link d-flex justify-content-start">
                         <ion-icon name="settings-outline"></ion-icon>
-                        Settings
+                        <span class="sideBar-btn-text">Settings</span>
                     </a>
                 </li>
             </ul>
@@ -102,7 +103,7 @@
                 "25%" matches the width of the sidebar.</p>
         </div>
 
-    </div>
+    </div>  
 
     <!-- ==== Boostrap Script ==== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"

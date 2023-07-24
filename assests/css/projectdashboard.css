@@ -17,4 +17,42 @@ body {
 
 #main {
   margin-left: 280px;
+  /* background-color: var(--secondary); */
+  height: 100vh;
+}
+
+#openNav{
+  font-size: 2.5rem;
+  background-color: transparent;
+  cursor: pointer;
+}
+.sideBar{
+  color: white;
+  background-color:var(--primary);
+}
+
+.sideBar ul li{
+  color: white;
+}
+.sideBar ul li ion-icon{
+  font-size: 2.5rem;
+  margin-right: 7px;
+}
+
+.sideBar ul li span{
+  font-size: 1.5rem;
+}
+
+.sideBar-btn:hover{
+  color: var(--primary);
+  background-color: var(--secondary);
+  
+}
+.sideBar-btn-text{
+  display: block;
+}
+
+.nav-item{
+  /* width: 100%; */
+  /* margin: 5px; */
 }
