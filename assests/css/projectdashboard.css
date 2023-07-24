@@ -30,10 +30,6 @@ body {
   color: white;
   background-color:var(--primary);
 }
-
-.sideBar ul li{
-  color: white;
-}
 .sideBar ul li ion-icon{
   font-size: 2.5rem;
   margin-right: 7px;
@@ -43,16 +39,11 @@ body {
   font-size: 1.5rem;
 }
 
-.sideBar-btn:hover{
+.sideBar-btn:hover, .sideBar-btn .activate{
   color: var(--primary);
   background-color: var(--secondary);
   
 }
 .sideBar-btn-text{
   display: block;
-}
-
-.nav-item{
-  /* width: 100%; */
-  /* margin: 5px; */
 }
