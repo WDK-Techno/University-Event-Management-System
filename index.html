@@ -7,7 +7,8 @@
   <title>Home Page</title>
   <!-- ====== CSS Files ==== -->
   <link rel="stylesheet" href="assests/css/style.css">
-  <link rel="stylesheet" href="assests/scss/style.scss">
+  <!-- <link rel="stylesheet" href="assests/scss/style.scss"> -->
+  <link rel="stylesheet" href="assests/css/home.css">
   <link rel="stylesheet" href="assests/css/home.css">
   <link rel="stylesheet" href="assests/css/calender.css">
   <link rel="stylesheet" href="assests/css/carousel.css">
@@ -22,7 +23,7 @@
 
 <body>
   <!-- ======= Navigation Bar =======    -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top position-relative">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid px-4">
       <a class="navbar-brand text-primary" href="index.html">UWU<span class="text-dark">Event</span><span
           class="text-warning">z</span></a>
@@ -52,8 +53,9 @@
 
   <!-- ======= Main Content ====== -->
 
+  <div id="main">
 
-  <div class="modal fade" id="showCalender" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="showCalender" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -271,22 +273,23 @@
 
   <header class="pt-lg-4">
     <div class="overlay py-1 px-2">
-  <h1>About UWU Event Calender</h1>
-  <p>Many events or projects happen every week in our university. In such a situation, the days will last
-    Events are held by different degrees or different clubs, and when you book the hall for those events, there
-    Many problems such as events that collide with each other on the same day.
-    Those events happen on the same day at the same time. And here some students may be in several events
-    Several clubs. Then it becomes easier for him to plan his work and manage his time.
-    A calendar of events and projects organized by the university's students will help in the assignment
-    Dates for an event.</p>
-    <br>
-    <button>READ MORE</button>
+      <h1>About UWU Event Calender</h1>
+      <p>Many events or projects happen every week in our university. In such a situation, the days will last
+        Events are held by different degrees or different clubs, and when you book the hall for those events, there
+        Many problems such as events that collide with each other on the same day.
+        Those events happen on the same day at the same time. And here some students may be in several events
+        Several clubs. Then it becomes easier for him to plan his work and manage his time.
+        A calendar of events and projects organized by the university's students will help in the assignment
+        Dates for an event.</p>
+        <br>
+        <button>READ MORE</button>
       </div>
-  </header>
-
-
-  <!-- ======== Footer ======== -->
-  <footer class="py-0 px-0 text-dark bottom-0 position-fixed w-100">
+    </header>
+    
+  </div>
+    
+    <!-- ======== Footer ======== -->
+    <footer class="py-0 px-0 text-dark bottom-0 position-fixed w-100">
     <div class="d-flex flex-column align-items-center flex-lg-row justify-content-lg-between py-1 my-1 border-top">
       <p class="text-center">© 2023 UWUEventz, Inc. <span class="d-block d-md-inline">All rights reserved.</span>
       </p>
