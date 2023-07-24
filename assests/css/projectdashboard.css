@@ -42,7 +42,7 @@ body {
 .sideBar-btn:hover, .sideBar-btn .activate{
   color: var(--primary);
   background-color: var(--secondary);
-  
+  border-radius: 5px;
 }
 .sideBar-btn-text{
   display: block;
