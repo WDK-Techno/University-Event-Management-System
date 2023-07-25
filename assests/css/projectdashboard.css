@@ -5,6 +5,7 @@ html {
 body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  /* overflow: hidden; */
 }
 
 /* ======== side bar ========= */
@@ -12,13 +13,12 @@ body {
   width: 280px;
   display: block;
   height: 100vh;
-  overflow-y: hidden;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 #main {
   margin-left: 280px;
-  width: calc(100%-280px);
+  /* width: calc(100%-280px); */
   /* background-color: var(--secondary); */
   height: 100vh;
 }
