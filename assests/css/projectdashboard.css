@@ -5,7 +5,7 @@ html {
 body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 /* ======== side bar ========= */
@@ -22,6 +22,37 @@ body {
   /* background-color: var(--secondary); */
   height: 100vh;
 }
+
+
+@media only screen and (max-width: 768px) {
+  
+  body{
+    overflow:scroll;
+  }
+  #mySidebar {
+    width: 80px;
+    display: block;
+    height: 100vh;
+    overflow-y: scroll;
+  }
+  
+  #main {
+    margin-left: 80px;
+    /* width: calc(100%-280px); */
+    /* background-color: var(--secondary); */
+    height: 100vh;
+  }
+
+  #mySidebar .sideBar-btn-text{
+    display:none;
+  }
+
+  #user-name{
+    display: none;
+  }
+  
+}
+
 
 #openNav{
   font-size: 2.5rem;
