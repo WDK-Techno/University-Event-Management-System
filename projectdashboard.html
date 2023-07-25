@@ -18,7 +18,7 @@
 
 </head>
 
-<body>
+<body style="box-sizing: border-box;">
 
     <!-- =======  side bar ======= -->
     <div class="sideBar w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:block;" id="mySidebar">
@@ -69,26 +69,59 @@
             </ul>
 
             <hr>
-            <div class="dropdown">
-                <a href="#" class="d-flex align-items-center text-white text-decoration-none" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <img id="user-img" src="https://github.com/mdo.png" alt="" width="40" class="rounded-circle">
-                    <strong id="user-name" class="ms-2">Kavindra <br> Weerasinghe</strong><ion-icon
-                        name="caret-down-outline"></ion-icon>
-                </a>
-                <ul class="dropdown-menu text-small shadow">
-                    <li><a class="dropdown-item" href="#">Return Back</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
-            </div>
+            <strong id="user-name" class="ms-2">Kavindra <br> Weerasinghe</strong>
         </div>
     </div>
     <!-- ============== main content ===================== -->
     <div id="main" style="height: 100vh;">
+
+        <!-- ======= Navigation Bar =======    -->
+        <div class="navbar navbar-light bg-light">
+            <div class="container-fluid px-4">
+                <a class="navbar-brand text-primary" href="index.html">UWU<span class="text-dark">Event</span><span
+                        class="text-warning">z</span></a>
+                <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button> -->
+                <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+                <div id="project-name">Project 1</div>
+                <div class="" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li> -->
+                    </ul>
+
+                    <div id="navBar-user-dropdown" class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img id="user-img" src="https://github.com/mdo.png" alt="" width="40" class="rounded-circle">
+                            <!-- <ion-icon name="caret-down-outline"></ion-icon> -->
+                        </a>
+                        <ul class="dropdown-menu text-small shadow w3-left">
+                            <li><a class="dropdown-item" href="#">Return Back</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+
+                    <form class="d-flex">
+                        <!-- <button class="btn btn-outline-secondary d-flex align-items-center" type="submit"><Span
+                                class="d-none d-lg-inline pe-2">SignUp</Span>
+                            <ion-icon style="font-size: 1.0rem;;"" name=" person-add-outline"></ion-icon>
+                        </button>
+                        <button class="btn btn-outline-primary ms-2 d-flex align-items-center" type="submit"><Span
+                                class="d-none d-lg-inline-block pe-2">LogIn</Span>
+                            <ion-icon style="font-size: 1.5rem;" name="log-in-outline"></ion-icon>
+                        </button> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+
 
         <div id="menu-content-1" class="main-content show">
             <h1>Content 1</h1>
