@@ -7,23 +7,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home Page</title>
   <!-- ====== CSS Files ==== -->
-  <link rel="stylesheet" href="assests/css/style.css">
-  <link rel="stylesheet" href="assests/scss/style.scss">
-  <link rel="stylesheet" href="assests/css/home.css">
-  <link rel="stylesheet" href="assests/css/calender.css">
-  <link rel="stylesheet" href="assests/css/carousel.css">
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assests/css/bootstrap.min.css">
   <link rel="stylesheet" href="./fullcalendar/lib/main.min.css">
-  <script src="./js/jquery-3.6.0.min.js"></script>
-  <script src="./js/bootstrap.min.js"></script>
-  <script src="./fullcalendar/lib/main.min.js"></script>
+  <link rel="stylesheet" href="./assests/css/style.css">
+  <link rel="stylesheet" href="./assests/scss/style.scss">
+  <link rel="stylesheet" href="./assests/css/home.css">
+  <link rel="stylesheet" href="./assests/css/calender.css">
+  <link rel="stylesheet" href="./assests/css/carousel.css">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
   <!-- ===== Boostrap CSS ==== -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
+  <script src="./assests/js/jquery-3.6.0.min.js"></script>
+  <script src="./assests/js/bootstrap.min.js"></script>
+  <script src="./fullcalendar/lib/main.min.js"></script>
 </head>
 
 <body>
@@ -63,7 +63,7 @@
             Event Calender
           </div>
           <div class="card-body">
-            <div class="container py-5" id="page-container">
+            <div class="container-fluid" id="page-container">
               <div class="row">
                 <div class="col-md-9">
                   <div id="calendar"></div>
@@ -107,7 +107,7 @@
               </div>
             </div>
             <!-- Event Details Modal -->
-            <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal">
+            <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content rounded-0">
                   <div class="modal-header rounded-0">
