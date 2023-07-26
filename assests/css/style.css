@@ -17,8 +17,10 @@ html {
 :root {
     --primary: #2F3C7E;
     --secondary: #FBEAEB;
-    --btn-color1: blue;
-}
+    --darker-primary: #1D2561;
+    --lighter-secondary: #FDF6F7;
+    --accent-color: #1F8A70;
+  }
 
 .navbar {
     --bs-bg-opacity: .75;
