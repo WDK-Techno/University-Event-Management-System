@@ -43,6 +43,7 @@ function sideBarControl() {
         document.getElementsByClassName("sideBar-btn-text")[i].style.display = "block";
       }
       document.getElementById("user-name").style.display = "block";
+      document.getElementById("project-details").style.display = "block";
       
       sidebarExpand = true;
 
@@ -61,6 +62,7 @@ function sideBarControl() {
         document.getElementsByClassName("sideBar-btn-text")[i].style.display = "block";
       }
       document.getElementById("user-name").style.display = "block";
+      document.getElementById("project-details").style.display = "block";
       
       sidebarExpand = true;
     }
@@ -80,6 +82,7 @@ function sideBarControl() {
       document.getElementsByClassName("sideBar-btn-text")[i].style.display = "none";
     }
     document.getElementById("user-name").style.display = "none";
+    document.getElementById("project-details").style.display = "none";
     
     sidebarExpand = false;
   }

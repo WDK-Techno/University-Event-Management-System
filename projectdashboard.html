@@ -36,6 +36,11 @@
                 <span class="fs-4 m-2">Sidebar</span>
             </a> -->
 
+            <div id="project-details" class="my-2" style="font-weight:bold; font-size: 1.5rem;">
+                <span class="d-block">Project 1</span>
+                <span class="d-block">IEEE Club</span>
+            </div>
+
             <hr>
             <ul class="nav nav-pills flex-column navbar-text mb-auto">
                 <li id="menu-1" class="sideBar-btn activate" onclick="showMenuContent(1)">
@@ -69,9 +74,16 @@
                     </a>
                 </li>
             </ul>
-
             <hr>
-            <strong id="user-name" class="ms-2">Kavindra <br> Weerasinghe</strong>
+            <div id="user-name">
+                <div class="d-flex justify-content-start">
+                    <ion-icon name="person-circle-outline" class="d-block my-auto" style="font-size:2.8rem;"></ion-icon>
+                    <span class="ms-2">
+                        <strong class="d-block">Kavindra</strong>
+                        <strong class="d-block">Weerasinghe</strong>
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
     <!-- ============== main content ===================== -->
@@ -80,8 +92,8 @@
         <!-- ======= Navigation Bar =======    -->
         <div class="">
             <div class="navbar navbar-light bg-light container-fluid px-4 d-flex justify-content-between">
-                <a class="navbar-brand text-primary d-none d-sm-block" href="index.html">UWU<span class="text-dark">Event</span><span
-                        class="text-warning">z</span></a>
+                <a class="navbar-brand text-primary d-none d-sm-block" href="index.html">UWU<span
+                        class="text-dark">Event</span><span class="text-warning">z</span></a>
                 <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button> -->
@@ -103,12 +115,17 @@
                         <ul class="dropdown-menu shadow dropdown-menu-end">
                             <!-- <li class="dropdown-item d-flex justify-content-start px-4"><ion-icon name="person-outline" style="font-size: 1.2rem;" class="me-2"></ion-icon><span>Profile</span></li>
                             <li class="dropdown-item d-flex justify-content-start px-4"><ion-icon name="arrow-undo-outline" style="font-size: 1.2rem;" class="me-2"></ion-icon><span>Userboard</span></li> -->
-                            <li class="dropdown-item d-flex justify-content-start px-4"><span>Userboard</span><ion-icon name="arrow-undo-outline" class="ms-auto" style="font-size: 1.2rem;"></ion-icon></li>
-                            <li class="dropdown-item d-flex justify-content-start px-4"><span>Profile</span><ion-icon name="person-outline" class="ms-auto" style="font-size: 1.2rem;"></ion-icon></li>
+                            <li class="dropdown-item d-flex justify-content-start px-4"><span>Userboard</span><ion-icon
+                                    name="arrow-undo-outline" class="ms-auto" style="font-size: 1.2rem;"></ion-icon>
+                            </li>
+                            <li class="dropdown-item d-flex justify-content-start px-4"><span>Profile</span><ion-icon
+                                    name="person-outline" class="ms-auto" style="font-size: 1.2rem;"></ion-icon></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li class="dropdown-item d-flex justify-content-start px-4" type="button"><span>Logout</span><ion-icon name="log-out-outline" class="ms-auto" style="font-size: 1.2rem;"></ion-icon></li>
+                            <li class="dropdown-item d-flex justify-content-start px-4" type="button">
+                                <span>Logout</span><ion-icon name="log-out-outline" class="ms-auto"
+                                    style="font-size: 1.2rem;"></ion-icon></li>
                         </ul>
                     </div>
                 </div>
