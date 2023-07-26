@@ -164,7 +164,6 @@
                 <h4></h4>
               </div>
               <div class="box back">
-                <span class="fa fa-quote-left"></span>
                 <p>
                   IEEE is a leader in engineering and technology education, providing resources for pre-university,
                   university, and continuing professional education. IEEE offers innovative STEM and university
@@ -184,7 +183,6 @@
                 <h4></h4>
               </div>
               <div class="box back">
-                <span class="fa fa-quote-left"></span>
                 <p>
                   Students of Faculty of Management annually organize “ENM Trophy Cricket Encounter” inviting the
                   students of fellow degree programs of the University.
@@ -201,7 +199,6 @@
                 <h4></h4>
               </div>
               <div class="box back">
-                <span class="fa fa-quote-left"></span>
                 <p>
                   Students of Animal Science degree program annually organize “ANS Trophy Football Tournament”
                   inviting the students of fellow degree programs of the University.
@@ -223,7 +220,6 @@
                 <h4></h4>
               </div>
               <div class="box back">
-                <span class="fa fa-quote-left"></span>
                 <p>
                   Empowering of Youth as Agri-Entrepreneurs Faculty of Animal Science and Export Agriculture, Uva
                   Wellassa University launched its community participatory extension programme of “Empowering of Youth
@@ -242,7 +238,6 @@
                 <h4></h4>
               </div>
               <div class="box back">
-                <span class="fa fa-quote-left"></span>
                 <p>
                   The Faculty of Applied Sciences of Uva Wellassa University of Sri Lanka (UWU) is organizing UWU EXPO
                   2022 with the aims of establishing strong university-industry relationships to equip graduates with
@@ -260,7 +255,6 @@
                 <h4></h4>
               </div>
               <div class="box back">
-                <span class="fa fa-quote-left"></span>
                 <p>
                   UBL Cell is organizing a Business Plan Competition to identify potential undergraduate entrepreneurs
                   who have realistic business ideas and to assist them to grow up as sustainable entrepreneurs
@@ -281,7 +275,6 @@
                 <h4></h4>
               </div>
               <div class="box back">
-                <span class="fa fa-quote-left"></span>
                 <p>
                   A workshop on “How to start your own business?” was conducted at the university on 20th Wednesday
                 </p>
@@ -297,7 +290,6 @@
                 <h4></h4>
               </div>
               <div class="box back">
-                <span class="fa fa-quote-left"></span>
                 <p>
                   The LAN Challenge is an annual gaming extravagance commemorating its fifth chapter in 2023. Since
                   its inception in the year 2012, the challenge has brought together epic gamers in the Uva Wellassa
@@ -315,7 +307,6 @@
                 <h4></h4>
               </div>
               <div class="box back">
-                <span class="fa fa-quote-left"></span>
                 <p>
                   The Aurora is always a highly anticipated event on UWU’s annual event calendar hosted by students of
                   Department of Animal Science under the guidance of Academic staff, Department of Animal Science.
