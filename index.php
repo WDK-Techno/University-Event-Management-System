@@ -54,7 +54,7 @@
   </nav>
 
   <!-- ======= Main Content ====== -->
-
+<div>
   <div class="container py-4">
     <div class="row">
       <div class="col-lg-12">
@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-md-3">
                   <div class="cardt rounded-0 shadow">
-                    <div class="card-header bg-gradient bg-primary text-light">
+                    <div class="card-header bg-gradient bg-warning text-dark">
                       <h5 class="card-title">Schedule Form</h5>
                     </div>
                     <div class="card-body">
@@ -98,7 +98,7 @@
                     </div>
                     <div class="card-footer">
                       <div class="text-center">
-                        <button class="btn btn-primary btn-sm rounded-0" type="submit" form="schedule-form"><i class="fa fa-save"></i> Save</button>
+                        <button class="btn btn-success btn-sm rounded-0" type="submit" form="schedule-form"><i class="fa fa-save"></i> Save</button>
                         <button class="btn btn-default border btn-sm rounded-0" type="reset" form="schedule-form"><i class="fa fa-reset"></i> Cancel</button>
                       </div>
                     </div>
@@ -321,8 +321,8 @@
   </div>
   </div>
 
-  <header class="pt-lg-4">
-    <div class="overlay py-1 px-1">
+  <header class="pt-lg-4 py-2 px-2">
+    <div class="overlay">
       <h1>About UWU Event Calender</h1>
       <p>Many events or projects happen every week in our university. In such a situation, the days will last
         Events are held by different degrees or different clubs, and when you book the hall for those events, there
@@ -338,6 +338,7 @@
 
 
   <!-- ======== Footer ======== -->
+  
   <footer class="py-0 px-0 text-dark bottom-0 position-fixed w-100">
     <div class="d-flex flex-column align-items-center flex-lg-row justify-content-lg-between py-1 my-1 border-top">
       <p class="text-center">© 2023 UWUEventz, Inc. <span class="d-block d-md-inline">All rights reserved.</span>
