@@ -32,6 +32,9 @@ body {
   height: 100vh;
 }
 
+/* #project-details{
+  color: var();
+} */
 
 @media only screen and (max-width: 768px) {
   
