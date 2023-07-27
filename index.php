@@ -155,10 +155,10 @@
   <div class="carousel slide" data-bs-ride="carousel" id="carouselExampleSlidesOnly">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <div class="row" style="height:300px;">
-          <div class="col-lg-4">
+        <div class="row">
+          <div class="col-lg-4" style="height: 300px;">
             <div class="card h-100">
-              <div class="box front">
+              <div class="box front p-4">
                 <img alt="" src="assests/images/ieee.png">
                 <h2>IEEE Open Day</h2>
                 <h4></h4>
@@ -166,18 +166,15 @@
               <div class="box back">
                 <p>
                   IEEE is a leader in engineering and technology education, providing resources for pre-university,
-                  university, and continuing professional education. IEEE offers innovative STEM and university
-                  education and recognition programs for students and their teachers, facilitates the accreditation of
-                  engineering programs at the university level, and offers ongoing continuing professional education
-                  for practitioners and engineering faculty through platforms such as the IEEE Learning Network (ILN).
+                  university, and continuing professional education.
                 </p>
                 <button class="btn btn-success">Register</button>
               </div>
             </div>
           </div>
-          <div class="col-lg-4">
+          <div class="col-lg-4" style="height: 300px;">
             <div class="card h-100">
-              <div class="box front">
+              <div class="box front p-4">
                 <img alt="" src="assests/images/enmthrophy.jpg">
                 <h2>ENM Trophy</h2>
                 <h4></h4>
@@ -191,9 +188,9 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4">
+          <div class="col-lg-4" style="height: 300px;">
             <div class="card h-100">
-              <div class="box front">
+              <div class="box front p-4">
                 <img alt="" src="assests/images/ansTropy.png">
                 <h2>ANS Trophy</h2>
                 <h4></h4>
@@ -210,10 +207,10 @@
         </div>
       </div>
       <div class="carousel-item">
-        <div class="row" style="height:300px;">
-          <div class="col-lg-4">
+        <div class="row">
+          <div class="col-lg-4"  style="height: 300px;">
             <div class="card h-100">
-              <div class="box front">
+              <div class="box front p-4">
                 <img alt="" src="assests/images/community.jpg">
 
                 <h2> Community Development Project</h2>
@@ -222,34 +219,30 @@
               <div class="box back">
                 <p>
                   Empowering of Youth as Agri-Entrepreneurs Faculty of Animal Science and Export Agriculture, Uva
-                  Wellassa University launched its community participatory extension programme of “Empowering of Youth
-                  as Agri-Entrepreneurs” on October 27, 2022 with the collaboration of the Smallholder Agri-business
-                  Partnership Programme
+                  Wellassa University.
                 </p>
                 <button class="btn btn-success">Register</button>
               </div>
             </div>
           </div>
-          <div class="col-lg-4">
+          <div class="col-lg-4"  style="height: 300px;">
             <div class="card h-100">
-              <div class="box front">
+              <div class="box front p-4">
                 <img alt="" src="assests/images/expo.jpg">
                 <h2>UWU Expo</h2>
                 <h4></h4>
               </div>
               <div class="box back">
                 <p>
-                  The Faculty of Applied Sciences of Uva Wellassa University of Sri Lanka (UWU) is organizing UWU EXPO
-                  2022 with the aims of establishing strong university-industry relationships to equip graduates with
-                  the knowledge and skills necessary for a successful professional, scientific, and industrial career.
+                  The Faculty of Applied Sciences of Uva Wellassa University of Sri Lanka (UWU) is organizing UWU EXPO.
                 </p>
                 <button class="btn btn-success">Register</button>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4"  style="height: 300px;">
             <div class="card h-100">
-              <div class="box front">
+              <div class="box front p-4">
                 <img alt="" src="assests/images/bussiness.jpg">
                 <h2>Bussiness plan Competition</h2>
                 <h4></h4>
@@ -266,10 +259,10 @@
         </div>
       </div>
       <div class="carousel-item">
-        <div class="row" style="height:300px;">
-          <div class="col-lg-4">
+        <div class="row">
+          <div class="col-lg-4"  style="height: 300px;">
             <div class="card h-100">
-              <div class="box front">
+              <div class="box front p-4">
                 <img alt="" src="assests/images/CapWorkshop.jpg">
                 <h2>Workshop</h2>
                 <h4></h4>
@@ -282,9 +275,9 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4">
+          <div class="col-lg-4"  style="height: 300px;">
             <div class="card h-100">
-              <div class="box front">
+              <div class="box front p-4">
                 <img alt="" src="assests/images/lanChallenge.png">
                 <h2>CST Lan Challenge</h2>
                 <h4></h4>
@@ -292,16 +285,16 @@
               <div class="box back">
                 <p>
                   The LAN Challenge is an annual gaming extravagance commemorating its fifth chapter in 2023. Since
-                  its inception in the year 2012, the challenge has brought together epic gamers in the Uva Wellassa
-                  student community to test their expertise in the world of multiplayer PC gaming.
+                  the challenge has brought together epic gamers in the Uva Wellassa
+                  student community.
                 </p>
                 <button class="btn btn-success">Register</button>
               </div>
             </div>
           </div>
-          <div class="col-lg-4">
+          <div class="col-lg-4"  style="height: 300px;">
             <div class="card h-100">
-              <div class="box front">
+              <div class="box front p-4">
                 <img alt="" src="assests/images/aurora.png">
                 <h2>Aurora Food Festival</h2>
                 <h4></h4>
@@ -339,7 +332,7 @@
 
   <!-- ======== Footer ======== -->
   
-  <footer class="py-0 px-0 text-dark bottom-0 position-fixed w-100">
+  <footer class="py-0 px-0 text-dark bottom-0 position-relative w-100">
     <div class="d-flex flex-column align-items-center flex-lg-row justify-content-lg-between py-1 my-1 border-top">
       <p class="text-center">© 2023 UWUEventz, Inc. <span class="d-block d-md-inline">All rights reserved.</span>
       </p>
