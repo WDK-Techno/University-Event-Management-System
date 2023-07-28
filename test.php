@@ -1,7 +1,8 @@
 
 
 <?php
-    echo "Hello Wold!"
+    echo "Hello Wold!";
+    echo "uba nam maha pissek";
 ?>
 
 <!DOCTYPE html>
