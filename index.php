@@ -7,13 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home Page</title>
   <!-- ====== CSS Files ==== -->
-  <link rel="stylesheet" href="./assests/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="./fullcalendar/lib/main.min.css">
-  <link rel="stylesheet" href="./assests/css/style.css">
-  <link rel="stylesheet" href="./assests/scss/style.scss">
-  <link rel="stylesheet" href="./assests/css/home.css">
-  <link rel="stylesheet" href="./assests/css/calender.css">
-  <link rel="stylesheet" href="./assests/css/carousel.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/scss/style.scss">
+  <link rel="stylesheet" href="./assets/css/home.css">
+  <link rel="stylesheet" href="./assets/css/calender.css">
+  <link rel="stylesheet" href="./assets/css/carousel.css">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
   <!-- ===== Boostrap CSS ==== -->
@@ -21,8 +21,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
-  <script src="./assests/js/jquery-3.6.0.min.js"></script>
-  <script src="./assests/js/bootstrap.min.js"></script>
+  <script src="./assets/js/jquery-3.6.0.min.js"></script>
+  <script src="./assets/js/bootstrap.min.js"></script>
   <script src="./fullcalendar/lib/main.min.js"></script>
 </head>
 
@@ -159,7 +159,7 @@
           <div class="col-lg-4" style="height: 300px;">
             <div class="card h-100">
               <div class="box front p-4">
-                <img alt="" src="assests/images/ieee.png">
+                <img alt="" src="assets/images/ieee.png">
                 <h2>IEEE Open Day</h2>
                 <h4></h4>
               </div>
@@ -175,7 +175,7 @@
           <div class="col-lg-4" style="height: 300px;">
             <div class="card h-100">
               <div class="box front p-4">
-                <img alt="" src="assests/images/enmthrophy.jpg">
+                <img alt="" src="assets/images/enmthrophy.jpg">
                 <h2>ENM Trophy</h2>
                 <h4></h4>
               </div>
@@ -191,7 +191,7 @@
           <div class="col-lg-4" style="height: 300px;">
             <div class="card h-100">
               <div class="box front p-4">
-                <img alt="" src="assests/images/ansTropy.png">
+                <img alt="" src="assets/images/ansTropy.png">
                 <h2>ANS Trophy</h2>
                 <h4></h4>
               </div>
@@ -211,7 +211,7 @@
           <div class="col-lg-4"  style="height: 300px;">
             <div class="card h-100">
               <div class="box front p-4">
-                <img alt="" src="assests/images/community.jpg">
+                <img alt="" src="assets/images/community.jpg">
 
                 <h2> Community Development Project</h2>
                 <h4></h4>
@@ -228,7 +228,7 @@
           <div class="col-lg-4"  style="height: 300px;">
             <div class="card h-100">
               <div class="box front p-4">
-                <img alt="" src="assests/images/expo.jpg">
+                <img alt="" src="assets/images/expo.jpg">
                 <h2>UWU Expo</h2>
                 <h4></h4>
               </div>
@@ -243,7 +243,7 @@
           <div class="col-md-4"  style="height: 300px;">
             <div class="card h-100">
               <div class="box front p-4">
-                <img alt="" src="assests/images/bussiness.jpg">
+                <img alt="" src="assets/images/bussiness.jpg">
                 <h2>Bussiness plan Competition</h2>
                 <h4></h4>
               </div>
@@ -263,7 +263,7 @@
           <div class="col-lg-4"  style="height: 300px;">
             <div class="card h-100">
               <div class="box front p-4">
-                <img alt="" src="assests/images/CapWorkshop.jpg">
+                <img alt="" src="assets/images/CapWorkshop.jpg">
                 <h2>Workshop</h2>
                 <h4></h4>
               </div>
@@ -278,7 +278,7 @@
           <div class="col-lg-4"  style="height: 300px;">
             <div class="card h-100">
               <div class="box front p-4">
-                <img alt="" src="assests/images/lanChallenge.png">
+                <img alt="" src="assets/images/lanChallenge.png">
                 <h2>CST Lan Challenge</h2>
                 <h4></h4>
               </div>
@@ -295,7 +295,7 @@
           <div class="col-lg-4"  style="height: 300px;">
             <div class="card h-100">
               <div class="box front p-4">
-                <img alt="" src="assests/images/aurora.png">
+                <img alt="" src="assets/images/aurora.png">
                 <h2>Aurora Food Festival</h2>
                 <h4></h4>
               </div>
@@ -373,12 +373,12 @@
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
   <!-- ====== Script files ===== -->
-  <script src="assests/js/home.js"></script>
-  <script src="script.js"></script>
+  <script src="assets/js/home.js"></script>
   <script>
     var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')
   </script>
-  <script src="./js/script.js"></script>
+  <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
+
