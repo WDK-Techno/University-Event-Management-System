@@ -1,3 +1,6 @@
 
 .idea/vcs.xml
 .idea/php.xml
+*.json
+.vscode/settings.json
+.vscode/settings.json
