@@ -4,3 +4,6 @@
 *.json
 .vscode/settings.json
 .vscode/settings.json
+.idea/Project1.iml
+.idea/modules.xml
+.idea/dataSources.xml
