@@ -75,7 +75,7 @@
                     </div>
                     <div class="card-body">
                       <div class="container-fluid">
-                        <form action="save_schedule.php" method="post" id="schedule-form">
+                        <form action="process/home/save_schedule.php" method="post" id="schedule-form">
                           <input type="hidden" name="id" value="">
                           <div class="form-group mb-2">
                             <label for="title" class="control-label">Title</label>
