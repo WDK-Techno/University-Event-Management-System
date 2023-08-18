@@ -1,19 +1,21 @@
 <?php
-
+namespace classes;
+use PDO;
+use PDOException;
 class DBConnector
 {
-    private $host = "localhost";
-    private $db_name = "uwueventz_db";
-    private $db_user = "root";
-    private $db_password = "";
-    public function getConnection(){
-        $dsn = "mysql:host=$this->host;dbname=$this->db_name;";
+    private static $host = "localhost";
+    private static $db_name = "uwueventz_db";
+    private static $db_user = "root";
+    private static $db_password = "";
+    public static function getConnection(){
 
         try {
-            $con = new PDO($dsn,$this->db_user,$this->db_password);
+            $dsn = "mysql:host=".self::$host.";dbname=".self::$db_name ;
+            $con = new PDO($dsn,self::$db_user,self::$db_password);
             return $con;
         }catch (PDOException $exc){
-            die("Error: ".$exc->getMessage());
+            die("Error in database connection: ".$exc->getMessage());
         }
     }
 }
