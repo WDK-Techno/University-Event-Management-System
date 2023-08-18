@@ -133,26 +133,6 @@ body {
     overflow: hidden;
     border-radius: 0 0 85% 85% / 30%;
   }
-  header .overlay{
-    width: 100%;
-    min-height: 100vh;
-    padding: 0px;
-      margin: 0px;
-      box-sizing: border-box;
-    color: white;
-      background-color: #1D2561;
-    text-shadow: 1px 1px 1px #333;
-
-    
-  }.image-section{
-    float: right;
-    width: 40%;
-     }
-   .image-section img{
-       width: 100%;
-       height: auto;
-   }
-  
   h1 {
     font-family: 'Dancing Script', cursive;
     font-size: 80px;

@@ -15,6 +15,8 @@ body {
   --darker-primary: #1D2561;
   --lighter-secondary: #FDF6F7;
   --accent-color: #1F8A70;
+  --accent-color2: #93e017;
+  --accent-color3: #e36d24;
 }
 
 /* ======== side bar ========= */
@@ -120,3 +122,21 @@ body {
 .hide{
   display: none;
 }
+
+/* =============== content ========== */
+
+/* ===== common classes ========= */
+.card-list-option-buttons ion-icon{
+  color: var(--darker-primary);
+}
+.card-list-option-buttons ion-icon:hover{
+  color: var(--primary);
+}
+.card-list-option-buttons ion-icon:active{
+  color: var(--lighter-secondary);
+}
+
+/* ========== add new projects teams model ========== */
+.card-project-teams-list .row:hover{
+  background-color: var(--secondary) !important;
+} 
