@@ -55,18 +55,24 @@
 									<div class="text-center">
 										<h4 class="text-dark mb-4">User Login</h4>
 									</div><!-- Start: Login Form -->
-									<form class="user">
-										<div class="mb-3"><input class="form-control form-control-user" type="email"
+									<form action="process/login.php" method="post" class="user">
+										<div class="mb-3">
+                                            <input class="form-control form-control-user" type="email"
 												id="email" aria-describedby="emailHelp"
-												placeholder="Enter Email Address" name="email" required=""></div>
-										<div class="mb-3"><input class="form-control form-control-user" type="password"
-												placeholder="Password" name="password" required=""></div>
+												placeholder="Enter Email Address" name="username" required="">
+                                        </div>
+										<div class="mb-3">
+                                            <input class="form-control form-control-user" type="password"
+												placeholder="Password" name="password" required="">
+                                        </div>
 										<!-- Start: Error Message -->
 										<div class="row mb-3">
 											<p id="errorMsg" class="text-danger" style="display:none;">Paragraph</p>
-										</div><!-- End: Error Message --><button
+										</div><!-- End: Error Message -->
+
+                                        <button
 											class="btn btn-primary d-block btn-user w-100" id="submitBtn"
-											type="submit">Login</button>
+											name="submit" type="submit">Login</button>
 										<hr>
 									</form><!-- End: Login Form --><!-- Start: Forgot Password -->
 									<div class="text-center"><a class="small" href="forgot-password.html">Forgot
