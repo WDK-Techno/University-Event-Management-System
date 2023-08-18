@@ -55,7 +55,7 @@
 
   <!-- ======= Main Content ====== -->
 <div>
-  <div class="container py-4">
+  <div class="container">
     <div class="row">
       <div class="col-lg-12">
         <div class="card">
@@ -69,40 +69,7 @@
                   <div id="calendar"></div>
                 </div>
                 <div class="col-md-3">
-                  <div class="cardt rounded-0 shadow">
-                    <div class="card-header bg-gradient bg-warning text-dark">
-                      <h5 class="card-title">Schedule Form</h5>
-                    </div>
-                    <div class="card-body">
-                      <div class="container-fluid">
-                        <form action="process/home/save_schedule.php" method="post" id="schedule-form">
-                          <input type="hidden" name="id" value="">
-                          <div class="form-group mb-2">
-                            <label for="title" class="control-label">Title</label>
-                            <input type="text" class="form-control form-control-sm rounded-0" name="title" id="title" required>
-                          </div>
-                          <div class="form-group mb-2">
-                            <label for="description" class="control-label">Description</label>
-                            <textarea rows="3" class="form-control form-control-sm rounded-0" name="description" id="description" required></textarea>
-                          </div>
-                          <div class="form-group mb-2">
-                            <label for="start_datetime" class="control-label">Start</label>
-                            <input type="datetime-local" class="form-control form-control-sm rounded-0" name="start_datetime" id="start_datetime" required>
-                          </div>
-                          <div class="form-group mb-2">
-                            <label for="end_datetime" class="control-label">End</label>
-                            <input type="datetime-local" class="form-control form-control-sm rounded-0" name="end_datetime" id="end_datetime" required>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                    <div class="card-footer">
-                      <div class="text-center">
-                        <button class="btn btn-success btn-sm rounded-0" type="submit" form="schedule-form"><i class="fa fa-save"></i> Save</button>
-                        <button class="btn btn-default border btn-sm rounded-0" type="reset" form="schedule-form"><i class="fa fa-reset"></i> Cancel</button>
-                      </div>
-                    </div>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -129,11 +96,7 @@
                     </div>
                   </div>
                   <div class="modal-footer rounded-0">
-                    <div class="text-end">
-                      <button type="button" class="btn btn-primary btn-sm rounded-0" id="edit" data-id="">Edit</button>
-                      <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete" data-id="">Delete</button>
-                      <button type="button" class="btn btn-secondary btn-sm rounded-0" data-bs-dismiss="modal">Close</button>
-                    </div>
+
                   </div>
                 </div>
               </div>
@@ -146,22 +109,19 @@
   </div>
 
   <!-- <div class="container3-fluid py-6 mb-6"> -->
-  <div class="container">
+    <div class="container">
     <h2 class="title">
       <span class="title-word title-word-1">Upcomming</span>
-      <span class="title-word title-word-2">Events</span>
+      <span class="title-word title-word-2">News</span>
     </h2>
-  </div>
-  <div class="carousel slide" data-bs-ride="carousel" id="carouselExampleSlidesOnly">
-    <div class="carousel-inner">
+  <div class="carousel slide" data-bs-ride="carousel" id="carouselExampleSlidesOnly" >
+    <div class="carousel-inner justify-content-center">
       <div class="carousel-item active">
-        <div class="row">
-          <div class="col-lg-4" style="height: 300px;">
+        <div class="row justify-content-center">
+          <div class="col-lg-4" style="height: 500px; width: 300px">
             <div class="card h-100">
-              <div class="box front p-4">
-                <img alt="" src="assets/images/ieee.png">
-                <h2>IEEE Open Day</h2>
-                <h4></h4>
+              <div class="box front  w-100">
+                <img alt="" src="assets/images/f1.jpg">
               </div>
               <div class="box back">
                 <p>
@@ -172,12 +132,10 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4" style="height: 300px;">
+          <div class="col-lg-4" style="height: 500px; width: 300px">
             <div class="card h-100">
-              <div class="box front p-4">
-                <img alt="" src="assets/images/enmthrophy.jpg">
-                <h2>ENM Trophy</h2>
-                <h4></h4>
+              <div class="box front ">
+                <img alt="" src="assets/images/f2.jpg">
               </div>
               <div class="box back">
                 <p>
@@ -188,12 +146,10 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4" style="height: 300px;">
+          <div class="col-lg-4" style="height: 500px; width: 300px">
             <div class="card h-100">
-              <div class="box front p-4">
-                <img alt="" src="assets/images/ansTropy.png">
-                <h2>ANS Trophy</h2>
-                <h4></h4>
+              <div class="box front">
+                <img alt="" src="assets/images/f3.jpg">
               </div>
               <div class="box back">
                 <p>
@@ -207,14 +163,11 @@
         </div>
       </div>
       <div class="carousel-item">
-        <div class="row">
-          <div class="col-lg-4"  style="height: 300px;">
+        <div class="row justify-content-center">
+          <div class="col-lg-4"  style="height: 500px; width: 300px">
             <div class="card h-100">
-              <div class="box front p-4">
-                <img alt="" src="assets/images/community.jpg">
-
-                <h2> Community Development Project</h2>
-                <h4></h4>
+              <div class="box front">
+                <img alt="" src="assets/images/f4.jpg">
               </div>
               <div class="box back">
                 <p>
@@ -225,12 +178,10 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4"  style="height: 300px;">
+          <div class="col-lg-4"  style="height: 500px; width: 300px">
             <div class="card h-100">
-              <div class="box front p-4">
-                <img alt="" src="assets/images/expo.jpg">
-                <h2>UWU Expo</h2>
-                <h4></h4>
+              <div class="box front">
+                <img alt="" src="assets/images/f5.jpg">
               </div>
               <div class="box back">
                 <p>
@@ -240,12 +191,10 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4"  style="height: 300px;">
+          <div class="col-md-4"  style="height: 500px; width: 300px">
             <div class="card h-100">
-              <div class="box front p-4">
-                <img alt="" src="assets/images/bussiness.jpg">
-                <h2>Bussiness plan Competition</h2>
-                <h4></h4>
+              <div class="box front">
+                <img alt="" src="assets/images/f6.jpg">
               </div>
               <div class="box back">
                 <p>
@@ -259,13 +208,11 @@
         </div>
       </div>
       <div class="carousel-item">
-        <div class="row">
-          <div class="col-lg-4"  style="height: 300px;">
+        <div class="row justify-content-center">
+          <div class="col-lg-4"  style="height: 500px; width: 300px">
             <div class="card h-100">
-              <div class="box front p-4">
-                <img alt="" src="assets/images/CapWorkshop.jpg">
-                <h2>Workshop</h2>
-                <h4></h4>
+              <div class="box front">
+                <img alt="" src="assets/images/f7.jpg">
               </div>
               <div class="box back">
                 <p>
@@ -275,12 +222,10 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4"  style="height: 300px;">
+          <div class="col-lg-4"  style="height: 500px; width: 300px">
             <div class="card h-100">
-              <div class="box front p-4">
-                <img alt="" src="assets/images/lanChallenge.png">
-                <h2>CST Lan Challenge</h2>
-                <h4></h4>
+              <div class="box front">
+                <img alt="" src="assets/images/f8.jpg">
               </div>
               <div class="box back">
                 <p>
@@ -292,12 +237,10 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4"  style="height: 300px;">
+          <div class="col-lg-4"  style="height: 500px; width: 300px">
             <div class="card h-100">
-              <div class="box front p-4">
+              <div class="box front">
                 <img alt="" src="assets/images/aurora.png">
-                <h2>Aurora Food Festival</h2>
-                <h4></h4>
               </div>
               <div class="box back">
                 <p>
@@ -313,9 +256,10 @@
     </div>
   </div>
   </div>
-
-  <header class="pt-lg-4 py-2 px-2">
-    <div class="overlay">
+</div>
+<div class="section2 col-md-12">
+  <header class="pt-lg-4 py-2 px-5">
+    <div class="overlay col-md-12">
       <h1>About UWU Event Calender</h1>
       <p>Many events or projects happen every week in our university. In such a situation, the days will last
         Events are held by different degrees or different clubs, and when you book the hall for those events, there
@@ -325,13 +269,19 @@
         A calendar of events and projects organized by the university's students will help in the assignment
         Dates for an event.</p>
       <br>
-      <button>READ MORE</button>
+        <div class="button2">>
+        <a href="">Read More</a>
+        </div
+            <div class="image-section">
+                <img src="assets/images/calender.">
+            </div>
     </div>
   </header>
+</div>
 
 
   <!-- ======== Footer ======== -->
-  
+
   <footer class="py-0 px-0 text-dark bottom-0 position-relative w-100">
     <div class="d-flex flex-column align-items-center flex-lg-row justify-content-lg-between py-1 my-1 border-top">
       <p class="text-center">© 2023 UWUEventz, Inc. <span class="d-block d-md-inline">All rights reserved.</span>

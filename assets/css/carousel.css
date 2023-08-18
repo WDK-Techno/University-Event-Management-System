@@ -28,7 +28,7 @@ body {
 .card .box.front{
    
     background-repeat: repeat;
-    background-color: rgb(28, 219, 236);
+    background-color: white;
 
        /* https://www.toptal.com/designers/subtlepatterns/moroccan-flower-pattern/ */
 }
@@ -42,11 +42,8 @@ body {
 }
 
 .card .box.front img {
-	width: 250px;
-	height: 300px;
-	border-radius: 100%;
-	object-fit: cover;
-	border: 2px solid #262626;
+	width: 100%;
+	height: 100%;
 	margin-bottom: 10px;
   ;
 }
@@ -63,7 +60,7 @@ body {
 }
 .card .box.back {
     position: absolute;
-    background: linear-gradient(90deg, rgb(51, 47, 91) 0%, rgba(85, 157, 220, 0.508) 35%, rgb(122, 126, 138) 100%);
+    background: lightsteelblue;
     transform: rotateY(180deg);
     padding: 20px 30px;
     text-align: center;
@@ -138,13 +135,23 @@ body {
   }
   header .overlay{
     width: 100%;
-    height: 100%;
-    padding: 50px;
-    color: #171616;
+    min-height: 100vh;
+    padding: 0px;
+      margin: 0px;
+      box-sizing: border-box;
+    color: white;
+      background-color: #1D2561;
     text-shadow: 1px 1px 1px #333;
-    background-image: linear-gradient( 135deg, #9f05ff69 10%, #fd5e086b 100%);
+
     
-  }
+  }.image-section{
+    float: right;
+    width: 40%;
+     }
+   .image-section img{
+       width: 100%;
+       height: auto;
+   }
   
   h1 {
     font-family: 'Dancing Script', cursive;
@@ -162,8 +169,8 @@ body {
     outline: color(srgb red green blue);
     padding: 10px 20px;
     border-radius: 50px;
-    color: #f7f5f5;
-    background: #290909;
+    color: black;
+    background: lightgoldenrodyellow;
     margin-bottom: 50px;
     box-shadow: 0 3px 20px 0 #0000003b;
   }
