@@ -155,120 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                      data-bs-target="#project-teams">Project Teams
                 </div>
             </div>
-            <!-- ============ Project Teams model =============== -->
-            <div class="modal fade" id="project-teams" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalCenterTitle"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <form action="" method="POST" id="">
-                            <div class="modal-header py-2 px-2">
-                                <div class="d-flex flex-row w-100 justify-content-between">
 
-                                    <div class="ms-2 my-auto fs-4 fw-bold">Project Teams</div>
-                                    <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
-                                         style="font-size: 1.3rem; color: var(--primary);">Project 1
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="modal-body">
-                                <div class="container w-100 ps-4 fw-bold" style="font-size: 1.1rem;">
-                                    <!-- <div class="row">
-                                        <div class="col-4 text-start my-auto form-label">Category</div>
-                                        <div class="col ms-2 text-start text-info-emphasis">
-                                            <input type="text" class="form-control border-3 bg-transparent text-center"
-                                                   name="cat_name" id="" value=""
-                                                   placeholder="Category Name"/>
-
-                                    </div> -->
-
-                                    <div class="row">
-                                        <div class="col-1"></div>
-                                        <div class="col-10 d-flex mx-auto">
-                                            <!--======== add Team Categories ========-->
-                                            <input type="text"
-                                                   class="form-control border-3 bg-transparent text-center"
-                                                   name="team_name"
-                                                   id=""
-                                                   placeholder="Team Name">
-
-
-                                            <!--==== team add button =======-->
-                                            <button class="btn ms-1" id=""
-                                                    type="button"
-                                                    onclick="addNewTeam()"
-                                                    style="background-color: var(--accent-color); color: var(--secondary);">
-                                                Add
-                                            </button>
-
-                                        </div>
-                                        <div class="col-1"></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 d-flex mx-0 p-0">
-
-
-                                            <div id=""
-                                                 class="category-shared-user-list container mt-3 mx-0 text-dark">
-
-
-                                                <div class="row p-0">
-                                                    <div class="col-1 d-flex">
-                                                        <!-- <div class="my-auto mx-auto">1</div> -->
-                                                    </div>
-                                                    <div class="col-8 d-flex">
-                                                        <div class="ms-1 my-auto">Program Team</div>
-                                                    </div>
-                                                    <div class="col-1 d-flex">
-                                                        <div class="btn rounded-0 me-0 ms-auto"
-                                                             type="button"
-                                                             onclick="deleteTeamCat()"
-                                                             style="background-color: var(--accent-color);color: var(--secondary); width: fit-content;">
-                                                            <ion-icon name="trash-outline"
-                                                                      style="font-size: 0.8rem;">
-                                                            </ion-icon>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-1 d-flex">
-                                                        <div class="btn rounded-0 me-0 ms-auto"
-                                                             type="button"
-                                                             onclick="deleteTeamCat()"
-                                                             style="background-color: var(--accent-color);color: var(--secondary); width: fit-content;">
-                                                            <ion-icon name="trash-outline"
-                                                                      style="font-size: 0.8rem;">
-                                                            </ion-icon>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-1 d-flex">
-                                                        <!-- <div class="my-auto mx-auto">1</div> -->
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                </button>
-                                <!-- <button type="button" class="btn btn-danger">Reject</button> -->
-                                <button type="submit" name="submit" class="btn fw-bold"
-                                        form=""
-                                        style="background-color: var(--secondary); color: var(--accent-color2);">
-                                    Update
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
 
         </div>
     </div>
@@ -291,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <!-- ========== right side section ========== -->
                 <div class="col-12 col-lg-4">
                     <div class="w-100 p-0 pt-3 d-flex container">
-                        <div class="card mx-auto col-12 col-md-8 col-lg-12" style="height: 50%;">
+                        <div id="project-teams-list" class="card mx-auto col-12 col-md-8 col-lg-12">
                             <div class="card-header d-flex"
                                  style="background-color: var(--primary); color: var(--lighter-secondary);">
                                 <div class="my-auto fw-bold" style="font-size: 1.3rem;">Project Teams</div>
@@ -333,7 +220,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                                                 </div>
 
-                                                <div class="modal-body" style="background-color: var(--lighter-secondary);">
+                                                <div class="modal-body"
+                                                     style="background-color: var(--lighter-secondary);">
                                                     <div class="d-flex px-5">
                                                         <input class="form-control text-center" type="text"
                                                                name="team_name" placeholder="Team Name"/>
@@ -360,18 +248,82 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 </div>
 
                             </div>
-                            <div class="card-body">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-10">
-                                            <div>Program Team</div>
+                            <!-- ========== project list body =========== -->
+                            <div class="card-body" style="overflow-y: auto; height: 300px;">
+                                <div class="container card-project-teams-list">
+
+                                    <div class="row shadow-sm ps-2 py-3 my-2 rounded-3 fw-normal"
+                                         style="font-size: 1.0rem; background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                                        <div class="col-9 d-flex">
+                                            <div class="my-auto fs-5">Program Team</div>
                                         </div>
-                                        <div class="col-2" style="font-size: 1.5rem;">
-                                            <div class="d-flex">
-                                                <ion-icon class="" type="button" name="create-outline"></ion-icon>
+                                        <div class="col-3" style="font-size: 1.5rem;">
+                                            <div class="d-flex mx-auto card-list-option-buttons"
+                                                 style="font-size: 1.7rem;">
+                                                <ion-icon class="me-2 my-auto" type="button"
+                                                          name="create-outline"></ion-icon>
+                                                <ion-icon class="my-auto" type="button" name="trash-outline"></ion-icon>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row shadow-sm ps-2 py-3 my-2 rounded-3 fw-normal"
+                                         style="font-size: 1.0rem; background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                                        <div class="col-9 d-flex">
+                                            <div class="my-auto fs-5">Secretary Team</div>
+                                        </div>
+                                        <div class="col-3" style="font-size: 1.5rem;">
+                                            <div class="d-flex mx-auto card-list-option-buttons"
+                                                 style="font-size: 1.7rem;">
+                                                <ion-icon class="me-2 my-auto" type="button"
+                                                          name="create-outline"></ion-icon>
+                                                <ion-icon class="my-auto" type="button" name="trash-outline"></ion-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row shadow-sm ps-2 py-3 my-2 rounded-3 fw-normal"
+                                         style="font-size: 1.0rem; background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                                        <div class="col-9 d-flex">
+                                            <div class="my-auto fs-5">Logistic Team</div>
+                                        </div>
+                                        <div class="col-3" style="font-size: 1.5rem;">
+                                            <div class="d-flex mx-auto card-list-option-buttons"
+                                                 style="font-size: 1.7rem;">
+                                                <ion-icon class="me-2 my-auto" type="button"
+                                                          name="create-outline"></ion-icon>
+                                                <ion-icon class="my-auto" type="button" name="trash-outline"></ion-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row shadow-sm ps-2 py-3 my-2 rounded-3 fw-normal"
+                                         style="font-size: 1.0rem; background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                                        <div class="col-9 d-flex">
+                                            <div class="my-auto fs-5">Finance Team</div>
+                                        </div>
+                                        <div class="col-3" style="font-size: 1.5rem;">
+                                            <div class="d-flex mx-auto card-list-option-buttons"
+                                                 style="font-size: 1.7rem;">
+                                                <ion-icon class="me-2 my-auto" type="button"
+                                                          name="create-outline"></ion-icon>
+                                                <ion-icon class="my-auto" type="button" name="trash-outline"></ion-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row shadow-sm ps-2 py-3 my-2 rounded-3 fw-normal"
+                                         style="font-size: 1.0rem; background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                                        <div class="col-9 d-flex">
+                                            <div class="my-auto fs-5">Design Team</div>
+                                        </div>
+                                        <div class="col-3" style="font-size: 1.5rem;">
+                                            <div class="d-flex mx-auto card-list-option-buttons"
+                                                 style="font-size: 1.7rem;">
+                                                <ion-icon class="me-2 my-auto" type="button"
+                                                          name="create-outline"></ion-icon>
+                                                <ion-icon class="my-auto" type="button" name="trash-outline"></ion-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>

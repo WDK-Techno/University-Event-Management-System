@@ -126,3 +126,17 @@ body {
 /* =============== content ========== */
 
 /* ===== common classes ========= */
+.card-list-option-buttons ion-icon{
+  color: var(--darker-primary);
+}
+.card-list-option-buttons ion-icon:hover{
+  color: var(--primary);
+}
+.card-list-option-buttons ion-icon:active{
+  color: var(--lighter-secondary);
+}
+
+/* ========== add new projects teams model ========== */
+.card-project-teams-list .row:hover{
+  background-color: var(--secondary) !important;
+} 
