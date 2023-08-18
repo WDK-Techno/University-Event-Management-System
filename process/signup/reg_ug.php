@@ -1,24 +1,46 @@
 <?php
 
-require "../../classes/User.php";
-require "../../classes/DBConnector.php";
+require_once "../../classes/User.php";
+require_once "../../classes/DBConnector.php";
 
 use classes\Undergraduate;
 use classes\DBConnector;
 
 $con = DBConnector::getConnection();
 
-$ug = new Undergraduate("suvi@gmail.com","suvi@123","Ishara",
-    "Suvini","0771235650");
-if ($ug->checkDuplicateEmail($con)){
-    echo "You have already registerd";
-}else{
+if (isset($_POST["submit"], $_POST["username"], $_POST["password"],
+    $_POST["first_name"], $_POST["last_name"], $_POST["contact_no"])) {
 
-    $result =  $ug->register($con);
-    if ($result){
-        echo "Reg SUccess fill";
+    if (empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["first_name"]) ||
+        empty($_POST["last_name"]) || empty($_POST["contact_no"])) {
+
+        header("location: ../../ug_signup.php?status=1");
+
+    } else {
+
+
+        $userName = $_POST["username"];
+        $password = password_hash($_POST["password"],PASSWORD_BCRYPT);
+        $firstName = $_POST["first_name"];
+        $lastName = $_POST["last_name"];
+        $contactNo = $_POST["contact_no"];
+
+        $ug = new Undergraduate($userName, $password, $firstName,
+            $lastName, $contactNo);
+    if ($ug->checkDuplicateEmail($con)){
+        header("location: ../../ug_signup.php?status=3");
     }else{
-        echo "Not Success";
+
+        $result =  $ug->register($con);
+        if ($result){
+            header("location: ../../login.php");
+        }else{
+            header("location: ../../ug_signup.php?status=2");
+        }
     }
+    }
+} else {
+    header("location: ../../ug_signup.php?status=1");
 }
+
 

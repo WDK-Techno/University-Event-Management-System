@@ -56,39 +56,47 @@
                 <div class="text-center">
                     <h4 class="text-dark mb-4">Undergraduates</h4>
                 </div><!-- Start: Register Form -->
-                <form class="user"><!-- Start: Username -->
-                    <div class="mb-3"><input class="form-control form-control-user" type="text"
-                                             placeholder="Username" required=""></div><!-- End: Username -->
+                <form action="process/signup/reg_ug.php" method="post" class="user"><!-- Start: Username -->
                     <!-- Start: Email -->
-                    <div class="mb-3"><input class="form-control form-control-user" type="email" id="email"
+                    <div class="mb-3"><input name="username" class="form-control form-control-user" type="email"
+                                             id="email"
                                              placeholder="Email Address" required=""></div>
                     <!-- End: Email --><!-- Start: Password -->
                     <div class="row mb-3">
-                        <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"
-                                                                  type="password" id="password" placeholder="Password"
-                                                                  required=""></div>
-                        <div class="col-sm-6"><input class="form-control form-control-user" type="password"
-                                                     id="verifyPassword" placeholder="Repeat Password" required="">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <input name="password" class="form-control form-control-user"
+                                   type="password" id="password" placeholder="Password"
+                                   required="">
+                        </div>
+                        <div class="col-sm-6">
+                            <input class="form-control form-control-user" type="password"
+                                   id="verifyPassword" placeholder="Repeat Password" required="">
                         </div>
                     </div><!-- End: Password --><!-- Start: Names -->
                     <div class="row mb-3">
-                        <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text"
+                        <div class="col-sm-6 mb-3 mb-sm-0"><input name="first_name"
+                                                                  class="form-control form-control-user" type="text"
                                                                   placeholder="First Name" required=""></div>
-                        <div class="col-sm-6"><input class="form-control form-control-user" type="text"
+                        <div class="col-sm-6"><input name="last_name" class="form-control form-control-user" type="text"
                                                      placeholder="Last Name" required=""></div>
-                    </div><!-- End: Names --><!-- Start: Email Error Message -->
+                    </div><!-- End: Names -->
+                    <div class="mb-3"><input name="contact_no" class="form-control form-control-user" type="text"
+                                             id="contact"
+                                             placeholder="Contact Number" required=""></div>
+                    <!-- Start: Email Error Message -->
                     <div class="row mb-3">
                         <p id="emailErrorMsg" class="text-danger" style="display:none;">Paragraph</p>
                         <p id="passwordErrorMsg" class="text-danger" style="display:none;">Paragraph</p>
                     </div><!-- End: Email Error Message -->
                     <button class="btn btn-primary d-block btn-user w-100" style=" background-color: #2b14bc;"
-                            id="submitBtn" type="submit">Sign Up
+                            id="submitBtn" name="submit" type="submit">Sign Up
                     </button>
                     <hr>
 
                     <!-- End: Forgot Password --><!-- Start: Login -->
                     <div class="text-center"><a class="small" href="login.html">Already have an account? Login!</a>
                     </div><!-- End: Login -->
+                </form>
             </div>
         </div>
     </div>
