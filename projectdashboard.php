@@ -1,16 +1,34 @@
-
 <?php
 
- if ($_SERVER['REQUEST_METHOD']=='GET'){
-     $selected_menuNo=5;
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $selected_menuNo = 5;
 
- }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
-<body style="box-sizing: border-box;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- ====== CSS Files ==== -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- <link rel="stylesheet" href="assests/scss/style.scss"> -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="assets/css/projectdashboard.css">
+
+    <!-- ===== Boostrap CSS ==== -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+
+</head>
+
+<body>
 
 <!-- =======  side bar ======= -->
 <div class="sideBar w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:block;" id="mySidebar">
@@ -263,30 +281,106 @@
     <div id="menu-content-4" class="main-content hide">
         <h1>Content 4</h1>
     </div>
-    <div id="menu-content-5" class="main-content w-100 hide">
-        <div class="w-100 bg-primary container d-flex">
-            <div class="bg-info mx-auto col-4">
-                <div class="card mx-auto">
-                    <div class="card-header">
-                        <div>Project Teams</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-10">
-                                    <div>Program Team</div>
+    <div id="menu-content-5" class="main-content w-100 h-100 hide">
+        <div class="container-fluid h-100">
+            <div class="row h-100">
+                <!-- ====== left side section ========== -->
+                <div class="col-12 col-lg-8">
+                    <h1>das</h1>
+                </div>
+                <!-- ========== right side section ========== -->
+                <div class="col-12 col-lg-4">
+                    <div class="w-100 p-0 pt-3 d-flex container">
+                        <div class="card mx-auto col-12 col-md-8 col-lg-12" style="height: 50%;">
+                            <div class="card-header d-flex"
+                                 style="background-color: var(--primary); color: var(--lighter-secondary);">
+                                <div class="my-auto fw-bold" style="font-size: 1.3rem;">Project Teams</div>
+                                <div class="btn fw-bold my-auto ms-auto me-2 d-flex"
+                                     style="color: var(--accent-color2) !important"
+                                     type="button" data-bs-toggle="modal"
+                                     data-bs-target="#add-new-project-teams">
+                                    <ion-icon class="my-auto" name="add-outline"></ion-icon>
+                                    <div class="my-auto">New</div>
                                 </div>
-                                <div class="col-2">
-                                    <div class="d-flex" type="button">
-                                        <ion-icon name="create-outline"></ion-icon>
+
+                                <!-- =========== add new team button model =========== -->
+                                <div class="modal fade"
+                                     id="add-new-project-teams"
+                                     tabindex="-1"
+                                     role="dialog"
+                                     aria-labelledby="exampleModalCenterTitle"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered"
+                                         role="document">
+                                        <div class="modal-content">
+                                            <!--=== form =====-->
+                                            <form>
+                                                <div class="modal-header py-2 px-2"
+                                                     style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                                    <div class="d-flex flex-row w-100 justify-content-between">
+
+                                                        <div class="ms-2 my-auto fs-4 fw-bold">
+                                                            Project Team
+                                                        </div>
+
+                                                        <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                        <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                        <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                             style="font-size: 1.3rem; color: var(--accent-color2);">
+                                                            New
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="modal-body" style="background-color: var(--lighter-secondary);">
+                                                    <div class="d-flex px-5">
+                                                        <input class="form-control text-center" type="text"
+                                                               name="team_name" placeholder="Team Name"/>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer" style="background-color: var(--primary);">
+                                                    <button type="button"
+                                                            class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                    <button type="submit"
+                                                            name="submit"
+                                                            class="btn fw-bold"
+                                                            style="background-color: var(--secondary); color: var(--primary);">
+                                                        ADD
+                                                    </button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-10">
+                                            <div>Program Team</div>
+                                        </div>
+                                        <div class="col-2" style="font-size: 1.5rem;">
+                                            <div class="d-flex">
+                                                <ion-icon class="" type="button" name="create-outline"></ion-icon>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
 </div>
@@ -316,24 +410,5 @@
 <script src="assets/js/projectdashboard.js"></script>
 
 </body>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <!-- ====== CSS Files ==== -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <!-- <link rel="stylesheet" href="assests/scss/style.scss"> -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="assets/css/projectdashboard.css">
-
-    <!-- ===== Boostrap CSS ==== -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
-
-</head>
 
 </html>
