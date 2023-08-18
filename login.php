@@ -14,7 +14,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
-	<link rel="stylesheet" href="page.css">
+	<link rel="stylesheet" href="../assets/css/login.css">
 </head>
 
 <body>
@@ -23,7 +23,7 @@
 	<!-- ======= Navigation Bar =======    -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 		<div class="container-fluid px-4">
-		  <a class="navbar-brand text-primary" href="index.html">UWU<span class="text-dark">Event</span><span class="text-warning">z</span></a>
+		  <a class="navbar-brand text-primary" href="index.php">UWU<span class="text-dark">Event</span><span class="text-warning">z</span></a>
 		  <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		  </button> -->
@@ -34,10 +34,10 @@
 				<a class="nav-link active" aria-current="page" href="#">Home</a>
 			  </li> -->
 			</ul>
-			<form class="d-flex">
-			  <button class="btn btn-outline-secondary d-flex align-items-center" type="submit"><Span class="d-none d-lg-inline pe-2">SignUp</Span><ion-icon style="font-size: 1.0rem;;"" name="person-add-outline"></ion-icon></button>
-			  <button class="btn btn-outline-primary ms-2 d-flex align-items-center" type="submit"><Span class="d-none d-lg-inline-block pe-2">LogIn</Span><ion-icon style="font-size: 1.5rem;" name="log-in-outline"></ion-icon></button>
-			</form>
+			<a href="register.php" class="d-flex" style="text-decoration: none">
+			  <button class="btn btn-outline-secondary d-flex align-items-center" type="submit"><Span class="d-none d-lg-inline pe-2">SignUp</Span><ion-icon style="font-size: 1.0rem;" name="person-add-outline"></ion-icon></button>
+<!--			  <button class="btn btn-outline-primary ms-2 d-flex align-items-center" type="submit"><Span class="d-none d-lg-inline-block pe-2">LogIn</Span><ion-icon style="font-size: 1.5rem;" name="log-in-outline"></ion-icon></button>-->
+			</a>
 		  </div>
 		</div>
 	  </nav>

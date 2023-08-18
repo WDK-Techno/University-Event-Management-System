@@ -7,7 +7,7 @@
 	font-family: Raleway, sans-serif;
 }
 .bgimg {
-	background-image: url('cover_new.jpg');
+	background-image: url('../images/register_form/cover_new.jpg');
 	min-height: 100%;
 	background-position: center;
 	background-size: cover;
