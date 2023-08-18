@@ -22,6 +22,7 @@
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
     <script src="./assets/js/jquery-3.6.0.min.js"></script>
     <script src="./assets/js/bootstrap.min.js"></script>
@@ -129,7 +130,7 @@
                         <div class="col-lg-4" style="height: 500px; width: 300px">
                             <div class="card h-100">
                                 <div class="box front  w-100">
-                                    <img alt="" src="assets/images/f1.jpg">
+                                    <img alt="" src="assets/images/homepage/f1.jpg">
                                 </div>
                                 <div class="box back">
                                     <p>
@@ -144,7 +145,7 @@
                         <div class="col-lg-4" style="height: 500px; width: 300px">
                             <div class="card h-100">
                                 <div class="box front ">
-                                    <img alt="" src="assets/images/f2.jpg">
+                                    <img alt="" src="assets/images/homepage/f2.jpg">
                                 </div>
                                 <div class="box back">
                                     <p>
@@ -159,7 +160,7 @@
                         <div class="col-lg-4" style="height: 500px; width: 300px">
                             <div class="card h-100">
                                 <div class="box front">
-                                    <img alt="" src="assets/images/f3.jpg">
+                                    <img alt="" src="assets/images/homepage/f3.jpg">
                                 </div>
                                 <div class="box back">
                                     <p>
@@ -178,7 +179,7 @@
                         <div class="col-lg-4" style="height: 500px; width: 300px">
                             <div class="card h-100">
                                 <div class="box front">
-                                    <img alt="" src="assets/images/f4.jpg">
+                                    <img alt="" src="assets/images/homepage/f4.jpg">
                                 </div>
                                 <div class="box back">
                                     <p>
@@ -193,7 +194,7 @@
                         <div class="col-lg-4" style="height: 500px; width: 300px">
                             <div class="card h-100">
                                 <div class="box front">
-                                    <img alt="" src="assets/images/f5.jpg">
+                                    <img alt="" src="assets/images/homepage/f5.jpg">
                                 </div>
                                 <div class="box back">
                                     <p>
@@ -207,7 +208,7 @@
                         <div class="col-md-4" style="height: 500px; width: 300px">
                             <div class="card h-100">
                                 <div class="box front">
-                                    <img alt="" src="assets/images/f6.jpg">
+                                    <img alt="" src="assets/images/homepage/f6.jpg">
                                 </div>
                                 <div class="box back">
                                     <p>
@@ -227,7 +228,7 @@
                         <div class="col-lg-4" style="height: 500px; width: 300px">
                             <div class="card h-100">
                                 <div class="box front">
-                                    <img alt="" src="assets/images/f7.jpg">
+                                    <img alt="" src="assets/images/homepage/f7.jpg">
                                 </div>
                                 <div class="box back">
                                     <p>
@@ -241,7 +242,7 @@
                         <div class="col-lg-4" style="height: 500px; width: 300px">
                             <div class="card h-100">
                                 <div class="box front">
-                                    <img alt="" src="assets/images/f8.jpg">
+                                    <img alt="" src="assets/images/homepage/f8.jpg">
                                 </div>
                                 <div class="box back">
                                     <p>
@@ -257,7 +258,7 @@
                         <div class="col-lg-4" style="height: 500px; width: 300px">
                             <div class="card h-100">
                                 <div class="box front">
-                                    <img alt="" src="assets/images/aurora.png">
+                                    <img alt="" src="assets/images/homepage/aurora.png">
                                 </div>
                                 <div class="box back">
                                     <p>
@@ -280,17 +281,16 @@
 
 <div class="row">
     <div class="title">
-        <h1>About Us</h1>
+        <h1>Our Services</h1>
     </div>
     <div class="d-flex col-md-12  p-5 justify-content-start">
         <div class="card mb-3 " style="max-width: 80%;">
             <div class="row ">
                 <div class="col-md-4">
-                    <img src="assets/images/calender.jpg" class="img-fluid rounded-start">
+                    <img src="assets/images/homepage/calender.jpg" class="img-fluid rounded-start">
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">About UWU Event Calender</h5>
+                    <div class="card-content col-md-8">
+                        <h5 class="card-title">UWU Event Calender</h5>
                         <p class="card-text">
                             Many events or projects happen every week in our university. In such a situation, the
                             days will last
@@ -308,7 +308,6 @@
                             <a href="">Read More</a>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
@@ -316,10 +315,9 @@
         <div class="card mb-3" style="max-width: 80%;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="assets/images/prPlan.jpg" class="img-fluid rounded-start">
+                    <img src="assets/images/homepage/prPlan.jpg" class="img-fluid rounded-start">
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
+                    <div class="card-content col-md-8">
                         <h5 class="card-title">PR Plan Tool</h5>
                         <p class="card-text">
                             The tool should allow the project manager to define PR activities, such as press releases, media interviews, or social media campaigns. Further,
@@ -329,7 +327,6 @@
                             <a href="">Read More</a>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
@@ -337,10 +334,9 @@
         <div class="card mb-3 " style="max-width: 80%;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="assets/images/ganttChart.jpg" class="img-fluid rounded-start">
+                    <img src="assets/images/homepage/ganttChart.jpg" class="img-fluid rounded-start">
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
+                    <div class="card-content col-md-8">
                         <h5 class="card-title">Gantt Chart</h5>
                         <p class="card-text">
                             The system generates a visual representation of the project timeline, highlighting task start and finish dates. as well as
@@ -350,7 +346,6 @@
                             <a href="">Read More</a>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
@@ -358,10 +353,9 @@
         <div class="card mb-3" style="max-width: 80%;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="assets/images/activity.jpg" class="img-fluid rounded-start">
+                    <img src="assets/images/homepage/activity.jpg" class="img-fluid rounded-start">
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
+                    <div class="card-content col-md-8">
                         <h5 class="card-title">Activity Plan Tool</h5>
                         <p class="card-text">
                             Here users can add sub-tasks under the main task.
@@ -373,12 +367,87 @@
                             <a href="">Read More</a>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
 </div>
-<div class="container">
+<h1 class="heading">Our Team</h1>
+<div class="row row-cols-1 row-cols-md-5 g-4 p-5">
+    <div class="col d-flex justify-content-center">
+        <div class="card-profile d-flex flex-column justify-content-center">
+            <img src="assets/images/homepage/profile.jpg" class="card-img-top position-sticky" alt="...">
+            <div class="card-profile-body">
+                <h5 class="card-title">Kavindra Weerasingha</h5>
+                <p class="card-text">Web Master</p>
+            </div>
+            <div class="d-flex justify-content-evenly p-4">
+                <i class="bi bi-facebook"></i>
+                <i class="bi bi-linkedin"></i>
+                <i class="bi bi-envelope-fill"></i>
+                <i class="bi bi-whatsapp"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col d-flex justify-content-center">
+        <div class="card-profile d-flex flex-column justify-content-center">
+            <img src="assets/images/homepage/profile.jpg" class="card-img-top position-sticky" alt="...">
+            <div class="card-profile-body">
+                <h5 class="card-title">Thilini Priyangika</h5>
+                <p class="card-text">Full Stack Developer</p>
+            </div>
+            <div class="d-flex justify-content-evenly p-4">
+                <i class="bi bi-facebook"></i>
+                <i class="bi bi-linkedin"></i>
+                <i class="bi bi-envelope-fill"></i>
+                <i class="bi bi-whatsapp"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col d-flex justify-content-center">
+        <div class="card-profile d-flex flex-column justify-content-center">
+            <img src="assets/images/homepage/profile.jpg" class="card-img-top position-sticky" alt="...">
+            <div class="card-profile-body">
+                <h5 class="card-title">Kavinda Helitha</h5>
+                <p class="card-text">Web Master</p>
+            </div>
+            <div class="d-flex justify-content-evenly p-4">
+                <i class="bi bi-facebook"></i>
+                <i class="bi bi-linkedin"></i>
+                <i class="bi bi-envelope-fill"></i>
+                <i class="bi bi-whatsapp"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col d-flex justify-content-center">
+        <div class="card-profile d-flex flex-column justify-content-center">
+            <img src="assets/images/homepage/profile.jpg" class="card-img-top position-sticky" alt="...">
+            <div class="card-profile-body">
+                <h5 class="card-title">Ishara Suvini</h5>
+                <p class="card-text">Editor</p>
+            </div>
+            <div class="d-flex justify-content-evenly p-4">
+                <i class="bi bi-facebook"></i>
+                <i class="bi bi-linkedin"></i>
+                <i class="bi bi-envelope-fill"></i>
+                <i class="bi bi-whatsapp"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col d-flex justify-content-center">
+        <div class="card-profile d-flex flex-column justify-content-center">
+            <img src="assets/images/homepage/profile.jpg" class="card-img-top position-sticky" alt="...">
+            <div class="card-profile-body">
+                <h5 class="card-title">Anuranga</h5>
+                <p class="card-text">Full Stack Developer</p>
+            </div>
+            <div class="d-flex justify-content-evenly p-4">
+                <i class="bi bi-facebook"></i>
+                <i class="bi bi-linkedin"></i>
+                <i class="bi bi-envelope-fill"></i>
+                <i class="bi bi-whatsapp"></i>
+            </div>
+        </div>
+    </div>
 
 </div>
 
@@ -432,6 +501,8 @@ if (isset($conn)) $conn->close();
     var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')
 </script>
 <script src="./assets/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

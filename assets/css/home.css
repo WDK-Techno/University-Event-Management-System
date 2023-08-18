@@ -5,3 +5,61 @@
     display: block;
 
 }
+.card-content{
+    background-color: lightyellow;
+    height: 300px;
+ }
+  img{
+     height: 350px;
+     width: 300px;
+      align-items: center;
+      justify-content: center;
+ }
+.heading{
+    text-align: center;
+    font-size: 50px;
+    margin: 0px;
+    padding: 0px;
+}
+.card-img-top{
+    margin-bottom: 100px;
+    border-radius: 50%;
+    height: 250px !important;
+    width: 250px !important;
+    position: relative;
+    left: 80px;
+    top: -80px;
+    object-fit: cover;
+}
+.card-profile{
+    border-radius: 0;
+    cursor: pointer;
+}
+.card-profile:hover{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+}
+.card-profile-body{
+    margin-top: -50px;
+}
+.card-title{
+    text-align: center;
+}
+.card-text{
+    text-align: center;
+}
+.content-btn{
+   
+    text-align: center;
+}
+
+.bi{
+    font-size: 25px;
+}
+@media only screen and (max-width: 600px) {
+    .card-img-top{
+
+        left: 48px !important;
+
+    }
+}
