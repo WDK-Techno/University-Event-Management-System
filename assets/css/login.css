@@ -1,0 +1,13 @@
+.bgimg {
+	background-image: url('../images/login/cover_new.jpg');
+	min-height: 100%;
+	background-position: center;
+	background-size: auto;
+	background-repeat: no-repeat;
+  }
+body {
+	/*background: linear-gradient(90deg, #C7C5F4);*/
+}
+footer{
+	background-color: #8984f5;
+}

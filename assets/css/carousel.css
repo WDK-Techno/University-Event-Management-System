@@ -1,0 +1,152 @@
+body {
+	background: #0259f0;
+	height: 70vh;
+	font-family: 'Poppins', sans-serif;
+}
+
+.card {
+    width: 100%;
+    height: 300px;
+    transform-style: preserve-3d;
+    perspective: 500px;
+    border: none;
+    background-color: inherit;
+}
+
+.card .box {
+    position: absolute;
+    color: #262626;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    background: #fff;
+    transform-style: preserve-3d;
+    transition: 0.5s;
+    backface-visibility: hidden;
+}
+.card .box.front{
+   
+    background-repeat: repeat;
+    background-color: white;
+
+       /* https://www.toptal.com/designers/subtlepatterns/moroccan-flower-pattern/ */
+}
+.card .box.front,
+.card .box.back {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card .box.front img {
+	width: 100%;
+	height: 100%;
+	margin-bottom: 10px;
+  ;
+}
+
+.card:hover .box.front {
+    transform: rotateY(180deg);
+}
+.box.front h2 {
+	font-family: 'Bebas Neue', cursive;
+}
+.box.front h4 {
+	font-size: 18px;
+	letter-spacing: 2px;
+}
+.card .box.back {
+    position: absolute;
+    background: lightsteelblue;
+    transform: rotateY(180deg);
+    padding: 20px 30px;
+    text-align: center;
+    user-select: none;
+}
+
+.card .box.back .fa-quote-left {
+	position: absolute;
+	top: 25px;
+	left: 180px;
+	font-size: 3.2rem;
+}
+
+.card:hover .box.back {
+    transform: rotateY(360deg);
+}
+.title-word {
+    animation: color-animation 4s linear infinite;
+  }
+  
+  .title-word-1 {
+    --color-1: #DF8453;
+    --color-2: #3D8DAE;
+    --color-3: #E4A9A8;
+  }
+  
+  .title-word-2 {
+    --color-1: #DBAD4A;
+    --color-2: #ACCFCB;
+    --color-3: #17494D;
+  }
+  @keyframes color-animation {
+    0%    {color: var(--color-1)}
+    32%   {color: var(--color-1)}
+    33%   {color: var(--color-2)}
+    65%   {color: var(--color-2)}
+    66%   {color: var(--color-3)}
+    99%   {color: var(--color-3)}
+    100%  {color: var(--color-1)}
+  }
+  
+  /* Here are just some visual styles. 🖌 */
+  
+  .container3 {
+    display: grid;
+    place-items: center;  
+    text-align: center;
+    height: 50vh
+  }
+  
+  .title {
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    font-weight: 10;
+    font-size: 2.5vw;
+    text-transform: uppercase;
+      letter-spacing: .25em;
+  }.container4{
+    text-align: center;
+  }
+  *{padding: 0; margin: 0; box-sizing: border-box;}
+  body{height: 900px;}
+  header {
+    text-align: center;
+    width: 100%;
+    height: auto;
+    background-size: cover;
+    background-attachment: relative;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 0 85% 85% / 30%;
+  }
+  h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 80px;
+    margin-bottom: 30px;
+  }
+  
+  h3, p {
+    font-family: 'Open Sans', sans-serif;
+    margin-bottom: 30px;
+  }
+
+@media(max-width: 991.5px) {
+    .col-lg-4 {
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+}

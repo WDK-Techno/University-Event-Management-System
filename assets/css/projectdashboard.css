@@ -1,0 +1,142 @@
+html {
+  height: -webkit-fill-available;
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  overflow: hidden;
+}
+
+
+:root {
+  --primary: #2F3C7E;
+  --secondary: #FBEAEB;
+  --darker-primary: #1D2561;
+  --lighter-secondary: #FDF6F7;
+  --accent-color: #1F8A70;
+  --accent-color2: #93e017;
+  --accent-color3: #e36d24;
+}
+
+/* ======== side bar ========= */
+#mySidebar {
+  width: 280px;
+  display: block;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+#main {
+  margin-left: 280px;
+  /* width: calc(100%-280px); */
+  /* background-color: var(--secondary); */
+  height: 100vh;
+}
+
+/* #project-details{
+  color: var();
+} */
+
+@media only screen and (max-width: 768px) {
+  
+  body{
+    overflow:scroll;
+  }
+  #mySidebar {
+    width: 80px;
+    display: block;
+    height: 100vh;
+    overflow-y: scroll;
+  }
+  
+  #main {
+    margin-left: 80px;
+    /* width: calc(100%-280px); */
+    /* background-color: var(--secondary); */
+    height: 100vh;
+  }
+
+  #mySidebar .sideBar-btn-text{
+    display:none;
+  }
+
+  #user-name{
+    display: none;
+  }
+  #project-details{
+    display: none;
+  }
+  
+}
+
+
+#openNav{
+  font-size: 2.5rem;
+  background-color: transparent;
+  cursor: pointer;
+}
+.sideBar{
+  color: white;
+  background-color:var(--darker-primary);
+}
+.sideBar ul li ion-icon{
+  font-size: 2.5rem;
+  margin-right: 7px;
+}
+
+.sideBar ul li span{
+  font-size: 1.5rem;
+}
+
+.sideBar-btn:hover{
+  color: var(--primary);
+  background-color: var(--lighter-secondary);
+  border-radius: 5px;
+  margin: 3px;
+} 
+.sideBar-btn:active,
+.activate{
+  color: var(--primary);
+  background-color: var(--secondary);
+  border-radius: 5px;
+  margin: 3px;
+}
+.sideBar-btn-text{
+  display: block;
+}
+
+/* ======== Nav Bar Changes =========== */
+#project-name{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+  text-shadow: 2px 2px 4px #edd7d8e3;
+}
+
+/* ========== show hide ============ */
+.show{
+  display: block;
+}
+
+.hide{
+  display: none;
+}
+
+/* =============== content ========== */
+
+/* ===== common classes ========= */
+.card-list-option-buttons ion-icon{
+  color: var(--darker-primary);
+}
+.card-list-option-buttons ion-icon:hover{
+  color: var(--primary);
+}
+.card-list-option-buttons ion-icon:active{
+  color: var(--lighter-secondary);
+}
+
+/* ========== add new projects teams model ========== */
+.card-project-teams-list .row:hover{
+  background-color: var(--secondary) !important;
+} 

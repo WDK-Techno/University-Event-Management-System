@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Custom CSS for circle shape profile photo */
+    .profile-photo {
+    border-radius: 50%;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header Section -->
+    <header class="mt-4 text-right">
+        <div class="row align-items-center">
+          <div class="col-auto">
+            <img src="path/to/profile-photo.jpg" alt="Profile Photo" class="img-thumbnail profile-photo" style="width: 100px;">
+          </div>
+          <div class="col">
+            <h2 class="mt-0">User Name</h2>
+          </div>
+        </div>
+      </header>
+
+    <!-- Project Details Section -->
+    <section class="mt-4">
+      <h3>Project Details</h3>
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <table class="table table-bordered">
+            <tr>
+              <th>Project Name</th>
+              <td>Art Festival</td>
+            </tr>
+            <tr>
+              <th>Host Club</th>
+              <td>Rotract Club</td>
+            </tr>
+            <tr>
+              <th>User Role</th>
+              <td>Designer</td>
+            </tr>
+            <tr>
+              <th>Project Date</th>
+              <td>2023/03/12</td>
+            </tr>
+            <!-- New row for the View button -->
+            <tr>
+              <td colspan="2" class="text-center">
+                <button class="btn btn-primary">View</button>
+              </td>
+            </tr>
+          </table>
+          <!-- First Pie Chart -->
+          <div id="pieChart1" style="height: 150px;"></div>
+        </div>
+        <div class="col-md-6">
+          <table class="table table-bordered">
+            <tr>
+              <th>Project Name</th>
+              <td>Food Festival</td>
+            </tr>
+            <tr>
+              <th>Host Club</th>
+              <td>Leo Club</td>
+            </tr>
+            <tr>
+              <th>User Role</th>
+              <td>Advertiser</td>
+            </tr>
+            <tr>
+              <th>Project Date</th>
+              <td>2023/04/12</td>
+            </tr>
+            <!-- New row for the View button -->
+            <tr>
+              <td colspan="2" class="text-center">
+                <button class="btn btn-primary">View</button>
+              </td>
+            </tr>
+          </table>
+          <!-- Second Pie Chart -->
+          <div id="pieChart2" style="height: 150px;"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Add the Bootstrap and JavaScript dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.28.3/dist/apexcharts.min.js"></script>
+  <script>
+    // Initialize and render the first pie chart
+    document.addEventListener("DOMContentLoaded", function() {
+      const chartData1 = [70, 30]; // Replace with your project completion data (in percentage)
+      const options1 = {
+        chart: {
+          type: "pie",
+        },
+        series: chartData1,
+        labels: ["Completed", "Remaining"],
+        colors: ["#00e396", "#ff4560"],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 150
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+      };
+
+      const pieChart1 = new ApexCharts(document.querySelector("#pieChart1"), options1);
+      pieChart1.render();
+    });
+
+    // Initialize and render the second pie chart
+    document.addEventListener("DOMContentLoaded", function() {
+      const chartData2 = [50, 50]; // Replace with your project completion data (in percentage)
+      const options2 = {
+        chart: {
+          type: "pie",
+        },
+        series: chartData2,
+        labels: ["Completed", "Remaining"],
+        colors: ["#4CAF50", "#FF9800"],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 150
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+      };
+
+      const pieChart2 = new ApexCharts(document.querySelector("#pieChart2"), options2);
+      pieChart2.render();
+    });
+  </script>
+</body>
+</html>

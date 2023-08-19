@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Dashboard</title>
+
+    <!-- ====== CSS Files ==== -->
+    <!-- <link rel="stylesheet" href="assests/css/style.css"> -->
+    <!-- <link rel="stylesheet" href="assests/scss/style.scss"> -->
+    <link rel="stylesheet" href="assests/css/projectdashboard.css">
+
+    <!-- ===== Boostrap CSS ==== -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <!-- ===== side bar ===== -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top d-none">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand text-primary" href="index.html">UWU<span class="text-dark">Event</span><span
+                    class="text-warning">z</span></a>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button> -->
+            <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+            <div class="" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li> -->
+                </ul>
+                <form class="d-flex">
+                    <button class="btn btn-outline-secondary d-flex align-items-center" type="submit"><Span
+                            class="d-none d-lg-inline pe-2">SignUp</Span><ion-icon style="font-size: 1.0rem;;"" name="
+                            person-add-outline"></ion-icon></button>
+                    <button class="btn btn-outline-primary ms-2 d-flex align-items-center" type="submit"><Span
+                            class="d-none d-lg-inline-block pe-2">LogIn</Span><ion-icon style="font-size: 1.5rem;"
+                            name="log-in-outline"></ion-icon></button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main">
+
+        <!-- ======== Side Bar ======= -->
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px; height: 100vh">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                
+                <span class="fs-4">Sidebar</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item btn-toggle-nav">
+                    <a href="#" class="nav-link active" aria-current="page">
+                        <ion-icon name="people-circle-outline"></ion-icon>
+                        Team Members
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white">
+                        <ion-icon name="calendar-outline"></ion-icon>
+                        Grantt Chart
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white">
+                        <ion-icon name="walk-outline"></ion-icon>
+                        Activitty Plan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white">
+                        <ion-icon name="accessibility-outline"></ion-icon>
+                        PR Plan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white">
+                        <ion-icon name="settings-outline"></ion-icon>
+                        Settings
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong>mdo</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+            </div>
+
+            <div class="d-inline" style="width: 100%; height: 100vh;">
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- ==== Boostrap Script ==== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <!-- ========= Ionicons Scripts ===== -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- ====== Script files ===== -->
+    <script src="assests/js/home.js"></script>
+
+
+</body>
+
+</html>
