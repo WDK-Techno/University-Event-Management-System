@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./assets/css/home.css">
     <link rel="stylesheet" href="./assets/css/calender.css">
     <link rel="stylesheet" href="./assets/css/carousel.css">
+    <link rel="stylesheet" href="./assets/css/footer.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
@@ -33,7 +34,7 @@
 <!-- ======= Navigation Bar =======    -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top position-relative">
     <div class="container-fluid px-4">
-        <a class="navbar-brand text-primary" href="index.html">UWU<span class="text-dark">Event</span><span
+        <a class="navbar-brand text-primary" href="home.php">UWU<span class="text-dark">Event</span><span
                     class="text-warning">z</span></a>
         <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -453,24 +454,7 @@
 
 
 <!-- ======== Footer ======== -->
-
-<footer class="py-0 px-0 text-dark bottom-0 position-relative w-100">
-    <div class="d-flex flex-column align-items-center flex-lg-row justify-content-lg-between py-1 my-1 border-top">
-        <p class="text-center">© 2023 UWUEventz, Inc. <span class="d-block d-md-inline">All rights reserved.</span>
-        </p>
-        <ul class="list-unstyled d-flex">
-            <li class="m-1"><a class="link-dark" href="#">
-                    <ion-icon name="logo-tumblr"></ion-icon>
-                </a></li>
-            <li class="m-1"><a class="link-dark" href="#">
-                    <ion-icon name="logo-instagram"></ion-icon>
-                </a></li>
-            <li class="m-1"><a class="link-dark" href="#">
-                    <ion-icon name="logo-facebook"></ion-icon>
-                </a></li>
-        </ul>
-    </div>
-</footer>
+<?php include('content/footer.php') ?>
 
 <?php
 $schedules = $conn->query("SELECT * FROM `schedule_list`");

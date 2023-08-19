@@ -15,6 +15,7 @@
      width: 300px;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
  }
 .heading{
     text-align: center;
