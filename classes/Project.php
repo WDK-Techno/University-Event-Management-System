@@ -112,7 +112,7 @@ class Project
 
         try {
 
-            $con = DBConnector::getConnection();
+
             $query = "SELECT * FROM project WHERE project_id = ?";
             $pstmt = $con->prepare($query);
             $pstmt->bindValue(1, $this->projectID);
@@ -136,6 +136,48 @@ class Project
             die("Error in Project details loading" . $exc->getMessage());
         }
 
+    }
+    public function saveChangesToDataBase($con){
+        try {
+
+            $query = "UPDATE project SET name=?,project_chair_id=?,status=? WHERE project_id=?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1, $this->projectName);
+            $pstmt->bindValue(2, $this->projectChairID);
+            $pstmt->bindValue(3, $this->status);
+            $pstmt->bindValue(4, $this->projectID);
+            $pstmt->execute();
+
+            return $pstmt->rowCount()>0;
+
+        }catch (PDOException $exc){
+            die("Error in Update Database". $exc->getMessage());
+        }
+    }
+
+    public function getProjectListFromClubID($con){
+        $projects = array();
+        try {
+
+            $query = "SELECT * FROM project WHERE club_id=?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1, $this->clubID);
+            $pstmt->execute();
+            $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
+            if(!empty($rs)){
+
+                foreach ($rs as $row){
+                    $project = new Project($row->project_id,$row->name,
+                        $row->club_id,$row->project_chair_id,$row->status);
+                    $projects[] = $project;
+                }
+
+            }
+        }catch (PDOException $exc){
+            die("Error in Database Loading". $exc->getMessage());
+        }
+
+        return $projects;
     }
 
 }

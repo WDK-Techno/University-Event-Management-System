@@ -14,7 +14,7 @@ if (isset($_POST["submit"], $_POST["username"], $_POST["password"],
     if (empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["first_name"]) ||
         empty($_POST["last_name"]) || empty($_POST["contact_no"])) {
 
-        header("location: ../../ug_signup.php?status=1");
+        header("location: ../../content/ug_signup.php?status=1");
 
     } else {
 
@@ -28,19 +28,19 @@ if (isset($_POST["submit"], $_POST["username"], $_POST["password"],
         $ug = new Undergraduate($userName, $password, $firstName,
             $lastName, $contactNo);
     if ($ug->checkDuplicateEmail($con)){
-        header("location: ../../ug_signup.php?status=3");
+        header("location: ../../content/ug_signup.php?status=3");
     }else{
 
         $result =  $ug->register($con);
         if ($result){
             header("location: ../../login.php");
         }else{
-            header("location: ../../ug_signup.php?status=2");
+            header("location: ../../content/ug_signup.php?status=2");
         }
     }
     }
 } else {
-    header("location: ../../ug_signup.php?status=1");
+    header("location: ../../content/ug_signup.php?status=1");
 }
 
 

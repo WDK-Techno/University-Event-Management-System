@@ -167,4 +167,50 @@ class Club extends User
 {
     private $clubName;
     private $contactNo;
+
+    public function __construct($usrname, $password,$clubName,$contactNo)
+    {
+        parent::__construct($usrname, $password);
+
+        $this->clubName = $clubName;
+        $this->contactNo = $contactNo;
+        parent::setRole("club");
+        parent::setStatus("new");
+    }
+    public function registerClub($con){
+        $findDuplicate = parent::checkDuplicateEmail($con); //check duplicate
+        if (!$findDuplicate) {
+            try {
+                $query1 = "INSERT INTO user (user_name,password,role,status) VALUES (?,?,?,?)";
+                $pstmt = $con->prepare($query1);
+                $pstmt->bindValue(1, parent::getUsername());
+                $pstmt->bindValue(2, parent::getPassword());
+                $pstmt->bindValue(3, parent::getRole());
+                $pstmt->bindValue(4, parent::getStatus());
+                $pstmt->execute();
+
+                if ($pstmt->rowCount() > 0) {
+                    $regID = $con->lastInsertId();
+                    parent::setUserId($regID);
+
+                    $query2 = "INSERT INTO club (user_id,name,contact_no) VALUES (?,?,?)";
+                    $pstmt2 = $con->prepare($query2);
+                    $pstmt2->bindValue(1, $regID);
+                    $pstmt2->bindValue(2, $this->clubName);
+                    $pstmt2->bindValue(3, $this->contactNo);
+                    $pstmt2->execute();
+
+                    return $pstmt2->rowCount()>0;
+                }else{
+                    return false;
+                }
+            }catch (PDOException $exc){
+                die("Error in Club Registraion ". $exc->getMessage() );
+            }
+        }else{
+            return false;
+        }
+    }
+
+
 }

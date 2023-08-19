@@ -30,10 +30,20 @@
 				<a class="nav-link active" aria-current="page" href="#">Home</a>
 			  </li> -->
 			</ul>
-			<form class="d-flex">
-			  <button class="btn btn-outline-secondary d-flex align-items-center" type="submit"><Span class="d-none d-lg-inline pe-2">SignUp</Span><ion-icon style="font-size: 1.0rem;;"" name="person-add-outline"></ion-icon></button>
-			  <button class="btn btn-outline-primary ms-2 d-flex align-items-center" type="submit"><Span class="d-none d-lg-inline-block pe-2">LogIn</Span><ion-icon style="font-size: 1.5rem;" name="log-in-outline"></ion-icon></button>
-			</form>
+              <div class="d-flex">
+                  <a href="../register.php" class="text-decoration-none">
+                      <button class="btn btn-outline-secondary d-flex align-items-center" type="submit"><Span
+                                  class="d-none d-lg-inline pe-2">SignUp</Span>
+                          <ion-icon style="font-size: 1.0rem;;"
+                          " name="person-add-outline"></ion-icon></button>
+                  </a>
+                  <a href="../login.php" class="text-decoration-none">
+                      <button class="btn btn-outline-primary ms-2 d-flex align-items-center" type="submit"><Span
+                                  class="d-none d-lg-inline-block pe-2">LogIn</Span>
+                          <ion-icon style="font-size: 1.5rem;" name="log-in-outline"></ion-icon>
+                      </button>
+                  </a>
+              </div>
 		  </div>
 		</div>
 	  </nav>
@@ -52,33 +62,57 @@
 				<div class="p-5">
 					<div class="text-center">
 						<h4 class="text-dark mb-4">Club/Society</h4>
-					</div><!-- Start: Register Form -->
-					<form class="user"><!-- Start: Username -->
-						<div class="mb-3"><input class="form-control form-control-user" type="text"
-								placeholder="Username" required=""></div><!-- End: Username --><!-- Start: Email -->
-						<div class="mb-3"><input class="form-control form-control-user" type="email" id="email"
-								placeholder="Email Address" required=""></div>
+					</div>
+
+                    <!-- Start: Register Form -->
+					<form action="../process/signup/reg_club.php" method="post" class="user"><!-- Start: Username -->
+
+                        <!-- Start: Email -->
+						<div class="mb-3">
+                            <input name="username" class="form-control form-control-user" type="email" id="email"
+								placeholder="Email Address" required="">
+                        </div>
 						<!-- End: Email --><!-- Start: Password -->
 						<div class="row mb-3">
-							<div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control-user"
-									type="password" id="password" placeholder="Password" required=""></div>
-							<div class="col-sm-6"><input class="form-control form-control-user" type="password"
-									id="verifyPassword" placeholder="Repeat Password" required=""></div>
-						</div><!-- End: Password --><!-- Start: Names -->
+							<div class="col-sm-6 mb-3 mb-sm-0">
+                                <input name="password" class="form-control form-control-user"
+									type="password" id="password" placeholder="Password" required="">
+                            </div>
+							<div class="col-sm-6">
+                                <input class="form-control form-control-user" type="password"
+									id="verifyPassword" placeholder="Repeat Password" required="">
+                            </div>
+						</div><!-- End: Password -->
+                        <!-- Start: Names -->
 						<div class="row mb-3">
-							<div class="col-sm-12 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text"
-									placeholder="Club Name" required=""></div>
+							<div class="col-sm-12 mb-3 mb-sm-0">
+                                <input name="club_name" class="form-control form-control-user" type="text"
+									placeholder="Club Name" required="">
+                            </div>
 						
-						</div><!-- End: Names --><!-- Start: Email Error Message -->
+						</div><!-- End: Names -->
+                        <!-- Start: Contact No -->
+						<div class="row mb-3">
+							<div class="col-sm-12 mb-3 mb-sm-0">
+                                <input name="contact_no" class="form-control form-control-user" type="text"
+									placeholder="Contact Number" required="">
+                            </div>
+
+						</div><!-- End: Contact No -->
+
+
+                        <!-- Start: Email Error Message -->
 						<div class="row mb-3">
 							<p id="emailErrorMsg" class="text-danger" style="display:none;">Paragraph</p>
 							<p id="passwordErrorMsg" class="text-danger" style="display:none;">Paragraph</p>
-						</div><!-- End: Email Error Message --><button class="btn btn-primary d-block btn-user w-100" style=" background-color: #339363;"
-							id="submitBtn" type="submit"> Register </button>
+						</div><!-- End: Email Error Message -->
+                        <button class="btn btn-primary d-block btn-user w-100" style=" background-color: #339363;"
+							id="submitBtn" name="submit" type="submit"> Register </button>
 						<hr>
-					</form><!-- End: Register Form --><!-- Start: Forgot Password -->
+					</form>
+                    <!-- End: Register Form --><!-- Start: Forgot Password -->
 					
-					<div class="text-center"><a class="small" href="login.html">Already have an account? Login!</a>
+					<div class="text-center"><a class="small" href="../login.php">Already have an account? Login!</a>
 					</div><!-- End: Login -->
 				</div>
 			</div>

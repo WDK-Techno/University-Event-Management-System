@@ -62,7 +62,7 @@
                     <h3 style="padding: 30px 0px 30px 0px;color: black;font-weight: bold; " align="center">
                         Register </h3>
                     <div class="text-center m-3">
-                        <a href="ug_signup.php">
+                        <a href="content/ug_signup.php">
                             <button class="btn btn-danger " type="button"
                                     style="border: none;width: 300px;height: 58px;background-color: #2b14bc;">
                                 Undergraduates
@@ -70,9 +70,12 @@
                         </a>
                     </div>
                     <div style="padding-bottom: 30px;" class="text-center m-3">
-                        <button class="btn btn-danger " type="button"
-                                style="border: none;width: 300px;height: 58px;background-color: #339363;">Club/Society
-                        </button>
+                        <a href="content/club_signup.php">
+                            <button class="btn btn-danger " type="button"
+                                    style="border: none;width: 300px;height: 58px;background-color: #339363;">
+                                Club/Society
+                            </button>
+                        </a>
                     </div>
 
                 </div>
