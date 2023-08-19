@@ -7,10 +7,10 @@
     <title>Document</title>
 
     <!-- ====== CSS Files ==== -->
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <!-- <link rel="stylesheet" href="assests/scss/style.scss"> -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="../assets/css/clubownerdash.css">
+    <link rel="stylesheet" href="assets/css/clubownerdash.css">
 
     <!-- ===== Boostrap CSS ==== -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
@@ -228,7 +228,7 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <!-- ====== Script files ===== -->
-    <script src="../assets/js/projectdashboard.js"></script>
+    <script src="assets/js/projectdashboard.js"></script>
 
 </body>
 

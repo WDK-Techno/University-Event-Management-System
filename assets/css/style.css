@@ -20,7 +20,9 @@ html {
     --darker-primary: #1D2561;
     --lighter-secondary: #FDF6F7;
     --accent-color: #1F8A70;
-  }
+    --accent-color2: #93e017;
+    --accent-color3: #e36d24;
+}
 
 .navbar {
     --bs-bg-opacity: .75;
