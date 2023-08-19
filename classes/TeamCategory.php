@@ -65,6 +65,32 @@ class TeamCategory
         $this->status = $status;
     }
 
+    public function loadDataByTeamID($con){
+        try {
+
+            $query = "SELECT * FROM team_category WHERE category_id=?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1, $this->categoryID);
+            $pstmt->execute();
+            $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
+            if (!empty($rs)){
+                $this->categoryID = $rs->category_id;
+                $this->categoryName = $rs->category_name;
+                $this->projectID = $rs->project_id;
+                $this->status = $rs->status;
+
+                return true;
+            }else{
+                return false;
+            }
+
+        } catch (PDOException $exc) {
+            die("Error in Team Category Loading " . $exc->getMessage());
+        }
+
+
+    }
+
     public function addNewTeam($con)
     {
         try {
@@ -91,9 +117,10 @@ class TeamCategory
         $teamCategories = array();
         try {
 
-            $query = "SELECT * FROM team_category WHERE project_id=?";
+            $query = "SELECT * FROM team_category WHERE project_id=? AND status=?";
             $pstmt = $con->prepare($query);
             $pstmt->bindValue(1, $projectID);
+            $pstmt->bindValue(2, "active");
             $pstmt->execute();
             $rs = $pstmt->fetchAll(\PDO::FETCH_OBJ);
             if (!empty($rs)) {
@@ -108,6 +135,25 @@ class TeamCategory
             die("Error in Team Category Loading " . $exc->getMessage());
         }
         return $teamCategories;
+    }
+
+    public function updateChanges($con)
+    {
+
+        try {
+
+            $query = "UPDATE team_category SET category_name=?,status=? WHERE category_id=?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1, $this->getCategoryName());
+            $pstmt->bindValue(2, $this->getStatus());
+            $pstmt->bindValue(3, $this->getCategoryID());
+            $pstmt->execute();
+
+            return $pstmt->rowCount() > 0;
+        } catch (PDOException $exc) {
+            die("Error in Team Category Changes Updating " . $exc->getMessage());
+        }
+
     }
 
 
