@@ -104,6 +104,42 @@ class Undergraduate extends User
     private $lastName;
     private $contactNo;
 
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    public function getContactNo()
+    {
+        return $this->contactNo;
+    }
+
+
+    public function setContactNo($contactNo)
+    {
+        $this->contactNo = $contactNo;
+    }
+
+
+
     public function __construct($usrname, $password, $firstName, $lastName, $contactNo)
     {
         parent::__construct($usrname, $password);
@@ -161,6 +197,27 @@ class Undergraduate extends User
         }
     }
 
+    public function loadDataFromUserID($con){
+
+        $query = "SELECT * FROM undergraduate INNER JOIN user ON undergraduate.user_id = user.user_id WHERE user.user_id =?";
+        $pstmt = $con->prepare($query);
+        $pstmt->bindValue(1, parent::getUserId());
+        $pstmt->execute();
+        $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
+        if (!empty($rs)) {
+            parent::setUsername($rs->user_name);
+            parent::setRole($rs->role);
+            parent::setStatus($rs->status);
+            $this->firstName = $rs->first_name;
+            $this->lastName = $rs->last_name;
+            $this->contactNo = $rs->contact_no;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
 
 class Club extends User
@@ -168,7 +225,32 @@ class Club extends User
     private $clubName;
     private $contactNo;
 
-    public function __construct($usrname, $password,$clubName,$contactNo)
+
+    public function getClubName()
+    {
+        return $this->clubName;
+    }
+
+
+    public function setClubName($clubName)
+    {
+        $this->clubName = $clubName;
+    }
+
+
+    public function getContactNo()
+    {
+        return $this->contactNo;
+    }
+
+
+    public function setContactNo($contactNo)
+    {
+        $this->contactNo = $contactNo;
+    }
+
+
+    public function __construct($usrname, $password, $clubName, $contactNo)
     {
         parent::__construct($usrname, $password);
 
@@ -177,7 +259,9 @@ class Club extends User
         parent::setRole("club");
         parent::setStatus("new");
     }
-    public function registerClub($con){
+
+    public function registerClub($con)
+    {
         $findDuplicate = parent::checkDuplicateEmail($con); //check duplicate
         if (!$findDuplicate) {
             try {
@@ -200,14 +284,35 @@ class Club extends User
                     $pstmt2->bindValue(3, $this->contactNo);
                     $pstmt2->execute();
 
-                    return $pstmt2->rowCount()>0;
-                }else{
+                    return $pstmt2->rowCount() > 0;
+                } else {
                     return false;
                 }
-            }catch (PDOException $exc){
-                die("Error in Club Registraion ". $exc->getMessage() );
+            } catch (PDOException $exc) {
+                die("Error in Club Registraion " . $exc->getMessage());
             }
-        }else{
+        } else {
+            return false;
+        }
+    }
+
+    public function loadDataFromUserID($con)
+    {
+
+        $query = "SELECT * FROM club INNER JOIN user ON club.user_id = user.user_id WHERE user.user_id =?";
+        $pstmt = $con->prepare($query);
+        $pstmt->bindValue(1, parent::getUserId());
+        $pstmt->execute();
+        $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
+        if (!empty($rs)) {
+            parent::setUsername($rs->user_name);
+            parent::setRole($rs->role);
+            parent::setStatus($rs->status);
+            $this->clubName = $rs->name;
+            $this->contactNo = $rs->contact_no;
+
+            return true;
+        } else {
             return false;
         }
     }

@@ -97,7 +97,7 @@ class Project
 
             if ($pstmt->rowCount() > 0) {
                 $this->projectID = $con->lastInsertId();
-                $this->loadDataFromProectID($con);
+                $this->loadDataFromProjectID($con);
             } else {
 
                 return false;
@@ -107,7 +107,7 @@ class Project
         }
     }
 
-    public function loadDataFromProectID($con)
+    public function loadDataFromProjectID($con)
     {
 
         try {
