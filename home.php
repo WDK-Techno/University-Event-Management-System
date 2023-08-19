@@ -290,7 +290,7 @@
                     <img src="assets/images/homepage/calender.jpg" class="img-fluid rounded-start">
                 </div>
                     <div class="card-content col-md-8">
-                        <h5 class="card-title">UWU Event Calender</h5>
+                        <h5 class="card-title-service">UWU Event Calender</h5>
                         <p class="card-text">
                             Many events or projects happen every week in our university. In such a situation, the
                             days will last
@@ -318,7 +318,7 @@
                     <img src="assets/images/homepage/prPlan.jpg" class="img-fluid rounded-start">
                 </div>
                     <div class="card-content col-md-8">
-                        <h5 class="card-title">PR Plan Tool</h5>
+                        <h5 class="card-title-service">PR Plan Tool</h5>
                         <p class="card-text">
                             The tool should allow the project manager to define PR activities, such as press releases, media interviews, or social media campaigns. Further,
                             The system can provide a platform for managing PR tasks, assigning responsibilities, and setting deadlines.
@@ -337,7 +337,7 @@
                     <img src="assets/images/homepage/ganttChart.jpg" class="img-fluid rounded-start">
                 </div>
                     <div class="card-content col-md-8">
-                        <h5 class="card-title">Gantt Chart</h5>
+                        <h5 class="card-title-service">Gantt Chart</h5>
                         <p class="card-text">
                             The system generates a visual representation of the project timeline, highlighting task start and finish dates. as well as
                             Project members are able to update the timeline as the project progresses, making adjustments to task timelines or dependencies as needed.
@@ -356,7 +356,7 @@
                     <img src="assets/images/homepage/activity.jpg" class="img-fluid rounded-start">
                 </div>
                     <div class="card-content col-md-8">
-                        <h5 class="card-title">Activity Plan Tool</h5>
+                        <h5 class="card-title-service">Activity Plan Tool</h5>
                         <p class="card-text">
                             Here users can add sub-tasks under the main task.
                             This tool allows project managers to define project activities. And also
@@ -375,10 +375,10 @@
 <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/profile.jpg" class="card-img-top position-sticky" alt="...">
+            <img src="assets/images/homepage/kavindra.jpg" class="card-img-top position-sticky" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Kavindra Weerasingha</h5>
-                <p class="card-text">Web Master</p>
+                <p class="card-text">UWU/CST/20/068</p>
             </div>
             <div class="d-flex justify-content-evenly p-4">
                 <i class="bi bi-facebook"></i>
@@ -390,25 +390,10 @@
     </div>
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/profile.jpg" class="card-img-top position-sticky" alt="...">
-            <div class="card-profile-body">
-                <h5 class="card-title">Thilini Priyangika</h5>
-                <p class="card-text">Full Stack Developer</p>
-            </div>
-            <div class="d-flex justify-content-evenly p-4">
-                <i class="bi bi-facebook"></i>
-                <i class="bi bi-linkedin"></i>
-                <i class="bi bi-envelope-fill"></i>
-                <i class="bi bi-whatsapp"></i>
-            </div>
-        </div>
-    </div>
-    <div class="col d-flex justify-content-center">
-        <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/profile.jpg" class="card-img-top position-sticky" alt="...">
+            <img src="assets/images/homepage/heli.jpg" class="card-img-top position-sticky" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Kavinda Helitha</h5>
-                <p class="card-text">Web Master</p>
+                <p class="card-text">UWU/CST/20/070</p>
             </div>
             <div class="d-flex justify-content-evenly p-4">
                 <i class="bi bi-facebook"></i>
@@ -420,25 +405,40 @@
     </div>
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/profile.jpg" class="card-img-top position-sticky" alt="...">
-            <div class="card-profile-body">
-                <h5 class="card-title">Ishara Suvini</h5>
-                <p class="card-text">Editor</p>
-            </div>
-            <div class="d-flex justify-content-evenly p-4">
-                <i class="bi bi-facebook"></i>
-                <i class="bi bi-linkedin"></i>
-                <i class="bi bi-envelope-fill"></i>
-                <i class="bi bi-whatsapp"></i>
-            </div>
-        </div>
-    </div>
-    <div class="col d-flex justify-content-center">
-        <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/profile.jpg" class="card-img-top position-sticky" alt="...">
+            <img src="assets/images/homepage/anuranga.jpg" class="card-img-top position-sticky" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Anuranga</h5>
-                <p class="card-text">Full Stack Developer</p>
+                <p class="card-text">UWU/CST/20/085</p>
+            </div>
+            <div class="d-flex justify-content-evenly p-4">
+                <i class="bi bi-facebook"></i>
+                <i class="bi bi-linkedin"></i>
+                <i class="bi bi-envelope-fill"></i>
+                <i class="bi bi-whatsapp"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col d-flex justify-content-center">
+        <div class="card-profile d-flex flex-column justify-content-center">
+            <img src="assets/images/homepage/ishara.jpg" class="card-img-top position-sticky" alt="...">
+            <div class="card-profile-body">
+                <h5 class="card-title">Ishara Suvini</h5>
+                <p class="card-text">UWU/CST/20/087</p>
+            </div>
+            <div class="d-flex justify-content-evenly p-4">
+                <i class="bi bi-facebook"></i>
+                <i class="bi bi-linkedin"></i>
+                <i class="bi bi-envelope-fill"></i>
+                <i class="bi bi-whatsapp"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col d-flex justify-content-center">
+        <div class="card-profile d-flex flex-column justify-content-center">
+            <img src="assets/images/homepage/thilini.jpg" class="card-img-top position-sticky" alt="...">
+            <div class="card-profile-body">
+                <h5 class="card-title">Thilini Priyangika</h5>
+                <p class="card-text">UWU/CST/20/089</p>
             </div>
             <div class="d-flex justify-content-evenly p-4">
                 <i class="bi bi-facebook"></i>
