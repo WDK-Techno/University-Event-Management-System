@@ -36,7 +36,7 @@ if (!$project->loadDataFromProjectID($con)) {
     $teamCategories = TeamCategory::getTeamCategoeryListFromProjectID($con, $project->getProjectID());
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $selected_menuNo = 1;
+        $selected_menuNo = 2;
         if (isset($_GET['tab'])) {
             $selected_menuNo = $_GET['tab'];
         }
@@ -200,8 +200,43 @@ if (!$project->loadDataFromProjectID($con)) {
         <div id="menu-content-1" class="main-content w-100 h-100 hide">
             <h1>Content 1</h1>
         </div>
+        <!--======== Content 2 - Team Members ======-->
         <div id="menu-content-2" class="main-content hide">
-            <h1>Content 2</h1>
+            <div>
+                <button class="btn">Add Team Member</button>
+            </div>
+            <div class="container d-flex">
+                
+                <div class="card mx-auto col-11">
+                    <div class="card-header">
+                        Team Members
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-1">IMG</div>
+                                <div class="col-3">Kavindra Weerasinghe</div>
+                                <div class="col-3">wdk@gmail.com</div>
+                                <div class="col-2">0774743603</div>
+                                <div class="col-2">Program Team</div>
+                                <div class="col-1">
+                                    <div class="d-flex" style="font-size: 1.5rem;">
+
+                                        <ion-icon class="me-3 my-auto" type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target=""
+                                        name="create-outline"></ion-icon>
+                                        <ion-icon class="my-auto" type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target=""
+                                        name="trash-outline"></ion-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="menu-content-3" class="main-content hide">
             <h1>Content 3</h1>
