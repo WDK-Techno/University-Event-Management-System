@@ -381,7 +381,7 @@
 <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/kavindra.jpg" class="card-img-top position-sticky" alt="...">
+                <img src="assets/images/homepage/kavindra.jpg" class="card-img-top position-sticky " style="width: 290px;height: 330px" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Kavindra Weerasingha</h5>
                 <p class="card-text">UWU/CST/20/068</p>
@@ -396,7 +396,7 @@
     </div>
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/heli.jpg" class="card-img-top position-sticky" alt="...">
+            <img src="assets/images/homepage/heli.jpg" class="card-img-top position-sticky" style="width: 290px;height: 330px" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Kavinda Helitha</h5>
                 <p class="card-text">UWU/CST/20/070</p>
@@ -411,7 +411,7 @@
     </div>
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/anuranga.jpg" class="card-img-top position-sticky" alt="...">
+            <img src="assets/images/homepage/anuranga.jpg" class="card-img-top position-sticky" style="width: 290px;height: 330px" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Anuranga</h5>
                 <p class="card-text">UWU/CST/20/085</p>
@@ -426,7 +426,7 @@
     </div>
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/ishara.jpg" class="card-img-top position-sticky" alt="...">
+            <img src="assets/images/homepage/ishara.jpg" class="card-img-top position-sticky" style="width: 290px;height: 330px" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Ishara Suvini</h5>
                 <p class="card-text">UWU/CST/20/087</p>
@@ -441,7 +441,7 @@
     </div>
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/thilini.jpg" class="card-img-top position-sticky" alt="...">
+            <img src="assets/images/homepage/thilini.jpg" class="card-img-top position-sticky" style="width: 290px;height: 330px" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Thilini Priyangika</h5>
                 <p class="card-text">UWU/CST/20/089</p>
