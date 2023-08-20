@@ -128,7 +128,7 @@
             <div class="carousel-inner justify-content-center">
                 <div class="carousel-item active">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4" style="height: 500px; width: 300px">
+                        <div class="col-lg-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front  w-100">
                                     <img alt="" src="assets/images/homepage/f1.jpg">
@@ -143,7 +143,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 300px">
+                        <div class="col-lg-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front ">
                                     <img alt="" src="assets/images/homepage/f2.jpg">
@@ -158,7 +158,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 300px">
+                        <div class="col-lg-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f3.jpg">
@@ -177,7 +177,7 @@
                 </div>
                 <div class="carousel-item">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4" style="height: 500px; width: 300px">
+                        <div class="col-lg-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f4.jpg">
@@ -192,7 +192,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 300px">
+                        <div class="col-lg-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f5.jpg">
@@ -206,7 +206,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4" style="height: 500px; width: 300px">
+                        <div class="col-md-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f6.jpg">
@@ -226,7 +226,7 @@
                 </div>
                 <div class="carousel-item">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4" style="height: 500px; width: 300px">
+                        <div class="col-lg-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f7.jpg">
@@ -240,7 +240,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 300px">
+                        <div class="col-lg-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f8.jpg">
@@ -256,7 +256,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 300px">
+                        <div class="col-lg-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/aurora.png">
