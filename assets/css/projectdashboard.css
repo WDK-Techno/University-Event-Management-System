@@ -140,3 +140,18 @@ body {
 .card-project-teams-list .row:hover{
   background-color: var(--secondary) !important;
 } 
+
+/* =========== Team member tabel ========= */
+
+.tabel-column-type-1{
+  background-color: var(--secondary);
+
+}
+.tabel-column-type-2{
+  background-color: var(--lighter-secondary);
+}
+.set-border {
+  border-style: solid !important;
+  border-color: var(--lighter-secondary) !important;
+  border-width: 5px;
+}
