@@ -1,3 +1,21 @@
+<?php
+require_once 'classes/DBConnector.php';
+require_once 'classes/Project.php';
+
+use classes\DBConnector;
+use classes\Project;
+
+
+$con = DBConnector::getConnection();
+$clubid=11;
+$projects= Project::getProjectListFromClubID($con,$clubid);
+
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -168,16 +186,20 @@
             </div>
 
             <hr />
+     <?php
+      $i=1;
 
-            <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+
+     foreach ($projects as $project) {
+     ?>
+            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-3">
                 <div class="col">
                     <div class="rounded border">
                         <div class="bg-image card d-block shadow-1-strong h-80" style="background-image: url('https://assets-global.website-files.com/5e39e095596498a8b9624af1/5f6e93d250a6d04f4eae9f02_Backgrounds-WFU-thumbnail-(size).jpg');">
                             <div class="card-body text-white">
-                                <h5 class="card-title">Project name</h5>
+                                <h5 class="card-title"><?=$project->getProjectName()?></h5>
                                 <p class="card-text">
-                                    Some quick example text to build on the card title and make up the bulk of the
-                                    card's content.
+                                    
                                 </p>
                                 <a href="#!" class="btn btn-outline-light">More</a>
                             </div>
@@ -198,7 +220,11 @@
                 </div>
 
             </div>
+
         </div>
+        <?php
+        $i++;
+        }?>
     </div>
     <div id="menu-content-2" class="main-content hide">
         <h1>Content 2</h1>
@@ -228,7 +254,7 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <!-- ====== Script files ===== -->
-    <script src="assets/js/projectdashboard.js"></script>
+    <script src="assets/js/clubownerdashboard.js"></script>
 
 </body>
 
