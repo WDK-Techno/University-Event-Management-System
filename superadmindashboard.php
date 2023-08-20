@@ -1,7 +1,7 @@
 <?php
 require 'core/init.php';
 $user1 = $userObj->getUsers();
-/*$user3 = $userObj->getRequests();*/
+$user3 = $userObj->getRequests();
 ?>
 
 <!DOCTYPE html>
@@ -269,43 +269,37 @@ $user1 = $userObj->getUsers();
             <table>
                 <thead>
                     <tr>
-                        <th>Club Name</th>
-                        <th>date</th>
+                    <th>Club Name</th>
+                        <th>Email</th>
+                        <th>Contact NO</th>
+                        <th>Date</th>
                         <th></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
+                <?php
+            foreach ($user3 as $users) {
+                ?>
                     <tr>
-                        <td>UWU LEO</td>
-                        <td>2023.07.29</td>
-                        <td><button type="submit" class="btn btn-success btnedit">Accept</button>  </td>
+                        <td><?php echo $users->name ;?></td>
+                        <td><?php echo $users->user_name ;?> </td>
+                        <td><?php echo $users->contact_no ;?> </td>
+                        <td> </td>
+
+                        <td> 
+                        <form action="updateStatus.php" method="post">
+                        <input type="hidden" name="user_id" value="<?php echo $users->user_id ;?>">
+                        <button type="submit" class="btn btn-success  btnedit">Accept</button> 
+                        </form>
+                        </td>
                         <td><button type="submit" class="btn btn-danger">Decline</button></td>
                     </tr>
                     <tr>
-                        <td>Catholic Society</td>
-                        <td>2023.07.25</td>
-                        <td><button type="submit" class="btn btn-success btnedit">Accept</button>  </td>
-                        <td><button type="submit" class="btn btn-danger">Decline</button></td>
-                    </tr>
-                    <tr>
-                        <td>UWU Rayon</td>
-                        <td>2023.07.24</td>
-                        <td><button type="submit" class="btn btn-success btnedit">Accept</button> </td>
-                        <td><button type="submit" class="btn btn-danger">Decline</button></td>
-                    </tr>
-                    <tr>
-                        <td>Gavel</td>
-                        <td>2023.07.19</td>
-                        <td><button type="submit" class="btn btn-success btnedit">Accept</button> </td>
-                        <td><button type="submit" class="btn btn-danger">Decline</button></td>
-                    </tr>
-                    <tr>
-                        <td>ELA</td>
-                        <td>2023.07.14</td>
-                        <td><button type="submit" class="btn btn-success btnedit">Accept</button> </td>
-                        <td><button type="submit" class="btn btn-danger">Decline</button></td>
-                    </tr>
+                    <?php
+            }
+            ?>
+                        
                 </tbody>
 
             </table>
