@@ -16,6 +16,16 @@ class admin{
         return $rs;
     }
 
+    public function getClubs(){
+        $dbuser = new DBConnector();
+        $con = $dbuser->getConnection();
+        $query = "SELECT u.user_name,club.name,club.contact_no FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'active'";
+        $pstmt = $con->prepare($query);
+        $pstmt->execute();
+        $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
+        return $rs; 
+    }
+
     public function getRequests(){
         $dbuser = new DBConnector();
         $con = $dbuser->getConnection();

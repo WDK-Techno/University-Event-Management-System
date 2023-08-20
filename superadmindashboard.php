@@ -1,6 +1,7 @@
 <?php
 require 'core/init.php';
 $user1 = $userObj->getUsers();
+$user1 = $userObj->getClubs();
 $user3 = $userObj->getRequests();
 ?>
 
@@ -199,61 +200,33 @@ $user3 = $userObj->getRequests();
                     <table id="myTable" >
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Club Name</th>
-                                <th>username</th>
-                                <th>password</th>
+                                <<th>No</th>
+                                <th>Name</th>
+                                <th>email</th>
+                                <th>Contact No</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                        <?php
+                            $i =1;
+                            foreach ($user2 as $users) {
+                                ?>
                             <tr>
-                                <td>1</td>
-                                <td>Art</td>
-                                <td>ffhhgjj</td>
-                                <td>12345</td>
+                            <td><?php echo $i ;?></td>
+                                <td><?php echo $users->name ;?></td>
+                                <td><?php echo $users->user_name ;?></td>
+                                <td><?php echo $users->contact_no ;?></td>
                                 <td><button type="submit" class="btn btn-primary " style="border: none;width: 96px;height: 38px;">Edit</button></td>
                                 <td><button type="submit" class="btn btn-success " style="border: none;width: 96px;height: 38px;">Deactivate</button></td>
                                 <td><button type="submit" class="btn btn-danger " style="border: none;width: 96px;height: 38px;">Delete</button></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>UWU NET</td>
-                                <td>net@gmail.com</td>
-                                <td>2345</td>
-                                <td><button type="submit" class="btn btn-primary " style="border: none;width: 96px;height: 38px;">Edit</button></td>
-                                <td><button type="submit" class="btn btn-success " style="border: none;width: 96px;height: 38px;">Deactivate</button></td>
-                                <td><button type="submit" class="btn btn-danger " style="border: none;width: 96px;height: 38px;">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Buddihist Society</td>
-                                <td>oshan@gmail.com</td>
-                                <td>6987</td>
-                                <td><button type="submit" class="btn btn-primary " style="border: none;width: 96px;height: 38px;">Edit</button></td>
-                                <td><button type="submit" class="btn btn-success " style="border: none;width: 96px;height: 38px;">Deactivate</button></td>
-                                <td><button type="submit" class="btn btn-danger " style="border: none;width: 96px;height: 38px;">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>IEEE</td>
-                                <td>ovindu@gmail.com</td>
-                                <td>1019</td>
-                                <td><button type="submit" class="btn btn-primary " style="border: none;width: 96px;height: 38px;">Edit</button></td>
-                                <td><button type="submit" class="btn btn-success " style="border: none;width: 96px;height: 38px;">Deactivate</button></td>
-                                <td><button type="submit" class="btn btn-danger " style="border: none;width: 96px;height: 38px;">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>ROtaract</td>
-                                <td>naveen@gmail.com</td>
-                                <td>18745</td>
-                                <td><button type="submit" class="btn btn-primary " style="border: none;width: 96px;height: 38px;">Edit</button></td>
-                                <td><button type="submit" class="btn btn-success " style="border: none;width: 96px;height: 38px;">Deactivate</button></td>
-                                <td><button type="submit" class="btn btn-danger " style="border: none;width: 96px;height: 38px;">Delete</button></td>
-                            </tr>
+                            <?php
+                        $i++;
+                    }
+                    ?>
                             
                         </tbody>
                     </table>
@@ -271,7 +244,7 @@ $user3 = $userObj->getRequests();
                     <tr>
                     <th>Club Name</th>
                         <th>Email</th>
-                        <th>Contact NO</th>
+                        <th>Contact No</th>
                         <th>Date</th>
                         <th></th>
                         <th></th>
