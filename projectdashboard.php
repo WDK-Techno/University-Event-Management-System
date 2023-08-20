@@ -4,12 +4,14 @@ require_once "classes/DBConnector.php";
 require_once "classes/Project.php";
 require_once "classes/User.php";
 require_once "classes/TeamCategory.php";
+require_once "classes/TeamMember.php";
 
 use classes\Project;
 use classes\DBConnector;
 use classes\Club;
 use classes\Undergraduate;
 use classes\TeamCategory;
+use classes\TeamMember;
 
 $projectIDFromSession = 1;
 $con = DBConnector::getConnection();
@@ -27,13 +29,14 @@ if (!$project->loadDataFromProjectID($con)) {
     $club->loadDataFromUserID($con);
 
     //Get Project Chair Details
-    $projectChair = new Undergraduate(null, null, null, null, null);
+    $projectChair = new Undergraduate(null, null, null, null, null, null);
     $projectChair->setUserId($project->getProjectChairID());
     $projectChair->loadDataFromUserID($con);
 
     //Get Team Category List
-    $teamCategory = new TeamCategory(null, null, null, null);
     $teamCategories = TeamCategory::getTeamCategoeryListFromProjectID($con, $project->getProjectID());
+
+    $teamMembers = TeamMember::getMemberListFromProjectID($con, $project->getProjectID());
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $selected_menuNo = 2;
@@ -202,37 +205,91 @@ if (!$project->loadDataFromProjectID($con)) {
         </div>
         <!--======== Content 2 - Team Members ======-->
         <div id="menu-content-2" class="main-content hide">
-            <div>
-                <button class="btn">Add Team Member</button>
+            <div class="d-flex my-4">
+                <div class="btn fw-bold my-auto me-2 me-lg-5 ms-auto d-flex"
+                     style="color: var(--darker-primary) !important; background-color: var(--secondary);"
+                     type="button" data-bs-toggle="modal"
+                     data-bs-target="#add-new-team-member">
+                    <ion-icon class="my-auto" name="add-outline"></ion-icon>
+                    <div class="my-auto">Member</div>
+                </div>
+
+
             </div>
             <div class="container d-flex">
-                
-                <div class="card mx-auto col-11">
-                    <div class="card-header">
-                        Team Members
-                    </div>
-                    <div class="card-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-1">IMG</div>
-                                <div class="col-3">Kavindra Weerasinghe</div>
-                                <div class="col-3">wdk@gmail.com</div>
-                                <div class="col-2">0774743603</div>
-                                <div class="col-2">Program Team</div>
-                                <div class="col-1">
-                                    <div class="d-flex" style="font-size: 1.5rem;">
 
-                                        <ion-icon class="me-3 my-auto" type="button"
-                                        data-bs-toggle="modal"
-                                        data-bs-target=""
-                                        name="create-outline"></ion-icon>
-                                        <ion-icon class="my-auto" type="button"
-                                        data-bs-toggle="modal"
-                                        data-bs-target=""
-                                        name="trash-outline"></ion-icon>
+                <div class="card mx-auto col-11" style="height: 500px;">
+                    <div class="card-header team-member-table pb-0"
+                         style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+
+                        <div class="row p-0 fw-bold">
+                            <div class="col-1"></div>
+                            <div class="col-3 text-center py-2 rounded-top-3"
+                                 style="background-color: var(--primary);">Name
+                            </div>
+                            <div class="col-3 text-center py-2 rounded-top-3"
+                                 style="background-color: var(--lighter-secondary); color: var(--darker-primary);">Email
+                            </div>
+                            <div class="col-2 text-center py-2 rounded-top-3"
+                                 style="background-color: var(--primary);">Contact No
+                            </div>
+                            <div class="col-2 text-center py-2 rounded-top-3"
+                                 style="background-color: var(--lighter-secondary); color: var(--darker-primary);">Team
+                            </div>
+                            <div class="col-1">
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-body pt-0 bg-dark-subtle" style="background-color: var(--secondary);">
+                        <div class="container p-0">
+                            <?php
+                            foreach ($teamMembers as $teamMember) {
+
+                                $projectMember = new Undergraduate(null,null,null,null,null,null);
+                                $projectMember->setUserId($teamMember->getUgID());
+                                $projectMember->loadDataFromUserID($con);
+
+                                $projectMemberTeam = new TeamCategory($teamMember->getCategoryID(),null,null,null);
+                                $projectMemberTeam->loadDataByTeamID($con);
+
+                                ?>
+                                <div class="row mb-2 shadow-sm set-border" style="height: 45px;">
+                                    <div class="col-1 d-flex tabel-column-type-2">
+                                        <div class="my-auto">IMG</div>
+                                    </div>
+                                    <div class="col-3 tabel-column-type-1 d-flex">
+                                        <div class="my-auto"><?=$projectMember->getFirstName() ?> <?=$projectMember->getLastName() ?></div>
+                                    </div>
+                                    <div class="col-3 d-flex tabel-column-type-2">
+                                        <div class="my-auto"><?=$projectMember->getUsername() ?></div>
+                                    </div>
+                                    <div class="col-2 d-flex tabel-column-type-1">
+                                        <div class="my-auto mx-auto"><?=$projectMember->getContactNo() ?></div>
+                                    </div>
+                                    <div class="col-2 d-flex tabel-column-type-2">
+                                        <div class="my-auto mx-auto"><?=$projectMemberTeam->getCategoryName() ?></div>
+                                    </div>
+                                    <div class="col-1 tabel-column-type-1 d-flex">
+                                        <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
+
+                                            <ion-icon class="my-auto me-2" type="button"
+                                                      data-bs-toggle="modal"
+                                                      data-bs-target=""
+                                                      name="create-outline"></ion-icon>
+                                            <ion-icon class="my-auto" type="button"
+                                                      data-bs-toggle="modal"
+                                                      data-bs-target=""
+                                                      name="trash-outline"></ion-icon>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+
+                                <?php
+                            }
+                            ?>
+
                         </div>
                     </div>
                 </div>
