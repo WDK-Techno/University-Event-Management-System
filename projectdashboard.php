@@ -36,8 +36,10 @@ if (!$project->loadDataFromProjectID($con)) {
     $teamCategories = TeamCategory::getTeamCategoeryListFromProjectID($con, $project->getProjectID());
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $selected_menuNo = 5;
-
+        $selected_menuNo = 2;
+        if (isset($_GET['tab'])) {
+            $selected_menuNo = $_GET['tab'];
+        }
     }
     ?>
 
@@ -90,28 +92,40 @@ if (!$project->loadDataFromProjectID($con)) {
                 <li id="menu-1" class="sideBar-btn" onclick="showMenuContent(1)">
                     <a href="#" class="nav-link d-flex justify-content-start">
                         <ion-icon name="people-circle-outline"></ion-icon>
-                        <span class="sideBar-btn-text my-auto">Team Members</span>
+                        <span class="sideBar-btn-text my-auto">Project Details</span>
                     </a>
                 </li>
                 <li id="menu-2" class="sideBar-btn" onclick="showMenuContent(2)">
+                    <a href="#" class="nav-link d-flex justify-content-start">
+                        <ion-icon name="people-circle-outline"></ion-icon>
+                        <span class="sideBar-btn-text my-auto">Team Members</span>
+                    </a>
+                </li>
+                <li id="menu-3" class="sideBar-btn" onclick="showMenuContent(3)">
                     <a href="#" class="nav-link d-flex justify-content-start">
                         <ion-icon name="calendar-outline"></ion-icon>
                         <span class="sideBar-btn-text my-auto">Grantt Chart</span>
                     </a>
                 </li>
-                <li id="menu-3" class="sideBar-btn" onclick="showMenuContent(3)">
+                <li id="menu-4" class="sideBar-btn" onclick="showMenuContent(4)">
                     <a href="#" class="nav-link d-flex justify-content-start">
                         <ion-icon name="walk-outline"></ion-icon>
                         <span class="sideBar-btn-text my-auto">Activitty Plan</span>
                     </a>
                 </li>
-                <li id="menu-4" class="sideBar-btn" onclick="showMenuContent(4)">
+                <li id="menu-5" class="sideBar-btn" onclick="showMenuContent(5)">
                     <a href="#" class="nav-link d-flex justify-content-start">
                         <ion-icon name="document-text-outline"></ion-icon>
                         <span class="sideBar-btn-text my-auto">PR Plan</span>
                     </a>
                 </li>
-                <li id="menu-5" class="sideBar-btn" onclick="showMenuContent(5)">
+                <li id="menu-6" class="sideBar-btn" onclick="showMenuContent(6)">
+                    <a href="#" class="nav-link d-flex justify-content-start">
+                        <ion-icon name="document-text-outline"></ion-icon>
+                        <span class="sideBar-btn-text my-auto">Events</span>
+                    </a>
+                </li>
+                <li id="menu-7" class="sideBar-btn" onclick="showMenuContent(7)">
                     <a href="#" class="nav-link d-flex justify-content-start">
                         <ion-icon name="settings-outline"></ion-icon>
                         <span class="sideBar-btn-text my-auto">Settings</span>
@@ -184,19 +198,141 @@ if (!$project->loadDataFromProjectID($con)) {
 
 
         <div id="menu-content-1" class="main-content w-100 h-100 hide">
-            <div class="bg-primary-subtle p-4 w-100 h-100">
-                <!-- =========== Project Teams button ========== -->
-                <div class="w-100 d-flex">
-                    <div class="btn btn-primary ms-auto me-2" type="button" data-bs-toggle="modal"
-                         data-bs-target="#project-teams">Project Teams
+            <h1>Content 1</h1>
+        </div>
+        <!--======== Content 2 - Team Members ======-->
+        <div id="menu-content-2" class="main-content hide">
+            <div class="d-flex my-4">
+                <div class="btn fw-bold my-auto me-2 me-lg-5 ms-auto d-flex"
+                                         style="color: var(--darker-primary) !important; background-color: var(--secondary);"
+                                         type="button" data-bs-toggle="modal"
+                                         data-bs-target="#add-new-team-member">
+                                        <ion-icon class="my-auto" name="add-outline"></ion-icon>
+                                        <div class="my-auto">Member</div>
+                                    </div>
+
+                
+            </div>
+            <div class="container d-flex">
+                
+                <div class="card mx-auto col-11" style="height: 500px;">
+                    <div class="card-header team-member-table pb-0" style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                        
+                        <div class="row p-0 fw-bold">
+                            <div class="col-1"></div>
+                            <div class="col-3 text-center py-2 rounded-top-3"
+                            style="background-color: var(--primary);">Name</div>
+                            <div class="col-3 text-center py-2 rounded-top-3"
+                            style="background-color: var(--lighter-secondary); color: var(--darker-primary);">Email</div>
+                            <div class="col-2 text-center py-2 rounded-top-3"
+                            style="background-color: var(--primary);">Contact No</div>
+                            <div class="col-2 text-center py-2 rounded-top-3"
+                            style="background-color: var(--lighter-secondary); color: var(--darker-primary);">Team</div>
+                            <div class="col-1">
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-body pt-0 bg-dark-subtle" style="background-color: var(--secondary);">
+                        <div class="container p-0">
+                            <div class="row mb-2 shadow-sm set-border" style="height: 45px;">
+                                <div class="col-1 d-flex tabel-column-type-2">
+                                    <div class="my-auto">IMG</div>
+                                </div>
+                                <div class="col-3 tabel-column-type-1 d-flex">
+                                    <div class="my-auto">Kavindra Weerasinghe</div>
+                                </div>
+                                <div class="col-3 d-flex tabel-column-type-2">
+                                    <div class="my-auto">wdk@gmail.com</div>
+                                </div>
+                                <div class="col-2 d-flex tabel-column-type-1">
+                                    <div class="my-auto mx-auto">0774743603</div>
+                                </div>
+                                <div class="col-2 d-flex tabel-column-type-2">
+                                    <div class="my-auto mx-auto">Program Team</div>
+                                </div>
+                                <div class="col-1 tabel-column-type-1 d-flex">
+                                    <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
+
+                                        <ion-icon class="my-auto me-2" type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target=""
+                                        name="create-outline"></ion-icon>
+                                        <ion-icon class="my-auto" type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target=""
+                                        name="trash-outline"></ion-icon>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2 shadow-sm set-border" style="height: 45px;">
+                                <div class="col-1 d-flex tabel-column-type-2">
+                                    <div class="my-auto">IMG</div>
+                                </div>
+                                <div class="col-3 tabel-column-type-1 d-flex">
+                                    <div class="my-auto">Kavindra Weerasinghe</div>
+                                </div>
+                                <div class="col-3 d-flex tabel-column-type-2">
+                                    <div class="my-auto">wdk@gmail.com</div>
+                                </div>
+                                <div class="col-2 d-flex tabel-column-type-1">
+                                    <div class="my-auto mx-auto">0774743603</div>
+                                </div>
+                                <div class="col-2 d-flex tabel-column-type-2">
+                                    <div class="my-auto mx-auto">Program Team</div>
+                                </div>
+                                <div class="col-1 tabel-column-type-1 d-flex">
+                                    <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
+
+                                        <ion-icon class="my-auto me-2" type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target=""
+                                        name="create-outline"></ion-icon>
+                                        <ion-icon class="my-auto" type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target=""
+                                        name="trash-outline"></ion-icon>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2 shadow-sm set-border" style="height: 45px;">
+                                <div class="col-1 d-flex tabel-column-type-2">
+                                    <div class="my-auto">IMG</div>
+                                </div>
+                                <div class="col-3 tabel-column-type-1 d-flex">
+                                    <div class="my-auto">Kavindra Weerasinghe</div>
+                                </div>
+                                <div class="col-3 d-flex tabel-column-type-2">
+                                    <div class="my-auto">wdk@gmail.com</div>
+                                </div>
+                                <div class="col-2 d-flex tabel-column-type-1">
+                                    <div class="my-auto mx-auto">0774743603</div>
+                                </div>
+                                <div class="col-2 d-flex tabel-column-type-2">
+                                    <div class="my-auto mx-auto">Program Team</div>
+                                </div>
+                                <div class="col-1 tabel-column-type-1 d-flex">
+                                    <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
+
+                                        <ion-icon class="my-auto me-2" type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target=""
+                                        name="create-outline"></ion-icon>
+                                        <ion-icon class="my-auto" type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target=""
+                                        name="trash-outline"></ion-icon>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
                     </div>
                 </div>
-
-
             </div>
-        </div>
-        <div id="menu-content-2" class="main-content hide">
-            <h1>Content 2</h1>
         </div>
         <div id="menu-content-3" class="main-content hide">
             <h1>Content 3</h1>
@@ -204,7 +340,14 @@ if (!$project->loadDataFromProjectID($con)) {
         <div id="menu-content-4" class="main-content hide">
             <h1>Content 4</h1>
         </div>
-        <div id="menu-content-5" class="main-content w-100 h-100 hide">
+        <div id="menu-content-5" class="main-content hide">
+            <h1>Content 5</h1>
+        </div>
+        <div id="menu-content-6" class="main-content hide">
+            <h1>Content 6</h1>
+
+        </div>
+        <div id="menu-content-7" class="main-content w-100 h-100 hide">
             <div class="container-fluid h-100">
                 <div class="row h-100">
                     <!-- ====== left side section ========== -->
@@ -255,8 +398,9 @@ if (!$project->loadDataFromProjectID($con)) {
                                                         </div>
 
                                                         <!--======= hidden ==========-->
-                                                        <input type="hidden" name="menuNo" value="5">
-                                                        <input type="hidden" name="project_id" value="<?=$project->getProjectID() ?>">
+                                                        <input type="hidden" name="menuNo" value="7">
+                                                        <input type="hidden" name="project_id"
+                                                               value="<?= $project->getProjectID() ?>">
                                                     </div>
 
                                                     <div class="modal-body"
@@ -292,6 +436,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                     <div class="container card-project-teams-list">
 
                                         <?php
+                                        $projectTeamNo = 1;
                                         foreach ($teamCategories as $teamCategory) {
                                             ?>
 
@@ -303,16 +448,151 @@ if (!$project->loadDataFromProjectID($con)) {
                                                 <div class="col-3" style="font-size: 1.5rem;">
                                                     <div class="d-flex mx-auto card-list-option-buttons"
                                                          style="font-size: 1.7rem;">
+                                                        <!--========== edit team category button =========-->
                                                         <ion-icon class="me-2 my-auto" type="button"
+                                                                  data-bs-toggle="modal"
+                                                                  data-bs-target="#edit-project-teams-<?= $projectTeamNo ?>"
                                                                   name="create-outline"></ion-icon>
-                                                        <ion-icon class="my-auto" type="button"
+
+                                                        <!-- =========== edit team category button model =========== -->
+                                                        <div class="modal fade"
+                                                             id="edit-project-teams-<?= $projectTeamNo ?>"
+                                                             tabindex="-1"
+                                                             role="dialog"
+                                                             aria-labelledby="exampleModalCenterTitle"
+                                                             aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered"
+                                                                 role="document">
+                                                                <div class="modal-content">
+                                                                    <!--=== form =====-->
+                                                                    <form action="process/projectdashboard/editTeam.php"
+                                                                          method="post">
+                                                                        <div class="modal-header py-2 px-2"
+                                                                             style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                                                            <div class="d-flex flex-row w-100 justify-content-between">
+
+                                                                                <div class="ms-2 my-auto fs-4 fw-bold">
+                                                                                    Project Team
+                                                                                </div>
+
+                                                                                <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                                                <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                                                <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                                                     style="font-size: 1.3rem; color: var(--accent-color2);">
+                                                                                    Edit
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!--======= hidden ==========-->
+                                                                            <input type="hidden" name="menuNo"
+                                                                                   value="7">
+                                                                            <input type="hidden" name="category_id"
+                                                                                   value="<?= $teamCategory->getCategoryID() ?>">
+                                                                        </div>
+
+                                                                        <div class="modal-body"
+                                                                             style="background-color: var(--lighter-secondary);">
+                                                                            <div class="d-flex px-5">
+                                                                                <input class="form-control text-center"
+                                                                                       type="text"
+                                                                                       name="team_name"
+                                                                                       value="<?= $teamCategory->getCategoryName() ?>"
+                                                                                       placeholder="Team Name"/>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer"
+                                                                             style="background-color: var(--primary);">
+                                                                            <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-bs-dismiss="modal">
+                                                                                Close
+                                                                            </button>
+                                                                            <button type="submit"
+                                                                                    name="submit"
+                                                                                    class="btn fw-bold"
+                                                                                    style="background-color: var(--secondary); color: var(--primary);">
+                                                                                Update
+                                                                            </button>
+
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <!--========== Delete team category button =========-->
+                                                        <ion-icon class="my-auto" type="button" data-bs-toggle="modal"
+                                                                  data-bs-target="#delete-project-teams-<?= $projectTeamNo ?>"
                                                                   name="trash-outline"></ion-icon>
+                                                        <!-- =========== Delete team category button model =========== -->
+                                                        <div class="modal fade"
+                                                             id="delete-project-teams-<?= $projectTeamNo ?>"
+                                                             tabindex="-1"
+                                                             role="dialog"
+                                                             aria-labelledby="exampleModalCenterTitle"
+                                                             aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered"
+                                                                 role="document">
+                                                                <div class="modal-content">
+                                                                    <!--=== form =====-->
+                                                                    <form action="process/projectdashboard/deleteTeam.php"
+                                                                          method="post">
+                                                                        <div class="modal-header py-2 px-2"
+                                                                             style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                                                            <div class="d-flex flex-row w-100 justify-content-between">
+
+                                                                                <div class="ms-2 my-auto fs-4 fw-bold">
+                                                                                    <?= $teamCategory->getCategoryName() ?>
+                                                                                </div>
+
+                                                                                <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                                                <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                                                <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                                                     style="font-size: 1.3rem; color: var(--accent-color3);">
+                                                                                    Delete
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!--======= hidden ==========-->
+                                                                            <input type="hidden" name="menuNo"
+                                                                                   value="7">
+                                                                            <input type="hidden" name="category_id"
+                                                                                   value="<?= $teamCategory->getCategoryID() ?>">
+                                                                        </div>
+
+                                                                        <div class="modal-body"
+                                                                             style="background-color: var(--lighter-secondary);">
+                                                                            <div class="d-flex fw-normal fs-5">
+                                                                                Do you want to Delete this Team ?
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer"
+                                                                             style="background-color: var(--primary);">
+                                                                            <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-bs-dismiss="modal">
+                                                                                Close
+                                                                            </button>
+                                                                            <button type="submit"
+                                                                                    name="submit"
+                                                                                    class="btn fw-bold"
+                                                                                    style="background-color: var(--accent-color3); color: var(--primary);">
+                                                                                Delete
+                                                                            </button>
+
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <?php
 
+                                            $projectTeamNo++;
                                         }
 
                                         ?>
