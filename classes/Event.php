@@ -143,12 +143,12 @@ class Event
             die("Error in Update Database" . $exc->getMessage());
         }
     }
-    public function getEventListFromProjectID($con){
+    public static function getEventListFromProjectID($con,$project_id){
         $events = array();
         try {
             $query = "SELECT * FROM project WHERE project_id=?";
             $pstmt = $con->prepare($query);
-            $pstmt->bindValue(1, $this->projectID);
+            $pstmt->bindValue(1, project_id);
             $pstmt->execute();
             $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
             if (!empty($rs)){
