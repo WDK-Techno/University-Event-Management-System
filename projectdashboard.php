@@ -609,7 +609,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                                             <div class="modal-body"
                                                                  style="background-color: var(--lighter-secondary);">
                                                                 <div class="d-flex fw-normal fs-5">
-                                                                    Do you want to Delete this Team ?
+                                                                    Do you want to Delete this Event ?
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer"

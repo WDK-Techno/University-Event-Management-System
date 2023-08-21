@@ -101,7 +101,7 @@ class Event
     public function loadDataFromeventId($con)
     {
         try {
-            $query = "SELECT * FROM event WHERE event_id = ?";
+            $query = "SELECT * FROM event WHERE  event_id = ?";
             $pstmt = $con->prepare($query);
             $pstmt->bindValue(1, $this->eventId);
             $pstmt->execute();
@@ -146,7 +146,7 @@ class Event
     public static function getEventListFromProjectID($con,$project_id){
         $events = array();
         try {
-            $query = "SELECT * FROM event WHERE project_id=?";
+            $query = "SELECT * FROM event WHERE status = 'active' AND project_id=?";
             $pstmt = $con->prepare($query);
             $pstmt->bindValue(1, $project_id);
             $pstmt->execute();

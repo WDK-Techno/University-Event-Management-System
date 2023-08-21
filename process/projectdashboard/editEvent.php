@@ -15,7 +15,7 @@ if (isset($_POST['submit'],$_POST['name'])){
         $eventName = $_POST['name'];
         $eventId = $_POST['event_id'];
 
-        $event = new Event($eventId,null,null,null);
+        $event = new Event($eventId,null,null,null, null, null);
         $event->loadDataFromeventId($con);
         $event->seteventName($eventName);
         $result = $event->saveChangesToDataBase($con);
