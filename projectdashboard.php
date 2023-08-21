@@ -8,6 +8,7 @@ require_once "classes/TeamMember.php";
 require_once "classes/Event.php";
 
 
+use classes\Event;
 use classes\Project;
 use classes\DBConnector;
 use classes\Club;
@@ -37,6 +38,9 @@ if (!$project->loadDataFromProjectID($con)) {
 
     //Get Team Category List
     $teamCategories = TeamCategory::getTeamCategoeryListFromProjectID($con, $project->getProjectID());
+
+    //Get Events List
+    $events = Event::getEventListFromProjectID($con, $project->getProjectID());
 
     $teamMembers = TeamMember::getMemberListFromProjectID($con, $project->getProjectID());
 
@@ -399,7 +403,7 @@ if (!$project->loadDataFromProjectID($con)) {
         </div>
         <div id="menu-content-6" class="main-content hide">
             <div class="col-12 col-lg-4">
-                <div class="w-100 p-0 pt-3 d-flex container">
+                <div class="card w-100 p-0 pt-3 d-flex container">
                     <div class="card-header d-flex w-100"
                          style="background-color: var(--primary); color: var(--lighter-secondary);">
                         <div class="my-auto fw-bold" style="font-size: 1.3rem;">Events</div>
@@ -411,7 +415,6 @@ if (!$project->loadDataFromProjectID($con)) {
                             <div class="my-auto">New</div>
                         </div>
                         <!-- =========== add new event button model =========== -->
-
                         <div class="modal fade"
                              id="add-new-event"
                              tabindex="-1"
@@ -441,7 +444,7 @@ if (!$project->loadDataFromProjectID($con)) {
 
                                             <!--======= hidden ==========-->
                                             <input type="hidden" name="menuNo" value="7">
-                                            <input type="hidden" name="event_id"
+                                            <input type="hidden" name="project_id"
                                                    value="<?= $project->getProjectID() ?>">
                                         </div>
 
@@ -452,7 +455,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                                        name="name" placeholder="Event Name"/><br>
                                                 <input class="form-control text-center" type="text" required
                                                        name="description" placeholder="Description"/><br>
-                                                <input class="form-control text-center" type="datetime-local" required
+                                                <input class="form-control text-center" type="date" required
                                                        name="event_date" placeholder="Event Date"/><br>
                                             </div>
                                         </div>
@@ -475,14 +478,13 @@ if (!$project->loadDataFromProjectID($con)) {
 
                             </div>
                         </div>
-
                     </div>
                     <!-- ========== Event list body =========== -->
-                    <div class="card-body" style="overflow-y: auto; height: ;">
+                    <div class="card-body" style="overflow-y: auto; height:;">
                         <div class="container card-event-list ">
                             <?php
                             $eventNo = 1;
-                            foreach ($project as $event) {
+                            foreach ($events as $event) {
                                 ?>
                                 <div class="row shadow-sm ps-2 py-3 my-2 rounded-3 fw-normal"
                                      style="font-size: 1.0rem; background-color: var(--lighter-secondary); color: var(--darker-primary);">
@@ -540,7 +542,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                                                     <input class="form-control text-center"
                                                                            type="text"
                                                                            name="name"
-                                                                           value="<?= $eventName->geteventName() ?>"
+                                                                           value="<?= $event->geteventName() ?>"
                                                                            placeholder="Event Name"/>
                                                                 </div>
                                                             </div>
@@ -586,7 +588,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                                                 <div class="d-flex flex-row w-100 justify-content-between">
 
                                                                     <div class="ms-2 my-auto fs-4 fw-bold">
-                                                                        <?= $eventName->geteventName() ?>
+                                                                        <?= $event->geteventName() ?>
                                                                     </div>
 
                                                                     <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
@@ -601,7 +603,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                                                 <input type="hidden" name="menuNo"
                                                                        value="7">
                                                                 <input type="hidden" name="event_id"
-                                                                       value="<?= $eventId->geteventId() ?>">
+                                                                       value="<?= $event->geteventId() ?>">
                                                             </div>
 
                                                             <div class="modal-body"

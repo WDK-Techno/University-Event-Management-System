@@ -79,8 +79,8 @@ class Event
         try {
             $query = "INSERT INTO event (name,description,event_date,project_id,status) VALUES (?,?,?,?,?)";
             $pstmt = $con->prepare($query);
-            $pstmt->bindValue(1, $this->name);
-            $pstmt->bindValue(2, $this->description);
+            $pstmt->bindValue(1, $this->eventName);
+            $pstmt->bindValue(2, $this->eventDescription);
             $pstmt->bindValue(3, $this->eventDate);
             $pstmt->bindValue(4, $this->projectID);
             $pstmt->bindValue(5, "active");
@@ -146,9 +146,9 @@ class Event
     public static function getEventListFromProjectID($con,$project_id){
         $events = array();
         try {
-            $query = "SELECT * FROM project WHERE project_id=?";
+            $query = "SELECT * FROM event WHERE project_id=?";
             $pstmt = $con->prepare($query);
-            $pstmt->bindValue(1, project_id);
+            $pstmt->bindValue(1, $project_id);
             $pstmt->execute();
             $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
             if (!empty($rs)){

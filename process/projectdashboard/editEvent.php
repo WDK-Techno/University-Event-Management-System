@@ -12,10 +12,10 @@ if (isset($_POST['submit'],$_POST['name'])){
     if (empty($_POST['name'])){
         header("location: ../../projectdashboard.php?tab={$selectedMenuNo}&err=2");
     }else{
-        $teamName = $_POST['name'];
-        $teamCatID = $_POST['event_id'];
+        $eventName = $_POST['name'];
+        $eventId = $_POST['event_id'];
 
-        $event = new Event($eventName,null,null,null);
+        $event = new Event($eventId,null,null,null);
         $event->loadDataFromeventId($con);
         $event->seteventName($eventName);
         $result = $event->saveChangesToDataBase($con);
