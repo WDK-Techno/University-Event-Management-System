@@ -1,7 +1,7 @@
 <?php
 require 'core/init.php';
 $user1 = $userObj->getUsers();
-$user1 = $userObj->getClubs();
+$user2 = $userObj->getClubs();
 $user3 = $userObj->getRequests();
 ?>
 
