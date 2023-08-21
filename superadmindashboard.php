@@ -1,3 +1,10 @@
+<?php
+require 'core/init.php';
+$user1 = $userObj->getUsers();
+$user1 = $userObj->getClubs();
+$user3 = $userObj->getRequests();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -148,66 +155,31 @@
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>
-                                <th>username</th>
-                                <th>email</th>
-                                <th>password</th>
+                                <th>Email</th>
+                                <th>Contact No</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                        <?php
+                            $i =1;
+                            foreach ($user1 as $users) {
+                                ?>
                             <tr>
-                                <td>1</td>
-                                <td>Kavinda Helitha</td>
-                                <td>gmd123</td>
-                                <td>heli@gmail.com</td>
-                                <td>12345</td>
+                            <td><?php echo $i ;?></td>
+                                <td><?php echo $users->first_name ;?> <?php echo $users->last_name ;?></td>
+                                <td><?php echo $users->user_name ;?></td>
+                                <td><?php echo $users->contact_no ;?></td>
                                 <td><button type="submit" class="btn btn-primary " style="border: none;width: 96px;height: 38px;">Edit</button></td>
                                 <td><button type="submit" class="btn btn-success " style="border: none;width: 96px;height: 38px;">Deactivate</button></td>
                                 <td><button type="submit" class="btn btn-danger " style="border: none;width: 96px;height: 38px;">Delete</button></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Isuru Dhananjaya</td>
-                                <td>gmd456</td>
-                                <td>isuru@gmail.com</td>
-                                <td>2345</td>
-                                <td><button type="submit" class="btn btn-primary " style="border: none;width: 96px;height: 38px;">Edit</button></td>
-                                <td><button type="submit" class="btn btn-success " style="border: none;width: 96px;height: 38px;">Deactivate</button></td>
-                                <td><button type="submit" class="btn btn-danger " style="border: none;width: 96px;height: 38px;">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Nipuni Navodya</td>
-                                <td>gmd126</td>
-                                <td>navo@gmail.com</td>
-                                <td>6987</td>
-                                <td><button type="submit" class="btn btn-primary " style="border: none;width: 96px;height: 38px;">Edit</button></td>
-                                <td><button type="submit" class="btn btn-success " style="border: none;width: 96px;height: 38px;">Deactivate</button></td>
-                                <td><button type="submit" class="btn btn-danger " style="border: none;width: 96px;height: 38px;">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Senura Adithya</td>
-                                <td>iss0674</td>
-                                <td>senu@gmail.com</td>
-                                <td>1019</td>
-                                <td><button type="submit" class="btn btn-primary " style="border: none;width: 96px;height: 38px;">Edit</button></td>
-                                <td><button type="submit" class="btn btn-success " style="border: none;width: 96px;height: 38px;">Deactivate</button></td>
-                                <td><button type="submit" class="btn btn-danger " style="border: none;width: 96px;height: 38px;">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Kavindu Manahara</td>
-                                <td>gmd1235</td>
-                                <td>mane@gmail.com</td>
-                                <td>18745</td>
-                                <td><button type="submit" class="btn btn-primary " style="border: none;width: 96px;height: 38px;">Edit</button></td>
-                                <td><button type="submit" class="btn btn-success " style="border: none;width: 96px;height: 38px;">Deactivate</button></td>
-                                <td><button type="submit" class="btn btn-danger " style="border: none;width: 96px;height: 38px;">Delete</button></td>
-                            </tr>
-                            
+                            <?php
+                        $i++;
+                    }
+                    ?>    
                         </tbody>
                     </table>
 
@@ -228,61 +200,33 @@
                     <table id="myTable" >
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Club Name</th>
-                                <th>username</th>
-                                <th>password</th>
+                                <<th>No</th>
+                                <th>Name</th>
+                                <th>email</th>
+                                <th>Contact No</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                        <?php
+                            $i =1;
+                            foreach ($user2 as $users) {
+                                ?>
                             <tr>
-                                <td>1</td>
-                                <td>Art</td>
-                                <td>ffhhgjj</td>
-                                <td>12345</td>
+                            <td><?php echo $i ;?></td>
+                                <td><?php echo $users->name ;?></td>
+                                <td><?php echo $users->user_name ;?></td>
+                                <td><?php echo $users->contact_no ;?></td>
                                 <td><button type="submit" class="btn btn-primary " style="border: none;width: 96px;height: 38px;">Edit</button></td>
                                 <td><button type="submit" class="btn btn-success " style="border: none;width: 96px;height: 38px;">Deactivate</button></td>
                                 <td><button type="submit" class="btn btn-danger " style="border: none;width: 96px;height: 38px;">Delete</button></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>UWU NET</td>
-                                <td>net@gmail.com</td>
-                                <td>2345</td>
-                                <td><button type="submit" class="btn btn-primary " style="border: none;width: 96px;height: 38px;">Edit</button></td>
-                                <td><button type="submit" class="btn btn-success " style="border: none;width: 96px;height: 38px;">Deactivate</button></td>
-                                <td><button type="submit" class="btn btn-danger " style="border: none;width: 96px;height: 38px;">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Buddihist Society</td>
-                                <td>oshan@gmail.com</td>
-                                <td>6987</td>
-                                <td><button type="submit" class="btn btn-primary " style="border: none;width: 96px;height: 38px;">Edit</button></td>
-                                <td><button type="submit" class="btn btn-success " style="border: none;width: 96px;height: 38px;">Deactivate</button></td>
-                                <td><button type="submit" class="btn btn-danger " style="border: none;width: 96px;height: 38px;">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>IEEE</td>
-                                <td>ovindu@gmail.com</td>
-                                <td>1019</td>
-                                <td><button type="submit" class="btn btn-primary " style="border: none;width: 96px;height: 38px;">Edit</button></td>
-                                <td><button type="submit" class="btn btn-success " style="border: none;width: 96px;height: 38px;">Deactivate</button></td>
-                                <td><button type="submit" class="btn btn-danger " style="border: none;width: 96px;height: 38px;">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>ROtaract</td>
-                                <td>naveen@gmail.com</td>
-                                <td>18745</td>
-                                <td><button type="submit" class="btn btn-primary " style="border: none;width: 96px;height: 38px;">Edit</button></td>
-                                <td><button type="submit" class="btn btn-success " style="border: none;width: 96px;height: 38px;">Deactivate</button></td>
-                                <td><button type="submit" class="btn btn-danger " style="border: none;width: 96px;height: 38px;">Delete</button></td>
-                            </tr>
+                            <?php
+                        $i++;
+                    }
+                    ?>
                             
                         </tbody>
                     </table>
@@ -298,43 +242,37 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Club Name</th>
-                        <th>date</th>
+                    <th>Club Name</th>
+                        <th>Email</th>
+                        <th>Contact No</th>
+                        <th>Date</th>
                         <th></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
+                <?php
+            foreach ($user3 as $users) {
+                ?>
                     <tr>
-                        <td>UWU LEO</td>
-                        <td>2023.07.29</td>
-                        <td><button type="submit" class="btn btn-success btnedit">Accept</button>  </td>
+                        <td><?php echo $users->name ;?></td>
+                        <td><?php echo $users->user_name ;?> </td>
+                        <td><?php echo $users->contact_no ;?> </td>
+                        <td> </td>
+
+                        <td> 
+                        <form action="updateStatus.php" method="post">
+                        <input type="hidden" name="user_id" value="<?php echo $users->user_id ;?>">
+                        <button type="submit" class="btn btn-success  btnedit">Accept</button> 
+                        </form>
+                        </td>
                         <td><button type="submit" class="btn btn-danger">Decline</button></td>
                     </tr>
                     <tr>
-                        <td>Catholic Society</td>
-                        <td>2023.07.25</td>
-                        <td><button type="submit" class="btn btn-success btnedit">Accept</button>  </td>
-                        <td><button type="submit" class="btn btn-danger">Decline</button></td>
-                    </tr>
-                    <tr>
-                        <td>UWU Rayon</td>
-                        <td>2023.07.24</td>
-                        <td><button type="submit" class="btn btn-success btnedit">Accept</button> </td>
-                        <td><button type="submit" class="btn btn-danger">Decline</button></td>
-                    </tr>
-                    <tr>
-                        <td>Gavel</td>
-                        <td>2023.07.19</td>
-                        <td><button type="submit" class="btn btn-success btnedit">Accept</button> </td>
-                        <td><button type="submit" class="btn btn-danger">Decline</button></td>
-                    </tr>
-                    <tr>
-                        <td>ELA</td>
-                        <td>2023.07.14</td>
-                        <td><button type="submit" class="btn btn-success btnedit">Accept</button> </td>
-                        <td><button type="submit" class="btn btn-danger">Decline</button></td>
-                    </tr>
+                    <?php
+            }
+            ?>
+                        
                 </tbody>
 
             </table>
