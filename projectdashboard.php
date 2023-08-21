@@ -4,12 +4,14 @@ require_once "classes/DBConnector.php";
 require_once "classes/Project.php";
 require_once "classes/User.php";
 require_once "classes/TeamCategory.php";
+require_once "classes/TeamMember.php";
 
 use classes\Project;
 use classes\DBConnector;
 use classes\Club;
 use classes\Undergraduate;
 use classes\TeamCategory;
+use classes\TeamMember;
 
 $projectIDFromSession = 1;
 $con = DBConnector::getConnection();
@@ -27,16 +29,17 @@ if (!$project->loadDataFromProjectID($con)) {
     $club->loadDataFromUserID($con);
 
     //Get Project Chair Details
-    $projectChair = new Undergraduate(null, null, null, null, null);
+    $projectChair = new Undergraduate(null, null, null, null, null, null);
     $projectChair->setUserId($project->getProjectChairID());
     $projectChair->loadDataFromUserID($con);
 
     //Get Team Category List
-    $teamCategory = new TeamCategory(null, null, null, null);
     $teamCategories = TeamCategory::getTeamCategoeryListFromProjectID($con, $project->getProjectID());
 
+    $teamMembers = TeamMember::getMemberListFromProjectID($con, $project->getProjectID());
+
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $selected_menuNo = 1;
+        $selected_menuNo = 2;
         if (isset($_GET['tab'])) {
             $selected_menuNo = $_GET['tab'];
         }
@@ -200,8 +203,187 @@ if (!$project->loadDataFromProjectID($con)) {
         <div id="menu-content-1" class="main-content w-100 h-100 hide">
             <h1>Content 1</h1>
         </div>
+        <!--======== Content 2 - Team Members ======-->
         <div id="menu-content-2" class="main-content hide">
-            <h1>Content 2</h1>
+
+            <div class="container-fluid">
+                <div class="row d-flex">
+                    <div class="col-11 mx-auto">
+
+                        <!-- ======= add member button ======== -->
+                        <div class="d-flex mt-3 mb-2">
+                            <div class="btn fw-bold my-auto me-0 ms-auto d-flex"
+                                 style="color: var(--darker-primary) !important; background-color: var(--secondary);"
+                                 type="button" data-bs-toggle="modal"
+                                 data-bs-target="#add-new-team-member">
+                                <ion-icon class="my-auto" name="add-outline"></ion-icon>
+                                <div class="my-auto">Member</div>
+                            </div>
+                        </div>
+
+                        <!-- ========= add member button model ========== -->
+                        <div class="modal fade"
+                             id="add-new-team-member"
+                             tabindex="-1"
+                             role="dialog"
+                             aria-labelledby="exampleModalCenterTitle"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered"
+                                 role="document">
+                                <div class="modal-content">
+                                    <!--=== form =====-->
+                                    <form action="" method="post">
+                                        <div class="modal-header py-2 px-2"
+                                             style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                            <div class="d-flex flex-row w-100 justify-content-between">
+
+                                                <div class="ms-2 my-auto fs-4 fw-bold">
+                                                    Team Member
+                                                </div>
+
+                                                <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                     style="font-size: 1.3rem; color: var(--accent-color2);">
+                                                    New
+                                                </div>
+                                            </div>
+
+                                            <!--======= hidden ==========-->
+                                            <input type="hidden" name="menuNo" value="2">
+                                        </div>
+
+                                        <div class="modal-body"
+                                             style="background-color: var(--lighter-secondary);">
+                                            <!-- ====== input username ====== -->
+                                            <div class="d-flex px-5">
+                                                <input class="form-control text-center" type="email"
+                                                       name="username" placeholder="Email" required/>
+                                            </div>
+                                            <!-- ===== select team ======= -->
+                                            <div class="d-flex mt-2 px-5">
+                                                <select class="form-select ms-auto me-0" style="width: 50%;"
+                                                        name="project_team_id" id="" required>
+                                                    <option class="text-center" value="" selected>-- Select Team --
+                                                    </option>
+                                                    <?php
+                                                    foreach ($teamCategories as $teamCategory) {
+                                                        ?>
+                                                        <option value="<?= $teamCategory->getCategoryID() ?>"><?= $teamCategory->getCategoryName() ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer" style="background-color: var(--primary);">
+                                            <button type="button"
+                                                    class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="submit"
+                                                    name="submit"
+                                                    class="btn fw-bold"
+                                                    style="background-color: var(--secondary); color: var(--primary);">
+                                                ADD
+                                            </button>
+
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <!-- ========== member table ============ -->
+                        <div class="card" style="height: 500px;">
+                            <div class="card-header team-member-table pb-0"
+                                 style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+
+                                <div class="row p-0 fw-bold">
+                                    <div class="col-1"></div>
+                                    <div class="col-3 text-center py-2 rounded-top-3"
+                                         style="background-color: var(--primary);">Name
+                                    </div>
+                                    <div class="col-3 text-center py-2 rounded-top-3"
+                                         style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                                        Email
+                                    </div>
+                                    <div class="col-2 text-center py-2 rounded-top-3"
+                                         style="background-color: var(--primary);">Contact No
+                                    </div>
+                                    <div class="col-2 text-center py-2 rounded-top-3"
+                                         style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                                        Team
+                                    </div>
+                                    <div class="col-1">
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-body pt-0 bg-dark-subtle" style="background-color: var(--secondary); overflow-y: scroll;">
+                                <div class="container p-0">
+                                    <?php
+                                    foreach ($teamMembers as $teamMember) {
+
+                                        $projectMember = new Undergraduate(null, null, null, null, null, null);
+                                        $projectMember->setUserId($teamMember->getUgID());
+                                        $projectMember->loadDataFromUserID($con);
+
+                                        $projectMemberTeam = new TeamCategory($teamMember->getCategoryID(), null, null, null);
+                                        $projectMemberTeam->loadDataByTeamID($con);
+
+                                        ?>
+                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
+                                            <div class="col-1 d-flex tabel-column-type-2">
+                                                <div class="my-auto">
+                                                    <img class="rounded-circle"
+                                                         style="width: 40px; height: 40px; object-fit: cover;"
+                                                         src="assets/images/profile_img/ug/<?= $projectMember->getProfileImg() ?>"
+                                                         alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-3 tabel-column-type-1 d-flex">
+                                                <div class="my-auto"><?= $projectMember->getFirstName() ?> <?= $projectMember->getLastName() ?></div>
+                                            </div>
+                                            <div class="col-3 d-flex tabel-column-type-2">
+                                                <div class="my-auto mx-auto"><?= $projectMember->getUsername() ?></div>
+                                            </div>
+                                            <div class="col-2 d-flex tabel-column-type-1">
+                                                <div class="my-auto mx-auto"><?= $projectMember->getContactNo() ?></div>
+                                            </div>
+                                            <div class="col-2 d-flex tabel-column-type-2">
+                                                <div class="my-auto mx-auto"><?= $projectMemberTeam->getCategoryName() ?></div>
+                                            </div>
+                                            <div class="col-1 tabel-column-type-1 d-flex">
+                                                <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
+
+                                                    <ion-icon class="my-auto me-2" type="button"
+                                                              data-bs-toggle="modal"
+                                                              data-bs-target=""
+                                                              name="create-outline"></ion-icon>
+                                                    <ion-icon class="my-auto" type="button"
+                                                              data-bs-toggle="modal"
+                                                              data-bs-target=""
+                                                              name="trash-outline"></ion-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <?php
+                                    }
+                                    ?>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="menu-content-3" class="main-content hide">
             <h1>Content 3</h1>
