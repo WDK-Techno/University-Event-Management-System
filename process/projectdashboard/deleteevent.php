@@ -11,9 +11,9 @@ $con = DBConnector::getConnection();
 if (isset($_POST['submit'])) {
 
     $selectedMenuNo = $_POST['menuNo'];
-    $teamCatID = $_POST['event_id'];
+    $eventId = $_POST['event_id'];
 
-    $event = new Event(null,$eventId,"active");
+    $event = new Event($eventId,null, null, null, null,"active");
     $event->loadDataFromeventId($con);
     $event->setStatus("delete");
     $result = $event->saveChangesToDataBase($con);
