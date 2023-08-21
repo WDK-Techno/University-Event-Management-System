@@ -26,7 +26,7 @@ if (isset($_POST["submit"], $_POST["username"], $_POST["password"],
         $contactNo = $_POST["contact_no"];
 
         $ug = new Undergraduate($userName, $password, $firstName,
-            $lastName, $contactNo);
+            $lastName, $contactNo,null);
     if ($ug->checkDuplicateEmail($con)){
         header("location: ../../content/ug_signup.php?status=3");
     }else{

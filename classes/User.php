@@ -13,6 +13,7 @@ class User
     private $role;
     private $status;
 
+
     public function getUserId()
     {
         return $this->user_id;
@@ -103,6 +104,7 @@ class Undergraduate extends User
     private $firstName;
     private $lastName;
     private $contactNo;
+    private $profileImg;
 
     public function getFirstName()
     {
@@ -138,15 +140,25 @@ class Undergraduate extends User
         $this->contactNo = $contactNo;
     }
 
+    public function getProfileImg()
+    {
+        return $this->profileImg;
+    }
+
+    public function setProfileImg($profileImg)
+    {
+        $this->profileImg = $profileImg;
+    }
 
 
-    public function __construct($usrname, $password, $firstName, $lastName, $contactNo)
+    public function __construct($usrname, $password, $firstName, $lastName, $contactNo,$profileImg)
     {
         parent::__construct($usrname, $password);
 
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->contactNo = $contactNo;
+        $this->profileImg = $profileImg;
         parent::setRole("ug");
         parent::setStatus("active");
     }
@@ -197,8 +209,8 @@ class Undergraduate extends User
         }
     }
 
-    public function loadDataFromUserID($con){
-
+    public function loadDataFromUserID($con)
+    {
         $query = "SELECT * FROM undergraduate INNER JOIN user ON undergraduate.user_id = user.user_id WHERE user.user_id =?";
         $pstmt = $con->prepare($query);
         $pstmt->bindValue(1, parent::getUserId());
@@ -211,12 +223,17 @@ class Undergraduate extends User
             $this->firstName = $rs->first_name;
             $this->lastName = $rs->last_name;
             $this->contactNo = $rs->contact_no;
-
+            $this->profileImg = $rs->profile_image;
             return true;
         } else {
             return false;
         }
     }
+
+    public function updateChanges(){
+
+    }
+
 
 }
 

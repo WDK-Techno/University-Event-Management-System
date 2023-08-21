@@ -157,14 +157,15 @@ class Project
         }
     }
 
-    public function getProjectListFromClubID($con)
-    {
+
+    public static function getProjectListFromClubID($con,$clubId){
+
         $projects = array();
         try {
 
             $query = "SELECT * FROM project WHERE club_id=?";
             $pstmt = $con->prepare($query);
-            $pstmt->bindValue(1, $this->clubID);
+            $pstmt->bindValue(1, $clubId);
             $pstmt->execute();
             $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
             if (!empty($rs)) {
