@@ -5,6 +5,8 @@ require_once "classes/Project.php";
 require_once "classes/User.php";
 require_once "classes/TeamCategory.php";
 require_once "classes/TeamMember.php";
+require_once "classes/Event.php";
+
 
 use classes\Project;
 use classes\DBConnector;
@@ -325,7 +327,8 @@ if (!$project->loadDataFromProjectID($con)) {
                                 </div>
 
                             </div>
-                            <div class="card-body pt-0 bg-dark-subtle" style="background-color: var(--secondary); overflow-y: scroll;">
+                            <div class="card-body pt-0 bg-dark-subtle"
+                                 style="background-color: var(--secondary); overflow-y: scroll;">
                                 <div class="container p-0">
                                     <?php
                                     foreach ($teamMembers as $teamMember) {
@@ -395,7 +398,254 @@ if (!$project->loadDataFromProjectID($con)) {
             <h1>Content 5</h1>
         </div>
         <div id="menu-content-6" class="main-content hide">
-            <h1>Content 6</h1>
+            <div class="col-12 col-lg-4">
+                <div class="w-100 p-0 pt-3 d-flex container">
+                    <div class="card-header d-flex w-100"
+                         style="background-color: var(--primary); color: var(--lighter-secondary);">
+                        <div class="my-auto fw-bold" style="font-size: 1.3rem;">Events</div>
+                        <div class="btn fw-bold my-auto ms-auto me-2 d-flex"
+                             style="color: var(--accent-color2) !important"
+                             type="button" data-bs-toggle="modal"
+                             data-bs-target="#add-new-event">
+                            <ion-icon class="my-auto" name="add-outline"></ion-icon>
+                            <div class="my-auto">New</div>
+                        </div>
+                        <!-- =========== add new event button model =========== -->
+
+                        <div class="modal fade"
+                             id="add-new-event"
+                             tabindex="-1"
+                             role="dialog"
+                             aria-labelledby="exampleModalCenterTitle"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered"
+                                 role="document">
+                                <div class="modal-content">
+                                    <!--=== form =====-->
+                                    <form action="process/projectdashboard/addNewEvent.php" method="post">
+                                        <div class="modal-header py-2 px-2"
+                                             style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                            <div class="d-flex flex-row w-100 justify-content-between">
+
+                                                <div class="ms-2 my-auto fs-4 fw-bold">
+                                                    Event
+                                                </div>
+
+                                                <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                     style="font-size: 1.3rem; color: var(--accent-color2);">
+                                                    New
+                                                </div>
+                                            </div>
+
+                                            <!--======= hidden ==========-->
+                                            <input type="hidden" name="menuNo" value="7">
+                                            <input type="hidden" name="event_id"
+                                                   value="<?= $project->getProjectID() ?>">
+                                        </div>
+
+                                        <div class="modal-body"
+                                             style="background-color: var(--lighter-secondary);">
+                                            <div class=" p-2">
+                                                <input class="form-control text-center" type="text" required
+                                                       name="name" placeholder="Event Name"/><br>
+                                                <input class="form-control text-center" type="text" required
+                                                       name="description" placeholder="Description"/><br>
+                                                <input class="form-control text-center" type="datetime-local" required
+                                                       name="event_date" placeholder="Event Date"/><br>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer" style="background-color: var(--primary);">
+                                            <button type="button"
+                                                    class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="submit"
+                                                    name="submit"
+                                                    class="btn fw-bold"
+                                                    style="background-color: var(--secondary); color: var(--primary);">
+                                                ADD
+                                            </button>
+
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- ========== Event list body =========== -->
+                    <div class="card-body" style="overflow-y: auto; height: ;">
+                        <div class="container card-event-list ">
+                            <?php
+                            $eventNo = 1;
+                            foreach ($project as $event) {
+                                ?>
+                                <div class="row shadow-sm ps-2 py-3 my-2 rounded-3 fw-normal"
+                                     style="font-size: 1.0rem; background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                                    <div class="col-9 d-flex">
+                                        <div class="my-auto fs-5"><?= $event->geteventName() ?></div>
+                                    </div>
+                                    <div class="col-3" style="font-size: 1.5rem;">
+                                        <div class="d-flex mx-auto card-list-option-buttons"
+                                             style="font-size: 1.7rem;">
+                                            <!--========== edit event button =========-->
+                                            <ion-icon class="me-2 my-auto" type="button"
+                                                      data-bs-toggle="modal"
+                                                      data-bs-target="#edit-event<?= $eventNo ?>"
+                                                      name="create-outline"></ion-icon>
+
+                                            <!-- =========== edit event button model =========== -->
+                                            <div class="modal fade"
+                                                 id="edit-event<?= $eventNo ?>"
+                                                 tabindex="-1"
+                                                 role="dialog"
+                                                 aria-labelledby="exampleModalCenterTitle"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered"
+                                                     role="document">
+                                                    <div class="modal-content">
+                                                        <!--=== form =====-->
+                                                        <form action="process/projectdashboard/editEvent.php"
+                                                              method="post">
+                                                            <div class="modal-header py-2 px-2"
+                                                                 style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                                                <div class="d-flex flex-row w-100 justify-content-between">
+
+                                                                    <div class="ms-2 my-auto fs-4 fw-bold">
+                                                                        Event
+                                                                    </div>
+
+                                                                    <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                                    <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                                    <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                                         style="font-size: 1.3rem; color: var(--accent-color2);">
+                                                                        Edit
+                                                                    </div>
+                                                                </div>
+
+                                                                <!--======= hidden ==========-->
+                                                                <input type="hidden" name="menuNo"
+                                                                       value="7">
+                                                                <input type="hidden" name="event_id"
+                                                                       value="<?= $event->geteventId() ?>">
+                                                            </div>
+
+                                                            <div class="modal-body"
+                                                                 style="background-color: var(--lighter-secondary);">
+                                                                <div class="d-flex px-5">
+                                                                    <input class="form-control text-center"
+                                                                           type="text"
+                                                                           name="name"
+                                                                           value="<?= $eventName->geteventName() ?>"
+                                                                           placeholder="Event Name"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer"
+                                                                 style="background-color: var(--primary);">
+                                                                <button type="button"
+                                                                        class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">
+                                                                    Close
+                                                                </button>
+                                                                <button type="submit"
+                                                                        name="submit"
+                                                                        class="btn fw-bold"
+                                                                        style="background-color: var(--secondary); color: var(--primary);">
+                                                                    Update
+                                                                </button>
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!--========== Delete event button =========-->
+                                            <ion-icon class="my-auto" type="button" data-bs-toggle="modal"
+                                                      data-bs-target="#delete-event<?= $eventNo ?>"
+                                                      name="trash-outline"></ion-icon>
+                                            <!-- =========== Delete event button model =========== -->
+                                            <div class="modal fade"
+                                                 id="delete-event<?= $eventNo ?>"
+                                                 tabindex="-1"
+                                                 role="dialog"
+                                                 aria-labelledby="exampleModalCenterTitle"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered"
+                                                     role="document">
+                                                    <div class="modal-content">
+                                                        <!--=== form =====-->
+                                                        <form action="process/projectdashboard/deleteevent.php"
+                                                              method="post">
+                                                            <div class="modal-header py-2 px-2"
+                                                                 style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                                                <div class="d-flex flex-row w-100 justify-content-between">
+
+                                                                    <div class="ms-2 my-auto fs-4 fw-bold">
+                                                                        <?= $eventName->geteventName() ?>
+                                                                    </div>
+
+                                                                    <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                                    <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                                    <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                                         style="font-size: 1.3rem; color: var(--accent-color3);">
+                                                                        Delete
+                                                                    </div>
+                                                                </div>
+
+                                                                <!--======= hidden ==========-->
+                                                                <input type="hidden" name="menuNo"
+                                                                       value="7">
+                                                                <input type="hidden" name="event_id"
+                                                                       value="<?= $eventId->geteventId() ?>">
+                                                            </div>
+
+                                                            <div class="modal-body"
+                                                                 style="background-color: var(--lighter-secondary);">
+                                                                <div class="d-flex fw-normal fs-5">
+                                                                    Do you want to Delete this Team ?
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer"
+                                                                 style="background-color: var(--primary);">
+                                                                <button type="button"
+                                                                        class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">
+                                                                    Close
+                                                                </button>
+                                                                <button type="submit"
+                                                                        name="submit"
+                                                                        class="btn fw-bold"
+                                                                        style="background-color: var(--accent-color3); color: var(--primary);">
+                                                                    Delete
+                                                                </button>
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <?php
+
+                                $eventNo++;
+                            }
+
+                            ?>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
         <div id="menu-content-7" class="main-content w-100 h-100 hide">
