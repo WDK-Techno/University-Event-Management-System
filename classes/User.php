@@ -95,6 +95,21 @@ class User
         }
 
     }
+    public function getUserIDFromUsername($con){
+        try {
+            $query = "SELECT * FROM user WHERE user_name = ? AND role = ? AND status <> ?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1,$this->username);
+            $pstmt->bindValue(2,$this->role);
+            $pstmt->bindValue(3,"delete");
+            $pstmt->execute();
+            $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
+            return $rs->user_id;
+
+        }catch (PDOException $exc){
+            die("Error in loading userID From Database ". $exc->getMessage());
+        }
+    }
 
 
 }
