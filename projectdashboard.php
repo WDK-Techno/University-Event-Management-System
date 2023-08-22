@@ -402,8 +402,8 @@ if (!$project->loadDataFromProjectID($con)) {
             <h1>Content 5</h1>
         </div>
         <div id="menu-content-6" class="main-content hide">
-            <div class="col-12 col-lg-4">
-                <div class="card w-100 p-0 pt-3 d-flex container">
+            <div class="col-12 p-5 d-flex justify-content-center ">
+                <div class="card col-md-12 mx-auto">
                     <div class="card-header d-flex w-100"
                          style="background-color: var(--primary); color: var(--lighter-secondary);">
                         <div class="my-auto fw-bold" style="font-size: 1.3rem;">Events</div>
