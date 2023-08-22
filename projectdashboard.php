@@ -489,7 +489,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                 <div class="row shadow-sm ps-2 py-3 my-2 rounded-3 fw-normal"
                                      style="font-size: 1.0rem; background-color: var(--lighter-secondary); color: var(--darker-primary);">
                                     <div class="col-9 d-flex">
-                                        <div class="my-auto fs-5"><?= $event->geteventName() ?></div>
+                                        <div class="my-auto fs-5"><?= $event->geteventName()."<br>". $event->geteventDescription() ."<br>". $event->geteventDate()?></div>
                                     </div>
                                     <div class="col-3" style="font-size: 1.5rem;">
                                         <div class="d-flex mx-auto card-list-option-buttons"
@@ -538,12 +538,23 @@ if (!$project->loadDataFromProjectID($con)) {
 
                                                             <div class="modal-body"
                                                                  style="background-color: var(--lighter-secondary);">
-                                                                <div class="d-flex px-5">
-                                                                    <input class="form-control text-center"
-                                                                           type="text"
-                                                                           name="name"
-                                                                           value="<?= $event->geteventName() ?>"
-                                                                           placeholder="Event Name"/>
+                                                                <div class="grid px-5">
+                                                                    <!-- Row 1: Event Name -->
+                                                                    <div class="form-group">
+                                                                        <input class="form-control text-center" type="text" name="name" value="<?= $event->geteventName() ?>" placeholder="Event Name"/>
+                                                                    </div>
+                                                                    <br>
+
+                                                                    <!-- Row 2: Event Description -->
+                                                                    <div class="form-group">
+                                                                        <input class="form-control text-center" type="text" name="description" value="<?= $event->geteventDescription() ?>" placeholder="Event Description"/>
+                                                                    </div>
+                                                                    <br>
+
+                                                                    <!-- Row 3: Event Date -->
+                                                                    <div class="form-group">
+                                                                        <input class="form-control text-center" type="text" name="date" value="<?= $event->geteventDate() ?>" placeholder="Event Date"/>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer"
