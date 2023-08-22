@@ -443,7 +443,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                             </div>
 
                                             <!--======= hidden ==========-->
-                                            <input type="hidden" name="menuNo" value="7">
+                                            <input type="hidden" name="menuNo" value="6">
                                             <input type="hidden" name="project_id"
                                                    value="<?= $project->getProjectID() ?>">
                                         </div>
@@ -531,7 +531,7 @@ if (!$project->loadDataFromProjectID($con)) {
 
                                                                 <!--======= hidden ==========-->
                                                                 <input type="hidden" name="menuNo"
-                                                                       value="7">
+                                                                       value="6">
                                                                 <input type="hidden" name="event_id"
                                                                        value="<?= $event->geteventId() ?>">
                                                             </div>
@@ -601,7 +601,7 @@ if (!$project->loadDataFromProjectID($con)) {
 
                                                                 <!--======= hidden ==========-->
                                                                 <input type="hidden" name="menuNo"
-                                                                       value="7">
+                                                                       value="6">
                                                                 <input type="hidden" name="event_id"
                                                                        value="<?= $event->geteventId() ?>">
                                                             </div>
