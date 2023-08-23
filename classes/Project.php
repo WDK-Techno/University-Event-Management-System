@@ -13,6 +13,10 @@ class Project
     private $projectChairID;
     private $status;
 
+    private $startDate;
+
+    private $profileImage;
+
 
     public function getProjectID()
     {
@@ -74,13 +78,15 @@ class Project
     }
 
 
-    public function __construct($projectID, $projectName, $clubID, $projectChairID, $status)
+    public function __construct($projectID, $projectName, $clubID, $projectChairID, $status, $startDate, $profileImage)
     {
         $this->projectID = $projectID;
         $this->projectName = $projectName;
         $this->clubID = $clubID;
         $this->projectChairID = $projectChairID;
         $this->status = $status;
+        $this->startDate = $startDate;
+        $this->profileImage = $profileImage;
     }
 
     public function addProject($con)
@@ -93,11 +99,13 @@ class Project
             $pstmt->bindValue(2, $this->clubID);
             $pstmt->bindValue(3, $this->projectChairID);
             $pstmt->bindValue(4, "active");
+
             $pstmt->execute();
 
             if ($pstmt->rowCount() > 0) {
                 $this->projectID = $con->lastInsertId();
                 $this->loadDataFromProjectID($con);
+                return true;
             } else {
 
                 return false;
@@ -125,6 +133,8 @@ class Project
                 $this->clubID = $rs->club_id;
                 $this->projectChairID = $rs->project_chair_id;
                 $this->status = $rs->status;
+                $this->startDate = $rs->start_date;
+                $this->profileImage = $rs->profile_image;
 
                 return true;
             } else {
@@ -137,7 +147,9 @@ class Project
         }
 
     }
-    public function saveChangesToDataBase($con){
+
+    public function saveChangesToDataBase($con)
+    {
         try {
 
             $query = "UPDATE project SET name=?,project_chair_id=?,status=? WHERE project_id=?";
@@ -148,14 +160,15 @@ class Project
             $pstmt->bindValue(4, $this->projectID);
             $pstmt->execute();
 
-            return $pstmt->rowCount()>0;
+            return $pstmt->rowCount() > 0;
 
-        }catch (PDOException $exc){
-            die("Error in Update Database". $exc->getMessage());
+        } catch (PDOException $exc) {
+            die("Error in Update Database" . $exc->getMessage());
         }
     }
 
-    public static function getProjectListFromClubID($con,$clubId){
+    public static function getProjectListFromClubID($con, $clubId)
+    {
         $projects = array();
         try {
 
@@ -164,17 +177,17 @@ class Project
             $pstmt->bindValue(1, $clubId);
             $pstmt->execute();
             $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
-            if(!empty($rs)){
+            if (!empty($rs)) {
 
-                foreach ($rs as $row){
-                    $project = new Project($row->project_id,$row->name,
-                        $row->club_id,$row->project_chair_id,$row->status);
+                foreach ($rs as $row) {
+                    $project = new Project($row->project_id, $row->name,
+                        $row->club_id, $row->project_chair_id, $row->status, $row->start_date, $row->profile_image);
                     $projects[] = $project;
                 }
 
             }
-        }catch (PDOException $exc){
-            die("Error in Database Loading". $exc->getMessage());
+        } catch (PDOException $exc) {
+            die("Error in Database Loading" . $exc->getMessage());
         }
 
         return $projects;

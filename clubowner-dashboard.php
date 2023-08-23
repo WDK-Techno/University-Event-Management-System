@@ -158,20 +158,13 @@ $projects= Project::getProjectListFromClubID($con,$clubid);
                                 <h5 class="modal-title" id="exampleModalLabel">Project details</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="" method=POST>
+                            <form action="process/clubownerdashboard/addproject.php" method="POST" enctype="multipart/form-data">
                                 <div class="modal-body">
 
                                     <label for="prName" class="form-label h5">Name</label>
                                     <br />
-                                    <input type="text" id="prName" name="prName" required />
+                                    <input type="text" class="form-control" id="prName" name="projectName" required />
                                     <br />
-                                    <label for="cbName" class="form-label h5">club name</label>
-                                    <br />
-                                    <input type="text" id="cbName" name="cbName" required />
-                                    <br />
-                                    <label for="Prchair" class="form-label h5">select project chair</label>
-                                    <br />
-                                    <input type="text" id="Prchair" name="Prchair" required />
 
 
                                     <div class="modal-footer">
@@ -186,20 +179,23 @@ $projects= Project::getProjectListFromClubID($con,$clubid);
             </div>
 
             <hr />
-     <?php
-      $i=1;
+            
 
-
-     foreach ($projects as $project) {
-     ?>
             <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-3">
+                <?php
+                $i=1;
+
+
+                foreach ($projects as $project) {
+                ?>
+
                 <div class="col">
                     <div class="rounded border">
                         <div class="bg-image card d-block shadow-1-strong h-80" style="background-image: url('https://assets-global.website-files.com/5e39e095596498a8b9624af1/5f6e93d250a6d04f4eae9f02_Backgrounds-WFU-thumbnail-(size).jpg');">
                             <div class="card-body text-white">
                                 <h5 class="card-title"><?=$project->getProjectName()?></h5>
                                 <p class="card-text">
-                                    
+
                                 </p>
                                 <a href="#!" class="btn btn-outline-light">More</a>
                             </div>
@@ -218,13 +214,11 @@ $projects= Project::getProjectListFromClubID($con,$clubid);
                         </div>
                     </div>
                 </div>
-
+                    <?php
+                    $i++;
+                }?>
             </div>
-
-        </div>
-        <?php
-        $i++;
-        }?>
+    </div>
     </div>
     <div id="menu-content-2" class="main-content hide">
         <h1>Content 2</h1>
@@ -236,7 +230,63 @@ $projects= Project::getProjectListFromClubID($con,$clubid);
         <h1>Content 4</h1>
     </div>
     <div id="menu-content-5" class="main-content hide">
-        <h1>Content 5</h1>
+
+     <div class="card-body text-center shadow">
+         <img class="rounded-circle mb-3 mt-4" src="" width="160" height="160" />
+       <div class="mb-3">
+           <button class="btn btn-primary btn-sm" type="button">Change Photo</button>
+       </div>
+      </div>
+
+        <div class="card shadow mb-3">
+            <div class="card-header py-3">
+                <p class="text-primary m-0 fw-bold">Club Settings</p>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="form-label" for="username">
+                                    <strong>Username</strong>
+                                </label>
+                                <input id="username" class="form-control" type="text" placeholder="user.name" name="username" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="form-label" for="email">
+                                    <strong>Email Address</strong>
+                                </label>
+                                <input id="email" class="form-control" type="email" placeholder="clubId@.com" name="email" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="form-label" for="first_name">
+                                    <strong>club Name</strong>
+                                </label>
+                                <input id="first_name" class="form-control" type="text" placeholder="IEEE" name="first_name" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="form-label" for="first_name">
+                                    <strong>Contact number</strong>
+                                </label>
+                                <input id="first_name" class="form-control" type="text" placeholder="0123456789" name="first_name" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Update</button></div>
+                </form>
+            </div>
+        </div>
+               
+
     </div>
 
     </div>
