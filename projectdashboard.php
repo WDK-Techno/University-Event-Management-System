@@ -403,16 +403,14 @@ if (!$project->loadDataFromProjectID($con)) {
         </div>
         <div id="menu-content-6" class="main-content hide">
             <div class="col-12 p-5 d-flex justify-content-center ">
-                <div class="card col-md-12 mx-auto">
-                    <div class="card-header d-flex w-100"
-                         style="background-color: var(--primary); color: var(--lighter-secondary);">
-                        <div class="my-auto fw-bold" style="font-size: 1.3rem;">Events</div>
-                        <div class="btn fw-bold my-auto ms-auto me-2 d-flex"
-                             style="color: var(--accent-color2) !important"
+                <div class="col-md-12 mx-auto">
+                    <div class=" d-flex w-100">
+
+                        <div class="btn btn-success fw-bold my-auto ms-auto me-2 d-flex"
                              type="button" data-bs-toggle="modal"
                              data-bs-target="#add-new-event">
                             <ion-icon class="my-auto" name="add-outline"></ion-icon>
-                            <div class="my-auto">New</div>
+                            <div class="my-auto d-flex">New</div>
                         </div>
                         <!-- =========== add new event button model =========== -->
                         <div class="modal fade"
@@ -480,18 +478,18 @@ if (!$project->loadDataFromProjectID($con)) {
                         </div>
                     </div>
                     <!-- ========== Event list body =========== -->
-                    <div class="card-body row-3" style="overflow-y: auto; height:;">
-                        <div class="container card-event-list row-3 ">
+                    <div style="overflow-y: auto; height:;">
+                        <div class="row container card-event-list ">
                             <?php
                             $eventNo = 1;
                             foreach ($events as $event) {
                                 ?>
-                                <div class="row-3 shadow-sm ps-2 py-3 my-2 rounded-5 fw-normal"
+                                <div class="col-md-3 shadow-sm p-3 m-2 rounded-5 fw-normal"
                                      style="font-size: 1.0rem; background-color: var(--lighter-secondary); color: var(--darker-primary);">
-                                    <div class="col-3">
+                                    <div>
                                         <div class="my-auto fs-5"><?= $event->geteventName()."<br>". $event->geteventDescription() ."<br>". $event->geteventDate()?></div>
                                     </div>
-                                    <div class="col-3" style="font-size: 1.5rem;">
+                                    <div style="font-size: 1.5rem;">
                                         <div class="d-flex mx-auto card-list-option-buttons"
                                              style="font-size: 1.7rem;">
                                             <!--========== edit event button =========-->
