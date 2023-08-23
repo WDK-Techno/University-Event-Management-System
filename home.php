@@ -128,7 +128,7 @@
             <div class="carousel-inner justify-content-center">
                 <div class="carousel-item active">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4" style="height: 500px; width: 300px">
+                        <div class="col-lg-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front  w-100">
                                     <img alt="" src="assets/images/homepage/f1.jpg">
@@ -143,7 +143,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 300px">
+                        <div class="col-lg-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front ">
                                     <img alt="" src="assets/images/homepage/f2.jpg">
@@ -158,7 +158,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 300px">
+                        <div class="col-lg-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f3.jpg">
@@ -177,7 +177,7 @@
                 </div>
                 <div class="carousel-item">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4" style="height: 500px; width: 300px">
+                        <div class="col-lg-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f4.jpg">
@@ -192,7 +192,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 300px">
+                        <div class="col-lg-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f5.jpg">
@@ -206,7 +206,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4" style="height: 500px; width: 300px">
+                        <div class="col-md-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f6.jpg">
@@ -226,7 +226,7 @@
                 </div>
                 <div class="carousel-item">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4" style="height: 500px; width: 300px">
+                        <div class="col-lg-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f7.jpg">
@@ -240,7 +240,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 300px">
+                        <div class="col-lg-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f8.jpg">
@@ -256,7 +256,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 300px">
+                        <div class="col-lg-4" style="height: 500px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/aurora.png">
@@ -290,25 +290,25 @@
                 <div class="col-md-4">
                     <img src="assets/images/homepage/calender.jpg" class="img-fluid rounded-start">
                 </div>
-                    <div class="card-content col-md-8">
-                        <h5 class="card-title-service">UWU Event Calender</h5>
-                        <p class="card-text">
-                            Many events or projects happen every week in our university. In such a situation, the
-                            days will last
-                            Events are held by different degrees or different clubs, and when you book the hall for
-                            those events, there
-                            Many problems such as events that collide with each other on the same day.
-                            Those events happen on the same day at the same time. And here some students may be in
-                            several events
-                            Several clubs. Then it becomes easier for him to plan his work and manage his time.
-                            A calendar of events and projects organized by the university's students will help in
-                            the assignment
-                            Dates for an event.
-                        </p>
-                        <div class="content-btn">
-                            <a href="">Read More</a>
-                        </div>
+                <div class="card-content col-md-8">
+                    <h5 class="card-title-service">UWU Event Calender</h5>
+                    <p class="card-text">
+                        Many events or projects happen every week in our university. In such a situation, the
+                        days will last
+                        Events are held by different degrees or different clubs, and when you book the hall for
+                        those events, there
+                        Many problems such as events that collide with each other on the same day.
+                        Those events happen on the same day at the same time. And here some students may be in
+                        several events
+                        Several clubs. Then it becomes easier for him to plan his work and manage his time.
+                        A calendar of events and projects organized by the university's students will help in
+                        the assignment
+                        Dates for an event.
+                    </p>
+                    <div class="content-btn">
+                        <a href="">Read More</a>
                     </div>
+                </div>
             </div>
         </div>
     </div>
@@ -318,16 +318,18 @@
                 <div class="col-md-4">
                     <img src="assets/images/homepage/prPlan.jpg" class="img-fluid rounded-start">
                 </div>
-                    <div class="card-content col-md-8">
-                        <h5 class="card-title-service">PR Plan Tool</h5>
-                        <p class="card-text">
-                            The tool should allow the project manager to define PR activities, such as press releases, media interviews, or social media campaigns. Further,
-                            The system can provide a platform for managing PR tasks, assigning responsibilities, and setting deadlines.
-                        </p>
-                        <div class="content-btn">
-                            <a href="">Read More</a>
-                        </div>
+                <div class="card-content col-md-8">
+                    <h5 class="card-title-service">PR Plan Tool</h5>
+                    <p class="card-text">
+                        The tool should allow the project manager to define PR activities, such as press releases, media
+                        interviews, or social media campaigns. Further,
+                        The system can provide a platform for managing PR tasks, assigning responsibilities, and setting
+                        deadlines.
+                    </p>
+                    <div class="content-btn">
+                        <a href="">Read More</a>
                     </div>
+                </div>
             </div>
         </div>
     </div>
@@ -337,16 +339,18 @@
                 <div class="col-md-4">
                     <img src="assets/images/homepage/ganttChart.jpg" class="img-fluid rounded-start">
                 </div>
-                    <div class="card-content col-md-8">
-                        <h5 class="card-title-service">Gantt Chart</h5>
-                        <p class="card-text">
-                            The system generates a visual representation of the project timeline, highlighting task start and finish dates. as well as
-                            Project members are able to update the timeline as the project progresses, making adjustments to task timelines or dependencies as needed.
-                        </p>
-                        <div class="content-btn">
-                            <a href="">Read More</a>
-                        </div>
+                <div class="card-content col-md-8">
+                    <h5 class="card-title-service">Gantt Chart</h5>
+                    <p class="card-text">
+                        The system generates a visual representation of the project timeline, highlighting task start
+                        and finish dates. as well as
+                        Project members are able to update the timeline as the project progresses, making adjustments to
+                        task timelines or dependencies as needed.
+                    </p>
+                    <div class="content-btn">
+                        <a href="">Read More</a>
                     </div>
+                </div>
             </div>
         </div>
     </div>
@@ -356,18 +360,19 @@
                 <div class="col-md-4">
                     <img src="assets/images/homepage/activity.jpg" class="img-fluid rounded-start">
                 </div>
-                    <div class="card-content col-md-8">
-                        <h5 class="card-title-service">Activity Plan Tool</h5>
-                        <p class="card-text">
-                            Here users can add sub-tasks under the main task.
-                            This tool allows project managers to define project activities. And also
-                            Project users are able to update the activity plan, mark activities as completed and track the overall progress of the project.
+                <div class="card-content col-md-8">
+                    <h5 class="card-title-service">Activity Plan Tool</h5>
+                    <p class="card-text">
+                        Here users can add sub-tasks under the main task.
+                        This tool allows project managers to define project activities. And also
+                        Project users are able to update the activity plan, mark activities as completed and track the
+                        overall progress of the project.
 
-                        </p>
-                        <div class="content-btn">
-                            <a href="">Read More</a>
-                        </div>
+                    </p>
+                    <div class="content-btn">
+                        <a href="#">Read More</a>
                     </div>
+                </div>
             </div>
         </div>
     </div>
@@ -376,7 +381,7 @@
 <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/kavindra.jpg" class="card-img-top position-sticky" alt="...">
+                <img src="assets/images/homepage/kavindra.jpg" class="card-img-top position-sticky " style="width: 290px;height: 330px" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Kavindra Weerasingha</h5>
                 <p class="card-text">UWU/CST/20/068</p>
@@ -391,7 +396,7 @@
     </div>
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/heli.jpg" class="card-img-top position-sticky" alt="...">
+            <img src="assets/images/homepage/heli.jpg" class="card-img-top position-sticky" style="width: 290px;height: 330px" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Kavinda Helitha</h5>
                 <p class="card-text">UWU/CST/20/070</p>
@@ -406,7 +411,7 @@
     </div>
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/anuranga.jpg" class="card-img-top position-sticky" alt="...">
+            <img src="assets/images/homepage/anuranga.jpg" class="card-img-top position-sticky" style="width: 290px;height: 330px" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Anuranga</h5>
                 <p class="card-text">UWU/CST/20/085</p>
@@ -421,7 +426,7 @@
     </div>
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/ishara.jpg" class="card-img-top position-sticky" alt="...">
+            <img src="assets/images/homepage/ishara.jpg" class="card-img-top position-sticky" style="width: 290px;height: 330px" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Ishara Suvini</h5>
                 <p class="card-text">UWU/CST/20/087</p>
@@ -436,7 +441,7 @@
     </div>
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/thilini.jpg" class="card-img-top position-sticky" alt="...">
+            <img src="assets/images/homepage/thilini.jpg" class="card-img-top position-sticky" style="width: 290px;height: 330px" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Thilini Priyangika</h5>
                 <p class="card-text">UWU/CST/20/089</p>
@@ -485,7 +490,9 @@ if (isset($conn)) $conn->close();
     var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')
 </script>
 <script src="./assets/js/script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 
 </body>
 
