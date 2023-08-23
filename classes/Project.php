@@ -12,10 +12,10 @@ class Project
     private $clubID;
     private $projectChairID;
     private $status;
-
     private $startDate;
-
     private $profileImage;
+    private $endDate;
+    private $description;
 
 
     public function getProjectID()
@@ -78,6 +78,52 @@ class Project
     }
 
 
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+    }
+
+    public function getProfileImage()
+    {
+        return $this->profileImage;
+    }
+
+    public function setProfileImage($profileImage)
+    {
+        $this->profileImage = $profileImage;
+    }
+
+
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
+    }
+
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+
+
     public function __construct($projectID, $projectName, $clubID, $projectChairID, $status, $startDate, $profileImage)
     {
         $this->projectID = $projectID;
@@ -135,6 +181,8 @@ class Project
                 $this->status = $rs->status;
                 $this->startDate = $rs->start_date;
                 $this->profileImage = $rs->profile_image;
+                $this->endDate = $rs->end_date;
+                $this->description = $rs->description;
 
                 return true;
             } else {
@@ -152,12 +200,17 @@ class Project
     {
         try {
 
-            $query = "UPDATE project SET name=?,project_chair_id=?,status=? WHERE project_id=?";
+            $query = "UPDATE project SET name=?,project_chair_id=?,status=?,start_date=?,
+                   end_date=?,description=?,profile_image=? WHERE project_id=?";
             $pstmt = $con->prepare($query);
             $pstmt->bindValue(1, $this->projectName);
             $pstmt->bindValue(2, $this->projectChairID);
             $pstmt->bindValue(3, $this->status);
-            $pstmt->bindValue(4, $this->projectID);
+            $pstmt->bindValue(4, $this->start_date);
+            $pstmt->bindValue(5, $this->end_date);
+            $pstmt->bindValue(6, $this->description);
+            $pstmt->bindValue(7, $this->profile_image);
+            $pstmt->bindValue(8, $this->projectID);
             $pstmt->execute();
 
             return $pstmt->rowCount() > 0;
