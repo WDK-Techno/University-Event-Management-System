@@ -410,19 +410,19 @@ if (!$project->loadDataFromProjectID($con)) {
                 <div class="row h-100">
                     <!-- ====== left side section ========== -->
                     <div class="col-12 col-lg-8">
-                        <div class="m-3 border rounded w-100" style="height: 85%;">
+                        <div class="m-3 border rounded w-100 shadow-sm bg-body-tertiary" style="height: 85%;">
                             <div class="container p-3">
                                 <div class="row">
                                     <div class="col-3 d-flex justify-content-center">
                                         <!-- ======= project image area ===== -->
                                         <div class="d-flex flex-column">
-                                            <img class="img-thumbnail"
+                                            <img class="img-thumbnail shadow-sm"
                                                  style="width: 150px; height: 150px; object-fit: cover;"
-                                                 src="assets/images/profile_img/project/project_profile_default.jpg"
+                                                 src="assets/images/profile_img/project/<?=$project->getProfileImage()?>"
                                                  alt="">
 
-                                            <div class="btn fw-bold d-flex mx-4 mt-2"
-                                                 style="color: var(--darker-primary) !important; background-color: var(--secondary);"
+                                            <div class="btn fw-bold d-flex mx-4 mt-2 shadow-sm"
+                                                 style="color: var(--lighter-secondary) !important; background-color: var(--primary);"
                                                  type="button" data-bs-toggle="modal"
                                                  data-bs-target="#change-project-img">
                                                 <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
@@ -436,10 +436,10 @@ if (!$project->loadDataFromProjectID($con)) {
                                         <div class="d-flex mt-2 flex-column">
                                             <div class="fw-bold">Project Name</div>
                                             <div class="d-flex mt-1">
-                                                <input class="text-center form-control" type="text"
-                                                       value="JamborIEEEE23"/>
-                                                <div class="btn fw-bold d-flex ms-2"
-                                                     style="width: 127px; color: var(--darker-primary) !important; background-color: var(--secondary);"
+                                                <input class="shadow-sm text-center form-control" type="text"
+                                                       value="<?=$project->getProjectName() ?>"/>
+                                                <div class="btn fw-bold d-flex ms-2 shadow-sm"
+                                                     style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
                                                      type="button">
                                                     <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
                                                               name="save-outline"></ion-icon>
@@ -447,12 +447,12 @@ if (!$project->loadDataFromProjectID($con)) {
 
                                                 </div>
                                             </div>
-                                            <div class="fw-bold mt-3">Proect Chair</div>
+                                            <div class="fw-bold mt-3">Project Chair</div>
                                             <div class="d-flex mt-1">
-                                                <input class="text-center form-control" type="email"
-                                                       value="wdk@gmail.con"/>
-                                                <div class="btn fw-bold d-flex ms-2"
-                                                     style="width: 127px; color: var(--darker-primary) !important; background-color: var(--secondary);"
+                                                <input class="shadow-sm text-center form-control" type="email"
+                                                       value="<?=$projectChair->getUsername() ?>"/>
+                                                <div class="btn fw-bold d-flex ms-2 shadow-sm"
+                                                     style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
                                                      type="button">
                                                     <ion-icon class="my-auto ms-auto me-1"
                                                               style="font-size: 1.4rem;"
@@ -464,6 +464,36 @@ if (!$project->loadDataFromProjectID($con)) {
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <div class="border rounded p-3 border-secondary-subtle 
+                                        bg-body-secondary shadow-sm d-flex flex-column">
+                                            <div class="d-flex w-100 mx-auto">
+                                                <div class="d-flex w-50 ms-5 me-auto">
+                                                    <div class="fw-bold w-25 my-auto">Start Date</div>
+                                                    <input class="form-control w-50" type="date" name="" id="" value="<?=$project->getStartDate() ?>">
+                                                </div>
+                                                <div class="ms-auto me-5 d-flex w-50">
+                                                    <div class="fw-bold w-25 my-auto">End Date</div>
+                                                    <input class="form-control w-50" type="date" name="" id="">
+                                                </div>
+                                            </div>
+                                            <div class="d-flex mt-4 flex-column">
+                                                <div class="fw-bold">Description</div>
+                                                <textarea class="form-control" name="" id="" cols="30"
+                                                          rows="9"></textarea>
+                                            </div>
+                                            <div class="btn fw-bold d-flex mt-2 ms-auto me-0"
+                                                 style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
+                                                 type="button">
+                                                <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
+                                                          name="save-outline"></ion-icon>
+                                                <div class="my-auto ms-1 me-auto">Save</div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -471,7 +501,7 @@ if (!$project->loadDataFromProjectID($con)) {
                     <div class="col-12 col-lg-4">
                         <div class="w-100 p-0 pt-3 d-flex container d-flex flex-column">
                             <!-- ======== project Team list ====== -->
-                            <div id="project-teams-list" class="card mx-auto col-12 col-md-8 col-lg-12">
+                            <div id="project-teams-list" class="card mx-auto col-12 col-md-8 col-lg-12 shadow-sm">
                                 <div class="card-header d-flex"
                                      style="background-color: var(--primary); color: var(--lighter-secondary);">
                                     <div class="my-auto fw-bold" style="font-size: 1.3rem;">Project Teams</div>
@@ -720,8 +750,9 @@ if (!$project->loadDataFromProjectID($con)) {
                             </div>
 
                             <!-- =========== project chair details ======= -->
-                            <div class="card d-flex flex-column border rounded mt-4">
-                                <div class="card-header" style="background-color: var(--primary); color: var(--lighter-secondary);">
+                            <div class="card d-flex flex-column border rounded mt-4 shadow-sm">
+                                <div class="card-header"
+                                     style="background-color: var(--primary); color: var(--lighter-secondary);">
                                     <div class="fw-bold mx-auto" style="font-size: 1.3rem;">Project Chair</div>
                                 </div>
 
@@ -730,18 +761,18 @@ if (!$project->loadDataFromProjectID($con)) {
                                          style="width: 80px; height: 80px; object-fit: cover;"
                                          src="assets/images/profile_img/ug/ug_profile_4_1.jpg"
                                          alt=""/>
-                                    <div class="d-flex ms-2 my-auto flex-column">
+                                    <div class="d-flex ms-2 my-auto flex-column fw-bold">
                                         <div class="d-flex">
-                                            <div class="fw-bold">Name</div>
-                                            <div class="ms-2">Kavindra Weerasinghe</div>
+                                            <div class="fw-bold" style="color: var(--accent-color3);">Name</div>
+                                            <div class="ms-2"><?=$projectChair->getFirstName() ?> <?=$projectChair->getLastName() ?></div>
                                         </div>
                                         <div class="d-flex">
-                                            <div class="fw-bold">Email</div>
-                                            <div class="ms-2">wdk@gmail.com</div>
+                                            <div class="fw-bold" style="color: var(--accent-color3);">Email</div>
+                                            <div class="ms-2"><?=$projectChair->getUsername() ?></div>
                                         </div>
                                         <div class="d-flex">
-                                            <div class="fw-bold">Contact No</div>
-                                            <div class="ms-2">0774743603</div>
+                                            <div class="fw-bold" style="color: var(--accent-color3);">Contact No</div>
+                                            <div class="ms-2"><?=$projectChair->getContactNo() ?></div>
                                         </div>
 
                                     </div>
