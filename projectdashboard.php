@@ -455,7 +455,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                                        name="name" placeholder="Event Name"/><br>
                                                 <input class="form-control text-center" type="text" required
                                                        name="description" placeholder="Description"/><br>
-                                                <input class="form-control text-center" type="date" required
+                                                <input class="form-control text-center" type="datetime-local" required
                                                        name="event_date" placeholder="Event Date"/><br>
                                             </div>
                                         </div>
@@ -480,15 +480,15 @@ if (!$project->loadDataFromProjectID($con)) {
                         </div>
                     </div>
                     <!-- ========== Event list body =========== -->
-                    <div class="card-body" style="overflow-y: auto; height:;">
-                        <div class="container card-event-list ">
+                    <div class="card-body row-3" style="overflow-y: auto; height:;">
+                        <div class="container card-event-list row-3 ">
                             <?php
                             $eventNo = 1;
                             foreach ($events as $event) {
                                 ?>
-                                <div class="row shadow-sm ps-2 py-3 my-2 rounded-3 fw-normal"
+                                <div class="row-3 shadow-sm ps-2 py-3 my-2 rounded-5 fw-normal"
                                      style="font-size: 1.0rem; background-color: var(--lighter-secondary); color: var(--darker-primary);">
-                                    <div class="col-9 d-flex">
+                                    <div class="col-3">
                                         <div class="my-auto fs-5"><?= $event->geteventName()."<br>". $event->geteventDescription() ."<br>". $event->geteventDate()?></div>
                                     </div>
                                     <div class="col-3" style="font-size: 1.5rem;">
@@ -553,7 +553,7 @@ if (!$project->loadDataFromProjectID($con)) {
 
                                                                     <!-- Row 3: Event Date -->
                                                                     <div class="form-group">
-                                                                        <input class="form-control text-center" type="text" name="date" value="<?= $event->geteventDate() ?>" placeholder="Event Date"/>
+                                                                        <input class="form-control text-center" type="datetime-local" name="event_date" value="<?= $event->geteventDate() ?>" placeholder="Event Date"/>
                                                                     </div>
                                                                 </div>
                                                             </div>
