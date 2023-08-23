@@ -281,18 +281,45 @@ $user3 = $userObj->getRequests();
                          <div class="modal-footer">
                          <form action="process/admindashboard/updateStatus.php" method="post">
                          <input type="hidden" name="user_id" value="<?php echo $users->user_id ;?>">
-                        <button type="submit" class="btn btn-primary" id="confirmYes">Yes</button>
+                        <button type="submit" class="btn btn-primary" >Yes</button>
                         </form>
-                        <button type="button" class="btn btn-secondary" id="confirmNo" data-dismiss="modal">No</button>
-                
+                        <button type="button" class="btn btn-secondary" id="no" data-dismiss="modal">No</button>
+
             </div>
         </div>
     </div>
 </div>
 </td>
 
-                        
-                        <td><button type="submit" class="btn btn-danger">Decline</button></td>
+  <td>                      
+  <button type="button" class="btn btn-danger  btnedit"  id="declineButton">Decline</button>
+
+<!-- Bootstrap Modal for Decline -->
+<div class="modal" id="declineModal" tabindex="-1" role="dialog_1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmation</h5>
+                
+            </div>
+            <div class="modal-body">
+                Are you sure you want to decline?
+            </div>
+            <div class="modal-footer">
+            <form action="process/admindashboard/declineRequest.php" method="post">
+            <input type="hidden" name="user_id" value="<?php echo $users->user_id ;?>">   
+            <button type="submit" class="btn btn-danger" >Yes</button>
+            </form>
+                <button type="button" class="btn btn-secondary" id="decline" data-dismiss="modal">No</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            
+                    
+                    </td>
                     </tr>
                     <tr>
                     <?php
@@ -333,6 +360,7 @@ $user3 = $userObj->getRequests();
     <script src="assets/js/projectdashboard.js"></script>
     <script  src="assets/js/admindashboardsearch.js"></script>
     <script  src="assets/js/adminscript.js"></script>
+   
     
 </body>
 
