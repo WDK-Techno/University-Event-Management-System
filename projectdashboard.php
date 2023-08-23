@@ -17,7 +17,7 @@ $projectIDFromSession = 1;
 $con = DBConnector::getConnection();
 
 //Load Project Details to object
-$project = new Project($projectIDFromSession, null, null, null, null);
+$project = new Project($projectIDFromSession, null, null, null, null, null, null);
 
 if (!$project->loadDataFromProjectID($con)) {
     die("Cannot Load From Database");
@@ -258,11 +258,13 @@ if (!$project->loadDataFromProjectID($con)) {
                                             <!-- ====== input username ====== -->
                                             <div class="d-flex px-5">
                                                 <input class="form-control text-center" type="email"
-                                                       name="username" id="add-member-username-input" placeholder="Email" required/>
+                                                       name="username" id="add-member-username-input"
+                                                       placeholder="Email" required/>
                                             </div>
                                             <!-- ===== select team ======= -->
                                             <div class="d-flex mt-2 px-5">
-                                                <select id="add-member-team-select" class="form-select ms-auto me-0" style="width: 50%;"
+                                                <select id="add-member-team-select" class="form-select ms-auto me-0"
+                                                        style="width: 50%;"
                                                         name="project_team_id" id="" required>
                                                     <option class="text-center" value="" selected>-- Select Team --
                                                     </option>
@@ -275,7 +277,8 @@ if (!$project->loadDataFromProjectID($con)) {
                                                     ?>
                                                 </select>
                                             </div>
-                                            <div class="mt-2 text-center" id="add-member-team-error" style="color: var(--accent-color3)"></div>
+                                            <div class="mt-2 text-center" id="add-member-team-error"
+                                                 style="color: var(--accent-color3)"></div>
 
                                         </div>
                                         <div class="modal-footer" style="background-color: var(--primary);">
@@ -308,7 +311,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                     <div class="col-1"></div>
                                     <div class="col-3 text-center py-2 rounded-top-3"
                                          style="background-color: var(--primary);">Name
-                                    </div>  
+                                    </div>
                                     <div class="col-3 text-center py-2 rounded-top-3"
                                          style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
                                         Email
@@ -327,7 +330,8 @@ if (!$project->loadDataFromProjectID($con)) {
 
                             </div>
 
-                            <div class="card-body pt-0 bg-dark-subtle scrollable-div Flipped" style="background-color: var(--secondary);">
+                            <div class="card-body pt-0 bg-dark-subtle scrollable-div Flipped"
+                                 style="background-color: var(--secondary);">
                                 <div class="container p-0 scrollable-div-inside">
 
                                     <?php
@@ -406,7 +410,7 @@ if (!$project->loadDataFromProjectID($con)) {
                 <div class="row h-100">
                     <!-- ====== left side section ========== -->
                     <div class="col-12 col-lg-8">
-                        <div class="m-3 border rounded w-100 h-75">
+                        <div class="m-3 border rounded w-100" style="height: 85%;">
                             <div class="container p-3">
                                 <div class="row">
                                     <div class="col-3 d-flex justify-content-center">
@@ -465,7 +469,8 @@ if (!$project->loadDataFromProjectID($con)) {
                     </div>
                     <!-- ========== right side section ========== -->
                     <div class="col-12 col-lg-4">
-                        <div class="w-100 p-0 pt-3 d-flex container">
+                        <div class="w-100 p-0 pt-3 d-flex container d-flex flex-column">
+                            <!-- ======== project Team list ====== -->
                             <div id="project-teams-list" class="card mx-auto col-12 col-md-8 col-lg-12">
                                 <div class="card-header d-flex"
                                      style="background-color: var(--primary); color: var(--lighter-secondary);">
@@ -543,7 +548,7 @@ if (!$project->loadDataFromProjectID($con)) {
 
                                 </div>
                                 <!-- ========== project list body =========== -->
-                                <div class="card-body" style="overflow-y: auto; height: 300px;">
+                                <div class="card-body" style="overflow-y: auto; height: 350px;">
                                     <div class="container card-project-teams-list">
 
                                         <?php
@@ -714,6 +719,35 @@ if (!$project->loadDataFromProjectID($con)) {
                                 </div>
                             </div>
 
+                            <!-- =========== project chair details ======= -->
+                            <div class="card d-flex flex-column border rounded mt-4">
+                                <div class="card-header" style="background-color: var(--primary); color: var(--lighter-secondary);">
+                                    <div class="fw-bold mx-auto" style="font-size: 1.3rem;">Project Chair</div>
+                                </div>
+
+                                <div class="d-flex card-body">
+                                    <img class="shadow-sm rounded-circle mx-3"
+                                         style="width: 80px; height: 80px; object-fit: cover;"
+                                         src="assets/images/profile_img/ug/ug_profile_4_1.jpg"
+                                         alt=""/>
+                                    <div class="d-flex ms-2 my-auto flex-column">
+                                        <div class="d-flex">
+                                            <div class="fw-bold">Name</div>
+                                            <div class="ms-2">Kavindra Weerasinghe</div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="fw-bold">Email</div>
+                                            <div class="ms-2">wdk@gmail.com</div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="fw-bold">Contact No</div>
+                                            <div class="ms-2">0774743603</div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -729,7 +763,7 @@ if (!$project->loadDataFromProjectID($con)) {
         document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.add("show");
     </script>
     <script>
-        function addMemberToProject(){
+        function addMemberToProject() {
             let username = document.getElementById("add-member-username-input").value;
             let projectTeamID = document.getElementById("add-member-team-select").value;
             console.log(username);
@@ -759,7 +793,6 @@ if (!$project->loadDataFromProjectID($con)) {
 
             // Send the username to the PHP script
             xhr.send('username=' + encodeURIComponent(username) + '&project_team_id=' + encodeURIComponent(projectTeamID));
-
 
 
         }
