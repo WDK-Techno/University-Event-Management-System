@@ -43,6 +43,11 @@ if (!$project->loadDataFromProjectID($con)) {
         if (isset($_GET['tab'])) {
             $selected_menuNo = $_GET['tab'];
         }
+
+//        ====== change project chair GET ======
+        if(isset($_GET['changeChairErr'])){
+            $error_projectChairChange = $_GET['changeChairErr'];
+        }
     }
     ?>
 
@@ -213,7 +218,7 @@ if (!$project->loadDataFromProjectID($con)) {
                         <!-- ======= add member button ======== -->
                         <div class="d-flex mt-3 mb-2">
                             <div class="btn fw-bold my-auto me-0 ms-auto d-flex"
-                                 style="color: var(--darker-primary) !important; background-color: var(--secondary);"
+                                 style="color: var(--lighter-secondary) !important; background-color: var(--primary);"
                                  type="button" data-bs-toggle="modal"
                                  data-bs-target="#add-new-team-member">
                                 <ion-icon class="my-auto" name="add-outline"></ion-icon>
@@ -369,10 +374,10 @@ if (!$project->loadDataFromProjectID($con)) {
                                             <div class="col-1 tabel-column-type-1 d-flex">
                                                 <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
 
-                                                    <ion-icon class="my-auto me-2" type="button"
-                                                              data-bs-toggle="modal"
-                                                              data-bs-target=""
-                                                              name="create-outline"></ion-icon>
+                                                    <!--                                                    <ion-icon class="my-auto me-2" type="button"-->
+                                                    <!--                                                              data-bs-toggle="modal"-->
+                                                    <!--                                                              data-bs-target=""-->
+                                                    <!--                                                              name="create-outline"></ion-icon>-->
                                                     <ion-icon class="my-auto" type="button"
                                                               data-bs-toggle="modal"
                                                               data-bs-target=""
@@ -418,80 +423,123 @@ if (!$project->loadDataFromProjectID($con)) {
                                         <div class="d-flex flex-column">
                                             <img class="img-thumbnail shadow-sm"
                                                  style="width: 150px; height: 150px; object-fit: cover;"
-                                                 src="assets/images/profile_img/project/<?=$project->getProfileImage()?>"
+                                                 src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
                                                  alt="">
 
-                                            <div class="btn fw-bold d-flex mx-4 mt-2 shadow-sm"
-                                                 style="color: var(--lighter-secondary) !important; background-color: var(--primary);"
-                                                 type="button" data-bs-toggle="modal"
-                                                 data-bs-target="#change-project-img">
+                                            <div class="btn fw-bold d-flex mx-4 mt-2 shadow-sm" type="button"
+                                                 onclick="fileUploadBtn()"
+                                                 style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                                 <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
                                                           name="cloud-upload-outline"></ion-icon>
                                                 <div class="my-auto ms-1 me-auto">Upload</div>
+                                                <input type="file" class="form-control d-none" name="image_upload"
+                                                       id="image_upload"/>
                                             </div>
                                         </div>
 
                                     </div>
                                     <div class="col-9">
                                         <div class="d-flex mt-2 flex-column">
-                                            <div class="fw-bold">Project Name</div>
-                                            <div class="d-flex mt-1">
-                                                <input class="shadow-sm text-center form-control" type="text"
-                                                       value="<?=$project->getProjectName() ?>"/>
-                                                <div class="btn fw-bold d-flex ms-2 shadow-sm"
-                                                     style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
-                                                     type="button">
-                                                    <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
-                                                              name="save-outline"></ion-icon>
-                                                    <div class="my-auto ms-1 me-auto">Save</div>
+                                            <form action="process/projectdashboard/editProjectDetails.php"
+                                                  method="post">
+                                                <div class="fw-bold">Project Name</div>
+                                                <div class="d-flex mt-1">
+
+                                                    <input class="shadow-sm text-center form-control"
+                                                           name="project_name" type="text"
+                                                           value="<?= $project->getProjectName() ?>" required/>
+                                                    <!--======= hidden ==========-->
+                                                    <input type="hidden" name="menuNo" value="7">
+                                                    <input type="hidden" name="project_id"
+                                                           value="<?= $project->getProjectID() ?>">
+                                                    <button class="btn fw-bold d-flex ms-2 shadow-sm"
+                                                            style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
+                                                            type="submit" name="submit_project_name">
+                                                        <ion-icon class="my-auto ms-auto me-1"
+                                                                  style="font-size: 1.4rem;"
+                                                                  name="save-outline"></ion-icon>
+                                                        <div class="my-auto ms-1 me-auto">Save</div>
+                                                    </button>
 
                                                 </div>
-                                            </div>
-                                            <div class="fw-bold mt-3">Project Chair</div>
-                                            <div class="d-flex mt-1">
-                                                <input class="shadow-sm text-center form-control" type="email"
-                                                       value="<?=$projectChair->getUsername() ?>"/>
-                                                <div class="btn fw-bold d-flex ms-2 shadow-sm"
-                                                     style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
-                                                     type="button">
-                                                    <ion-icon class="my-auto ms-auto me-1"
-                                                              style="font-size: 1.4rem;"
-                                                              name="sync-outline"></ion-icon>
-                                                    <div class="my-auto ms-1 me-auto">Change</div>
-                                                </div>
-                                            </div>
+                                            </form>
+                                            <form action="process/projectdashboard/changeProjectChair.php" method="post">
+                                                <div class="fw-bold mt-3">Project Chair</div>
+                                                <div class="d-flex mt-1">
+                                                    <input class="shadow-sm text-center form-control" type="email"
+                                                           name="username"
+                                                           value="<?= $projectChair->getUsername() ?>" required/>
+                                                    <!--======= hidden ==========-->
+                                                    <input type="hidden" name="menuNo" value="7">
+                                                    <input type="hidden" name="project_id"
+                                                           value="<?= $project->getProjectID() ?>">
 
+                                                    <button class="btn fw-bold d-flex ms-2 shadow-sm"
+                                                         style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
+                                                         type="submit" name="submit">
+                                                        <ion-icon class="my-auto ms-auto me-1"
+                                                                  style="font-size: 1.4rem;"
+                                                                  name="sync-outline"></ion-icon>
+                                                        <div class="my-auto ms-1 me-auto">Change</div>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            <?php
+                                                $errorMessage = "";
+                                                if ($error_projectChairChange == 1){
+                                                    $errorMessage = "Invalid Email";
+                                                }
+                                                if($error_projectChairChange == 2){
+                                                    $errorMessage = "Email Cannot Be Empty";
+                                                }
+                                                if ($error_projectChairChange == 3){
+                                                    $errorMessage = "Already Added";
+                                                }
+                                            ?>
+                                            <div class="mt-2 ms-3 text-center w-75" id="change-projectChair-error"
+                                                 style="color: var(--accent-color3)"><?=$errorMessage?></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-12">
-                                        <div class="border rounded p-3 border-secondary-subtle 
-                                        bg-body-secondary shadow-sm d-flex flex-column">
-                                            <div class="d-flex w-100 mx-auto">
-                                                <div class="d-flex w-50 ms-5 me-auto">
-                                                    <div class="fw-bold w-25 my-auto">Start Date</div>
-                                                    <input class="form-control w-50" type="date" name="" id="" value="<?=$project->getStartDate() ?>">
+                                        <form action="process/projectdashboard/editProjectDetails.php" method="post">
+                                            <div class="border rounded p-3 border-secondary-subtle
+                                                    bg-body-secondary shadow-sm d-flex flex-column">
+                                                <div class="d-flex w-100 mx-auto">
+                                                    <div class="d-flex w-50 ms-5 me-auto">
+                                                        <div class="fw-bold w-25 my-auto">Start Date</div>
+                                                        <input class="form-control w-50" type="date" name="start_date"
+                                                               id=""
+                                                               value="<?= $project->getStartDate() ?>" required>
+                                                    </div>
+                                                    <div class="ms-auto me-5 d-flex w-50">
+                                                        <div class="fw-bold w-25 my-auto">End Date</div>
+                                                        <input class="form-control w-50" type="date" name="end_date"
+                                                               id=""
+                                                               value="<?= $project->getEndDate() ?>">
+                                                    </div>
                                                 </div>
-                                                <div class="ms-auto me-5 d-flex w-50">
-                                                    <div class="fw-bold w-25 my-auto">End Date</div>
-                                                    <input class="form-control w-50" type="date" name="" id="">
+                                                <div class="d-flex mt-4 flex-column">
+                                                    <div class="fw-bold">Description</div>
+                                                    <textarea class="form-control" name="desc" id="" cols="30"
+                                                              rows="9"><?= $project->getDescription() ?></textarea>
                                                 </div>
-                                            </div>
-                                            <div class="d-flex mt-4 flex-column">
-                                                <div class="fw-bold">Description</div>
-                                                <textarea class="form-control" name="" id="" cols="30"
-                                                          rows="9"></textarea>
-                                            </div>
-                                            <div class="btn fw-bold d-flex mt-2 ms-auto me-0"
-                                                 style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
-                                                 type="button">
-                                                <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
-                                                          name="save-outline"></ion-icon>
-                                                <div class="my-auto ms-1 me-auto">Save</div>
+                                                <!--======= hidden ==========-->
+                                                <input type="hidden" name="menuNo" value="7">
+                                                <input type="hidden" name="project_id"
+                                                       value="<?= $project->getProjectID() ?>">
 
+                                                <button class="btn fw-bold d-flex mt-2 ms-auto me-0"
+                                                        style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
+                                                        type="submit" name="submit_desc">
+                                                    <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
+                                                              name="save-outline"></ion-icon>
+                                                    <div class="my-auto ms-1 me-auto">Save</div>
+
+                                                </button>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -759,20 +807,20 @@ if (!$project->loadDataFromProjectID($con)) {
                                 <div class="d-flex card-body">
                                     <img class="shadow-sm rounded-circle mx-3"
                                          style="width: 80px; height: 80px; object-fit: cover;"
-                                         src="assets/images/profile_img/ug/ug_profile_4_1.jpg"
+                                         src="assets/images/profile_img/ug/<?=$projectChair->getProfileImg() ?>"
                                          alt=""/>
                                     <div class="d-flex ms-2 my-auto flex-column fw-bold">
                                         <div class="d-flex">
                                             <div class="fw-bold" style="color: var(--accent-color3);">Name</div>
-                                            <div class="ms-2"><?=$projectChair->getFirstName() ?> <?=$projectChair->getLastName() ?></div>
+                                            <div class="ms-2"><?= $projectChair->getFirstName() ?> <?= $projectChair->getLastName() ?></div>
                                         </div>
                                         <div class="d-flex">
                                             <div class="fw-bold" style="color: var(--accent-color3);">Email</div>
-                                            <div class="ms-2"><?=$projectChair->getUsername() ?></div>
+                                            <div class="ms-2"><?= $projectChair->getUsername() ?></div>
                                         </div>
                                         <div class="d-flex">
                                             <div class="fw-bold" style="color: var(--accent-color3);">Contact No</div>
-                                            <div class="ms-2"><?=$projectChair->getContactNo() ?></div>
+                                            <div class="ms-2"><?= $projectChair->getContactNo() ?></div>
                                         </div>
 
                                     </div>
@@ -792,6 +840,12 @@ if (!$project->loadDataFromProjectID($con)) {
         document.getElementById("menu-<?php echo $selected_menuNo ?>").classList.add("activate");
         document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.remove("hide");
         document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.add("show");
+    </script>
+    <!--    =============== execute upload image button ==========-->
+    <script>
+        function fileUploadBtn() {
+            document.getElementById('image_upload').click();
+        }
     </script>
     <script>
         function addMemberToProject() {

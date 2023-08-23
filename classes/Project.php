@@ -206,10 +206,10 @@ class Project
             $pstmt->bindValue(1, $this->projectName);
             $pstmt->bindValue(2, $this->projectChairID);
             $pstmt->bindValue(3, $this->status);
-            $pstmt->bindValue(4, $this->start_date);
-            $pstmt->bindValue(5, $this->end_date);
+            $pstmt->bindValue(4, $this->startDate);
+            $pstmt->bindValue(5, $this->endDate);
             $pstmt->bindValue(6, $this->description);
-            $pstmt->bindValue(7, $this->profile_image);
+            $pstmt->bindValue(7, $this->profileImage);
             $pstmt->bindValue(8, $this->projectID);
             $pstmt->execute();
 
