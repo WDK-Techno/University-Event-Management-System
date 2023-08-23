@@ -39,7 +39,7 @@ if (!$project->loadDataFromProjectID($con)) {
     $teamMembers = TeamMember::getMemberListFromProjectID($con, $project->getProjectID());
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $selected_menuNo = 2;
+        $selected_menuNo = 7;
         if (isset($_GET['tab'])) {
             $selected_menuNo = $_GET['tab'];
         }
@@ -94,7 +94,7 @@ if (!$project->loadDataFromProjectID($con)) {
             <ul class="nav nav-pills flex-column navbar-text mb-auto">
                 <li id="menu-1" class="sideBar-btn" onclick="showMenuContent(1)">
                     <a href="#" class="nav-link d-flex justify-content-start">
-                        <ion-icon name="people-circle-outline"></ion-icon>
+                        <ion-icon name="desktop-outline"></ion-icon>
                         <span class="sideBar-btn-text my-auto">Project Details</span>
                     </a>
                 </li>
@@ -112,19 +112,19 @@ if (!$project->loadDataFromProjectID($con)) {
                 </li>
                 <li id="menu-4" class="sideBar-btn" onclick="showMenuContent(4)">
                     <a href="#" class="nav-link d-flex justify-content-start">
-                        <ion-icon name="walk-outline"></ion-icon>
+                        <ion-icon name="pulse-outline"></ion-icon>
                         <span class="sideBar-btn-text my-auto">Activitty Plan</span>
                     </a>
                 </li>
                 <li id="menu-5" class="sideBar-btn" onclick="showMenuContent(5)">
                     <a href="#" class="nav-link d-flex justify-content-start">
-                        <ion-icon name="document-text-outline"></ion-icon>
+                        <ion-icon name="megaphone-outline"></ion-icon>
                         <span class="sideBar-btn-text my-auto">PR Plan</span>
                     </a>
                 </li>
                 <li id="menu-6" class="sideBar-btn" onclick="showMenuContent(6)">
                     <a href="#" class="nav-link d-flex justify-content-start">
-                        <ion-icon name="document-text-outline"></ion-icon>
+                        <ion-icon name="rocket-outline"></ion-icon>
                         <span class="sideBar-btn-text my-auto">Events</span>
                     </a>
                 </li>
@@ -325,7 +325,8 @@ if (!$project->loadDataFromProjectID($con)) {
                                 </div>
 
                             </div>
-                            <div class="card-body pt-0 bg-dark-subtle" style="background-color: var(--secondary); overflow-y: scroll;">
+                            <div class="card-body pt-0 bg-dark-subtle"
+                                 style="background-color: var(--secondary); overflow-y: scroll;">
                                 <div class="container p-0">
                                     <?php
                                     foreach ($teamMembers as $teamMember) {
@@ -403,7 +404,62 @@ if (!$project->loadDataFromProjectID($con)) {
                 <div class="row h-100">
                     <!-- ====== left side section ========== -->
                     <div class="col-12 col-lg-8">
-                        <h1>das</h1>
+                        <div class="m-3 border rounded w-100 h-75">
+                            <div class="container p-3">
+                                <div class="row">
+                                    <div class="col-3 d-flex justify-content-center">
+                                        <!-- ======= project image area ===== -->
+                                        <div class="d-flex flex-column">
+                                            <img class="img-thumbnail"
+                                                 style="width: 150px; height: 150px; object-fit: cover;"
+                                                 src="assets/images/profile_img/project/project_profile_default.jpg"
+                                                 alt="">
+
+                                            <div class="btn fw-bold d-flex mx-4 mt-2"
+                                                 style="color: var(--darker-primary) !important; background-color: var(--secondary);"
+                                                 type="button" data-bs-toggle="modal"
+                                                 data-bs-target="#change-project-img">
+                                                <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
+                                                          name="cloud-upload-outline"></ion-icon>
+                                                <div class="my-auto ms-1 me-auto">Upload</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="d-flex mt-2 flex-column">
+                                            <div class="fw-bold">Project Name</div>
+                                            <div class="d-flex mt-1">
+                                                <input class="text-center form-control" type="text"
+                                                       value="JamborIEEEE23"/>
+                                                <div class="btn fw-bold d-flex ms-2"
+                                                     style="width: 127px; color: var(--darker-primary) !important; background-color: var(--secondary);"
+                                                     type="button">
+                                                    <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
+                                                              name="save-outline"></ion-icon>
+                                                    <div class="my-auto ms-1 me-auto">Save</div>
+
+                                                </div>
+                                            </div>
+                                            <div class="fw-bold mt-3">Proect Chair</div>
+                                            <div class="d-flex mt-1">
+                                                <input class="text-center form-control" type="email"
+                                                       value="wdk@gmail.con"/>
+                                                <div class="btn fw-bold d-flex ms-2"
+                                                     style="width: 127px; color: var(--darker-primary) !important; background-color: var(--secondary);"
+                                                     type="button">
+                                                    <ion-icon class="my-auto ms-auto me-1"
+                                                              style="font-size: 1.4rem;"
+                                                              name="sync-outline"></ion-icon>
+                                                    <div class="my-auto ms-1 me-auto">Change</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- ========== right side section ========== -->
                     <div class="col-12 col-lg-4">
@@ -431,7 +487,8 @@ if (!$project->loadDataFromProjectID($con)) {
                                              role="document">
                                             <div class="modal-content">
                                                 <!--=== form =====-->
-                                                <form action="process/projectdashboard/addNewTeam.php" method="post">
+                                                <form action="process/projectdashboard/addNewTeam.php"
+                                                      method="post">
                                                     <div class="modal-header py-2 px-2"
                                                          style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
                                                         <div class="d-flex flex-row w-100 justify-content-between">
@@ -461,7 +518,8 @@ if (!$project->loadDataFromProjectID($con)) {
                                                                    name="team_name" placeholder="Team Name"/>
                                                         </div>
                                                     </div>
-                                                    <div class="modal-footer" style="background-color: var(--primary);">
+                                                    <div class="modal-footer"
+                                                         style="background-color: var(--primary);">
                                                         <button type="button"
                                                                 class="btn btn-secondary"
                                                                 data-bs-dismiss="modal">
@@ -572,7 +630,8 @@ if (!$project->loadDataFromProjectID($con)) {
                                                             </div>
                                                         </div>
                                                         <!--========== Delete team category button =========-->
-                                                        <ion-icon class="my-auto" type="button" data-bs-toggle="modal"
+                                                        <ion-icon class="my-auto" type="button"
+                                                                  data-bs-toggle="modal"
                                                                   data-bs-target="#delete-project-teams-<?= $projectTeamNo ?>"
                                                                   name="trash-outline"></ion-icon>
                                                         <!-- =========== Delete team category button model =========== -->
