@@ -155,3 +155,32 @@ body {
   border-color: var(--lighter-secondary) !important;
   border-width: 5px;
 }
+
+/* ====== scroll bar change ======= */
+.scrollable-div{
+  height: 500px;
+  overflow-y: scroll;
+  /* background-color:pink;
+  margin:auto;
+  padding:5px; */
+  /* transform: rotate(180deg); */
+}
+.scrollable-div-inside {
+  /* transform: rotate (-180deg) !importa nt; */
+  direction: ltr;
+}
+.Flipped{
+  direction: rtl;
+}
+.scrollable-div::-webkit-scrollbar {
+  width: 2px; /* Set the width of the scrollbar */
+  
+}
+.scrollable-div::-webkit-scrollbar-track {
+  background: var(--lighter-secondary);
+  border-radius: 5px;
+}
+
+.scrollable-div::-webkit-scrollbar-thumb {
+  background-color: var(--primary); /* Set the color of the thumb */
+}

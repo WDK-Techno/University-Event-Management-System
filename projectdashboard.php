@@ -47,7 +47,7 @@ if (!$project->loadDataFromProjectID($con)) {
     ?>
 
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="en" xmlns="http://www.w3.org/1999/html">
 
     <head>
         <meta charset="UTF-8">
@@ -232,7 +232,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                  role="document">
                                 <div class="modal-content">
                                     <!--=== form =====-->
-                                    <form action="" method="post">
+                                    <form>
                                         <div class="modal-header py-2 px-2"
                                              style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
                                             <div class="d-flex flex-row w-100 justify-content-between">
@@ -258,11 +258,11 @@ if (!$project->loadDataFromProjectID($con)) {
                                             <!-- ====== input username ====== -->
                                             <div class="d-flex px-5">
                                                 <input class="form-control text-center" type="email"
-                                                       name="username" placeholder="Email" required/>
+                                                       name="username" id="add-member-username-input" placeholder="Email" required/>
                                             </div>
                                             <!-- ===== select team ======= -->
                                             <div class="d-flex mt-2 px-5">
-                                                <select class="form-select ms-auto me-0" style="width: 50%;"
+                                                <select id="add-member-team-select" class="form-select ms-auto me-0" style="width: 50%;"
                                                         name="project_team_id" id="" required>
                                                     <option class="text-center" value="" selected>-- Select Team --
                                                     </option>
@@ -275,6 +275,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                                     ?>
                                                 </select>
                                             </div>
+                                            <div class="mt-2 text-center" id="add-member-team-error" style="color: var(--accent-color3)"></div>
 
                                         </div>
                                         <div class="modal-footer" style="background-color: var(--primary);">
@@ -283,8 +284,8 @@ if (!$project->loadDataFromProjectID($con)) {
                                                     data-bs-dismiss="modal">
                                                 Close
                                             </button>
-                                            <button type="submit"
-                                                    name="submit"
+                                            <button type="button"
+                                                    onclick="addMemberToProject()"
                                                     class="btn fw-bold"
                                                     style="background-color: var(--secondary); color: var(--primary);">
                                                 ADD
@@ -299,7 +300,7 @@ if (!$project->loadDataFromProjectID($con)) {
 
 
                         <!-- ========== member table ============ -->
-                        <div class="card" style="height: 500px;">
+                        <div class="card" style="">
                             <div class="card-header team-member-table pb-0"
                                  style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
 
@@ -307,7 +308,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                     <div class="col-1"></div>
                                     <div class="col-3 text-center py-2 rounded-top-3"
                                          style="background-color: var(--primary);">Name
-                                    </div>
+                                    </div>  
                                     <div class="col-3 text-center py-2 rounded-top-3"
                                          style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
                                         Email
@@ -325,9 +326,10 @@ if (!$project->loadDataFromProjectID($con)) {
                                 </div>
 
                             </div>
-                            <div class="card-body pt-0 bg-dark-subtle"
-                                 style="background-color: var(--secondary); overflow-y: scroll;">
-                                <div class="container p-0">
+
+                            <div class="card-body pt-0 bg-dark-subtle scrollable-div Flipped" style="background-color: var(--secondary);">
+                                <div class="container p-0 scrollable-div-inside">
+
                                     <?php
                                     foreach ($teamMembers as $teamMember) {
 
@@ -726,7 +728,42 @@ if (!$project->loadDataFromProjectID($con)) {
         document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.remove("hide");
         document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.add("show");
     </script>
+    <script>
+        function addMemberToProject(){
+            let username = document.getElementById("add-member-username-input").value;
+            let projectTeamID = document.getElementById("add-member-team-select").value;
+            console.log(username);
+            console.log(projectTeamID);
 
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', 'process/projectdashboard/addTeamMember.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    let response = JSON.parse(xhr.responseText);
+
+                    // Access the original username and the result from the response object
+                    let message = response.message;
+                    let success = response.success;
+
+                    if (success) {
+                        window.location.href = 'projectdashboard.php?tab=2';
+                    } else {
+                        document.getElementById("add-member-team-error").innerText = message;
+                    }
+
+
+                }
+            };
+
+            // Send the username to the PHP script
+            xhr.send('username=' + encodeURIComponent(username) + '&project_team_id=' + encodeURIComponent(projectTeamID));
+
+
+
+        }
+    </script>
 
     <!-- ==== Boostrap Script ==== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
