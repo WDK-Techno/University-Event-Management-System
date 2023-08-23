@@ -167,8 +167,9 @@ class Project
         }
     }
 
-    public static function getProjectListFromClubID($con, $clubId)
-    {
+
+    public static function getProjectListFromClubID($con,$clubId){
+
         $projects = array();
         try {
 
