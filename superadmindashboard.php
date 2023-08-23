@@ -19,9 +19,12 @@ $user3 = $userObj->getRequests();
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="assets/css/projectdashboard.css">
     <link rel="stylesheet" href="assets/css/admindashboard.css">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
 
     <!-- ===== Boostrap CSS ==== -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
@@ -261,11 +264,34 @@ $user3 = $userObj->getRequests();
                         <td> </td>
 
                         <td> 
-                        <form action="updateStatus.php" method="post">
-                        <input type="hidden" name="user_id" value="<?php echo $users->user_id ;?>">
-                        <button type="submit" class="btn btn-success  btnedit">Accept</button> 
+                          
+                        <button type="button" id="acceptButton" class="btn btn-success   btnedit">Accept</button> 
+
+                        <!-- Bootstrap Modal -->
+                        <div class="modal" id="confirmModal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title">Confirmation</h5>
+                        
+                        </div>
+                        <div class="modal-body">
+                          Are you sure you want to proceed?
+                         </div> 
+                         <div class="modal-footer">
+                         <form action="process/admindashboard/updateStatus.php" method="post">
+                         <input type="hidden" name="user_id" value="<?php echo $users->user_id ;?>">
+                        <button type="submit" class="btn btn-primary" id="confirmYes">Yes</button>
                         </form>
-                        </td>
+                        <button type="button" class="btn btn-secondary" id="confirmNo" data-dismiss="modal">No</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+</td>
+
+                        
                         <td><button type="submit" class="btn btn-danger">Decline</button></td>
                     </tr>
                     <tr>
@@ -286,6 +312,7 @@ $user3 = $userObj->getRequests();
 
     </div>
 
+    
     <!-- ==== Boostrap Script ==== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
@@ -295,6 +322,8 @@ $user3 = $userObj->getRequests();
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+    
+
 
     <!-- ========= Ionicons Scripts ===== -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -303,7 +332,8 @@ $user3 = $userObj->getRequests();
     <!-- ====== Script files ===== -->
     <script src="assets/js/projectdashboard.js"></script>
     <script  src="assets/js/admindashboardsearch.js"></script>
-
+    <script  src="assets/js/adminscript.js"></script>
+    
 </body>
 
 </html>
