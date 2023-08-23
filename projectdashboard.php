@@ -300,7 +300,7 @@ if (!$project->loadDataFromProjectID($con)) {
 
 
                         <!-- ========== member table ============ -->
-                        <div class="card" style="height: 500px;">
+                        <div class="card" style="">
                             <div class="card-header team-member-table pb-0"
                                  style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
 
@@ -308,7 +308,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                     <div class="col-1"></div>
                                     <div class="col-3 text-center py-2 rounded-top-3"
                                          style="background-color: var(--primary);">Name
-                                    </div>
+                                    </div>  
                                     <div class="col-3 text-center py-2 rounded-top-3"
                                          style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
                                         Email
@@ -326,8 +326,8 @@ if (!$project->loadDataFromProjectID($con)) {
                                 </div>
 
                             </div>
-                            <div class="card-body pt-0 bg-dark-subtle" style="background-color: var(--secondary); overflow-y: scroll;">
-                                <div class="container p-0">
+                            <div class="card-body pt-0 bg-dark-subtle scrollable-div Flipped" style="background-color: var(--secondary);">
+                                <div class="container p-0 scrollable-div-inside">
                                     <?php
                                     foreach ($teamMembers as $teamMember) {
 
