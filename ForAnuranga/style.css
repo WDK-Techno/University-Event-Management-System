@@ -1,0 +1,66 @@
+/* ========== task list tabel ====== */
+
+.card .card-header{
+    background-color: var(--darker-primary); 
+    color: var(--secondary);
+  }
+  
+  .card .card-body {
+    background-color: var(--secondary);
+  
+  }
+  
+  .card .card-footer {
+    background-color: var(--darker-primary) !important;
+  }
+  
+  /* ============ task ============= */
+  .task-list-container .task-card{
+    background-color: var(--lighter-secondary) !important;
+  }
+  .task-list-container .task-card:hover{
+  
+    background-color: rgba(254, 251, 228, 0.65) !important;
+  }
+  
+  .task-list-container .task-modifyIcons ion-icon{
+    font-size: 1.6rem;
+  }
+  
+  .task-list-container .task-modifyIcons ion-icon:hover {
+    color: var(--accent-color2);
+  }
+  
+  .task-list-container .task-modifyIcons ion-icon:active {
+    color: var(--lighter-secondary);
+    
+  }
+  
+  .task-list-container .task-complete-icon{
+    content: url("../fonts/check.png");
+    margin-top: 16%;
+    margin-bottom: 8%;
+    width: 80%;
+  }
+  
+  .task-list-container .task-complete-icon:hover{
+    content: url("../fonts/checked-hover.png");
+    margin-top: 20%;
+    margin-bottom: 20%;
+    margin-left: 10%;
+    width: 65%;
+  }
+  .task-list-container .task-complete-icon:active{
+    content: url("../fonts/checked-active.png");
+    margin-top: 20%;
+    margin-bottom: 20%;
+    margin-left: 10%;
+    width: 65%;
+  }
+  .task-list-container .task-complete-completed-icon{
+    content: url("../fonts/checked-active.png");
+    margin-top: 20%;
+    margin-bottom: 20%;
+    margin-left: 10%;
+    width: 65%;
+  }
