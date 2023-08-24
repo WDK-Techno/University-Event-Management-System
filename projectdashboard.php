@@ -1,11 +1,14 @@
 <?php
-
+session_start();
 require_once "classes/DBConnector.php";
 require_once "classes/Project.php";
 require_once "classes/User.php";
 require_once "classes/TeamCategory.php";
 require_once "classes/TeamMember.php";
+require_once "classes/Event.php";
 
+
+use classes\Event;
 use classes\Project;
 use classes\DBConnector;
 use classes\Club;
@@ -13,7 +16,22 @@ use classes\Undergraduate;
 use classes\TeamCategory;
 use classes\TeamMember;
 
-$projectIDFromSession = 1;
+
+if (!isset($_SESSION['project_id'])) {
+    header("location: clubowner-dashboard.php");
+}
+$projectIDFromSession = $_SESSION['project_id'];
+
+$loggedUserID = $_SESSION['user_id'];
+$loggedUserRole = $_SESSION['role'];
+$loggedUserImg = $_SESSION['profile_img'];
+if ($loggedUserRole == "ug") {
+    $loggedUserImg = "ug/" . $loggedUserImg;
+}
+if ($loggedUserRole == "club") {
+    $loggedUserImg = "club/" . $loggedUserImg;
+}
+
 $con = DBConnector::getConnection();
 
 //Load Project Details to object
@@ -35,6 +53,9 @@ if (!$project->loadDataFromProjectID($con)) {
 
     //Get Team Category List
     $teamCategories = TeamCategory::getTeamCategoeryListFromProjectID($con, $project->getProjectID());
+
+    //Get Events List
+    $events = Event::getEventListFromProjectID($con, $project->getProjectID());
 
     $teamMembers = TeamMember::getMemberListFromProjectID($con, $project->getProjectID());
 
@@ -206,16 +227,22 @@ if (!$project->loadDataFromProjectID($con)) {
                     <div class="btn-group ms-auto me-0">
                         <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle"
                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img id="user-img" src="https://github.com/mdo.png" alt="" width="40"
-                                 class="rounded-circle">
+                            <img class="rounded-circle"
+                                 style="width: 40px; height: 40px; object-fit: cover;"
+                                 src="assets/images/profile_img/<?= $loggedUserImg ?>"
+                                 alt="">
                         </a>
                         <ul class="dropdown-menu shadow dropdown-menu-end">
                             <!-- <li class="dropdown-item d-flex justify-content-start px-4"><ion-icon name="person-outline" style="font-size: 1.2rem;" class="me-2"></ion-icon><span>Profile</span></li>
                             <li class="dropdown-item d-flex justify-content-start px-4"><ion-icon name="arrow-undo-outline" style="font-size: 1.2rem;" class="me-2"></ion-icon><span>Userboard</span></li> -->
-                            <li class="dropdown-item d-flex justify-content-start px-4"><span>Userboard</span>
-                                <ion-icon
-                                        name="arrow-undo-outline" class="ms-auto" style="font-size: 1.2rem;"></ion-icon>
-                            </li>
+                            <form action="process/logout.php" method="post">
+                                <button class="dropdown-item d-flex justify-content-start px-4"
+                                        type="submit" name="submit3"><span>Userboard</span>
+                                    <ion-icon
+                                            name="arrow-undo-outline" class="ms-auto"
+                                            style="font-size: 1.2rem;"></ion-icon>
+                                </button>
+                            </form>
                             <li class="dropdown-item d-flex justify-content-start px-4"><span>Profile</span>
                                 <ion-icon
                                         name="person-outline" class="ms-auto" style="font-size: 1.2rem;"></ion-icon>
@@ -223,11 +250,14 @@ if (!$project->loadDataFromProjectID($con)) {
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li class="dropdown-item d-flex justify-content-start px-4" type="button">
-                                <span>Logout</span>
-                                <ion-icon name="log-out-outline" class="ms-auto"
-                                          style="font-size: 1.2rem;"></ion-icon>
-                            </li>
+                            <form action="process/logout.php" method="post">
+                                <button class="dropdown-item d-flex justify-content-start px-4" type="submit"
+                                        name="submit2">
+                                    <span>Logout</span>
+                                    <ion-icon name="log-out-outline" class="ms-auto"
+                                              style="font-size: 1.2rem;"></ion-icon>
+                                </button>
+                            </form>
                         </ul>
                     </div>
                 </div>
@@ -437,7 +467,261 @@ if (!$project->loadDataFromProjectID($con)) {
             <h1>Content 5</h1>
         </div>
         <div id="menu-content-6" class="main-content hide">
-            <h1>Content 6</h1>
+            <div class="col-12 p-5 d-flex justify-content-center ">
+                <div class="col-md-12 mx-auto">
+                    <div class=" d-flex w-100">
+
+                        <div class="btn btn-success fw-bold my-auto ms-auto me-2 d-flex"
+                             type="button" data-bs-toggle="modal"
+                             data-bs-target="#add-new-event">
+                            <ion-icon class="my-auto" name="add-outline"></ion-icon>
+                            <div class="my-auto d-flex">New</div>
+                        </div>
+                        <!-- =========== add new event button model =========== -->
+                        <div class="modal fade"
+                             id="add-new-event"
+                             tabindex="-1"
+                             role="dialog"
+                             aria-labelledby="exampleModalCenterTitle"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered"
+                                 role="document">
+                                <div class="modal-content">
+                                    <!--=== form =====-->
+                                    <form action="process/projectdashboard/addNewEvent.php" method="post">
+                                        <div class="modal-header py-2 px-2"
+                                             style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                            <div class="d-flex flex-row w-100 justify-content-between">
+
+                                                <div class="ms-2 my-auto fs-4 fw-bold">
+                                                    Event
+                                                </div>
+
+                                                <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                     style="font-size: 1.3rem; color: var(--accent-color2);">
+                                                    New
+                                                </div>
+                                            </div>
+
+                                            <!--======= hidden ==========-->
+                                            <input type="hidden" name="menuNo" value="6">
+                                            <input type="hidden" name="project_id"
+                                                   value="<?= $project->getProjectID() ?>">
+                                        </div>
+
+                                        <div class="modal-body"
+                                             style="background-color: var(--lighter-secondary);">
+                                            <div class=" p-2">
+                                                <input class="form-control text-center" type="text" required
+                                                       name="name" placeholder="Event Name"/><br>
+                                                <input class="form-control text-center" type="text" required
+                                                       name="description" placeholder="Description"/><br>
+                                                <input class="form-control text-center" type="datetime-local" required
+                                                       name="event_date" placeholder="Event Date"/><br>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer" style="background-color: var(--primary);">
+                                            <button type="button"
+                                                    class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="submit"
+                                                    name="submit"
+                                                    class="btn fw-bold"
+                                                    style="background-color: var(--secondary); color: var(--primary);">
+                                                ADD
+                                            </button>
+
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ========== Event list body =========== -->
+                    <div style="overflow-y: auto; height:;">
+                        <div class="row container card-event-list ">
+                            <?php
+                            $eventNo = 1;
+                            foreach ($events as $event) {
+                                ?>
+                                <div class="col-md-3 shadow-sm p-3 m-2 rounded-5 fw-normal"
+                                     style="font-size: 1.0rem; background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                                    <div>
+                                        <div class="my-auto fs-5"><?= $event->geteventName()."<br>". $event->geteventDescription() ."<br>". $event->geteventDate()?></div>
+                                    </div>
+                                    <div style="font-size: 1.5rem;">
+                                        <div class="d-flex mx-auto card-list-option-buttons"
+                                             style="font-size: 1.7rem;">
+                                            <!--========== edit event button =========-->
+                                            <ion-icon class="me-2 my-auto" type="button"
+                                                      data-bs-toggle="modal"
+                                                      data-bs-target="#edit-event<?= $eventNo ?>"
+                                                      name="create-outline"></ion-icon>
+
+                                            <!-- =========== edit event button model =========== -->
+                                            <div class="modal fade"
+                                                 id="edit-event<?= $eventNo ?>"
+                                                 tabindex="-1"
+                                                 role="dialog"
+                                                 aria-labelledby="exampleModalCenterTitle"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered"
+                                                     role="document">
+                                                    <div class="modal-content">
+                                                        <!--=== form =====-->
+                                                        <form action="process/projectdashboard/editEvent.php"
+                                                              method="post">
+                                                            <div class="modal-header py-2 px-2"
+                                                                 style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                                                <div class="d-flex flex-row w-100 justify-content-between">
+
+                                                                    <div class="ms-2 my-auto fs-4 fw-bold">
+                                                                        Event
+                                                                    </div>
+
+                                                                    <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                                    <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                                    <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                                         style="font-size: 1.3rem; color: var(--accent-color2);">
+                                                                        Edit
+                                                                    </div>
+                                                                </div>
+
+                                                                <!--======= hidden ==========-->
+                                                                <input type="hidden" name="menuNo"
+                                                                       value="6">
+                                                                <input type="hidden" name="event_id"
+                                                                       value="<?= $event->geteventId() ?>">
+                                                            </div>
+
+                                                            <div class="modal-body"
+                                                                 style="background-color: var(--lighter-secondary);">
+                                                                <div class="grid px-5">
+                                                                    <!-- Row 1: Event Name -->
+                                                                    <div class="form-group">
+                                                                        <input class="form-control text-center" type="text" name="name" value="<?= $event->geteventName() ?>" placeholder="Event Name"/>
+                                                                    </div>
+                                                                    <br>
+
+                                                                    <!-- Row 2: Event Description -->
+                                                                    <div class="form-group">
+                                                                        <input class="form-control text-center" type="text" name="description" value="<?= $event->geteventDescription() ?>" placeholder="Event Description"/>
+                                                                    </div>
+                                                                    <br>
+
+                                                                    <!-- Row 3: Event Date -->
+                                                                    <div class="form-group">
+                                                                        <input class="form-control text-center" type="datetime-local" name="event_date" value="<?= $event->geteventDate() ?>" placeholder="Event Date"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer"
+                                                                 style="background-color: var(--primary);">
+                                                                <button type="button"
+                                                                        class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">
+                                                                    Close
+                                                                </button>
+                                                                <button type="submit"
+                                                                        name="submit"
+                                                                        class="btn fw-bold"
+                                                                        style="background-color: var(--secondary); color: var(--primary);">
+                                                                    Update
+                                                                </button>
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!--========== Delete event button =========-->
+                                            <ion-icon class="my-auto" type="button" data-bs-toggle="modal"
+                                                      data-bs-target="#delete-event<?= $eventNo ?>"
+                                                      name="trash-outline"></ion-icon>
+                                            <!-- =========== Delete event button model =========== -->
+                                            <div class="modal fade"
+                                                 id="delete-event<?= $eventNo ?>"
+                                                 tabindex="-1"
+                                                 role="dialog"
+                                                 aria-labelledby="exampleModalCenterTitle"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered"
+                                                     role="document">
+                                                    <div class="modal-content">
+                                                        <!--=== form =====-->
+                                                        <form action="process/projectdashboard/deleteevent.php"
+                                                              method="post">
+                                                            <div class="modal-header py-2 px-2"
+                                                                 style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                                                <div class="d-flex flex-row w-100 justify-content-between">
+
+                                                                    <div class="ms-2 my-auto fs-4 fw-bold">
+                                                                        <?= $event->geteventName() ?>
+                                                                    </div>
+
+                                                                    <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                                    <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                                    <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                                         style="font-size: 1.3rem; color: var(--accent-color3);">
+                                                                        Delete
+                                                                    </div>
+                                                                </div>
+
+                                                                <!--======= hidden ==========-->
+                                                                <input type="hidden" name="menuNo"
+                                                                       value="6">
+                                                                <input type="hidden" name="event_id"
+                                                                       value="<?= $event->geteventId() ?>">
+                                                            </div>
+
+                                                            <div class="modal-body"
+                                                                 style="background-color: var(--lighter-secondary);">
+                                                                <div class="d-flex fw-normal fs-5">
+                                                                    Do you want to Delete this Event ?
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer"
+                                                                 style="background-color: var(--primary);">
+                                                                <button type="button"
+                                                                        class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">
+                                                                    Close
+                                                                </button>
+                                                                <button type="submit"
+                                                                        name="submit"
+                                                                        class="btn fw-bold"
+                                                                        style="background-color: var(--accent-color3); color: var(--primary);">
+                                                                    Delete
+                                                                </button>
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <?php
+
+                                $eventNo++;
+                            }
+
+                            ?>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
         <div id="menu-content-7" class="main-content w-100 h-100 hide">
@@ -452,7 +736,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                         <!-- ======= project image area ===== -->
                                         <div class="d-flex flex-column">
                                             <img class="img-thumbnail shadow-sm"
-                                                 style="width: 150px; height: 150px; object-fit: cover;"
+                                                 style="width: 150px; height: 150px;"
                                                  src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
                                                  alt="">
                                             <form action="process/projectdashboard/saveProfileImage.php" method="post"

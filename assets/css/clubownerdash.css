@@ -18,6 +18,8 @@ html {
     --darker-primary: #1D2561;
     --lighter-secondary: #FDF6F7;
     --accent-color: #1F8A70;
+    --accent-color2: #93e017;
+    --accent-color3: #e36d24;
     
   }
   
@@ -197,7 +199,8 @@ html {
   z-index: 1;
 }
   #button-3 .knobs:before {
-    content: "dective";
+    /*=== deactive ===*/
+    content: "";
     position: absolute;
     top: 4px;
     left: 4px;
@@ -209,7 +212,7 @@ html {
     text-align: center;
     line-height: 1;
     padding-top:10px ;
-    background-color: #8a1a1a;
+    background-color: var(--accent-color3);
     border-radius: 50%;
     transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
   }
@@ -224,13 +227,14 @@ html {
   }
   
   #button-3 .checkbox:checked + .knobs:before {
-    content: "active";
+    /*=== active ===*/
+    content: "";
     left: 42px;
-    background-color: #36e207;
+    background-color: var(--accent-color);
   }
   
   #button-3 .checkbox:checked ~ .layer {
-    background-color: #fcebeb;
+    background-color: var(--lighter-secondary);
   }
 
 
