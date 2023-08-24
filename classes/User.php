@@ -349,5 +349,23 @@ class Club extends User
         }
     }
 
+    // public function fetchData()
+    // {
+    //     $db = DBConnector::getConnection();
+
+    //     $query = "SELECT * FROM undergraduate WHERE user_id = :user_id";
+    //     $stmt = $db->prepare($query);
+    //     $stmt->bindParam(':user_id', $this->userId);
+    //     $stmt->execute();
+
+    //     $data = $stmt->fetch();
+    //     if ($data) {
+    //         $this->firstName = $data['first_name'];
+    //         $this->lastName = $data['last_name'];
+    //         $this->contactNo = $data['contact_no'];
+    //     }
+    // }
+    
+
 
 }
