@@ -11,22 +11,6 @@ use classes\Undergraduate;
 
 
 $con = DBConnector::getConnection();
-$clubid = 11;
-$projects = Project::getProjectListFromClubID($con, $clubid);
-
-
-$club = new Club('', '', '', '');
-$club->setUserId($clubid);
-$loadClubData = $club->loadDataFromUserID($con);
-
-
-$undergraduate = new Undergraduate('','','','','','');
-$undergraduate->setUserId($clubid);
-$loadUserData=$undergraduate->loadDataFromUserID($con);
-?>
-
-
-$con = DBConnector::getConnection();
 
 if (isset($_SESSION['user_id'])) {
 
@@ -36,7 +20,14 @@ if (isset($_SESSION['user_id'])) {
 
     $club = new Club(null, null, null, null);
     $club->setUserId($clubid);
-    $club->loadDataFromUserID($con);
+   $loadClubData = $club->loadDataFromUserID($con);
+
+
+
+
+   $undergraduate = new Undergraduate('','','','','','');
+   $undergraduate->setUserId($clubid);
+   $loadUserData=$undergraduate->loadDataFromUserID($con);
 
     ?>
 
@@ -142,7 +133,7 @@ if (isset($_SESSION['user_id'])) {
                 </li>
             </ul>
             <hr>
-
+             <?php }?>
         </div>
     </div>
     </div>
@@ -288,8 +279,6 @@ if (isset($_SESSION['user_id'])) {
                 $i++;
             } ?>
         </div>
-    </div>
-</div>
 <div id="menu-content-2" class="main-content hide">
     <h1>Content 2</h1>
 </div>
@@ -298,8 +287,6 @@ if (isset($_SESSION['user_id'])) {
 </div>
 <div id="menu-content-4" class="main-content hide">
     <h1>Content 4</h1>
-
-
 </div>
 <div id="menu-content-5" class="main-content hide">
 
@@ -388,7 +375,7 @@ if (isset($_SESSION['user_id'])) {
 
 
     <?php
-} else {
+   } else {
     header("location: login.php");
-}
+   }
 ?>
