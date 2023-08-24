@@ -1,15 +1,15 @@
 <?php 
-require_once('db-connect.php');
+require_once('DBConnector.php');
 if($_SERVER['REQUEST_METHOD'] !='POST'){
     echo "<script> alert('Error: No data to save.'); location.replace('./') </script>";
-    $conn->close();
+    $con->close();
     exit;
 }
 extract($_POST);
 $allday = isset($allday);
 
 if(empty($id)){
-    $sql = "INSERT INTO `schedule_list` (`title`,`description`,`start_datetime`,`end_datetime`) VALUES ('$title','$description','$start_datetime','$end_datetime')";
+    $sql = "INSERT INTO `event` (`name`,`description`,`event_date`,`project_id`,`status`) VALUES ('$name','$description','$event_date','$project_id','$status')";
 }else{
     $sql = "UPDATE `schedule_list` set `title` = '{$title}', `description` = '{$description}', `start_datetime` = '{$start_datetime}', `end_datetime` = '{$end_datetime}' where `id` = '{$id}'";
 }
