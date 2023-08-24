@@ -43,6 +43,25 @@ class admin{
         $pstmt = $con->prepare($query);
         $pstmt->bindValue(1, $user_id);
         $pstmt->execute();
+
+    }
+
+    public function declineRequest($user_id){
+        $dbuser = new DBConnector();
+        $con = $dbuser->getConnection();
+        $query1 = "DELETE FROM `user` WHERE user_id = ?";
+        $query2 = "DELETE FROM club WHERE user_id = ?";
+
+        $pstmt2 = $con->prepare($query2);
+        $pstmt2->bindValue(1,$user_id);
+        $pstmt2->execute();
+
+        $pstmt1 = $con->prepare($query1);
+        $pstmt1->bindValue(1,$user_id);
+        $pstmt1->execute();
+
+    
+    
     
     }
 }

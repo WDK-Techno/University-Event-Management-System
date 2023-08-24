@@ -95,6 +95,49 @@ class User
         }
 
     }
+    public function getUserIDFromUsername($con){
+        try {
+            $query = "SELECT * FROM user WHERE user_name = ? AND role = ? AND status <> ?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1,$this->username);
+            $pstmt->bindValue(2,$this->role);
+            $pstmt->bindValue(3,"delete");
+            $pstmt->execute();
+            $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
+            return $rs->user_id;
+
+        }catch (PDOException $exc){
+            die("Error in loading userID From Database ". $exc->getMessage());
+        }
+    }
+    public function authenticate ($con){
+        try {
+            $query = "SELECT * FROM user WHERE user_name = ? AND status <> ?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1, $this->username);
+            $pstmt->bindValue(2, "delete");
+            $pstmt->execute();
+            $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
+            if (!empty($rs)){
+                $db_password = $rs->password;
+                if (password_verify($this->password,$db_password)){
+                    $this->user_id = $rs->user_id;
+                    $this->username = $rs->user_name;
+                    $this->password = null;
+                    $this->role = $rs->role;
+                    $this->status = $rs->status;
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+
+        }catch (PDOException $exc){
+            die("Error in user Authentication ". $exc->getMessage());
+        }
+    }
 
 
 }
@@ -241,6 +284,8 @@ class Club extends User
 {
     private $clubName;
     private $contactNo;
+    private $registerDate;
+    private $profileImage;
 
 
     public function getClubName()
@@ -264,6 +309,32 @@ class Club extends User
     public function setContactNo($contactNo)
     {
         $this->contactNo = $contactNo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRegisterDate()
+    {
+        return $this->registerDate;
+    }
+
+    /**
+     * @param mixed $registerDate
+     */
+    public function setRegisterDate($registerDate)
+    {
+        $this->registerDate = $registerDate;
+    }
+
+    public function getProfileImage()
+    {
+        return $this->profileImage;
+    }
+
+    public function setProfileImage($profileImage)
+    {
+        $this->profileImage = $profileImage;
     }
 
 
@@ -327,12 +398,32 @@ class Club extends User
             parent::setStatus($rs->status);
             $this->clubName = $rs->name;
             $this->contactNo = $rs->contact_no;
+            $this->registerDate = $rs->register_date;
+            $this->profileImage = $rs->profile_image;
 
             return true;
         } else {
             return false;
         }
     }
+
+    // public function fetchData()
+    // {
+    //     $db = DBConnector::getConnection();
+
+    //     $query = "SELECT * FROM undergraduate WHERE user_id = :user_id";
+    //     $stmt = $db->prepare($query);
+    //     $stmt->bindParam(':user_id', $this->userId);
+    //     $stmt->execute();
+
+    //     $data = $stmt->fetch();
+    //     if ($data) {
+    //         $this->firstName = $data['first_name'];
+    //         $this->lastName = $data['last_name'];
+    //         $this->contactNo = $data['contact_no'];
+    //     }
+    // }
+    
 
 
 }

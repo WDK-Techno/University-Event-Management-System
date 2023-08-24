@@ -17,6 +17,23 @@ class TeamMember
         $this->ugID = $ugID;
     }
 
+    public function addUserToProject($con){
+        try {
+
+            $query = "INSERT INTO project_team (category_id, ug_id) VALUES (?,?)";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1,$this->categoryID);
+            $pstmt->bindValue(2,$this->ugID);
+            $pstmt->execute();
+
+            return $pstmt->rowCount()>0;
+
+        }catch (PDOException $exc){
+            return false;
+        }
+
+    }
+
     public static function getMemberListFromCategoryID($con, $categoryID)
     {
         $teamMembers = array();
