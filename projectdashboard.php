@@ -45,8 +45,38 @@ if (!$project->loadDataFromProjectID($con)) {
         }
 
 //        ====== change project chair GET ======
-        if(isset($_GET['changeChairErr'])){
-            $error_projectChairChange = $_GET['changeChairErr'];
+        $errorMessage_settings = "";
+        if (isset($_GET['changeChairErr'])) {
+            $error_changeChair = $_GET['changeChairErr'];
+
+            if ($error_changeChair == 1) {
+                $errorMessage_settings = "Invalid Email";
+            }
+            if ($error_changeChair == 2) {
+                $errorMessage_settings = "Email Cannot Be Empty";
+            }
+            if ($error_changeChair == 3) {
+                $errorMessage_settings = "Already Added";
+            }
+        }
+        if (isset($_GET['imgUploadErr'])) {
+            $error_imgUpload = $_GET['imgUploadErr'];
+
+            if ($error_imgUpload == 1) {
+                $errorMessage_settings = "Database Error";
+            }
+            if ($error_imgUpload == 2) {
+                $errorMessage_settings = "Error in Moving File";
+            }
+            if ($error_imgUpload == 3) {
+                $errorMessage_settings = "File Size larger than 10mb";
+            }
+            if ($error_imgUpload == 4) {
+                $errorMessage_settings = "Error in File Uploading";
+            }
+            if ($error_imgUpload == 5) {
+                $errorMessage_settings = "Invalid file format";
+            }
         }
     }
     ?>
@@ -425,16 +455,25 @@ if (!$project->loadDataFromProjectID($con)) {
                                                  style="width: 150px; height: 150px; object-fit: cover;"
                                                  src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
                                                  alt="">
+                                            <form action="process/projectdashboard/saveProfileImage.php" method="post"
+                                                  enctype="multipart/form-data">
+                                                <div class="btn fw-bold d-flex mx-4 mt-2 shadow-sm" type="button"
+                                                     onclick="fileUploadBtn()"
+                                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                                    <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
+                                                              name="cloud-upload-outline"></ion-icon>
+                                                    <div class="my-auto ms-1 me-auto">Upload</div>
+                                                    <input type="file" class="form-control d-none" name="image_upload"
+                                                           id="image_upload" onchange="saveImgSubmit()"/>
 
-                                            <div class="btn fw-bold d-flex mx-4 mt-2 shadow-sm" type="button"
-                                                 onclick="fileUploadBtn()"
-                                                 style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
-                                                <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
-                                                          name="cloud-upload-outline"></ion-icon>
-                                                <div class="my-auto ms-1 me-auto">Upload</div>
-                                                <input type="file" class="form-control d-none" name="image_upload"
-                                                       id="image_upload"/>
-                                            </div>
+                                                </div>
+                                                <!--======= hidden ==========-->
+                                                <input type="hidden" name="menuNo" value="7">
+                                                <input type="hidden" name="project_id"
+                                                       value="<?= $project->getProjectID() ?>">
+                                                <input class="d-none" type="submit" name="image_save_submit"
+                                                       id="image_save_submit"/>
+                                            </form>
                                         </div>
 
                                     </div>
@@ -463,7 +502,8 @@ if (!$project->loadDataFromProjectID($con)) {
 
                                                 </div>
                                             </form>
-                                            <form action="process/projectdashboard/changeProjectChair.php" method="post">
+                                            <form action="process/projectdashboard/changeProjectChair.php"
+                                                  method="post">
                                                 <div class="fw-bold mt-3">Project Chair</div>
                                                 <div class="d-flex mt-1">
                                                     <input class="shadow-sm text-center form-control" type="email"
@@ -475,8 +515,8 @@ if (!$project->loadDataFromProjectID($con)) {
                                                            value="<?= $project->getProjectID() ?>">
 
                                                     <button class="btn fw-bold d-flex ms-2 shadow-sm"
-                                                         style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
-                                                         type="submit" name="submit">
+                                                            style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
+                                                            type="submit" name="submit">
                                                         <ion-icon class="my-auto ms-auto me-1"
                                                                   style="font-size: 1.4rem;"
                                                                   name="sync-outline"></ion-icon>
@@ -484,20 +524,9 @@ if (!$project->loadDataFromProjectID($con)) {
                                                     </button>
                                                 </div>
                                             </form>
-                                            <?php
-                                                $errorMessage = "";
-                                                if ($error_projectChairChange == 1){
-                                                    $errorMessage = "Invalid Email";
-                                                }
-                                                if($error_projectChairChange == 2){
-                                                    $errorMessage = "Email Cannot Be Empty";
-                                                }
-                                                if ($error_projectChairChange == 3){
-                                                    $errorMessage = "Already Added";
-                                                }
-                                            ?>
+
                                             <div class="mt-2 ms-3 text-center w-75" id="change-projectChair-error"
-                                                 style="color: var(--accent-color3)"><?=$errorMessage?></div>
+                                                 style="color: var(--accent-color3)"><?= $errorMessage_settings ?></div>
                                         </div>
                                     </div>
                                 </div>
@@ -807,7 +836,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                 <div class="d-flex card-body">
                                     <img class="shadow-sm rounded-circle mx-3"
                                          style="width: 80px; height: 80px; object-fit: cover;"
-                                         src="assets/images/profile_img/ug/<?=$projectChair->getProfileImg() ?>"
+                                         src="assets/images/profile_img/ug/<?= $projectChair->getProfileImg() ?>"
                                          alt=""/>
                                     <div class="d-flex ms-2 my-auto flex-column fw-bold">
                                         <div class="d-flex">
@@ -845,6 +874,11 @@ if (!$project->loadDataFromProjectID($con)) {
     <script>
         function fileUploadBtn() {
             document.getElementById('image_upload').click();
+
+        }
+
+        function saveImgSubmit() {
+            document.getElementById('image_save_submit').click();
         }
     </script>
     <script>
