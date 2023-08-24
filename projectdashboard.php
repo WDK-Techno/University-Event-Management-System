@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once "classes/DBConnector.php";
 require_once "classes/Project.php";
 require_once "classes/User.php";
@@ -13,7 +13,22 @@ use classes\Undergraduate;
 use classes\TeamCategory;
 use classes\TeamMember;
 
-$projectIDFromSession = 1;
+
+if (!isset($_SESSION['project_id'])) {
+    header("location: clubowner-dashboard.php");
+}
+$projectIDFromSession = $_SESSION['project_id'];
+
+$loggedUserID = $_SESSION['user_id'];
+$loggedUserRole = $_SESSION['role'];
+$loggedUserImg = $_SESSION['profile_img'];
+if ($loggedUserRole == "ug") {
+    $loggedUserImg = "ug/" . $loggedUserImg;
+}
+if ($loggedUserRole == "club") {
+    $loggedUserImg = "club/" . $loggedUserImg;
+}
+
 $con = DBConnector::getConnection();
 
 //Load Project Details to object
@@ -206,16 +221,22 @@ if (!$project->loadDataFromProjectID($con)) {
                     <div class="btn-group ms-auto me-0">
                         <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle"
                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img id="user-img" src="https://github.com/mdo.png" alt="" width="40"
-                                 class="rounded-circle">
+                            <img class="rounded-circle"
+                                 style="width: 40px; height: 40px; object-fit: cover;"
+                                 src="assets/images/profile_img/<?= $loggedUserImg ?>"
+                                 alt="">
                         </a>
                         <ul class="dropdown-menu shadow dropdown-menu-end">
                             <!-- <li class="dropdown-item d-flex justify-content-start px-4"><ion-icon name="person-outline" style="font-size: 1.2rem;" class="me-2"></ion-icon><span>Profile</span></li>
                             <li class="dropdown-item d-flex justify-content-start px-4"><ion-icon name="arrow-undo-outline" style="font-size: 1.2rem;" class="me-2"></ion-icon><span>Userboard</span></li> -->
-                            <li class="dropdown-item d-flex justify-content-start px-4"><span>Userboard</span>
-                                <ion-icon
-                                        name="arrow-undo-outline" class="ms-auto" style="font-size: 1.2rem;"></ion-icon>
-                            </li>
+                            <form action="process/logout.php" method="post">
+                                <button class="dropdown-item d-flex justify-content-start px-4"
+                                        type="submit" name="submit3"><span>Userboard</span>
+                                    <ion-icon
+                                            name="arrow-undo-outline" class="ms-auto"
+                                            style="font-size: 1.2rem;"></ion-icon>
+                                </button>
+                            </form>
                             <li class="dropdown-item d-flex justify-content-start px-4"><span>Profile</span>
                                 <ion-icon
                                         name="person-outline" class="ms-auto" style="font-size: 1.2rem;"></ion-icon>
@@ -223,11 +244,14 @@ if (!$project->loadDataFromProjectID($con)) {
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li class="dropdown-item d-flex justify-content-start px-4" type="button">
-                                <span>Logout</span>
-                                <ion-icon name="log-out-outline" class="ms-auto"
-                                          style="font-size: 1.2rem;"></ion-icon>
-                            </li>
+                            <form action="process/logout.php" method="post">
+                                <button class="dropdown-item d-flex justify-content-start px-4" type="submit"
+                                        name="submit2">
+                                    <span>Logout</span>
+                                    <ion-icon name="log-out-outline" class="ms-auto"
+                                              style="font-size: 1.2rem;"></ion-icon>
+                                </button>
+                            </form>
                         </ul>
                     </div>
                 </div>
@@ -452,7 +476,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                         <!-- ======= project image area ===== -->
                                         <div class="d-flex flex-column">
                                             <img class="img-thumbnail shadow-sm"
-                                                 style="width: 150px; height: 150px; object-fit: cover;"
+                                                 style="width: 150px; height: 150px;"
                                                  src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
                                                  alt="">
                                             <form action="process/projectdashboard/saveProfileImage.php" method="post"
