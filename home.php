@@ -292,7 +292,7 @@
                     <img src="assets/images/homepage/calender.jpg" class="img-fluid rounded-start">
                 </div>
                 <div class="col-md-8">
-                    <h5 class="title-service">UWU Event Calender</h5>
+                    <h5 class="title-service" style="text-align: center; color: darkgreen">UWU Event Calender</h5>
                     <p class="text">
                         Many events or projects happen every week in our university. In such a situation, the
                         days will last
@@ -320,7 +320,7 @@
                     <img src="assets/images/homepage/prPlan.jpg" class="img-fluid rounded-start">
                 </div>
                 <div class=" col-md-8">
-                    <h5 class="title-service">PR Plan Tool</h5>
+                    <h5 class="title-service" style="text-align: center; color: darkgreen">PR Plan Tool</h5>
                     <p class="text">
                         The tool should allow the project manager to define PR activities, such as press releases, media
                         interviews, or social media campaigns. Further,
@@ -341,7 +341,7 @@
                     <img src="assets/images/homepage/ganttChart.jpg" class="img-fluid rounded-start">
                 </div>
                 <div class=" col-md-8">
-                    <h5 class="title-service">Gantt Chart</h5>
+                    <h5 class="title-service" style="text-align: center; color: darkgreen">Gantt Chart</h5>
                     <p class="text">
                         The system generates a visual representation of the project timeline, highlighting task start
                         and finish dates. as well as
@@ -362,7 +362,7 @@
                     <img src="assets/images/homepage/activity.jpg" class="img-fluid rounded-start">
                 </div>
                 <div class="content col-md-8">
-                    <h5 class="title-service">Activity Plan Tool</h5>
+                    <h5 class="title-service" style="text-align: center; color: darkgreen">Activity Plan Tool</h5>
                     <p class="text">
                         Here users can add sub-tasks under the main task.
                         This tool allows project managers to define project activities. And also
