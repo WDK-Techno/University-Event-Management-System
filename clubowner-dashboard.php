@@ -190,12 +190,18 @@ if (isset($_SESSION['user_id'])) {
 
 
         <div id="menu-content-1" class="main-content show ms-1">
-            <div class="d flex flex-column mt-3">
-                <div class="d-flex  ">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Create Projects
-                    </button>
-                </div>
+            <div class="d-flex  " >
+                <button class="btn fw-bold d-flex ms-2 shadow-sm"
+                        style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                    <ion-icon class="my-auto"  name="add-outline"
+                              style="font-size: 1.4rem;"></ion-icon>
+                    <div class="my-auto ms-1 me-auto">New Projects</div>
+                </button>
+
+
+            </div>
+
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                      aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -269,25 +275,25 @@ if (isset($_SESSION['user_id'])) {
                                     <!--==== hidden ======-->
                                     <input type="hidden" name="project_id" value="<?= $project->getProjectID() ?>">
 
-                                    <button type="submit" name="submit" class="btn my-2 btn-outline-light">More
-                                    </button>
-                                </div>
-                                <div class="card-body py-4 d-flex">
-                                    <div class="toggle-button-cover">
-                                        <div class="button-cover">
-                                            <div class="button shadow-sm r" id="button-3">
-                                                <input type="checkbox" class="checkbox" checked/>
-                                                <div class="knobs"></div>
-                                                <div class="layer"></div>
+                                        <button type="submit" name="submit" class="btn my-2 btn-outline-light">Access
+                                        </button>
+                                    </div>
+                                    <div class="card-body py-4 d-flex">
+                                        <div class="toggle-button-cover">
+                                            <div class="button-cover">
+                                                <div class="button shadow-sm r" id="button-3">
+                                                    <input type="checkbox" class="checkbox" checked/>
+                                                    <div class="knobs"></div>
+                                                    <div class="layer"></div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="">
-                                        <img class="img-thumbnail shadow-sm"
-                                             style="width: 150px; height: 150px;"
-                                             src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
-                                             alt="">
-                                    </div>
+                                        <div class="">
+                                            <img class="img-thumbnail shadow-sm"
+                                                 style="width: 150px; height: 150px;"
+                                                 src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
+                                                 alt="">
+                                        </div>
 
                                 </div>
                             </div>
@@ -310,19 +316,18 @@ if (isset($_SESSION['user_id'])) {
         </div>
         <div id="menu-content-5" class="main-content hide">
 
-            <div class="card-body text-center shadow">
-                <?php
-                if ($loadUserData) {
-                    ?>
-                    <img src="assets/images/profile_img/club/<?= $undergraduate->getProfileImg() ?>"
-                         class="rounded-circle mb-3 mt-4" src="" width="160" height="160"/>
-                    <div class="mb-3">
-                        <button class="btn btn-primary btn-sm" type="button">Change Photo
-                        </button>
-                    </div>
-                <?php }
-                ?>
-            </div>
+    <div class="card-body text-center shadow">
+        <?php
+        if($loadClubData){
+        ?>
+        <img src="assets/images/profile_img/club/<?= $club->getProfileImage() ?>" class="rounded-circle mb-3 mt-4" src="" width="160" height="160"/>
+        <div class="mb-3">
+            <button class="btn btn-primary btn-sm" type="button">Change Photo
+            </button>
+        </div>
+        <?php }
+        ?>
+    </div>
 
             <div class="card shadow mb-3">
                 <div class="card-header py-3">
