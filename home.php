@@ -77,7 +77,8 @@
                                     <div id="calendar"></div>
                                 </div>
                                 <div class="col-md-3">
-
+                                    <div><h2 class="p-3" style="color: #0b5ed7">Eventz 2023</h2></div><br><br><br><br>
+                                    <div><img src="assets/images/homepage/calender.gif" </div>
                                 </div>
                             </div>
                         </div>
