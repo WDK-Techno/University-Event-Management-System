@@ -29,8 +29,8 @@
                 if (!!scheds[id]) {
                     _details.find('#title').text(scheds[id].title)
                     _details.find('#description').text(scheds[id].description)
-                    _details.find('#start').text(scheds[id].start)
-                    _details.find('#end').text(scheds[id].end)
+                    _details.find('#start').text(scheds[id].s_date)
+                    _details.find('#end').text(scheds[id].e_date)
                     _details.find('#edit,#delete').attr('data-id', id)
                     _details.modal('show')
                 } else {

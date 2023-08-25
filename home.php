@@ -17,9 +17,8 @@ $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
 $sched_res = [];
 if (!empty($rs)) {
     foreach ($rs as $row) {
-        $sDate = date("F d, Y h:i A", strtotime($row->start_date));
-        $eDate = date("F d, Y h:i A", strtotime($row->end_date));
-        $event = new Event($row->)
+        $row->s_date = date("F d, Y h:i A", strtotime($row->start_date));
+        $row->e_date = date("F d, Y h:i A", strtotime($row->end_date));
         $sched_res[$row->event_id] = $row;
     }
 }
