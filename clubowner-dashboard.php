@@ -193,11 +193,11 @@ if (isset($_SESSION['user_id'])) {
         <div id="menu-content-1" class="main-content show ms-1">
             <div class="d-flex  " >
                 <button class="btn fw-bold d-flex ms-2 shadow-sm"
-                        style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
+                        style=" color: var(--lighter-secondary) !important; background-color: var(--primary);"
                         data-bs-toggle="modal" data-bs-target="#exampleModal" >
                     <ion-icon class="my-auto"  name="add-outline"
                               style="font-size: 1.4rem;"></ion-icon>
-                    <div class="my-auto ms-1 me-auto">New Projects</div>
+                    <div class="my-auto ms-1 me-auto">Create New</div>
                 </button>
 
 
