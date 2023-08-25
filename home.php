@@ -286,14 +286,14 @@
         <h1>Our Services</h1>
     </div>
     <div class="d-flex col-md-12  p-5 justify-content-start">
-        <div class="card mb-3 " style="max-width: 80%;">
+        <div class=" mb-3 " style="max-width: 80%;">
             <div class="row ">
                 <div class="col-md-4">
                     <img src="assets/images/homepage/calender.jpg" class="img-fluid rounded-start">
                 </div>
-                <div class="card-content col-md-8">
-                    <h5 class="card-title-service">UWU Event Calender</h5>
-                    <p class="card-text">
+                <div class="col-md-8">
+                    <h5 class="title-service">UWU Event Calender</h5>
+                    <p class="text">
                         Many events or projects happen every week in our university. In such a situation, the
                         days will last
                         Events are held by different degrees or different clubs, and when you book the hall for
@@ -314,14 +314,14 @@
         </div>
     </div>
     <div class="d-flex col-md-12  p-5 justify-content-end">
-        <div class="card mb-3" style="max-width: 80%;">
+        <div class=" mb-3" style="max-width: 80%;">
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src="assets/images/homepage/prPlan.jpg" class="img-fluid rounded-start">
                 </div>
-                <div class="card-content col-md-8">
-                    <h5 class="card-title-service">PR Plan Tool</h5>
-                    <p class="card-text">
+                <div class=" col-md-8">
+                    <h5 class="title-service">PR Plan Tool</h5>
+                    <p class="text">
                         The tool should allow the project manager to define PR activities, such as press releases, media
                         interviews, or social media campaigns. Further,
                         The system can provide a platform for managing PR tasks, assigning responsibilities, and setting
@@ -335,14 +335,14 @@
         </div>
     </div>
     <div class="d-flex col-md-12 p-5 justify-content-start">
-        <div class="card mb-3 " style="max-width: 80%;">
+        <div class=" mb-3 " style="max-width: 80%;">
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src="assets/images/homepage/ganttChart.jpg" class="img-fluid rounded-start">
                 </div>
-                <div class="card-content col-md-8">
-                    <h5 class="card-title-service">Gantt Chart</h5>
-                    <p class="card-text">
+                <div class=" col-md-8">
+                    <h5 class="title-service">Gantt Chart</h5>
+                    <p class="text">
                         The system generates a visual representation of the project timeline, highlighting task start
                         and finish dates. as well as
                         Project members are able to update the timeline as the project progresses, making adjustments to
@@ -356,14 +356,14 @@
         </div>
     </div>
     <div class="d-flex col-md-12 p-5 justify-content-end">
-        <div class="card mb-3" style="max-width: 80%;">
+        <div class="mb-3" style="max-width: 80%;">
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src="assets/images/homepage/activity.jpg" class="img-fluid rounded-start">
                 </div>
-                <div class="card-content col-md-8">
-                    <h5 class="card-title-service">Activity Plan Tool</h5>
-                    <p class="card-text">
+                <div class="content col-md-8">
+                    <h5 class="title-service">Activity Plan Tool</h5>
+                    <p class="text">
                         Here users can add sub-tasks under the main task.
                         This tool allows project managers to define project activities. And also
                         Project users are able to update the activity plan, mark activities as completed and track the
