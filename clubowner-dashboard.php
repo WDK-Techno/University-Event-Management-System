@@ -279,6 +279,8 @@ if (isset($_SESSION['user_id'])) {
                 $i++;
             } ?>
         </div>
+    </div>
+
 <div id="menu-content-2" class="main-content hide">
     <h1>Content 2</h1>
 </div>
@@ -345,12 +347,6 @@ if (isset($_SESSION['user_id'])) {
             }
             ?>
         </div>
-    </div>
-
-
-</div>
-
-</div>
 
 <!-- ==== Boostrap Script ==== -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
