@@ -276,12 +276,20 @@ if (isset($_SESSION['user_id'])) {
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button shadow-sm r" id="button-3">
-                                                    <input type="checkbox" class="checkbox" checked/>
+                                                    <input type="checkbox" class="checkbox status-toggle" checked project-id="<?= $project->getProjectID() ?>">
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
                                             </div>
                                         </div>
+
+
+
+
+
+
+
+                                    <!-------------------------------------------------->
                                         <div class="">
                                             <img class="img-thumbnail shadow-sm"
                                                  style="width: 150px; height: 150px;"
@@ -406,6 +414,36 @@ if (isset($_SESSION['user_id'])) {
                 '&club_id=' + encodeURIComponent(<?=$clubid ?>));
 
         }
+    </script>
+
+
+    <!-- ======script button===== --->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const statusToggles = document.querySelectorAll(".status-toggle");
+
+            statusToggles.forEach(function (statusToggle) {
+                statusToggle.addEventListener("change", function () {
+                    const isChecked = statusToggle.checked;
+                    const projectId = statusToggle.getAttribute("project-id");
+                     console.log(projectId);
+                    updateStatus(isChecked, projectId);
+                });
+            });
+
+            function updateStatus(status, projectId) {
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "process/clubownerdashboard/updateProjectStatus.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        const response = xhr.responseText;
+                        // Handle the response if needed
+                    }
+                };
+                xhr.send("status=" + status + "&projectId=" + projectId);
+            }
+        });
     </script>
 
     <!-- ==== Boostrap Script ==== -->
