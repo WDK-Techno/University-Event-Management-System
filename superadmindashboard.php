@@ -70,19 +70,19 @@ $user3 = $userObj->getRequests();
             <li id="menu-1" class="sideBar-btn activate" onclick="showMenuContent(1)">
                 <a href="#" class="nav-link d-flex justify-content-start">
                     <ion-icon name="person-circle-outline"></ion-icon>
-                    <span class="sideBar-btn-text my-auto">Undergraduates Detais</span>
+                    <span class="sideBar-btn-text my-auto">Undergraduates</span>
                 </a>
             </li>
             <li id="menu-2" class="sideBar-btn" onclick="showMenuContent(2)">
                 <a href="#" class="nav-link d-flex justify-content-start">
                     <ion-icon name="document-outline"></ion-icon>
-                    <span class="sideBar-btn-text my-auto">Club/Society Details</span>
+                    <span class="sideBar-btn-text my-auto">Club/Society</span>
                 </a>
             </li>
             <li id="menu-3" class="sideBar-btn" onclick="showMenuContent(3)">
                 <a href="#" class="nav-link d-flex justify-content-start">
                     <ion-icon name="git-pull-request-outline"></ion-icon>
-                    <span class="sideBar-btn-text my-auto">New Clubs Requests</span>
+                    <span class="sideBar-btn-text my-auto">New Clubs</span>
                 </a>
             </li>
 
@@ -122,7 +122,7 @@ $user3 = $userObj->getRequests();
                 <form action="process/logout.php" method="post">
                     <button class="my-2 btn btn-outline-secondary d-flex align-items-center" type="submit" name="submit5"><Span
                                 class="d-none d-lg-inline pe-2">Logout</Span>
-                        <ion-icon style="font-size: 1.0rem;"
+                        <ion-icon style="font-size: 1.3rem;"
                                   name="log-out-outline"></ion-icon>
                     </button>
                 </form>
@@ -152,14 +152,14 @@ $user3 = $userObj->getRequests();
 
 
     <div id="menu-content-1" class="main-content show">
-        <h1>User Details</h1>
-        <section class="table_header">
+        <h1 class="text-center fw-bold">Undergraduates Details</h1>
+        <section class="table_header mx-auto">
             <div>
                 <input type="text" id="myInput" placeholder="Search for names..." onkeyup="search();">
                 <ion-icon name="search-outline"></ion-icon>
             </div>
         </section>
-        <div class="table-2">
+        <div class="table-2 mx-auto">
             <section class="table_body">
                 <table id="myTable">
                     <thead>
@@ -211,14 +211,14 @@ $user3 = $userObj->getRequests();
         </div>
     </div>
     <div id="menu-content-2" class="main-content hide">
-        <h1>Club Details</h1>
-        <section class="table_header">
+        <h1 class="text-center fw-bold">Club Details</h1>
+        <section class="table_header mx-auto">
             <div>
                 <input type="text" id="myInput" placeholder="Search for names..." onkeyup="search();">
                 <ion-icon name="search-outline"></ion-icon>
             </div>
         </section>
-        <div class="table-2">
+        <div class="table-2 mx-auto">
             <section class="table_body">
                 <table id="myTable">
                     <thead>
@@ -272,8 +272,8 @@ $user3 = $userObj->getRequests();
         </div>
     </div>
     <div id="menu-content-3" class="main-content hide">
-        <h1>New Club Requests</h1>
-        <div class="table">
+        <h1 class="text-center fw-bold">New Club Requests</h1>
+        <div class="table mx-auto">
             <section class="table_body">
                 <table>
                     <thead>
