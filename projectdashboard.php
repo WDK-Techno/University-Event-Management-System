@@ -552,9 +552,11 @@ if (!$project->loadDataFromProjectID($con)) {
                                 <div class="col-md-3 shadow-sm p-3 m-2 rounded-5 fw-normal"
                                      style="font-size: 1.0rem; background-color: var(--lighter-secondary); color: var(--darker-primary);">
                                     <div>
-                                        <div class="my-auto fs-5"><?= $event->geteventName()."<br>". $event->geteventDescription() ."<br>". $event->geteventDate()?></div>
+                                        <div class="card-header p-3 text-white" style="background-color: var(--primary);text-align: center;font-size: 1.5rem"><?= $event->geteventName()?></div>
                                     </div>
                                     <div style="font-size: 1.5rem;">
+                                        <div class="my-auto fs-5"><?= $event->geteventDescription() ."<br>". $event->geteventDate()?>
+                                        </div>
                                         <div class="d-flex mx-auto card-list-option-buttons"
                                              style="font-size: 1.7rem;">
                                             <!--========== edit event button =========-->
