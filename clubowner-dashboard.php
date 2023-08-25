@@ -20,14 +20,12 @@ if (isset($_SESSION['user_id'])) {
 
     $club = new Club(null, null, null, null);
     $club->setUserId($clubid);
-   $loadClubData = $club->loadDataFromUserID($con);
+    $loadClubData = $club->loadDataFromUserID($con);
 
 
-
-
-   $undergraduate = new Undergraduate('','','','','','');
-   $undergraduate->setUserId($clubid);
-   $loadUserData=$undergraduate->loadDataFromUserID($con);
+    $undergraduate = new Undergraduate('', '', '', '', '', '');
+    $undergraduate->setUserId($clubid);
+    $loadUserData = $undergraduate->loadDataFromUserID($con);
 
     ?>
 
@@ -55,85 +53,86 @@ if (isset($_SESSION['user_id'])) {
 
     </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
 
-    <!-- ====== CSS Files ==== -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <!-- <link rel="stylesheet" href="assests/scss/style.scss"> -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="assets/css/clubownerdash.css">
+        <!-- ====== CSS Files ==== -->
+        <link rel="stylesheet" href="assets/css/style.css">
+        <!-- <link rel="stylesheet" href="assests/scss/style.scss"> -->
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="assets/css/clubownerdash.css">
 
-    <!-- ===== Boostrap CSS ==== -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <!-- ===== Boostrap CSS ==== -->
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+              crossorigin="anonymous">
 
 
-</head>
+    </head>
 
-<body style="box-sizing: border-box;">
+    <body style="box-sizing: border-box;">
     <body style="box-sizing: border-box;">
 
-<!-- =======  side bar ======= -->
-<div class="sideBar w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:block;" id="mySidebar">
+    <!-- =======  side bar ======= -->
+    <div class="sideBar w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:block;" id="mySidebar">
 
 
-    <!-- ======== side bar content ======= -->
-    <div class="d-flex flex-column flex-shrink-0 p-3">
+        <!-- ======== side bar content ======= -->
+        <div class="d-flex flex-column flex-shrink-0 p-3">
 
-        <ion-icon id="openNav" class="d-block m-2" onclick="sideBarControl()"
-                  name="chevron-back-circle-outline"></ion-icon>
+            <ion-icon id="openNav" class="d-block m-2" onclick="sideBarControl()"
+                      name="chevron-back-circle-outline"></ion-icon>
 
-        <!-- <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <span class="fs-4 m-2">Sidebar</span>
-        </a> -->
-        <?php
+            <!-- <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <span class="fs-4 m-2">Sidebar</span>
+            </a> -->
+            <?php
 
-        if ($loadClubData) {
-            ?>
-            <div id="project-details" class="my-2" style="font-weight:bold; font-size: 1.5rem;">
-                <span class="d-block w3-text-light-blue"></span>
-                <span class="d-block w3-text-cyan"><?= $club->getClubName() ?></span>
-            </div>
+            if ($loadClubData) {
+                ?>
+                <div id="project-details" class="my-2" style="font-weight:bold; font-size: 1.5rem;">
+                    <span class="d-block w3-text-light-blue"></span>
+                    <span class="d-block w3-text-cyan"><?= $club->getClubName() ?></span>
+                </div>
 
-            <hr>
-            <ul class="nav nav-pills flex-column navbar-text mb-auto">
-                <li id="menu-1" class="sideBar-btn activate" onclick="showMenuContent(1)">
-                    <a href="#" class="nav-link d-flex justify-content-start">
-                        <ion-icon name="people-circle-outline"></ion-icon>
-                        <span class="sideBar-btn-text my-auto">Projects</span>
-                    </a>
-                </li>
-                <li id="menu-2" class="sideBar-btn" onclick="showMenuContent(2)">
-                    <a href="#" class="nav-link d-flex justify-content-start">
-                        <ion-icon name="calendar-outline"></ion-icon>
-                        <span class="sideBar-btn-text my-auto">Grantt Chart</span>
-                    </a>
-                </li>
-                <li id="menu-3" class="sideBar-btn" onclick="showMenuContent(3)">
-                    <a href="#" class="nav-link d-flex justify-content-start">
-                        <ion-icon name="walk-outline"></ion-icon>
-                        <span class="sideBar-btn-text my-auto">Activitty Plan</span>
-                    </a>
-                </li>
-                <li id="menu-4" class="sideBar-btn" onclick="showMenuContent(4)">
-                    <a href="#" class="nav-link d-flex justify-content-start">
-                        <ion-icon name="document-text-outline"></ion-icon>
-                        <span class="sideBar-btn-text my-auto">PR Plan</span>
-                    </a>
-                </li>
-                <li id="menu-5" class="sideBar-btn" onclick="showMenuContent(5)">
-                    <a href="#" class="nav-link d-flex justify-content-start">
-                        <ion-icon name="settings-outline"></ion-icon>
-                        <span class="sideBar-btn-text my-auto">Settings</span>
-                    </a>
-                </li>
-            </ul>
-            <hr>
-             <?php }?>
+                <hr>
+                <ul class="nav nav-pills flex-column navbar-text mb-auto">
+                    <li id="menu-1" class="sideBar-btn activate" onclick="showMenuContent(1)">
+                        <a href="#" class="nav-link d-flex justify-content-start">
+                            <ion-icon name="people-circle-outline"></ion-icon>
+                            <span class="sideBar-btn-text my-auto">Projects</span>
+                        </a>
+                    </li>
+                    <li id="menu-2" class="sideBar-btn" onclick="showMenuContent(2)">
+                        <a href="#" class="nav-link d-flex justify-content-start">
+                            <ion-icon name="calendar-outline"></ion-icon>
+                            <span class="sideBar-btn-text my-auto">Grantt Chart</span>
+                        </a>
+                    </li>
+                    <li id="menu-3" class="sideBar-btn" onclick="showMenuContent(3)">
+                        <a href="#" class="nav-link d-flex justify-content-start">
+                            <ion-icon name="walk-outline"></ion-icon>
+                            <span class="sideBar-btn-text my-auto">Activitty Plan</span>
+                        </a>
+                    </li>
+                    <li id="menu-4" class="sideBar-btn" onclick="showMenuContent(4)">
+                        <a href="#" class="nav-link d-flex justify-content-start">
+                            <ion-icon name="document-text-outline"></ion-icon>
+                            <span class="sideBar-btn-text my-auto">PR Plan</span>
+                        </a>
+                    </li>
+                    <li id="menu-5" class="sideBar-btn" onclick="showMenuContent(5)">
+                        <a href="#" class="nav-link d-flex justify-content-start">
+                            <ion-icon name="settings-outline"></ion-icon>
+                            <span class="sideBar-btn-text my-auto">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+                <hr>
+            <?php } ?>
         </div>
     </div>
     </div>
@@ -201,26 +200,45 @@ if (isset($_SESSION['user_id'])) {
                      aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Project details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                            <div class="modal-header py-2 px-2"
+                                 style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                <!--                                <h5 class="modal-title" id="exampleModalLabel">Project details</h5>-->
+                                <div class="ms-2 my-auto fs-4 fw-bold">
+                                    New Project
+                                </div>
+                                <!--                                <button type="button" class="btn-close" data-bs-dismiss="modal"-->
+                                <!--                                        aria-label="Close"></button>-->
                             </div>
                             <form action="process/clubownerdashboard/addproject.php" method="POST"
                                   enctype="multipart/form-data">
-                                <div class="modal-body">
+                                <div class="modal-body" style="background-color: var(--lighter-secondary);">
 
-                                    <label for="prName" class="form-label h5">Name</label>
-                                    <br/>
-                                    <input type="text" class="form-control" id="prName" name="projectName" required/>
-                                    <br/>
-
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                        </button>
-                                        <button type="submit" class="btn btn-primary" name="addProject">Add</button>
+                                    <div class="d-flex px-5">
+                                        <input class="form-control text-center" type="text"
+                                               name="project_name" id="add-project-name-input"
+                                               placeholder="Project Name" required/>
                                     </div>
+                                    <div class="mt-3 border border-secondary-subtle rounded bg-body-secondary shadow-sm px-1 py-1 mx-5  d-flex flex-column px-5">
+                                        <div class="fw-bold my-2" style="color: var(--primary);">Project Chair</div>
+                                        <input class="form-control mb-4 text-center" type="email"
+                                               name="username" id="add-project-username-input"
+                                               placeholder="Email" required/>
+                                    </div>
+
+                                    <div class="mt-2 text-center" id="add-project-error"
+                                         style="color: var(--accent-color3)"></div>
+
+                                </div>
+                                <div class="modal-footer" style="background-color: var(--primary);">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+                                    <button type="button"
+                                            onclick="createNewProject()"
+                                            class="btn fw-bold"
+                                            style="background-color: var(--secondary); color: var(--primary);">
+                                        ADD
+                                    </button>
+                                </div>
                             </form>
 
                         </div>
@@ -236,138 +254,174 @@ if (isset($_SESSION['user_id'])) {
                 $i = 1;
 
 
-                foreach ($projects as $project) {
-                    ?>
+                foreach ($projects
 
-                    <div class="col">
-                        <form action="process/clubownerdashboard/getIntoProject.php" method="post">
-                            <div class="rounded border">
-                                <div class="card d-block shadow-sm h-80">
-                                    <div class="card-header p-3 text-white" style="background-color: var(--primary)">
-                                        <h5 class="card-title fw-bold"
-                                            style="font-size: 1.5rem"><?= $project->getProjectName() ?></h5>
-                                        <!--==== hidden ======-->
-                                        <input type="hidden" name="project_id" value="<?= $project->getProjectID() ?>">
-
-                                        <button type="submit" name="submit" class="btn my-2 btn-outline-light">More
-                                        </button>
-                                    </div>
-                                    <div class="card-body py-4 d-flex">
-                                        <div class="toggle-button-cover">
-                                            <div class="button-cover">
-                                                <div class="button shadow-sm r" id="button-3">
-                                                    <input type="checkbox" class="checkbox" checked/>
-                                                    <div class="knobs"></div>
-                                                    <div class="layer"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <img class="img-thumbnail shadow-sm"
-                                                 style="width: 150px; height: 150px;"
-                                                 src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
-                                                 alt="">
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <?php
-                $i++;
-            } ?>
-        </div>
-<div id="menu-content-2" class="main-content hide">
-    <h1>Content 2</h1>
-</div>
-<div id="menu-content-3" class="main-content hide">
-    <h1>Content 3</h1>
-</div>
-<div id="menu-content-4" class="main-content hide">
-    <h1>Content 4</h1>
-</div>
-<div id="menu-content-5" class="main-content hide">
-
-    <div class="card-body text-center shadow">
-        <?php
-        if($loadUserData){
-        ?>
-        <img src="assets/images/profile_img/club/<?= $undergraduate->getProfileImg() ?>" class="rounded-circle mb-3 mt-4" src="" width="160" height="160"/>
-        <div class="mb-3">
-            <button class="btn btn-primary btn-sm" type="button">Change Photo
-            </button>
-        </div>
-        <?php }
-        ?>
-    </div>
-
-    <div class="card shadow mb-3">
-        <div class="card-header py-3">
-            <p class="text-primary m-0 fw-bold">Club Settings</p>
-        </div>
-        <div class="card-body">
-            <form>
-                <?php
-
-                if ($loadClubData){
+                as $project) {
                 ?>
 
-                <div class="row">
-                    <div class="col">
-                        <div class="mb-3">
-                            <label class="form-label" for="first_name">
-                                <strong>club Name</strong>
-                            </label>
-                            <input id="first_name" class="form-control" type="text"
-                                   placeholder="<?= $club->getClubName() ?>" name="first_name"/>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="mb-3">
-                            <label class="form-label" for="first_name">
-                                <strong>Contact number</strong>
-                            </label>
-                            <input id="first_name" class="form-control" type="text"
-                                   placeholder="<?= $club->getContactNo() ?>" name="first_name"/>
-                        </div>
-                    </div>
+                <div class="col">
+                    <form action="process/clubownerdashboard/getIntoProject.php" method="post">
+                        <div class="rounded border">
+                            <div class="card d-block shadow-sm h-80">
+                                <div class="card-header p-3 text-white" style="background-color: var(--primary)">
+                                    <h5 class="card-title fw-bold"
+                                        style="font-size: 1.5rem"><?= $project->getProjectName() ?></h5>
+                                    <!--==== hidden ======-->
+                                    <input type="hidden" name="project_id" value="<?= $project->getProjectID() ?>">
 
+                                    <button type="submit" name="submit" class="btn my-2 btn-outline-light">More
+                                    </button>
+                                </div>
+                                <div class="card-body py-4 d-flex">
+                                    <div class="toggle-button-cover">
+                                        <div class="button-cover">
+                                            <div class="button shadow-sm r" id="button-3">
+                                                <input type="checkbox" class="checkbox" checked/>
+                                                <div class="knobs"></div>
+                                                <div class="layer"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <img class="img-thumbnail shadow-sm"
+                                             style="width: 150px; height: 150px;"
+                                             src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
+                                             alt="">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <button class="btn btn-primary btn-sm" type="submit">Update</button>
-                </div>
-            </form>
+            </div>
             <?php
-            } else {
-                echo "Club data not found for the given user ID.";
-            }
-            ?>
+            $i++;
+            } ?>
         </div>
+        <div id="menu-content-2" class="main-content hide">
+            <h1>Content 2</h1>
+        </div>
+        <div id="menu-content-3" class="main-content hide">
+            <h1>Content 3</h1>
+        </div>
+        <div id="menu-content-4" class="main-content hide">
+            <h1>Content 4</h1>
+        </div>
+        <div id="menu-content-5" class="main-content hide">
+
+            <div class="card-body text-center shadow">
+                <?php
+                if ($loadUserData) {
+                    ?>
+                    <img src="assets/images/profile_img/club/<?= $undergraduate->getProfileImg() ?>"
+                         class="rounded-circle mb-3 mt-4" src="" width="160" height="160"/>
+                    <div class="mb-3">
+                        <button class="btn btn-primary btn-sm" type="button">Change Photo
+                        </button>
+                    </div>
+                <?php }
+                ?>
+            </div>
+
+            <div class="card shadow mb-3">
+                <div class="card-header py-3">
+                    <p class="text-primary m-0 fw-bold">Club Settings</p>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <?php
+
+                        if ($loadClubData){
+                        ?>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label class="form-label" for="first_name">
+                                        <strong>club Name</strong>
+                                    </label>
+                                    <input id="first_name" class="form-control" type="text"
+                                           placeholder="<?= $club->getClubName() ?>" name="first_name"/>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label class="form-label" for="first_name">
+                                        <strong>Contact number</strong>
+                                    </label>
+                                    <input id="first_name" class="form-control" type="text"
+                                           placeholder="<?= $club->getContactNo() ?>" name="first_name"/>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-primary btn-sm" type="submit">Update</button>
+                        </div>
+                    </form>
+                    <?php
+                    } else {
+                        echo "Club data not found for the given user ID.";
+                    }
+                    ?>
+                </div>
+            </div>
+
+
+        </div>
+
     </div>
 
+    <script>
+        function createNewProject(){
+            let projectName = document.getElementById("add-project-name-input").value;
+            let chairID = document.getElementById("add-project-username-input").value;
 
-</div>
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', 'process/clubownerdashboard/addproject.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-</div>
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    let response = JSON.parse(xhr.responseText);
 
-<!-- ==== Boostrap Script ==== -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
+                    // Access the original username and the result from the response object
+                    let message = response.message;
+                    let success = response.success;
+
+                    if (success) {
+                        window.location.href = 'clubowner-dashboard.php';
+                    } else {
+                        document.getElementById("add-project-error").innerText = message;
+                    }
 
 
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+                }
+            };
 
-<!-- ========= Ionicons Scripts ===== -->
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+            // Send the username to the PHP script
+            xhr.send('project_name=' + encodeURIComponent(projectName) + '&chair_username=' + encodeURIComponent(chairID));
 
-<!-- ====== Script files ===== -->
-<script src="assets/js/clubownerdashboard.js"></script>
+        }
+    </script>
+
+    <!-- ==== Boostrap Script ==== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+
+
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+
+    <!-- ========= Ionicons Scripts ===== -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- ====== Script files ===== -->
+    <script src="assets/js/clubownerdashboard.js"></script>
 
     </body>
 
@@ -375,7 +429,7 @@ if (isset($_SESSION['user_id'])) {
 
 
     <?php
-   } else {
+} else {
     header("location: login.php");
-   }
+}
 ?>
