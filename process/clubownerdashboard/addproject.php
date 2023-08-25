@@ -1,33 +1,58 @@
 <?php
 require_once '../../classes/DBConnector.php';
 require_once '../../classes/Project.php';
+require_once '../../classes/User.php';
+
 
 use classes\Project;
 use classes\DBConnector;
+use classes\User;
 
-$con =  DBConnector::getConnection();
+$con = DBConnector::getConnection();
+$message = "";
+$success = false;
 
-if($_SERVER['REQUEST_METHOD']==="POST"){
- if(isset($_POST['addProject'])) {
-     if (!empty($_POST['projectName'])) {
-         $projectName = strip_tags($_POST['projectName']);
-         $clubId = 11;
-         $chairId = 5;
-         $project = new Project(null, $projectName, $clubId, $chairId, "active", null, null);
-         $result=$project->addProject($con);
-         if($result){
-             header("Location: ../../clubowner-dashboard.php");
-         }else{
-             header("Location: ../../clubowner-dashboard.php?status=4");
-         }
+if (isset($_POST['project_name'], $_POST['chair_username'])) {
+    if (empty($_POST['project_name']) || empty($_POST['chair_username'])) {
 
-     }else{
-         header("Location: ../../clubowner-dashboard.php?status=2"); //empty fields
-     }
- }
- else {
-         header("Location: ../../clubowner-dashboard.php?status=1"); //not submit
-     }
- }else{
-    header("Location: ../../clubowner-dashboard.php?status=1");
+        $message = "Input Cannot Be Empty";
+
+    } else {
+
+
+        $projectName = strip_tags($_POST['project_name']);
+        $clubId = $_POST['club_id'];
+        $chairUserName = $_POST['chair_username'];
+
+        $projectChair = new User($chairUserName, null);
+        $projectChair->setRole("ug");
+        $projectChairID = $projectChair->getUserIDFromUsername($con);
+        if (!empty($projectChairID)) {
+            $project = new Project(null, $projectName, $clubId, $projectChairID, "active", null, null);
+            $rs = $project->addProject($con);
+            if ($rs) {
+                $success = true;
+                $message = "success";
+            } else {
+                $message = "Error";
+            }
+
+        } else {
+            $message = "Invalid User";
+        }
+
+    }
+}else{
+    $message = "Input Cannot Be Empty";
 }
+
+
+// Create an array to hold varibales values
+$response = array(
+    'message' => $message,
+    'success' => $success
+);
+
+// Convert the array to JSON and send it as the response
+echo json_encode($response);
+

@@ -1,4 +1,31 @@
-<?php require_once('db-connect.php') ?>
+<?php
+require_once "classes/DBConnector.php";
+require_once "classes/Event.php";
+
+//require_once('db-connect.php');
+
+use classes\DBConnector;
+use classes\Event;
+
+$con = DBConnector::getConnection();
+$query = "SELECT * FROM event";
+$pstmt = $con->prepare($query);
+$pstmt->execute();
+$rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
+
+//$schedules = $con->query("SELECT * FROM `schedule_list`");
+$sched_res = [];
+if (!empty($rs)) {
+    foreach ($rs as $row) {
+        $row->s_date = date("F d, Y h:i A", strtotime($row->start_date));
+        $row->e_date = date("F d, Y h:i A", strtotime($row->end_date));
+        $sched_res[$row->event_id] = $row;
+    }
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,7 +77,7 @@
                 <button class="btn btn-outline-secondary d-flex align-items-center" type="submit"><Span
                             class="d-none d-lg-inline pe-2">SignUp</Span>
                     <ion-icon style="font-size: 1.0rem;;"
-                    " name=" person-add-outline"></ion-icon>
+                              name=" person-add-outline"></ion-icon>
                 </button>
                 <button class="btn btn-outline-primary ms-2 d-flex align-items-center" type="submit"><Span
                             class="d-none d-lg-inline-block pe-2">LogIn</Span>
@@ -77,8 +104,9 @@
                                     <div id="calendar"></div>
                                 </div>
                                 <div class="col-md-3">
-                                    <div><h2 class="p-3" style="color: #0b5ed7">Eventz 2023</h2></div><br><br><br><br>
-                                    <div><img src="assets/images/homepage/calender.gif" </div>
+                                    <div><h2 class="p-3" style="color: #0b5ed7">Eventz 2023</h2></div>
+                                    <br><br><br><br>
+                                    <div><img src="assets/images/homepage/calender.gif"</div>
                                 </div>
                             </div>
                         </div>
@@ -382,7 +410,8 @@
 <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-                <img src="assets/images/homepage/kavindra.jpg" class="card-img-top position-sticky " style="width: 290px;height: 330px" alt="...">
+            <img src="assets/images/homepage/kavindra.jpg" class="card-img-top position-sticky "
+                 style="width: 290px;height: 330px" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Kavindra Weerasingha</h5>
                 <p class="card-text">UWU/CST/20/068</p>
@@ -397,7 +426,8 @@
     </div>
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/heli.jpg" class="card-img-top position-sticky" style="width: 290px;height: 330px" alt="...">
+            <img src="assets/images/homepage/heli.jpg" class="card-img-top position-sticky"
+                 style="width: 290px;height: 330px" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Kavinda Helitha</h5>
                 <p class="card-text">UWU/CST/20/070</p>
@@ -412,7 +442,8 @@
     </div>
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/anuranga.jpg" class="card-img-top position-sticky" style="width: 290px;height: 330px" alt="...">
+            <img src="assets/images/homepage/anuranga.jpg" class="card-img-top position-sticky"
+                 style="width: 290px;height: 330px" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Anuranga</h5>
                 <p class="card-text">UWU/CST/20/085</p>
@@ -427,7 +458,8 @@
     </div>
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/ishara.jpg" class="card-img-top position-sticky" style="width: 290px;height: 330px" alt="...">
+            <img src="assets/images/homepage/ishara.jpg" class="card-img-top position-sticky"
+                 style="width: 290px;height: 330px" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Ishara Suvini</h5>
                 <p class="card-text">UWU/CST/20/087</p>
@@ -442,7 +474,8 @@
     </div>
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
-            <img src="assets/images/homepage/thilini.jpg" class="card-img-top position-sticky" style="width: 290px;height: 330px" alt="...">
+            <img src="assets/images/homepage/thilini.jpg" class="card-img-top position-sticky"
+                 style="width: 290px;height: 330px" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Thilini Priyangika</h5>
                 <p class="card-text">UWU/CST/20/089</p>
@@ -462,18 +495,6 @@
 <!-- ======== Footer ======== -->
 <?php include('content/footer.php') ?>
 
-<?php
-$schedules = $conn->query("SELECT * FROM `schedule_list`");
-$sched_res = [];
-foreach ($schedules->fetch_all(MYSQLI_ASSOC) as $row) {
-    $row['sdate'] = date("F d, Y h:i A", strtotime($row['start_datetime']));
-    $row['edate'] = date("F d, Y h:i A", strtotime($row['end_datetime']));
-    $sched_res[$row['id']] = $row;
-}
-?>
-<?php
-if (isset($conn)) $conn->close();
-?>
 
 <!-- ==== Boostrap Script ==== -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
@@ -486,14 +507,14 @@ if (isset($conn)) $conn->close();
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 <!-- ====== Script files ===== -->
-<script src="assets/js/home.js"></script>
+<script src="assets/js/script.js"></script>
 <script>
     var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')
 </script>
-<script src="./assets/js/script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"-->
+<!--        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"-->
+<!--        crossorigin="anonymous"></script>-->
 
 </body>
 

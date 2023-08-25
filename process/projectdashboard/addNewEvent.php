@@ -13,10 +13,12 @@ if (isset($_POST['submit'],$_POST['name'])){
     }else{
         $eventName = $_POST['name'];
         $eventDescription = $_POST['description'];
-        $eventDate = $_POST['event_date'];
+        $eventStartDate = $_POST['event_start_date'];
+        $eventEndDate = $_POST['event_end_date'];
         $projectId = $_POST['project_id'];
 
-        $event = new Event(null,$eventName, $eventDescription, $eventDate, $projectId,"active");
+        $event = new Event(null,$eventName, $eventDescription, $eventStartDate, $eventEndDate,
+            $projectId,"active");
         $result = $event->addEvent($con);
 
         if ($result){
