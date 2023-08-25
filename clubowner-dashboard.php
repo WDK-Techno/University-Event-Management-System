@@ -190,7 +190,7 @@ if (isset($_SESSION['user_id'])) {
 
 
         <div id="menu-content-1" class="main-content show ms-1">
-            <div class="d-flex  " >
+            <div class="d-flex mt-3 mb-2 ">
                 <button class="btn fw-bold d-flex ms-2 shadow-sm"
                         style=" color: var(--lighter-secondary) !important; background-color: var(--primary);"
                         data-bs-toggle="modal" data-bs-target="#exampleModal" >
@@ -199,55 +199,53 @@ if (isset($_SESSION['user_id'])) {
                     <div class="my-auto ms-1 me-auto">Create New</div>
                 </button>
 
-
             </div>
 
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header py-2 px-2"
-                                 style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
-                                <!--                                <h5 class="modal-title" id="exampleModalLabel">Project details</h5>-->
-                                <div class="ms-2 my-auto fs-4 fw-bold">
-                                    New Project
-                                </div>
-                                <!--                                <button type="button" class="btn-close" data-bs-dismiss="modal"-->
-                                <!--                                        aria-label="Close"></button>-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header py-2 px-2"
+                             style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                            <!--                                <h5 class="modal-title" id="exampleModalLabel">Project details</h5>-->
+                            <div class="ms-2 my-auto fs-4 fw-bold">
+                                Create Project
                             </div>
-                            <form action="process/clubownerdashboard/addproject.php" method="POST"
-                                  enctype="multipart/form-data">
-                                <div class="modal-body" style="background-color: var(--lighter-secondary);">
-
-                                    <div class="d-flex px-5">
-                                        <input class="form-control text-center" type="text"
-                                               name="project_name" id="add-project-name-input"
-                                               placeholder="Project Name" required/>
-                                    </div>
-                                    <div class="mt-3 border border-secondary-subtle rounded bg-body-secondary shadow-sm px-1 py-1 mx-5  d-flex flex-column px-5">
-                                        <div class="fw-bold my-2" style="color: var(--primary);">Project Chair</div>
-                                        <input class="form-control mb-4 text-center" type="email"
-                                               name="username" id="add-project-username-input"
-                                               placeholder="Email" required/>
-                                    </div>
-
-                                    <div class="mt-2 text-center" id="add-project-error"
-                                         style="color: var(--accent-color3)"></div>
-
-                                </div>
-                                <div class="modal-footer" style="background-color: var(--primary);">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                    </button>
-                                    <button type="button"
-                                            onclick="createNewProject()"
-                                            class="btn fw-bold"
-                                            style="background-color: var(--secondary); color: var(--primary);">
-                                        ADD
-                                    </button>
-                                </div>
-                            </form>
-
+                            <!--                                <button type="button" class="btn-close" data-bs-dismiss="modal"-->
+                            <!--                                        aria-label="Close"></button>-->
                         </div>
+                        <form action="process/clubownerdashboard/addproject.php" method="POST"
+                              enctype="multipart/form-data">
+                            <div class="modal-body" style="background-color: var(--lighter-secondary);">
+
+                                <div class="d-flex px-5">
+                                    <input class="form-control text-center" type="text"
+                                           name="project_name" id="add-project-name-input"
+                                           placeholder="Project Name" required/>
+                                </div>
+                                <div class="mt-3 border border-secondary-subtle rounded bg-body-secondary shadow-sm px-1 py-1 mx-5  d-flex flex-column px-5">
+                                    <div class="fw-bold my-2" style="color: var(--primary);">Project Chair</div>
+                                    <input class="form-control mb-4 text-center" type="email"
+                                           name="username" id="add-project-username-input"
+                                           placeholder="Email" required/>
+                                </div>
+
+                                <div class="mt-2 text-center" id="add-project-error"
+                                     style="color: var(--accent-color3)"></div>
+
+                            </div>
+                            <div class="modal-footer" style="background-color: var(--primary);">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                </button>
+                                <button type="button"
+                                        onclick="createNewProject()"
+                                        class="btn fw-bold"
+                                        style="background-color: var(--secondary); color: var(--primary);">
+                                    ADD
+                                </button>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -258,22 +256,18 @@ if (isset($_SESSION['user_id'])) {
             <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-3">
                 <?php
                 $i = 1;
+                foreach ($projects as $project) {
+                    ?>
 
-
-                foreach ($projects
-
-                as $project) {
-                ?>
-
-                <div class="col">
-                    <form action="process/clubownerdashboard/getIntoProject.php" method="post">
-                        <div class="rounded border">
-                            <div class="card d-block shadow-sm h-80">
-                                <div class="card-header p-3 text-white" style="background-color: var(--primary)">
-                                    <h5 class="card-title fw-bold"
-                                        style="font-size: 1.5rem"><?= $project->getProjectName() ?></h5>
-                                    <!--==== hidden ======-->
-                                    <input type="hidden" name="project_id" value="<?= $project->getProjectID() ?>">
+                    <div class="col">
+                        <form action="process/clubownerdashboard/getIntoProject.php" method="post">
+                            <div class="rounded border">
+                                <div class="card d-block shadow-sm h-80">
+                                    <div class="card-header p-3 text-white" style="background-color: var(--primary)">
+                                        <h5 class="card-title fw-bold"
+                                            style="font-size: 1.5rem"><?= $project->getProjectName() ?></h5>
+                                        <!--==== hidden ======-->
+                                        <input type="hidden" name="project_id" value="<?= $project->getProjectID() ?>">
 
                                         <button type="submit" name="submit" class="btn my-2 btn-outline-light">Access
                                         </button>
@@ -295,15 +289,16 @@ if (isset($_SESSION['user_id'])) {
                                                  alt="">
                                         </div>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
+
+                    <?php
+                    $i++;
+                } ?>
             </div>
-            <?php
-            $i++;
-            } ?>
         </div>
         <div id="menu-content-2" class="main-content hide">
             <h1>Content 2</h1>
@@ -316,18 +311,19 @@ if (isset($_SESSION['user_id'])) {
         </div>
         <div id="menu-content-5" class="main-content hide">
 
-    <div class="card-body text-center shadow">
-        <?php
-        if($loadClubData){
-        ?>
-        <img src="assets/images/profile_img/club/<?= $club->getProfileImage() ?>" class="rounded-circle mb-3 mt-4" src="" width="160" height="160"/>
-        <div class="mb-3">
-            <button class="btn btn-primary btn-sm" type="button">Change Photo
-            </button>
-        </div>
-        <?php }
-        ?>
-    </div>
+            <div class="card-body text-center shadow">
+                <?php
+                if ($loadClubData) {
+                    ?>
+                    <img src="assets/images/profile_img/club/<?= $club->getProfileImage() ?>"
+                         class="rounded-circle mb-3 mt-4" src="" width="160" height="160"/>
+                    <div class="mb-3">
+                        <button class="btn btn-primary btn-sm" type="button">Change Photo
+                        </button>
+                    </div>
+                <?php }
+                ?>
+            </div>
 
             <div class="card shadow mb-3">
                 <div class="card-header py-3">
@@ -379,7 +375,7 @@ if (isset($_SESSION['user_id'])) {
     </div>
 
     <script>
-        function createNewProject(){
+        function createNewProject() {
             let projectName = document.getElementById("add-project-name-input").value;
             let chairID = document.getElementById("add-project-username-input").value;
 
@@ -406,7 +402,8 @@ if (isset($_SESSION['user_id'])) {
             };
 
             // Send the username to the PHP script
-            xhr.send('project_name=' + encodeURIComponent(projectName) + '&chair_username=' + encodeURIComponent(chairID));
+            xhr.send('project_name=' + encodeURIComponent(projectName) + '&chair_username=' + encodeURIComponent(chairID) +
+                '&club_id=' + encodeURIComponent(<?=$clubid ?>));
 
         }
     </script>
