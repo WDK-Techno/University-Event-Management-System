@@ -548,22 +548,22 @@ if (!$project->loadDataFromProjectID($con)) {
                             <?php
                             $eventNo = 1;
                             foreach ($events as $event) {
-                                $event = new Event($event->getEventId(),null,null,null,
-                                null,null,null);
+                                $event = new Event($event->getEventId(), null, null, null,
+                                    null, null, null);
                                 $event->loadDataFromeventId($con);
                                 ?>
                                 <div class="col-md-3 shadow-sm p-3 m-2 rounded-5 fw-normal"
                                      style="font-size: 1.0rem; background-color: var(--lighter-secondary); color: var(--darker-primary);">
-                                  
+
                                     <div class="d-flex flex-column">
                                         <div><?= $event->getEventName() ?></div>
                                         <div><?= $event->getEventDescription() ?></div>
                                         <div><?= $event->getEventStartDate() ?></div>
                                         <div><?= $event->getEventEndDate() ?></div>
-                                      
+
                                     </div>
                                     <div style="font-size: 1.5rem;">
-                                        <div class="my-auto fs-5"><?= $event->geteventDescription() ."<br>". $event->geteventDate()?>
+                                        <div class="my-auto fs-5"><?= $event->geteventDescription() . "<br>" . $event->getEventStartDate() ?>
                                         </div>
                                         <div class="d-flex mx-auto card-list-option-buttons"
                                              style="font-size: 1.7rem;">
@@ -633,15 +633,17 @@ if (!$project->loadDataFromProjectID($con)) {
                                                                     <!-- Row 3: Event Date -->
                                                                     <div class="form-group">
                                                                         <input class="form-control text-center"
-                                                                               type="datetime-local" name="event_start_date"
-                                                                               value="<?=$event->getEventStartDate() ?>"
+                                                                               type="datetime-local"
+                                                                               name="event_start_date"
+                                                                               value="<?= $event->getEventStartDate() ?>"
                                                                                placeholder="Event Date"/>
                                                                     </div>
 
                                                                     <div class="form-group">
                                                                         <input class="form-control text-center"
-                                                                               type="datetime-local" name="event_end_date"
-                                                                               value="<?=$event->getEventEndDate() ?>"
+                                                                               type="datetime-local"
+                                                                               name="event_end_date"
+                                                                               value="<?= $event->getEventEndDate() ?>"
                                                                                placeholder="Event Date"/>
                                                                     </div>
                                                                 </div>
