@@ -563,7 +563,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                       
                                     </div>
                                     <div style="font-size: 1.5rem;">
-                                        <div class="my-auto fs-5"><?= $event->geteventDescription() ."<br>". $event->geteventDate()?>
+                                        <div class="my-auto fs-5"><?= $event->geteventDescription() ."<br>". $event->getEventStartDate()?>
                                         </div>
                                         <div class="d-flex mx-auto card-list-option-buttons"
                                              style="font-size: 1.7rem;">
