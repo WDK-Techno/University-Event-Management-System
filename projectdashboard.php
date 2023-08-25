@@ -517,7 +517,9 @@ if (!$project->loadDataFromProjectID($con)) {
                                                 <input class="form-control text-center" type="text" required
                                                        name="description" placeholder="Description"/><br>
                                                 <input class="form-control text-center" type="datetime-local" required
-                                                       name="event_date" placeholder="Event Date"/><br>
+                                                       name="event_start_date" placeholder="Event Start Date"/><br>
+                                                <input class="form-control text-center" type="datetime-local" required
+                                                       name="event_end_date" placeholder="Event End Date"/><br>
                                             </div>
                                         </div>
                                         <div class="modal-footer" style="background-color: var(--primary);">
@@ -546,11 +548,17 @@ if (!$project->loadDataFromProjectID($con)) {
                             <?php
                             $eventNo = 1;
                             foreach ($events as $event) {
+                                $event = new Event($event->getEventId(),null,null,null,
+                                null,null,null);
+                                $event->loadDataFromeventId($con);
                                 ?>
                                 <div class="col-md-3 shadow-sm p-3 m-2 rounded-5 fw-normal"
                                      style="font-size: 1.0rem; background-color: var(--lighter-secondary); color: var(--darker-primary);">
-                                    <div>
-                                        <div class="my-auto fs-5"><?= $event->geteventName()."<br>". $event->geteventDescription() ."<br>". $event->geteventDate()?></div>
+                                    <div class="d-flex flex-column">
+                                        <div><?= $event->getEventName() ?></div>
+                                        <div><?= $event->getEventDescription() ?></div>
+                                        <div><?= $event->getEventStartDate() ?></div>
+                                        <div><?= $event->getEventEndDate() ?></div>
                                     </div>
                                     <div style="font-size: 1.5rem;">
                                         <div class="d-flex mx-auto card-list-option-buttons"
@@ -594,7 +602,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                                                 <input type="hidden" name="menuNo"
                                                                        value="6">
                                                                 <input type="hidden" name="event_id"
-                                                                       value="<?= $event->geteventId() ?>">
+                                                                       value="<?= $event->getEventId() ?>">
                                                             </div>
 
                                                             <div class="modal-body"
@@ -602,19 +610,35 @@ if (!$project->loadDataFromProjectID($con)) {
                                                                 <div class="grid px-5">
                                                                     <!-- Row 1: Event Name -->
                                                                     <div class="form-group">
-                                                                        <input class="form-control text-center" type="text" name="name" value="<?= $event->geteventName() ?>" placeholder="Event Name"/>
+                                                                        <input class="form-control text-center"
+                                                                               type="text" name="name"
+                                                                               value="<?= $event->getEventName() ?>"
+                                                                               placeholder="Event Name"/>
                                                                     </div>
-                                                                    <br>
+
 
                                                                     <!-- Row 2: Event Description -->
                                                                     <div class="form-group">
-                                                                        <input class="form-control text-center" type="text" name="description" value="<?= $event->geteventDescription() ?>" placeholder="Event Description"/>
+                                                                        <input class="form-control text-center"
+                                                                               type="text" name="description"
+                                                                               value="<?= $event->getEventDescription() ?>"
+                                                                               placeholder="Event Description"/>
                                                                     </div>
-                                                                    <br>
+
 
                                                                     <!-- Row 3: Event Date -->
                                                                     <div class="form-group">
-                                                                        <input class="form-control text-center" type="datetime-local" name="event_date" value="<?= $event->geteventDate() ?>" placeholder="Event Date"/>
+                                                                        <input class="form-control text-center"
+                                                                               type="datetime-local" name="event_start_date"
+                                                                               value="<?=$event->getEventStartDate() ?>"
+                                                                               placeholder="Event Date"/>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <input class="form-control text-center"
+                                                                               type="datetime-local" name="event_end_date"
+                                                                               value="<?=$event->getEventEndDate() ?>"
+                                                                               placeholder="Event Date"/>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -660,7 +684,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                                                 <div class="d-flex flex-row w-100 justify-content-between">
 
                                                                     <div class="ms-2 my-auto fs-4 fw-bold">
-                                                                        <?= $event->geteventName() ?>
+                                                                        <?= $event->getEventName() ?>
                                                                     </div>
 
                                                                     <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
@@ -675,7 +699,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                                                 <input type="hidden" name="menuNo"
                                                                        value="6">
                                                                 <input type="hidden" name="event_id"
-                                                                       value="<?= $event->geteventId() ?>">
+                                                                       value="<?= $event->getEventId() ?>">
                                                             </div>
 
                                                             <div class="modal-body"
