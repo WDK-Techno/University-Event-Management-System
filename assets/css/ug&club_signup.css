@@ -1,12 +1,11 @@
 .bgimg {
-	background-image: url('../images/login/cover_new.jpg');
+	background-image: url('../images/register_form/cover_new.jpg');
 	min-height: 100%;
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
 	position: relative;
-  }
-
+}
 .bgimg::before{
 	content: '';
 	position: absolute;
@@ -15,5 +14,5 @@
 	right: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(0, 0, 0, 0.499);
+	background-color: rgba(0, 0, 0, 0.513);
 }

@@ -6,30 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <!-- ====== CSS Files ==== -->
-    <link rel="stylesheet" href="assests/css/style.css">
-    <link rel="stylesheet" href="assests/scss/style.scss">
-    <link rel="stylesheet" href="assests/css/home.css">
+    <link rel="stylesheet" href="assets/css/register.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <!-- ===== Boostrap CSS ==== -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="assets/css/register.css">
 
-    <style>
-        body, h1 {
-            font-family: "Raleway", sans-serif
-        }
-
-        body, html {
-            height: 50%
-        }
-
-    </style>
 </head>
 <body>
 
-<div class="bgimg ">
+<div class="bgimg">
     <!-- ======= Navigation Bar =======    -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container-fluid px-4">
@@ -55,40 +43,41 @@
             </div>
         </div>
     </nav>
-    <div class="container">
-        <div class="row mh-100vh">
-            <div class="screen">
-                <div class="screen__content">
-                    <h3 style="padding: 30px 0px 30px 0px;color: black;font-weight: bold; " align="center">
-                        Register </h3>
-                    <div class="text-center m-3">
-                        <a href="content/ug_signup.php">
-                            <button class="btn btn-danger " type="button"
-                                    style="border: none;width: 300px;height: 58px;background-color: #2b14bc;">
-                                Undergraduates
-                            </button>
-                        </a>
-                    </div>
-                    <div style="padding-bottom: 30px;" class="text-center m-3">
-                        <a href="content/club_signup.php">
-                            <button class="btn btn-danger " type="button"
-                                    style="border: none;width: 300px;height: 58px;background-color: #339363;">
-                                Club/Society
-                            </button>
-                        </a>
-                    </div>
+    <div class="w-100" style="height: 100vh;">
+        <div class="container">
+            <div class="row mh-100vh">
+                <div class="screen">
+                    <div class="screen__content">
+                        <h3 style="padding: 30px 0px 30px 0px;color: black;font-weight: bold; " align="center">
+                            Register </h3>
+                        <div class="text-center m-3">
+                            <a href="content/ug_signup.php">
+                                <button class="btn btn-danger " type="button"
+                                        style="border: none;width: 300px;height: 58px;background-color: #2b14bc;">
+                                    Undergraduates
+                                </button>
+                            </a>
+                        </div>
+                        <div style="padding-bottom: 30px;" class="text-center m-3">
+                            <a href="content/club_signup.php">
+                                <button class="btn btn-danger " type="button"
+                                        style="border: none;width: 300px;height: 58px;background-color: #339363;">
+                                    Club/Society
+                                </button>
+                            </a>
+                        </div>
 
-                </div>
-                <div class="screen__background">
-                    <span class="screen__background__shape screen__background__shape4"></span>
-                    <span class="screen__background__shape screen__background__shape3"></span>
-                    <span class="screen__background__shape screen__background__shape2"></span>
-                    <span class="screen__background__shape screen__background__shape1"></span>
+                    </div>
+                    <div class="screen__background">
+                        <span class="screen__background__shape screen__background__shape4"></span>
+                        <span class="screen__background__shape screen__background__shape3"></span>
+                        <span class="screen__background__shape screen__background__shape2"></span>
+                        <span class="screen__background__shape screen__background__shape1"></span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 <!-- ======== Footer ======== -->
 <footer class="py-0 px-5 text-dark">

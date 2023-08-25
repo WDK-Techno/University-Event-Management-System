@@ -31,7 +31,7 @@ if(isset($_POST['submit'],$_POST['username'],$_POST['password'])){
 
                     $_SESSION['profile_img'] = $ug->getProfileImg();
 
-                    header("location: ../");
+                    header("location: ../profile.php");
                 }
 
             }

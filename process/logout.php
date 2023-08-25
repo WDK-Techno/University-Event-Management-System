@@ -35,4 +35,11 @@ if (isset($_POST['submit4'])){
 
     header("location: ../");
 }
+if ((isset($_POST['submit5']))){
+    unset($_SESSION["user_id"]);
+    unset($_SESSION['role']);
+    session_destroy();
+
+    header("location: ../login.php");
+}
 

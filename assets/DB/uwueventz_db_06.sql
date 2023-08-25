@@ -1,0 +1,323 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Aug 25, 2023 at 11:46 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `uwueventz_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `club`
+--
+
+CREATE TABLE `club` (
+  `user_id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `contact_no` varchar(30) NOT NULL,
+  `register_date` date NOT NULL DEFAULT current_timestamp(),
+  `profile_image` varchar(50) NOT NULL DEFAULT 'club_profile_default.jpg'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `club`
+--
+
+INSERT INTO `club` (`user_id`, `name`, `contact_no`, `register_date`, `profile_image`) VALUES
+(11, 'IEEE UWU', '0774568793', '2023-08-21', 'club_profile_default.jpg'),
+(12, 'Rotaract Club', '0771235462', '2023-08-21', 'club_profile_default.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event`
+--
+
+CREATE TABLE `event` (
+  `event_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` text NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `status` varchar(10) NOT NULL DEFAULT 'new'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`event_id`, `name`, `description`, `start_date`, `end_date`, `project_id`, `status`) VALUES
+(1, 'Holi', 'test', '2023-09-02 21:52:00', '0000-00-00 00:00:00', 1, 'delete'),
+(2, 'Holi', 'This is Fund Raising program', '2023-08-27 08:00:00', '2023-08-27 10:00:00', 1, 'active'),
+(3, 'fasdf', 'dsfdas', '2023-08-29 11:15:00', '2023-08-29 21:30:00', 1, 'active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `project`
+--
+
+CREATE TABLE `project` (
+  `project_id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `club_id` int(11) NOT NULL,
+  `project_chair_id` int(11) NOT NULL,
+  `status` varchar(10) NOT NULL DEFAULT 'active',
+  `start_date` date NOT NULL DEFAULT current_timestamp(),
+  `end_date` date DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `profile_image` varchar(50) NOT NULL DEFAULT 'project_profile_default.jpg'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `project`
+--
+
+INSERT INTO `project` (`project_id`, `name`, `club_id`, `project_chair_id`, `status`, `start_date`, `end_date`, `description`, `profile_image`) VALUES
+(1, 'JamborIEEE23', 11, 4, 'active', '2023-08-21', '2023-08-26', 'JamborIEEE is a project intiate by IEEE Sri Lanka Section.', '64e830b42afda8.67288644.png'),
+(5, 'INSL 2023', 11, 5, 'active', '2023-08-25', NULL, NULL, '64e87d4ab4ca82.40177324.png'),
+(6, 'Open Day 2023', 11, 6, 'active', '2023-08-25', NULL, NULL, 'project_profile_default.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `project_team`
+--
+
+CREATE TABLE `project_team` (
+  `category_id` int(11) NOT NULL,
+  `ug_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `project_team`
+--
+
+INSERT INTO `project_team` (`category_id`, `ug_id`) VALUES
+(1, 4),
+(1, 5),
+(2, 5),
+(3, 6),
+(4, 4),
+(4, 6),
+(8, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `team_category`
+--
+
+CREATE TABLE `team_category` (
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(30) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `status` varchar(10) NOT NULL DEFAULT 'active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `team_category`
+--
+
+INSERT INTO `team_category` (`category_id`, `category_name`, `project_id`, `status`) VALUES
+(1, 'Program Team', 1, 'active'),
+(2, 'Secretary Team', 1, 'active'),
+(3, 'Logistic Team', 1, 'active'),
+(4, 'Finance Team', 1, 'active'),
+(5, 'test Team 1', 1, 'delete'),
+(6, 'Test Team 5', 1, 'delete'),
+(7, 'New Team', 1, 'delete'),
+(8, 'Helitha Team', 1, 'active'),
+(9, 'Program Team', 6, 'active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `undergraduate`
+--
+
+CREATE TABLE `undergraduate` (
+  `user_id` int(11) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `last_name` varchar(30) NOT NULL,
+  `contact_no` varchar(13) NOT NULL,
+  `profile_image` varchar(50) NOT NULL DEFAULT 'ug_profile_default.jpg'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `undergraduate`
+--
+
+INSERT INTO `undergraduate` (`user_id`, `first_name`, `last_name`, `contact_no`, `profile_image`) VALUES
+(4, 'Kavindra', 'Weerasinghe', '0771235462', 'ug_profile_4_1.jpg'),
+(5, 'Ishara', 'Suvini', '0774568793', 'ug_profile_default.jpg'),
+(6, 'Thilini', 'Priyangika', '0714568792', 'ug_profile_default.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(50) NOT NULL,
+  `password` text NOT NULL,
+  `role` varchar(5) NOT NULL,
+  `status` varchar(10) NOT NULL DEFAULT 'active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `user_name`, `password`, `role`, `status`) VALUES
+(4, 'wdk@gmail.com', '$2y$10$B6upj90IgL8nrCWee7qeX.xB7zRDVkxZgJjF8PaJmcgM7ZH./9jmG', 'ug', 'active'),
+(5, 'suvi@gmail.com', '$2y$10$ygwIkp/oUl8SqIi8rCmQGekH1MxFyxLHHB3vMHid88F9fzqF7AR0e', 'ug', 'active'),
+(6, 'thilini@gmail.com', '$2y$10$eSa/3JDL43juhVipg2GP7OmeprZhkj1ZvaUWDHpvLe6y1wzjKLd3y', 'ug', 'active'),
+(11, 'ieee@gmail.com', '$2y$10$p.AFtXCnxtHqGHdh/YydEejiJg31PnDIQgmmB7e8SnhXKsYdHM.Nm', 'club', 'active'),
+(12, 'rotaract@gmail.com', '$2y$10$DQlhqaLHY8MomVwohOzOsexmaqzvTPg9ZIUGd/1In4NZp1tptWPLW', 'club', 'active'),
+(14, 'admin@gmail.com', '$2y$10$RLEVRnMq2yLZkU6mYL4U1OfQMjM8tv0dyfA3ddMMQ0P5ZOccZlFVq', 'admin', 'active');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `club`
+--
+ALTER TABLE `club`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `event`
+--
+ALTER TABLE `event`
+  ADD PRIMARY KEY (`event_id`),
+  ADD KEY `project_id` (`project_id`);
+
+--
+-- Indexes for table `project`
+--
+ALTER TABLE `project`
+  ADD PRIMARY KEY (`project_id`),
+  ADD KEY `club_id` (`club_id`),
+  ADD KEY `project_chair_id` (`project_chair_id`);
+
+--
+-- Indexes for table `project_team`
+--
+ALTER TABLE `project_team`
+  ADD PRIMARY KEY (`category_id`,`ug_id`),
+  ADD KEY `ug_id` (`ug_id`);
+
+--
+-- Indexes for table `team_category`
+--
+ALTER TABLE `team_category`
+  ADD PRIMARY KEY (`category_id`),
+  ADD KEY `project_id` (`project_id`);
+
+--
+-- Indexes for table `undergraduate`
+--
+ALTER TABLE `undergraduate`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `event`
+--
+ALTER TABLE `event`
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `project`
+--
+ALTER TABLE `project`
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `team_category`
+--
+ALTER TABLE `team_category`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `club`
+--
+ALTER TABLE `club`
+  ADD CONSTRAINT `club_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `event`
+--
+ALTER TABLE `event`
+  ADD CONSTRAINT `event_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`);
+
+--
+-- Constraints for table `project`
+--
+ALTER TABLE `project`
+  ADD CONSTRAINT `project_ibfk_1` FOREIGN KEY (`club_id`) REFERENCES `club` (`user_id`),
+  ADD CONSTRAINT `project_ibfk_2` FOREIGN KEY (`project_chair_id`) REFERENCES `undergraduate` (`user_id`);
+
+--
+-- Constraints for table `project_team`
+--
+ALTER TABLE `project_team`
+  ADD CONSTRAINT `project_team_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `team_category` (`category_id`),
+  ADD CONSTRAINT `project_team_ibfk_2` FOREIGN KEY (`ug_id`) REFERENCES `undergraduate` (`user_id`);
+
+--
+-- Constraints for table `team_category`
+--
+ALTER TABLE `team_category`
+  ADD CONSTRAINT `team_category_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`project_id`);
+
+--
+-- Constraints for table `undergraduate`
+--
+ALTER TABLE `undergraduate`
+  ADD CONSTRAINT `undergraduate_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

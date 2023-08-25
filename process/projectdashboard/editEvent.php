@@ -15,13 +15,15 @@ if (isset($_POST['submit'],$_POST['name'])){
         $eventName = $_POST['name'];
         $eventId = $_POST['event_id'];
         $eventDescription = $_POST['description'];
-        $eventDate = $_POST['event_date'];
+        $eventStartDate = $_POST['event_start_date'];
+        $eventEndDate = $_POST['event_end_date'];
 
-        $event = new Event($eventId,null,null,null, null, null);
+        $event = new Event($eventId,null,null,null,null, null, null);
         $event->loadDataFromeventId($con);
-        $event->seteventName($eventName);
-        $event->seteventDescription($eventDescription);
-        $event->seteventDate($eventDate);
+        $event->setEventName($eventName);
+        $event->setEventDescription($eventDescription);
+        $event->setEventStartDate($eventStartDate);
+        $event->setEventEndDate($eventEndDate);
 
         $result = $event->saveChangesToDataBase($con);
 
