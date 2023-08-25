@@ -249,7 +249,7 @@ if (isset($_SESSION['user_id'])) {
                                         <!--==== hidden ======-->
                                         <input type="hidden" name="project_id" value="<?= $project->getProjectID() ?>">
 
-                                        <button type="submit" name="submit" class="btn my-2 btn-outline-light">More
+                                        <button type="submit" name="submit" class="btn my-2 btn-outline-light">Access
                                         </button>
                                     </div>
                                     <div class="card-body py-4 d-flex">
@@ -294,9 +294,9 @@ if (isset($_SESSION['user_id'])) {
 
     <div class="card-body text-center shadow">
         <?php
-        if($loadUserData){
+        if($loadClubData){
         ?>
-        <img src="assets/images/profile_img/club/<?= $undergraduate->getProfileImg() ?>" class="rounded-circle mb-3 mt-4" src="" width="160" height="160"/>
+        <img src="assets/images/profile_img/club/<?= $club->getProfileImage() ?>" class="rounded-circle mb-3 mt-4" src="" width="160" height="160"/>
         <div class="mb-3">
             <button class="btn btn-primary btn-sm" type="button">Change Photo
             </button>
