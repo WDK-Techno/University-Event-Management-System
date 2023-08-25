@@ -112,12 +112,10 @@ if (!$project->loadDataFromProjectID($con)) {
 
         <!-- ====== CSS Files ==== -->
         <link rel="stylesheet" href="assets/css/style.css">
-        <!-- <link rel="stylesheet" href="assests/scss/style.scss"> -->
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="assets/css/projectdashboard.css">
 
         <!-- ===== Boostrap CSS ==== -->
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
               crossorigin="anonymous">
