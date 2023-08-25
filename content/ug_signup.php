@@ -31,8 +31,8 @@
                     <a href="../register.php" class="text-decoration-none">
                         <button class="btn btn-outline-secondary d-flex align-items-center" type="submit"><Span
                                     class="d-none d-lg-inline pe-2">SignUp</Span>
-                            <ion-icon style="font-size: 1.0rem;;"
-                            " name="person-add-outline"></ion-icon></button>
+                            <ion-icon style="font-size: 1.0rem;"
+                            name="person-add-outline"></ion-icon></button>
                     </a>
                     <a href="../login.php" class="text-decoration-none">
                         <button class="btn btn-outline-primary ms-2 d-flex align-items-center" type="submit"><Span

@@ -4,7 +4,7 @@ namespace classes;
 use classes\DBConnector;
 use PDO;
 
-class admin{
+class Admin{
 
     public function getUsers(){
         $dbuser = new DBConnector();
