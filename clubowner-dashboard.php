@@ -116,19 +116,19 @@ if (isset($_SESSION['user_id'])) {
                     <li id="menu-2" class="sideBar-btn" onclick="showMenuContent(2)">
                         <a href="#" class="nav-link d-flex justify-content-start">
                             <ion-icon name="calendar-outline"></ion-icon>
-                            <span class="sideBar-btn-text my-auto">Grantt Chart</span>
+                            <span class="sideBar-btn-text my-auto">Club Analysis</span>
                         </a>
                     </li>
                     <li id="menu-3" class="sideBar-btn" onclick="showMenuContent(3)">
                         <a href="#" class="nav-link d-flex justify-content-start">
                             <ion-icon name="walk-outline"></ion-icon>
-                            <span class="sideBar-btn-text my-auto">Activitty Plan</span>
+                            <span class="sideBar-btn-text my-auto">User Tracker</span>
                         </a>
                     </li>
                     <li id="menu-4" class="sideBar-btn" onclick="showMenuContent(4)">
                         <a href="#" class="nav-link d-flex justify-content-start">
                             <ion-icon name="document-text-outline"></ion-icon>
-                            <span class="sideBar-btn-text my-auto">PR Plan</span>
+                            <span class="sideBar-btn-text my-auto">Progress</span>
                         </a>
                     </li>
                     <li id="menu-5" class="sideBar-btn" onclick="showMenuContent(5)">
