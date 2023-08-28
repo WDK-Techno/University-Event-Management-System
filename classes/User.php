@@ -95,22 +95,26 @@ class User
         }
 
     }
-    public function getUserIDFromUsername($con){
+
+    public function getUserIDFromUsername($con)
+    {
         try {
             $query = "SELECT * FROM user WHERE user_name = ? AND role = ? AND status <> ?";
             $pstmt = $con->prepare($query);
-            $pstmt->bindValue(1,$this->username);
-            $pstmt->bindValue(2,$this->role);
-            $pstmt->bindValue(3,"delete");
+            $pstmt->bindValue(1, $this->username);
+            $pstmt->bindValue(2, $this->role);
+            $pstmt->bindValue(3, "delete");
             $pstmt->execute();
             $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
             return $rs->user_id;
 
-        }catch (PDOException $exc){
-            die("Error in loading userID From Database ". $exc->getMessage());
+        } catch (PDOException $exc) {
+            die("Error in loading userID From Database " . $exc->getMessage());
         }
     }
-    public function authenticate ($con){
+
+    public function authenticate($con)
+    {
         try {
             $query = "SELECT * FROM user WHERE user_name = ? AND status <> ?";
             $pstmt = $con->prepare($query);
@@ -118,24 +122,24 @@ class User
             $pstmt->bindValue(2, "delete");
             $pstmt->execute();
             $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
-            if (!empty($rs)){
+            if (!empty($rs)) {
                 $db_password = $rs->password;
-                if (password_verify($this->password,$db_password)){
+                if (password_verify($this->password, $db_password)) {
                     $this->user_id = $rs->user_id;
                     $this->username = $rs->user_name;
                     $this->password = null;
                     $this->role = $rs->role;
                     $this->status = $rs->status;
                     return true;
-                }else{
+                } else {
                     return false;
                 }
-            }else{
+            } else {
                 return false;
             }
 
-        }catch (PDOException $exc){
-            die("Error in user Authentication ". $exc->getMessage());
+        } catch (PDOException $exc) {
+            die("Error in user Authentication " . $exc->getMessage());
         }
     }
 
@@ -194,7 +198,7 @@ class Undergraduate extends User
     }
 
 
-    public function __construct($usrname, $password, $firstName, $lastName, $contactNo,$profileImg)
+    public function __construct($usrname, $password, $firstName, $lastName, $contactNo, $profileImg)
     {
         parent::__construct($usrname, $password);
 
@@ -273,7 +277,8 @@ class Undergraduate extends User
         }
     }
 
-    public function updateChanges(){
+    public function updateChanges()
+    {
 
     }
 
@@ -407,23 +412,23 @@ class Club extends User
         }
     }
 
-    // public function fetchData()
-    // {
-    //     $db = DBConnector::getConnection();
+    public function saveChangesToDatabase($con)
+    {
+        try {
 
-    //     $query = "SELECT * FROM undergraduate WHERE user_id = :user_id";
-    //     $stmt = $db->prepare($query);
-    //     $stmt->bindParam(':user_id', $this->userId);
-    //     $stmt->execute();
+            $query = "UPDATE club SET name=?,contact_no=?,profile_image=? WHERE user_id=?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1, $this->clubName);
+            $pstmt->bindValue(2, $this->contactNo);
+            $pstmt->bindValue(3, $this->profileImage);
+            $pstmt->bindValue(4, parent::getUserId());
+            $pstmt->execute();
+            return $pstmt->rowCount() > 0;
 
-    //     $data = $stmt->fetch();
-    //     if ($data) {
-    //         $this->firstName = $data['first_name'];
-    //         $this->lastName = $data['last_name'];
-    //         $this->contactNo = $data['contact_no'];
-    //     }
-    // }
-    
+        } catch (PDOException $exc) {
+            die("Error in update data to DB " . $exc->getMessage());
+        }
+    }
 
 
 }

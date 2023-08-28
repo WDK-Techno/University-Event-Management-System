@@ -27,6 +27,13 @@ if (isset($_SESSION['user_id'])) {
     $undergraduate->setUserId($clubid);
     $loadUserData = $undergraduate->loadDataFromUserID($con);
 
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        $selected_menuNo = 5;
+        if (isset($_GET['tab'])) {
+            $selected_menuNo = $_GET['tab'];
+        }
+    }
+
     ?>
 
 
@@ -93,14 +100,14 @@ if (isset($_SESSION['user_id'])) {
 
             if ($loadClubData) {
                 ?>
-                <div id="project-details" class="my-2" style="font-weight:bold; font-size: 1.5rem;">
+                <div id="user-name" class="my-2 " style="font-weight:bold; font-size: 1.5rem;">
                     <span class="d-block w3-text-light-blue"></span>
                     <span class="d-block w3-text-cyan"><?= $club->getClubName() ?></span>
                 </div>
 
                 <hr>
                 <ul class="nav nav-pills flex-column navbar-text mb-auto">
-                    <li id="menu-1" class="sideBar-btn activate" onclick="showMenuContent(1)">
+                    <li id="menu-1" class="sideBar-btn" onclick="showMenuContent(1)">
                         <a href="#" class="nav-link d-flex justify-content-start">
                             <ion-icon name="people-circle-outline"></ion-icon>
                             <span class="sideBar-btn-text my-auto">Projects</span>
@@ -189,12 +196,12 @@ if (isset($_SESSION['user_id'])) {
         </div>
 
 
-        <div id="menu-content-1" class="main-content show ms-1">
+        <div id="menu-content-1" class="main-content hide ms-1">
             <div class="d-flex mt-3 mb-2 ">
                 <button class="btn fw-bold d-flex ms-2 shadow-sm"
                         style=" color: var(--lighter-secondary) !important; background-color: var(--primary);"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal" >
-                    <ion-icon class="my-auto"  name="add-outline"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <ion-icon class="my-auto" name="add-outline"
                               style="font-size: 1.4rem;"></ion-icon>
                     <div class="my-auto ms-1 me-auto">Create New</div>
                 </button>
@@ -263,20 +270,24 @@ if (isset($_SESSION['user_id'])) {
                         <form action="process/clubownerdashboard/getIntoProject.php" method="post">
                             <div class="rounded border">
                                 <div class="card d-block shadow-sm h-80">
-                                    <div class="card-header p-3 text-white" style="background-color: var(--primary)">
+                                    <div class="card-header p-3 text-white"
+                                         style="background-color: var(--primary)">
                                         <h5 class="card-title fw-bold"
                                             style="font-size: 1.5rem"><?= $project->getProjectName() ?></h5>
                                         <!--==== hidden ======-->
-                                        <input type="hidden" name="project_id" value="<?= $project->getProjectID() ?>">
+                                        <input type="hidden" name="project_id"
+                                               value="<?= $project->getProjectID() ?>">
 
-                                        <button type="submit" name="submit" class="btn my-2 btn-outline-light">Access
+                                        <button type="submit" name="submit" class="btn my-2 btn-outline-light">
+                                            Access
                                         </button>
                                     </div>
                                     <div class="card-body py-4 d-flex">
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button shadow-sm r" id="button-3">
-                                                    <input type="checkbox" class="checkbox status-toggle" checked project-id="<?= $project->getProjectID() ?>">
+                                                    <input type="checkbox" class="checkbox status-toggle" checked
+                                                           project-id="<?= $project->getProjectID() ?>">
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -284,12 +295,7 @@ if (isset($_SESSION['user_id'])) {
                                         </div>
 
 
-
-
-
-
-
-                                    <!-------------------------------------------------->
+                                        <!-------------------------------------------------->
                                         <div class="">
                                             <img class="img-thumbnail shadow-sm"
                                                  style="width: 150px; height: 150px;"
@@ -319,23 +325,44 @@ if (isset($_SESSION['user_id'])) {
         </div>
         <div id="menu-content-5" class="main-content hide">
 
-            <div class="card-body text-center shadow">
+            <div class="text-center d-flex">
                 <?php
                 if ($loadClubData) {
                     ?>
-                    <img src="assets/images/profile_img/club/<?= $club->getProfileImage() ?>"
-                         class="rounded-circle mb-3 mt-4" src="" width="160" height="160"/>
-                    <div class="mb-3">
-                        <button class="btn btn-primary btn-sm" type="button">Change Photo
-                        </button>
+                    <!-- ======= project image area ===== -->
+                    <div class="d-flex flex-column mx-auto my-3">
+                        <img class="rounded-circle img-thumbnail shadow-sm"
+                             style="width: 150px; height: 150px; object-fit: cover;"
+                             src="assets/images/profile_img/club/<?= $club->getProfileImage() ?>"
+                             alt="">
+                        <form action="process/clubownerdashboard/saveProfileImage.php" method="post"
+                              enctype="multipart/form-data">
+                            <div class="btn fw-bold d-flex mx-4 mt-2 shadow-sm" type="button"
+                                 onclick="fileUploadBtn()"
+                                 style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
+                                          name="cloud-upload-outline"></ion-icon>
+                                <div class="my-auto ms-1 me-auto">Upload</div>
+                                <input type="file" class="form-control d-none" name="image_upload"
+                                       id="image_upload" onchange="saveImgSubmit()"/>
+
+                            </div>
+                            <!--======= hidden ==========-->
+                            <input type="hidden" name="menuNo" value="5">
+                            <input type="hidden" name="club_id"
+                                   value="<?= $club->getUserId() ?>">
+                            <input class="d-none" type="submit" name="image_save_submit"
+                                   id="image_save_submit"/>
+                        </form>
                     </div>
+
                 <?php }
                 ?>
             </div>
 
-            <div class="card shadow mb-3">
+            <div class="card shadow-sm mb-3 mx-4">
                 <div class="card-header py-3">
-                    <p class="text-primary m-0 fw-bold">Club Settings</p>
+                    <p class="m-0 fw-bold" style="color: var(--darker-primary); font-size: 1.3rem;">Club Settings</p>
                 </div>
                 <div class="card-body">
                     <form>
@@ -344,14 +371,14 @@ if (isset($_SESSION['user_id'])) {
                         if ($loadClubData){
                         ?>
 
-                        <div class="row">
+                        <div class="row" style="color: var(--primary);">
                             <div class="col">
                                 <div class="mb-3">
                                     <label class="form-label" for="first_name">
-                                        <strong>club Name</strong>
+                                        <strong>Club Name</strong>
                                     </label>
                                     <input id="first_name" class="form-control" type="text"
-                                           placeholder="<?= $club->getClubName() ?>" name="first_name"/>
+                                           value="<?= $club->getClubName() ?>" name="first_name"/>
                                 </div>
                             </div>
                             <div class="col">
@@ -360,14 +387,24 @@ if (isset($_SESSION['user_id'])) {
                                         <strong>Contact number</strong>
                                     </label>
                                     <input id="first_name" class="form-control" type="text"
-                                           placeholder="<?= $club->getContactNo() ?>" name="first_name"/>
+                                           value="<?= $club->getContactNo() ?>" name="first_name"/>
                                 </div>
                             </div>
 
                         </div>
-                        <div class="mb-3">
-                            <button class="btn btn-primary btn-sm" type="submit">Update</button>
+                        <div class="row px-2" style="color: var(--primary);">
+                            <div class="fw-bold">Description</div>
+                            <textarea class="form-control" name="desc" id="" cols="25"
+                                      rows="7"><?= $project->getDescription() ?></textarea>
                         </div>
+                        <button class="btn fw-bold d-flex mt-2 ms-auto me-0"
+                                style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
+                                type="submit" name="submit_desc">
+                            <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
+                                      name="save-outline"></ion-icon>
+                            <div class="my-auto ms-1 me-auto">Save</div>
+
+                        </button>
                     </form>
                     <?php
                     } else {
@@ -415,7 +452,17 @@ if (isset($_SESSION['user_id'])) {
 
         }
     </script>
+    <!--    =============== execute upload image button ==========-->
+    <script>
+        function fileUploadBtn() {
+            document.getElementById('image_upload').click();
 
+        }
+
+        function saveImgSubmit() {
+            document.getElementById('image_save_submit').click();
+        }
+    </script>
 
     <!-- ======script button===== --->
     <script>
@@ -426,7 +473,7 @@ if (isset($_SESSION['user_id'])) {
                 statusToggle.addEventListener("change", function () {
                     const isChecked = statusToggle.checked;
                     const projectId = statusToggle.getAttribute("project-id");
-                     console.log(projectId);
+                    console.log(projectId);
                     updateStatus(isChecked, projectId);
                 });
             });
@@ -445,7 +492,12 @@ if (isset($_SESSION['user_id'])) {
             }
         });
     </script>
-
+    <!--=========== Selected Menu change when loading ============-->
+    <script>
+        document.getElementById("menu-<?php echo $selected_menuNo ?>").classList.add("activate");
+        document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.remove("hide");
+        document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.add("show");
+    </script>
     <!-- ==== Boostrap Script ==== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
