@@ -490,8 +490,8 @@ if (!empty($rs)) {
     </div>
 
 </div>
-
-
+<!-- =====back to top button====-->
+<a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top border border-dark" role="button"><i class="fas fa-chevron-up"></i></a>
 <!-- ======== Footer ======== -->
 <?php include('content/footer.php') ?>
 
@@ -510,6 +510,26 @@ if (!empty($rs)) {
 <script src="assets/js/script.js"></script>
 <script>
     var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')
+</script>
+<!-- =====back to top button====-->
+<script>
+    $(document).ready(function(){
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('#back-to-top').fadeIn();
+            } else {
+                $('#back-to-top').fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        $('#back-to-top').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 400);
+            return false;
+        });
+    });
+
 </script>
 
 <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"-->
