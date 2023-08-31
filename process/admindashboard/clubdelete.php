@@ -7,6 +7,6 @@ require_once '../../classes/DBConnector.php';
 if (isset($_POST["user_id"])) {
     $user_id = $_POST["user_id"];
     $userObj = new \classes\Admin();
-    $userObj->declineRequest($user_id);
+    $userObj->clubdelete($user_id);
     header("Location:../../superadmindashboard.php");
 }

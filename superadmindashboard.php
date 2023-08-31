@@ -16,6 +16,7 @@ $userObj = new Admin();
 $user1 = $userObj->getUsers();
 $user2 = $userObj->getClubs();
 $user3 = $userObj->getRequests();
+$user4 = $userObj->getRowCount();
 ?>
 
 <!DOCTYPE html>
@@ -116,7 +117,7 @@ $user3 = $userObj->getRequests();
                     </li> -->
                 </ul>
 
-                <div class="bell-notification" current-count="8">
+                <div class="bell-notification" current-count="<?php echo $user4 ; ?>">
                     <ion-icon name="notifications-outline"></ion-icon>
                 </div>
                 <form action="process/logout.php" method="post">
@@ -194,9 +195,12 @@ $user3 = $userObj->getRequests();
                                 </button>
                             </td>
                             <td>
+                            <form action="process/admindashboard/ugdelete.php" method="post">
+                                                <input type="hidden" name="user_id" value="<?php echo $users->user_id; ?>">
                                 <button type="submit" class="btn btn-danger "
                                         style="border: none;width: 96px;height: 38px;">Delete
                                 </button>
+                                </form>
                             </td>
                         </tr>
                         <?php
@@ -254,9 +258,13 @@ $user3 = $userObj->getRequests();
                                 </button>
                             </td>
                             <td>
+                            <form action="process/admindashboard/clubdelete.php" method="post">
+                                                <input type="hidden" name="user_id"
+                                                       value="<?php echo $users->user_id; ?>">
                                 <button type="submit" class="btn btn-danger "
                                         style="border: none;width: 96px;height: 38px;">Delete
                                 </button>
+                    </form>
                             </td>
                         </tr>
                         <?php
