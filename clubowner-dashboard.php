@@ -60,29 +60,7 @@ if (isset($_SESSION['user_id'])) {
 
     </head>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-
-        <!-- ====== CSS Files ==== -->
-        <link rel="stylesheet" href="assets/css/style.css">
-        <!-- <link rel="stylesheet" href="assests/scss/style.scss"> -->
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="assets/css/clubownerdash.css">
-
-        <!-- ===== Boostrap CSS ==== -->
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-              crossorigin="anonymous">
-
-
-    </head>
-
     <body style="box-sizing: border-box;">
-    <body style="box-sizing: border-box;">
-
     <!-- =======  side bar ======= -->
     <div class="sideBar w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:block;" id="mySidebar">
 
@@ -141,7 +119,6 @@ if (isset($_SESSION['user_id'])) {
                 <hr>
             <?php } ?>
         </div>
-    </div>
     </div>
     <!-- ============== main content ===================== -->
     <div id="main" style="height: 100vh;">
@@ -516,7 +493,6 @@ if (isset($_SESSION['user_id'])) {
     <script src="assets/js/clubownerdashboard.js"></script>
 
     </body>
-
     </html>
 
 
