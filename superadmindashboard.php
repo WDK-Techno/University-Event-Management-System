@@ -288,17 +288,23 @@ $user3 = $userObj->getRequests();
                     </thead>
                     <tbody>
                     <?php
-                    foreach ($user3
 
-                    as $users) {
+                    foreach ($user3 as $users) {
+                        
+                                                                       
+                        
+                        $registerDate = $user3['register_date'];
+                        $dateTime = new DateTime($registerDate);
+                        $formattedDate = $dateTime->format("Y-m-d");
+ 
+                        
                     ?>
                     <tr>
                         <td><?php echo $users->name; ?></td>
                         <td><?php echo $users->user_name; ?> </td>
                         <td><?php echo $users->contact_no; ?> </td>
-                        <td></td>
-
-                        <td>
+                        <td><?php echo $formattedDate; ?> </td>
+<td>
 
                             <button type="button" id="acceptButton" class="btn btn-success   btnedit">Accept</button>
 
