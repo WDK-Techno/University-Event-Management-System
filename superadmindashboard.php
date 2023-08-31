@@ -155,7 +155,7 @@ $user3 = $userObj->getRequests();
         <h1 class="text-center fw-bold">Undergraduates Details</h1>
         <section class="table_header mx-auto">
             <div>
-                <input type="text" id="myInput" placeholder="Search for names..." onkeyup="search();">
+                <input type="text" id="myInput" placeholder="Search for names..." onkeyup="searchUndergrad();">
                 <ion-icon name="search-outline"></ion-icon>
             </div>
         </section>
@@ -164,7 +164,7 @@ $user3 = $userObj->getRequests();
                 <table id="myTable">
                     <thead>
                     <tr>
-                        <th>No</th>
+                        
                         <th>Name</th>
                         <th>Email</th>
                         <th>Contact No</th>
@@ -175,12 +175,12 @@ $user3 = $userObj->getRequests();
                     </thead>
                     <tbody>
                     <?php
-                    $i = 1;
+                    
                     foreach ($user1 as $users) {
                         ?>
                         <tr>
-                            <td><?php echo $i; ?></td>
-                            <td><?php echo $users->first_name; ?><?php echo $users->last_name; ?></td>
+                            
+                            <td><?php echo $users->first_name; ?> <?php echo $users->last_name; ?></td>
                             <td><?php echo $users->user_name; ?></td>
                             <td><?php echo $users->contact_no; ?></td>
                             <td>
@@ -200,7 +200,7 @@ $user3 = $userObj->getRequests();
                             </td>
                         </tr>
                         <?php
-                        $i++;
+                        
                     }
                     ?>
                     </tbody>
@@ -214,17 +214,17 @@ $user3 = $userObj->getRequests();
         <h1 class="text-center fw-bold">Club Details</h1>
         <section class="table_header mx-auto">
             <div>
-                <input type="text" id="myInput" placeholder="Search for names..." onkeyup="search();">
+                <input type="text" id="clubInput" placeholder="Search for names..." onkeyup="searchClub();">
                 <ion-icon name="search-outline"></ion-icon>
             </div>
         </section>
         <div class="table-2 mx-auto">
             <section class="table_body">
-                <table id="myTable">
+                <table id="clubTable">
                     <thead>
                     <tr>
-                        <
-                        <th>No</th>
+                        
+                        
                         <th>Name</th>
                         <th>email</th>
                         <th>Contact No</th>
@@ -235,11 +235,11 @@ $user3 = $userObj->getRequests();
                     </thead>
                     <tbody>
                     <?php
-                    $i = 1;
+                    
                     foreach ($user2 as $users) {
                         ?>
                         <tr>
-                            <td><?php echo $i; ?></td>
+                           
                             <td><?php echo $users->name; ?></td>
                             <td><?php echo $users->user_name; ?></td>
                             <td><?php echo $users->contact_no; ?></td>
@@ -260,7 +260,7 @@ $user3 = $userObj->getRequests();
                             </td>
                         </tr>
                         <?php
-                        $i++;
+                        
                     }
                     ?>
 
@@ -399,6 +399,7 @@ $user3 = $userObj->getRequests();
 <script src="assets/js/projectdashboard.js"></script>
 <script src="assets/js/admindashboardsearch.js"></script>
 <script src="assets/js/adminscript.js"></script>
+
 
 
 </body>
