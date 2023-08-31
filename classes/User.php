@@ -441,7 +441,7 @@ class Club extends User
             $pstmt->bindValue(1, $this->clubName);
             $pstmt->bindValue(2, $this->contactNo);
             $pstmt->bindValue(3, $this->profileImage);
-            $pstmt->bindValue(4, $this->clubDescription);
+            $pstmt->bindValue(5, $this->clubDescription);
             $pstmt->bindValue(4, parent::getUserId());
             $pstmt->execute();
             return $pstmt->rowCount() > 0;
