@@ -372,7 +372,7 @@ if (isset($_SESSION['user_id'])) {
                         <div class="row px-2" style="color: var(--primary);">
                             <div class="fw-bold">Description</div>
                             <textarea class="form-control" name="desc" id="" cols="25"
-                                      rows="7"><?= $project->getDescription() ?></textarea>
+                                      rows="7"><?= $club->getClubDescription() ?></textarea>
                         </div>
                         <button class="btn fw-bold d-flex mt-2 ms-auto me-0"
                                 style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"

@@ -292,6 +292,8 @@ class Club extends User
     private $registerDate;
     private $profileImage;
 
+    private $clubDescription;
+
 
     public function getClubName()
     {
@@ -341,6 +343,23 @@ class Club extends User
     {
         $this->profileImage = $profileImage;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getClubDescription()
+    {
+        return $this->clubDescription;
+    }
+
+    /**
+     * @param mixed $clubDescription
+     */
+    public function setClubDescription($clubDescription)
+    {
+        $this->clubDescription = $clubDescription;
+    }
+
 
 
     public function __construct($usrname, $password, $clubName, $contactNo)
@@ -405,6 +424,7 @@ class Club extends User
             $this->contactNo = $rs->contact_no;
             $this->registerDate = $rs->register_date;
             $this->profileImage = $rs->profile_image;
+            $this->clubDescription= $rs->description;
 
             return true;
         } else {
@@ -416,11 +436,12 @@ class Club extends User
     {
         try {
 
-            $query = "UPDATE club SET name=?,contact_no=?,profile_image=? WHERE user_id=?";
+            $query = "UPDATE club SET name=?,contact_no=?,profile_image=? ,description=? WHERE user_id=?";
             $pstmt = $con->prepare($query);
             $pstmt->bindValue(1, $this->clubName);
             $pstmt->bindValue(2, $this->contactNo);
             $pstmt->bindValue(3, $this->profileImage);
+            $pstmt->bindValue(4, $this->clubDescription);
             $pstmt->bindValue(4, parent::getUserId());
             $pstmt->execute();
             return $pstmt->rowCount() > 0;
