@@ -60,7 +60,7 @@ if (!$project->loadDataFromProjectID($con)) {
     $teamMembers = TeamMember::getMemberListFromProjectID($con, $project->getProjectID());
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $selected_menuNo = 7;
+        $selected_menuNo = 1;
         if (isset($_GET['tab'])) {
             $selected_menuNo = $_GET['tab'];
         }
@@ -190,16 +190,16 @@ if (!$project->loadDataFromProjectID($con)) {
                 </li>
             </ul>
             <hr>
-            <div id="user-name">
-                <div class="d-flex justify-content-start">
-                    <ion-icon name="person-circle-outline" class="d-block my-auto w3-text-lime"
-                              style="font-size:2.8rem;"></ion-icon>
-                    <span class="ms-2 w3-text-light-green">
-                        <strong class="d-block">Kavindra</strong>
-                        <strong class="d-block">Weerasinghe</strong>
-                    </span>
-                </div>
-            </div>
+<!--            <div id="user-name">-->
+<!--                <div class="d-flex justify-content-start">-->
+<!--                    <ion-icon name="person-circle-outline" class="d-block my-auto w3-text-lime"-->
+<!--                              style="font-size:2.8rem;"></ion-icon>-->
+<!--                    <span class="ms-2 w3-text-light-green">-->
+<!--                        <strong class="d-block">Kavindra</strong>-->
+<!--                        <strong class="d-block">Weerasinghe</strong>-->
+<!--                    </span>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
     <!-- ============== main content ===================== -->
