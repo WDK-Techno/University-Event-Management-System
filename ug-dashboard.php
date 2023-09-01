@@ -206,8 +206,8 @@ if (isset($_SESSION['user_id'])) {
                     </table>
                 </div> -->
 
-                <div class="card" style="">
-                            <div class="card-header team-member-table pb-0"
+                <div class="card m-4" style="">
+                            <div class="card-header team-member-table pb-0 m-4"
                                  style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
 
                                 <div class="row p-0 fw-bold">
@@ -234,7 +234,7 @@ if (isset($_SESSION['user_id'])) {
 
                             </div>
 
-                            <div class="card-body pt-0 bg-dark-subtle scrollable-div Flipped"
+                            <div class="card-body pt-0 bg-dark-subtle scrollable-div Flipped m-4"
                                  style="background-color: var(--secondary);">
                                 <div class="container p-0 scrollable-div-inside">
 
@@ -271,7 +271,7 @@ if (isset($_SESSION['user_id'])) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
+                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px; background-color:#A3A2EC;">
                                             <div class="col-1 d-flex tabel-column-type-2">
                                                 <div class="my-auto">
                                                     <img class="rounded-circle"
@@ -335,7 +335,7 @@ if (isset($_SESSION['user_id'])) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
+                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px; background-color:#A3A2EC;" >
                                             <div class="col-1 d-flex tabel-column-type-2">
                                                 <div class="my-auto">
                                                     <img class="rounded-circle"
