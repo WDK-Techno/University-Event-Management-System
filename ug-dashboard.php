@@ -50,6 +50,7 @@ if (isset($_SESSION['user_id'])) {
         <!-- <link rel="stylesheet" href="assests/scss/style.scss"> -->
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="assets/css/clubownerdash.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
         <!-- ===== Boostrap CSS ==== -->
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
@@ -81,30 +82,30 @@ if (isset($_SESSION['user_id'])) {
 
                 <hr>
                 <ul class="nav nav-pills flex-column navbar-text mb-auto">
-                    <li id="menu-1" class="sideBar-btn" onclick="showMenuContent(1)">
+                    <!-- <li id="menu-1" class="sideBar-btn" onclick="showMenuContent(1)">
                         <a href="#" class="nav-link d-flex justify-content-start">
                             <ion-icon name="people-circle-outline"></ion-icon>
                             <span class="sideBar-btn-text my-auto">Projects</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li id="menu-2" class="sideBar-btn" onclick="showMenuContent(2)">
                         <a href="#" class="nav-link d-flex justify-content-start">
                             <ion-icon name="calendar-outline"></ion-icon>
-                            <span class="sideBar-btn-text my-auto">Club Analysis</span>
+                            <span class="sideBar-btn-text my-auto">Task Analysis</span>
                         </a>
                     </li>
-                    <li id="menu-3" class="sideBar-btn" onclick="showMenuContent(3)">
+                    <!-- <li id="menu-3" class="sideBar-btn" onclick="showMenuContent(3)">
                         <a href="#" class="nav-link d-flex justify-content-start">
                             <ion-icon name="walk-outline"></ion-icon>
                             <span class="sideBar-btn-text my-auto">User Tracker</span>
                         </a>
-                    </li>
-                    <li id="menu-4" class="sideBar-btn" onclick="showMenuContent(4)">
+                    </li> -->
+                    <!-- <li id="menu-4" class="sideBar-btn" onclick="showMenuContent(4)">
                         <a href="#" class="nav-link d-flex justify-content-start">
                             <ion-icon name="document-text-outline"></ion-icon>
                             <span class="sideBar-btn-text my-auto">Progress</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li id="menu-5" class="sideBar-btn" onclick="showMenuContent(5)">
                         <a href="#" class="nav-link d-flex justify-content-start">
                             <ion-icon name="settings-outline"></ion-icon>
@@ -168,7 +169,7 @@ if (isset($_SESSION['user_id'])) {
             <div id="menu-content-1" class="main-content hide ms-1">
             </div>
             <div id="menu-content-2" class="main-content hide">
-                <h1>Content 2</h1>
+                <h1>Task Analysis</h1>
                 <!-- <div class="container mt-5">
                 
                 
@@ -243,7 +244,7 @@ if (isset($_SESSION['user_id'])) {
                                                 <div class="my-auto">
                                                     <img class="rounded-circle"
                                                          style="width: 40px; height: 40px; object-fit: cover;"
-                                                         src="assets/images/profile_img/ug/"
+                                                         src="assets/images/profile_img/project/64e77ce044cd33.38133607.png"
                                                          alt="">
                                                 </div>
                                             </div>
@@ -255,6 +256,102 @@ if (isset($_SESSION['user_id'])) {
                                             </div>
                                             <div class="col-2 d-flex tabel-column-type-1">
                                                 <div class="my-auto mx-auto">2023/10/10</div>
+                                            </div>
+                                            <div class="col-2 d-flex tabel-column-type-2">
+                                                <div class="my-auto mx-auto"><i class="fas fa-check-square"></i></div>
+                                            </div>
+                                            <div class="col-1 tabel-column-type-1 d-flex">
+                                                <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
+
+                                                   
+                                                    <ion-icon class="my-auto" type="button"
+                                                              data-bs-toggle="modal"
+                                                              data-bs-target=""
+                                                              name="trash-outline"></ion-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
+                                            <div class="col-1 d-flex tabel-column-type-2">
+                                                <div class="my-auto">
+                                                    <img class="rounded-circle"
+                                                         style="width: 40px; height: 40px; object-fit: cover;"
+                                                         src="assets/images/profile_img/project/64e77ce044cd33.38133607.png"
+                                                         alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-3 tabel-column-type-1 d-flex">
+                                                <div class="my-auto">JamborIEEE23</div>
+                                            </div>
+                                            <div class="col-3 d-flex tabel-column-type-2">
+                                                <div class="my-auto mx-auto">Design flyer</div>
+                                            </div>
+                                            <div class="col-2 d-flex tabel-column-type-1">
+                                                <div class="my-auto mx-auto">2023/10/20</div>
+                                            </div>
+                                            <div class="col-2 d-flex tabel-column-type-2">
+                                                <div class="my-auto mx-auto"><i class="fas fa-check-square"></i></div>
+                                            </div>
+                                            <div class="col-1 tabel-column-type-1 d-flex">
+                                                <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
+
+                                                   
+                                                    <ion-icon class="my-auto" type="button"
+                                                              data-bs-toggle="modal"
+                                                              data-bs-target=""
+                                                              name="trash-outline"></ion-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
+                                            <div class="col-1 d-flex tabel-column-type-2">
+                                                <div class="my-auto">
+                                                    <img class="rounded-circle"
+                                                         style="width: 40px; height: 40px; object-fit: cover;"
+                                                         src="assets/images/profile_img/project/64e87d4ab4ca82.40177324.png"
+                                                         alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-3 tabel-column-type-1 d-flex">
+                                                <div class="my-auto">IEEE INNAVATION NATION SRI LANKA</div>
+                                            </div>
+                                            <div class="col-3 d-flex tabel-column-type-2">
+                                                <div class="my-auto mx-auto">Create Logo</div>
+                                            </div>
+                                            <div class="col-2 d-flex tabel-column-type-1">
+                                                <div class="my-auto mx-auto">2023/11/10</div>
+                                            </div>
+                                            <div class="col-2 d-flex tabel-column-type-2">
+                                                <div class="my-auto mx-auto"><i class="fas fa-check-square"></i></div>
+                                            </div>
+                                            <div class="col-1 tabel-column-type-1 d-flex">
+                                                <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
+
+                                                   
+                                                    <ion-icon class="my-auto" type="button"
+                                                              data-bs-toggle="modal"
+                                                              data-bs-target=""
+                                                              name="trash-outline"></ion-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
+                                            <div class="col-1 d-flex tabel-column-type-2">
+                                                <div class="my-auto">
+                                                    <img class="rounded-circle"
+                                                         style="width: 40px; height: 40px; object-fit: cover;"
+                                                         src="assets/images/profile_img/project/64e87d4ab4ca82.40177324.png"
+                                                         alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-3 tabel-column-type-1 d-flex">
+                                                <div class="my-auto">IEEE INNAVATION NATION SRI LANKA</div>
+                                            </div>
+                                            <div class="col-3 d-flex tabel-column-type-2">
+                                                <div class="my-auto mx-auto">Design flyer</div>
+                                            </div>
+                                            <div class="col-2 d-flex tabel-column-type-1">
+                                                <div class="my-auto mx-auto">2023/11/23</div>
                                             </div>
                                             <div class="col-2 d-flex tabel-column-type-2">
                                                 <div class="my-auto mx-auto"><i class="fas fa-check-square"></i></div>
