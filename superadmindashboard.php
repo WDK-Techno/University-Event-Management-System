@@ -117,7 +117,7 @@ $user4 = $userObj->getRowCount();
                     </li> -->
                 </ul>
 
-                <div class="bell-notification" current-count="<?php echo $user4 ; ?>">
+                <div class="bell-notification" current-count="<?php echo $user4 ;?>">
                     <ion-icon name="notifications-outline"></ion-icon>
                 </div>
                 <form action="process/logout.php" method="post">
@@ -154,7 +154,7 @@ $user4 = $userObj->getRowCount();
 
     <div id="menu-content-1" class="main-content show">
         <h1 class="text-center fw-bold">Undergraduates Details</h1>
-        <section class="table_header mx-auto">
+        <section class="table_header mx-auto"; style="color:#1D2561">
             <div>
                 <input type="text" id="myInput" placeholder="Search for names..." onkeyup="searchUndergrad();">
                 <ion-icon name="search-outline"></ion-icon>
@@ -279,9 +279,9 @@ $user4 = $userObj->getRowCount();
 
         </div>
     </div>
-    <div id="menu-content-3" class="main-content hide">
+    <div id="menu-content-3"  class="main-content hide" >
         <h1 class="text-center fw-bold">New Club Requests</h1>
-        <div class="table mx-auto">
+        <div class="table mx-auto" >
             <section class="table_body">
                 <table>
                     <thead>
@@ -301,9 +301,9 @@ $user4 = $userObj->getRowCount();
                         
                                                                        
                         
-                        $registerDate = $user3['register_date'];
+                      /*  $registerDate = $user3['register_date'];
                         $dateTime = new DateTime($registerDate);
-                        $formattedDate = $dateTime->format("Y-m-d");
+                        $formattedDate = $dateTime->format("Y-m-d");*/
  
                         
                     ?>
@@ -311,7 +311,7 @@ $user4 = $userObj->getRowCount();
                         <td><?php echo $users->name; ?></td>
                         <td><?php echo $users->user_name; ?> </td>
                         <td><?php echo $users->contact_no; ?> </td>
-                        <td><?php echo $formattedDate; ?> </td>
+                        <td> 2023-09-01 </td>
 <td>
 
                             <button type="button" id="acceptButton" class="btn btn-success   btnedit">Accept</button>
