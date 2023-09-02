@@ -283,7 +283,7 @@ $user4 = $userObj->getRowCount();
         <h1 class="text-center fw-bold">New Club Requests</h1>
         <div class="table mx-auto" >
             <section class="table_body">
-                <table>
+        <table>
                     <thead>
                     <tr>
                         <th>Club Name</th>
@@ -298,12 +298,6 @@ $user4 = $userObj->getRowCount();
                     <?php
 
                     foreach ($user3 as $users) {
-                        
-                                                                       
-                        
-                      /*  $registerDate = $user3['register_date'];
-                        $dateTime = new DateTime($registerDate);
-                        $formattedDate = $dateTime->format("Y-m-d");*/
  
                         
                     ?>
@@ -311,10 +305,10 @@ $user4 = $userObj->getRowCount();
                         <td><?php echo $users->name; ?></td>
                         <td><?php echo $users->user_name; ?> </td>
                         <td><?php echo $users->contact_no; ?> </td>
-                        <td> 2023-09-01 </td>
-<td>
+                        <td><?php echo $users->register_date; ?></td>
+                        <td>
 
-                            <button type="button" id="acceptButton" class="btn btn-success   btnedit">Accept</button>
+                         <button type="button" id="acceptButton" class="btn btn-success   btnedit">Accept</button>
 
                             <!-- Bootstrap Modal -->
                             <div class="modal" id="confirmModal" tabindex="-1" role="dialog">
