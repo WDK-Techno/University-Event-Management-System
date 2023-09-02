@@ -91,7 +91,7 @@ if (isset($_SESSION['user_id'])) {
                     <li id="menu-2" class="sideBar-btn" onclick="showMenuContent(2)">
                         <a href="#" class="nav-link d-flex justify-content-start">
                             <ion-icon name="calendar-outline"></ion-icon>
-                            <span class="sideBar-btn-text my-auto">Task Analysis</span>
+                            <span class="sideBar-btn-text my-auto">Task</span>
                         </a>
                     </li>
                     <!-- <li id="menu-3" class="sideBar-btn" onclick="showMenuContent(3)">
@@ -169,7 +169,7 @@ if (isset($_SESSION['user_id'])) {
             <div id="menu-content-1" class="main-content hide ms-1">
             </div>
             <div id="menu-content-2" class="main-content hide">
-                <h1>Task Analysis</h1>
+                <h1>Task </h1>
                 <!-- <div class="container mt-5">
                 
                 
@@ -258,7 +258,7 @@ if (isset($_SESSION['user_id'])) {
                                                 <div class="my-auto mx-auto">2023/10/10</div>
                                             </div>
                                             <div class="col-2 d-flex tabel-column-type-2">
-                                                <div class="my-auto mx-auto"><i class="fas fa-check-square"></i></div>
+                                                <div class="my-auto mx-auto"><input type="checkbox" id="cheak" name="vehicle1" value="finished"></i></div>
                                             </div>
                                             <div class="col-1 tabel-column-type-1 d-flex">
                                                 <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
@@ -290,7 +290,7 @@ if (isset($_SESSION['user_id'])) {
                                                 <div class="my-auto mx-auto">2023/10/20</div>
                                             </div>
                                             <div class="col-2 d-flex tabel-column-type-2">
-                                                <div class="my-auto mx-auto"><i class="fas fa-check-square"></i></div>
+                                                <div class="my-auto mx-auto"><input type="checkbox" id="cheak" name="vehicle1" value="finished"></i></div>
                                             </div>
                                             <div class="col-1 tabel-column-type-1 d-flex">
                                                 <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
@@ -322,7 +322,7 @@ if (isset($_SESSION['user_id'])) {
                                                 <div class="my-auto mx-auto">2023/11/10</div>
                                             </div>
                                             <div class="col-2 d-flex tabel-column-type-2">
-                                                <div class="my-auto mx-auto"><i class="fas fa-check-square"></i></div>
+                                                <div class="my-auto mx-auto"><input type="checkbox" id="cheak" name="vehicle1" value="finished"></div>
                                             </div>
                                             <div class="col-1 tabel-column-type-1 d-flex">
                                                 <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
@@ -354,7 +354,7 @@ if (isset($_SESSION['user_id'])) {
                                                 <div class="my-auto mx-auto">2023/11/23</div>
                                             </div>
                                             <div class="col-2 d-flex tabel-column-type-2">
-                                                <div class="my-auto mx-auto"><i class="fas fa-check-square"></i></div>
+                                                <div class="my-auto mx-auto"><input type="checkbox" id="cheak" name="vehicle1" value="finished"></i></div>
                                             </div>
                                             <div class="col-1 tabel-column-type-1 d-flex">
                                                 <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
