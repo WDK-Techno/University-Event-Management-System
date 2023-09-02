@@ -19,7 +19,7 @@ class Admin{
     public function getClubs(){
         $dbuser = new DBConnector();
         $con = $dbuser->getConnection();
-        $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no,club.register_date FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'active'";
+        $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'active'";
         $pstmt = $con->prepare($query);
         $pstmt->execute();
         $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
@@ -29,7 +29,7 @@ class Admin{
     public function getRequests(){
         $dbuser = new DBConnector();
         $con = $dbuser->getConnection();
-        $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'new'";
+        $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no,club.register_date FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'new'";
     $pstmt = $con->prepare($query);
     $pstmt->execute();
     $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
