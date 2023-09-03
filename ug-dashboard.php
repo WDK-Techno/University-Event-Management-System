@@ -411,7 +411,7 @@ if (isset($_SESSION['user_id'])) {
                             Settings</p>
                     </div>
                     <div class="card-body">
-                        <form action="process/ug-dashboard/update.php" method="POST">
+                        <form action="process/ug-dashboard/edtUgDetails.php" method="POST">
                             <div class="d-flex flex-column" style="color: var(--primary);">
                                 <div class="col">
                                     <div class="mb-3">
