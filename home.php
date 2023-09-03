@@ -89,7 +89,7 @@ if (!empty($rs)) {
 
 <!-- ======= Main Content ====== -->
 <div>
-    <div class="container">
+    <div class="container m-0">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -406,25 +406,28 @@ if (!empty($rs)) {
         </div>
     </div>
 </div>
-<div>
-    <h1 class="heading">Our Club</h1>
+<div class="p-4">
+    <h1 class="heading p-3">Our Clubs</h1>
 
     <div class="d-flex flex-column justify-content-center align-items-center" style="height: 200px;">
         <div class="w-75" style="overflow-y: scroll; overflow-x: hidden;">
             <?php
             $sql = "SELECT * FROM club";
-            $pstmt= $con->query($sql);
-            while($row = $pstmt->fetch(PDO::FETCH_ASSOC)){
-                echo '<div class = "card p-3 m-2" style="background-color: #FBEAEB;align-items: center;text-align: center">
-        <h2 class="text-opacity-75">'. $row['name'].'</h2>
-        <h2>'. $row['contact_no'].'</h2>
-        <h2>'. $row['description'].'</h2>
-        <h2>'. $row['register_date'].'</h2>
+            $pstmt = $con->query($sql);
+            while ($row = $pstmt->fetch(PDO::FETCH_ASSOC)) {
+                echo '<div class = "postcard rounded p-3 m-3 shadow-sm" style="background-color: #c0c0c069;align-items: center;text-align: center">
+        <h2 class="postcard__title blue text-primary fw-bold">' . $row['name'] . '</h2>
+        <div class="d-flex justify-content-center align-items-center p-2">
+         <i class="fa-solid fa-phone fa-lg pe-2 text-success"></i> 
+        <span>' . $row['contact_no'] . '</span>
+        </div>
+        <h4>' . $row['description'] . '</h4>
+        <h4 class="font-monospace small fst-italic"> Registed on: ' . $row['register_date'] . '</h4>
         </div>';
             }
             ?>
         </div>
-        </div>
+    </div>
 
 
 </div>
@@ -560,8 +563,6 @@ if (!empty($rs)) {
     });
 
 </script>
-
-
 
 
 <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"-->
