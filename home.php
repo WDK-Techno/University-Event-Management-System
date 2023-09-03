@@ -407,19 +407,25 @@ if (!empty($rs)) {
     </div>
 </div>
 <div>
-    <?php
-    $sql = "SELECT * FROM club";
-    $pstmt= $con->query($sql);
+    <h1 class="heading">Our Club</h1>
 
-    while($row = $pstmt->fetch(PDO::FETCH_ASSOC)){
-        echo '<div class = "card">';
-        echo '<h2>'. $row['name'].'</h2>';
-        echo '<h2>'. $row['contact_no'].'</h2>';
-        echo '<h2>'. $row['description'].'</h2>';
-        echo '<h2>'. $row['register_date'].'</h2>';
-        echo '</div>';
-    }
-    ?>
+    <div class="d-flex flex-column justify-content-center align-items-center" style="height: 200px;">
+        <div class="w-75" style="overflow-y: scroll; overflow-x: hidden;">
+            <?php
+            $sql = "SELECT * FROM club";
+            $pstmt= $con->query($sql);
+            while($row = $pstmt->fetch(PDO::FETCH_ASSOC)){
+                echo '<div class = "card p-3 m-2" style="background-color: #FBEAEB;align-items: center;text-align: center">
+        <h2 class="text-opacity-75">'. $row['name'].'</h2>
+        <h2>'. $row['contact_no'].'</h2>
+        <h2>'. $row['description'].'</h2>
+        <h2>'. $row['register_date'].'</h2>
+        </div>';
+            }
+            ?>
+        </div>
+        </div>
+
 
 </div>
 <h1 class="heading">Our Team</h1>
