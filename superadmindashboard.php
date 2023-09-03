@@ -95,12 +95,12 @@ $user4 = $userObj->getRowCount();
                 </a>
             </li>
 
-            <li id="menu-5" class="sideBar-btn" onclick="showMenuContent(5)">
+            <!-- <li id="menu-5" class="sideBar-btn" onclick="showMenuContent(5)">
                 <a href="#" class="nav-link d-flex justify-content-start">
                     <ion-icon name="settings-outline"></ion-icon>
                     <span class="sideBar-btn-text my-auto">Settings</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
         <hr>
     </div>
