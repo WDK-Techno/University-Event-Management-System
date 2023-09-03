@@ -171,41 +171,7 @@ if (isset($_SESSION['user_id'])) {
             </div>
             <div id="menu-content-2" class="main-content hide">
                 <h1>Task </h1>
-                <!-- <div class="container mt-5">
-                
-                
-                    <table class="table table-bordered table-striped">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Event Name</th>
-                                <th>Host Club</th>
-                                <th>Event Start Date</th>
-                                <th>Event End Date</th>
-                                <th>Project Team</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                       
-
-                            <tr>
-                                <td>Event 1</td>
-                                <td>Club A</td>
-                                <td>2023-09-01</td>
-                                <td>2023-09-03</td>
-                                <td>Team Alpha</td>
-                            </tr>
-                            <tr>
-                                <td>Event 2</td>
-                                <td>Club B</td>
-                                <td>2023-09-05</td>
-                                <td>2023-09-07</td>
-                                <td>Team Beta</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div> -->
+          
 
                 <div class="card m-4" style="">
                             <div class="card-header team-member-table pb-0 m-4"
@@ -368,8 +334,6 @@ if (isset($_SESSION['user_id'])) {
                                                 </div>
                                             </div>
                                         </div>
-
-                                    
 
                                 </div>
                             </div>
