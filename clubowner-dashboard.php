@@ -342,7 +342,7 @@ if (isset($_SESSION['user_id'])) {
                     <p class="m-0 fw-bold" style="color: var(--darker-primary); font-size: 1.3rem;">Club Settings</p>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form action="process/clubownerdashboard/editClubDetails.php" method="post">
                         <?php
 
                         if ($loadClubData){
@@ -351,20 +351,20 @@ if (isset($_SESSION['user_id'])) {
                         <div class="row" style="color: var(--primary);">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label class="form-label" for="first_name">
+                                    <label class="form-label" for="club_name">
                                         <strong>Club Name</strong>
                                     </label>
-                                    <input id="first_name" class="form-control" type="text"
-                                           value="<?= $club->getClubName() ?>" name="first_name"/>
+                                    <input id="club_name" class="form-control" type="text"
+                                           value="<?= $club->getClubName() ?>" name="club_name"/>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-                                    <label class="form-label" for="first_name">
+                                    <label class="form-label" for="contact_no">
                                         <strong>Contact number</strong>
                                     </label>
-                                    <input id="first_name" class="form-control" type="text"
-                                           value="<?= $club->getContactNo() ?>" name="first_name"/>
+                                    <input id="contact_no" class="form-control" type="text"
+                                           value="<?= $club->getContactNo() ?>" name="contact_no"/>
                                 </div>
                             </div>
 
@@ -374,9 +374,13 @@ if (isset($_SESSION['user_id'])) {
                             <textarea class="form-control" name="desc" id="" cols="25"
                                       rows="7"><?= $club->getClubDescription() ?></textarea>
                         </div>
+                        <!--======= hidden ==========-->
+                        <input type="hidden" name="menuNo" value="5">
+                        <input type="hidden" name="club_id"
+                               value="<?= $club->getUserId() ?>">
                         <button class="btn fw-bold d-flex mt-2 ms-auto me-0"
                                 style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
-                                type="submit" name="submit_desc">
+                                type="submit" name="submit">
                             <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
                                       name="save-outline"></ion-icon>
                             <div class="my-auto ms-1 me-auto">Save</div>
