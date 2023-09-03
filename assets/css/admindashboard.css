@@ -56,7 +56,7 @@
 #menu-content-1 .table_header{
     width: 75%;
     height: 10%;
-    background-color: rgba(71, 23, 182, 0.267);
+    background-color:#1D2561;
     padding: .6rem 1rem;
 	border-radius: .5rem;
 }
@@ -127,7 +127,7 @@
 	border: 2px solid darkblue;
 }
 #menu-content-1 ion-icon{
-    color: rgb(41, 61, 61);
+    color: rgb(206, 212, 212);
 	font-size: 20px;
 	
 }
@@ -139,7 +139,7 @@
 #menu-content-2 .table_header{
     width: 75%;
     height: 10%;
-    background-color: rgba(71, 23, 182, 0.267);
+    background-color: #1D2561;
     padding: .6rem 1rem;
 	border-radius: .5rem;
 }
@@ -200,7 +200,7 @@
 #menu-content-2 tbody tr:hover{
 	background-color: #fff6;
 }
-#myInput{
+#clubInput{
 	width: 200px;
 	height: 50px;
 	font-size: 20px;
@@ -210,7 +210,7 @@
 	border: 2px solid darkblue;
 }
 #menu-content-2 ion-icon{
-    color: rgb(41, 61, 61);
+    color: rgb(208, 220, 220);
 	font-size: 20px;
 	
 }
@@ -225,9 +225,7 @@
 	#menu-content-3 .table{
 		width: 60vw;
 		height: 80vh;
-		
-	
-		
+
 		padding: .8rem 1rem;
 	
 		overflow: hidden;

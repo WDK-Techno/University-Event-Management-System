@@ -6,12 +6,12 @@ use PDOException;
 
 class User
 {
-    private $user_id;
-    private $username;
-    private $password;
+    protected $user_id;
+    protected $username;
+    protected $password;
 
-    private $role;
-    private $status;
+    protected $role;
+    protected $status;
 
 
     public function getUserId()
@@ -95,22 +95,26 @@ class User
         }
 
     }
-    public function getUserIDFromUsername($con){
+
+    public function getUserIDFromUsername($con)
+    {
         try {
             $query = "SELECT * FROM user WHERE user_name = ? AND role = ? AND status <> ?";
             $pstmt = $con->prepare($query);
-            $pstmt->bindValue(1,$this->username);
-            $pstmt->bindValue(2,$this->role);
-            $pstmt->bindValue(3,"delete");
+            $pstmt->bindValue(1, $this->username);
+            $pstmt->bindValue(2, $this->role);
+            $pstmt->bindValue(3, "delete");
             $pstmt->execute();
             $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
             return $rs->user_id;
 
-        }catch (PDOException $exc){
-            die("Error in loading userID From Database ". $exc->getMessage());
+        } catch (PDOException $exc) {
+            die("Error in loading userID From Database " . $exc->getMessage());
         }
     }
-    public function authenticate ($con){
+
+    public function authenticate($con)
+    {
         try {
             $query = "SELECT * FROM user WHERE user_name = ? AND status <> ?";
             $pstmt = $con->prepare($query);
@@ -118,27 +122,38 @@ class User
             $pstmt->bindValue(2, "delete");
             $pstmt->execute();
             $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
-            if (!empty($rs)){
+            if (!empty($rs)) {
                 $db_password = $rs->password;
-                if (password_verify($this->password,$db_password)){
+                if (password_verify($this->password, $db_password)) {
                     $this->user_id = $rs->user_id;
                     $this->username = $rs->user_name;
                     $this->password = null;
                     $this->role = $rs->role;
                     $this->status = $rs->status;
                     return true;
-                }else{
+                } else {
                     return false;
                 }
-            }else{
+            } else {
                 return false;
             }
 
-        }catch (PDOException $exc){
-            die("Error in user Authentication ". $exc->getMessage());
+        } catch (PDOException $exc) {
+            die("Error in user Authentication " . $exc->getMessage());
         }
     }
 
+    public function saveUserChangesToDataBase($con)
+    {
+        $query = "UPDATE user SET password=?,status=? WHERE user_id=?";
+        $pstmt = $con->prepare($query);
+        $pstmt->bindValue(1, $this->password);
+        $pstmt->bindValue(2, $this->status);
+        $pstmt->bindValue(3, $this->user_id);
+        $pstmt->execute();
+
+        return $pstmt->rowCount() > 0;
+    }
 
 }
 
@@ -194,7 +209,7 @@ class Undergraduate extends User
     }
 
 
-    public function __construct($usrname, $password, $firstName, $lastName, $contactNo,$profileImg)
+    public function __construct($usrname, $password, $firstName, $lastName, $contactNo, $profileImg)
     {
         parent::__construct($usrname, $password);
 
@@ -202,8 +217,9 @@ class Undergraduate extends User
         $this->lastName = $lastName;
         $this->contactNo = $contactNo;
         $this->profileImg = $profileImg;
-        parent::setRole("ug");
-        parent::setStatus("active");
+//        === parent class ======
+        $this->role = "ug";
+        $this->status = "active";
     }
 
     public function register($con)
@@ -214,10 +230,10 @@ class Undergraduate extends User
             if (!$findDuplicate) {
                 $query1 = "INSERT INTO user (user_name,password,role,status) VALUES (?,?,?,?)";
                 $pstmt = $con->prepare($query1);
-                $pstmt->bindValue(1, parent::getUsername());
-                $pstmt->bindValue(2, parent::getPassword());
-                $pstmt->bindValue(3, parent::getRole());
-                $pstmt->bindValue(4, parent::getStatus());
+                $pstmt->bindValue(1, $this->username);
+                $pstmt->bindValue(2, $this->password);
+                $pstmt->bindValue(3, $this->role);
+                $pstmt->bindValue(4, $this->status);
                 $pstmt->execute();
 
                 if ($pstmt->rowCount() > 0) {
@@ -256,13 +272,13 @@ class Undergraduate extends User
     {
         $query = "SELECT * FROM undergraduate INNER JOIN user ON undergraduate.user_id = user.user_id WHERE user.user_id =?";
         $pstmt = $con->prepare($query);
-        $pstmt->bindValue(1, parent::getUserId());
+        $pstmt->bindValue(1, $this->user_id);
         $pstmt->execute();
         $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
         if (!empty($rs)) {
-            parent::setUsername($rs->user_name);
-            parent::setRole($rs->role);
-            parent::setStatus($rs->status);
+            $this->username = $rs->user_name;
+            $this->role = $rs->role;
+            $this->status = $rs->status;
             $this->firstName = $rs->first_name;
             $this->lastName = $rs->last_name;
             $this->contactNo = $rs->contact_no;
@@ -273,7 +289,19 @@ class Undergraduate extends User
         }
     }
 
-    public function updateChanges(){
+    public function saveChangesToDatabase($con)
+    {
+        $query = "UPDATE undergraduate SET first_name=?,last_name=?,
+                         contact_no=?,profile_image=? WHERE user_id=?";
+        $pstmt = $con->prepare($query);
+        $pstmt->bindValue(1, $this->firstName);
+        $pstmt->bindValue(2, $this->lastName);
+        $pstmt->bindValue(3, $this->contactNo);
+        $pstmt->bindValue(4, $this->profileImg);
+        $pstmt->bindValue(5, $this->user_id);
+        $pstmt->execute();
+
+        return $pstmt->rowCount() > 0;
 
     }
 
@@ -286,6 +314,8 @@ class Club extends User
     private $contactNo;
     private $registerDate;
     private $profileImage;
+
+    private $clubDescription;
 
 
     public function getClubName()
@@ -337,6 +367,22 @@ class Club extends User
         $this->profileImage = $profileImage;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getClubDescription()
+    {
+        return $this->clubDescription;
+    }
+
+    /**
+     * @param mixed $clubDescription
+     */
+    public function setClubDescription($clubDescription)
+    {
+        $this->clubDescription = $clubDescription;
+    }
+
 
     public function __construct($usrname, $password, $clubName, $contactNo)
     {
@@ -344,8 +390,8 @@ class Club extends User
 
         $this->clubName = $clubName;
         $this->contactNo = $contactNo;
-        parent::setRole("club");
-        parent::setStatus("new");
+        $this->role = "club";
+        $this->status = "new";
     }
 
     public function registerClub($con)
@@ -355,15 +401,15 @@ class Club extends User
             try {
                 $query1 = "INSERT INTO user (user_name,password,role,status) VALUES (?,?,?,?)";
                 $pstmt = $con->prepare($query1);
-                $pstmt->bindValue(1, parent::getUsername());
-                $pstmt->bindValue(2, parent::getPassword());
-                $pstmt->bindValue(3, parent::getRole());
-                $pstmt->bindValue(4, parent::getStatus());
+                $pstmt->bindValue(1, $this->username);
+                $pstmt->bindValue(2, $this->password);
+                $pstmt->bindValue(3, $this->role);
+                $pstmt->bindValue(4, $this->status);
                 $pstmt->execute();
 
                 if ($pstmt->rowCount() > 0) {
                     $regID = $con->lastInsertId();
-                    parent::setUserId($regID);
+                    $this->user_id = $regID;
 
                     $query2 = "INSERT INTO club (user_id,name,contact_no) VALUES (?,?,?)";
                     $pstmt2 = $con->prepare($query2);
@@ -389,17 +435,18 @@ class Club extends User
 
         $query = "SELECT * FROM club INNER JOIN user ON club.user_id = user.user_id WHERE user.user_id =?";
         $pstmt = $con->prepare($query);
-        $pstmt->bindValue(1, parent::getUserId());
+        $pstmt->bindValue(1, $this->user_id);
         $pstmt->execute();
         $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
         if (!empty($rs)) {
-            parent::setUsername($rs->user_name);
-            parent::setRole($rs->role);
-            parent::setStatus($rs->status);
+            $this->username = $rs->user_name;
+            $this->role = $rs->role;
+            $this->status = $rs->status;
             $this->clubName = $rs->name;
             $this->contactNo = $rs->contact_no;
             $this->registerDate = $rs->register_date;
             $this->profileImage = $rs->profile_image;
+            $this->clubDescription = $rs->description;
 
             return true;
         } else {
@@ -407,22 +454,26 @@ class Club extends User
         }
     }
 
-    // public function fetchData()
-    // {
-    //     $db = DBConnector::getConnection();
+    public function saveChangesToDatabase($con)
+    {
+        try {
 
-    //     $query = "SELECT * FROM undergraduate WHERE user_id = :user_id";
-    //     $stmt = $db->prepare($query);
-    //     $stmt->bindParam(':user_id', $this->userId);
-    //     $stmt->execute();
+            $query = "UPDATE club SET name=?,contact_no=?,profile_image=? ,description=? WHERE user_id=?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1, $this->clubName);
+            $pstmt->bindValue(2, $this->contactNo);
+            $pstmt->bindValue(3, $this->profileImage);
+            $pstmt->bindValue(4, $this->clubDescription);
+            $pstmt->bindValue(5, $this->user_id);
+            $pstmt->execute();
 
-    //     $data = $stmt->fetch();
-    //     if ($data) {
-    //         $this->firstName = $data['first_name'];
-    //         $this->lastName = $data['last_name'];
-    //         $this->contactNo = $data['contact_no'];
-    //     }
-    // }
+            return $pstmt->rowCount() > 0;
+
+        } catch (PDOException $exc) {
+            die("Error in update data to DB " . $exc->getMessage());
+        }
+    }
+
     
 
 

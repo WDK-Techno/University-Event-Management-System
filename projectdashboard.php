@@ -60,7 +60,7 @@ if (!$project->loadDataFromProjectID($con)) {
     $teamMembers = TeamMember::getMemberListFromProjectID($con, $project->getProjectID());
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $selected_menuNo = 7;
+        $selected_menuNo = 1;
         if (isset($_GET['tab'])) {
             $selected_menuNo = $_GET['tab'];
         }
@@ -190,16 +190,16 @@ if (!$project->loadDataFromProjectID($con)) {
                 </li>
             </ul>
             <hr>
-            <div id="user-name">
-                <div class="d-flex justify-content-start">
-                    <ion-icon name="person-circle-outline" class="d-block my-auto w3-text-lime"
-                              style="font-size:2.8rem;"></ion-icon>
-                    <span class="ms-2 w3-text-light-green">
-                        <strong class="d-block">Kavindra</strong>
-                        <strong class="d-block">Weerasinghe</strong>
-                    </span>
-                </div>
-            </div>
+<!--            <div id="user-name">-->
+<!--                <div class="d-flex justify-content-start">-->
+<!--                    <ion-icon name="person-circle-outline" class="d-block my-auto w3-text-lime"-->
+<!--                              style="font-size:2.8rem;"></ion-icon>-->
+<!--                    <span class="ms-2 w3-text-light-green">-->
+<!--                        <strong class="d-block">Kavindra</strong>-->
+<!--                        <strong class="d-block">Weerasinghe</strong>-->
+<!--                    </span>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
     <!-- ============== main content ===================== -->
@@ -548,16 +548,18 @@ if (!$project->loadDataFromProjectID($con)) {
                             <?php
                             $eventNo = 1;
                             foreach ($events as $event) {
-                                $event = new Event($event->getEventId(),null,null,null,
-                                null,null,null);
+                                $event = new Event($event->getEventId(), null, null, null,
+                                    null, null, null);
                                 $event->loadDataFromeventId($con);
                                 ?>
+
                                 <div class="col-md-3 shadow-sm m-3 p-0  fw-normal"
                                      style=" background-color: var(--lighter-secondary); color: var(--darker-primary);">
 
                                     <div>
                                         <div class="header  p-3  text-white m-0" style="background-color: var(--primary);text-align: center;font-size: 2rem">
                                             <div class="my-auto"><?=$event->getEventName()?></div>
+
                                         </div>
                                             <div class="my-auto p-3" style="font-size:1.5rem"><?=$event->geteventDescription() ."<br>". $event->getEventStartDate() ."<br>". $event->getEventEndDate()?>
                                             </div>
@@ -628,6 +630,7 @@ if (!$project->loadDataFromProjectID($con)) {
 
 
 
+
                                                                         <!-- Row 3: Event Date -->
                                                                         <div class="form-group p-2">
                                                                             <input class="form-control text-center"
@@ -643,7 +646,6 @@ if (!$project->loadDataFromProjectID($con)) {
                                                                                    value="<?=$event->getEventEndDate() ?>"
                                                                                    placeholder="Event End Date"/>
                                                                         </div>
-
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer"

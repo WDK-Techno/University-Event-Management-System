@@ -16,6 +16,7 @@ $userObj = new Admin();
 $user1 = $userObj->getUsers();
 $user2 = $userObj->getClubs();
 $user3 = $userObj->getRequests();
+$user4 = $userObj->getRowCount();
 ?>
 
 <!DOCTYPE html>
@@ -116,7 +117,7 @@ $user3 = $userObj->getRequests();
                     </li> -->
                 </ul>
 
-                <div class="bell-notification" current-count="8">
+                <div class="bell-notification" current-count="<?php echo $user4 ;?>">
                     <ion-icon name="notifications-outline"></ion-icon>
                 </div>
                 <form action="process/logout.php" method="post">
@@ -153,9 +154,9 @@ $user3 = $userObj->getRequests();
 
     <div id="menu-content-1" class="main-content show">
         <h1 class="text-center fw-bold">Undergraduates Details</h1>
-        <section class="table_header mx-auto">
+        <section class="table_header mx-auto"; style="color:#1D2561">
             <div>
-                <input type="text" id="myInput" placeholder="Search for names..." onkeyup="search();">
+                <input type="text" id="myInput" placeholder="Search for names..." onkeyup="searchUndergrad();">
                 <ion-icon name="search-outline"></ion-icon>
             </div>
         </section>
@@ -164,7 +165,7 @@ $user3 = $userObj->getRequests();
                 <table id="myTable">
                     <thead>
                     <tr>
-                        <th>No</th>
+                        
                         <th>Name</th>
                         <th>Email</th>
                         <th>Contact No</th>
@@ -175,12 +176,12 @@ $user3 = $userObj->getRequests();
                     </thead>
                     <tbody>
                     <?php
-                    $i = 1;
+                    
                     foreach ($user1 as $users) {
                         ?>
                         <tr>
-                            <td><?php echo $i; ?></td>
-                            <td><?php echo $users->first_name; ?><?php echo $users->last_name; ?></td>
+                            
+                            <td><?php echo $users->first_name; ?> <?php echo $users->last_name; ?></td>
                             <td><?php echo $users->user_name; ?></td>
                             <td><?php echo $users->contact_no; ?></td>
                             <td>
@@ -194,13 +195,16 @@ $user3 = $userObj->getRequests();
                                 </button>
                             </td>
                             <td>
+                            <form action="process/admindashboard/ugdelete.php" method="post">
+                                                <input type="hidden" name="user_id" value="<?php echo $users->user_id; ?>">
                                 <button type="submit" class="btn btn-danger "
                                         style="border: none;width: 96px;height: 38px;">Delete
                                 </button>
+                                </form>
                             </td>
                         </tr>
                         <?php
-                        $i++;
+                        
                     }
                     ?>
                     </tbody>
@@ -214,17 +218,17 @@ $user3 = $userObj->getRequests();
         <h1 class="text-center fw-bold">Club Details</h1>
         <section class="table_header mx-auto">
             <div>
-                <input type="text" id="myInput" placeholder="Search for names..." onkeyup="search();">
+                <input type="text" id="clubInput" placeholder="Search for names..." onkeyup="searchClub();">
                 <ion-icon name="search-outline"></ion-icon>
             </div>
         </section>
         <div class="table-2 mx-auto">
             <section class="table_body">
-                <table id="myTable">
+                <table id="clubTable">
                     <thead>
                     <tr>
-                        <
-                        <th>No</th>
+                        
+                        
                         <th>Name</th>
                         <th>email</th>
                         <th>Contact No</th>
@@ -235,11 +239,11 @@ $user3 = $userObj->getRequests();
                     </thead>
                     <tbody>
                     <?php
-                    $i = 1;
+                    
                     foreach ($user2 as $users) {
                         ?>
                         <tr>
-                            <td><?php echo $i; ?></td>
+                           
                             <td><?php echo $users->name; ?></td>
                             <td><?php echo $users->user_name; ?></td>
                             <td><?php echo $users->contact_no; ?></td>
@@ -254,13 +258,17 @@ $user3 = $userObj->getRequests();
                                 </button>
                             </td>
                             <td>
+                            <form action="process/admindashboard/clubdelete.php" method="post">
+                                                <input type="hidden" name="user_id"
+                                                       value="<?php echo $users->user_id; ?>">
                                 <button type="submit" class="btn btn-danger "
                                         style="border: none;width: 96px;height: 38px;">Delete
                                 </button>
+                    </form>
                             </td>
                         </tr>
                         <?php
-                        $i++;
+                        
                     }
                     ?>
 
@@ -271,11 +279,11 @@ $user3 = $userObj->getRequests();
 
         </div>
     </div>
-    <div id="menu-content-3" class="main-content hide">
+    <div id="menu-content-3"  class="main-content hide" >
         <h1 class="text-center fw-bold">New Club Requests</h1>
-        <div class="table mx-auto">
+        <div class="table mx-auto" >
             <section class="table_body">
-                <table>
+        <table>
                     <thead>
                     <tr>
                         <th>Club Name</th>
@@ -288,19 +296,19 @@ $user3 = $userObj->getRequests();
                     </thead>
                     <tbody>
                     <?php
-                    foreach ($user3
 
-                    as $users) {
+                    foreach ($user3 as $users) {
+ 
+                        
                     ?>
                     <tr>
                         <td><?php echo $users->name; ?></td>
                         <td><?php echo $users->user_name; ?> </td>
                         <td><?php echo $users->contact_no; ?> </td>
-                        <td></td>
-
+                        <td><?php echo $users->register_date; ?></td>
                         <td>
 
-                            <button type="button" id="acceptButton" class="btn btn-success   btnedit">Accept</button>
+                         <button type="button" id="acceptButton" class="btn btn-success   btnedit">Accept</button>
 
                             <!-- Bootstrap Modal -->
                             <div class="modal" id="confirmModal" tabindex="-1" role="dialog">
@@ -399,6 +407,7 @@ $user3 = $userObj->getRequests();
 <script src="assets/js/projectdashboard.js"></script>
 <script src="assets/js/admindashboardsearch.js"></script>
 <script src="assets/js/adminscript.js"></script>
+
 
 
 </body>
