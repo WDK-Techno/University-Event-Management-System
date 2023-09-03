@@ -421,9 +421,6 @@ if (isset($_SESSION['user_id'])) {
                                         <input id="first_name" class="form-control" type="text" value="<?= $ug->getFirstName() ?>" name="first_name" />
                                     </div>
                                 </div>
-                                <!--======= hidden ==========-->
-                                <input type="hidden" name="menuNo" value="5">
-                                <input type="hidden" name="ug_id" value="<?= $ug->getUserId() ?>">
 
                                 <div class="col">
                                     <div class="mb-3">
@@ -433,12 +430,14 @@ if (isset($_SESSION['user_id'])) {
                                         <input id="last_name" class="form-control" type="text" value="<?= $ug->getLastName() ?>" name="last_name" />
                                     </div>
                                 </div>
-
-
                                 <div class="fw-bold">Contact Number</div>
                                 <input id="contact_no" class="form-control" type="text" value="<?= $ug->getContactNo() ?>" name="contact_no" />
                             </div>
-                            <button class="btn fw-bold d-flex mt-2 ms-auto me-0" style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);" type="submit" name="submit_desc">
+                            <!--======= hidden ==========-->
+                            <input type="hidden" name="menuNo" value="5">
+                            <input type="hidden" name="ug_id" value="<?=$ug->getUserId() ?>">
+
+                            <button class="btn fw-bold d-flex mt-2 ms-auto me-0" style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);" type="submit" name="submit">
                                 <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;" name="save-outline"></ion-icon>
                                 <div class="my-auto ms-1 me-auto">Save</div>
 
