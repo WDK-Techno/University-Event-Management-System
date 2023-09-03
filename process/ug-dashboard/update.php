@@ -8,8 +8,9 @@ use classes\Undergraduate;
 
 if($_SERVER['REQUEST_METHOD']==="POST"){
     if(isset($_POST['submit'])){
+        $selectedMenuNo = $_POST['menuNo'];
         if(empty($_POST['first_name']) || empty($_POST['last_name']) || empty($_POST['contact_no']) || empty($_POST['ug_id'])){
-
+            header("location: ../../ug-dashboard.php?tab={$selectedMenuNo}&saveEditErr=2");
         }else{
             $fname = $_POST['first_name'];
             $lname = $_POST['last_name'];
@@ -26,9 +27,9 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
             $rs = $ug->saveChangesToDatabase($con);
 
             if ($rs){
-
+                header("location: ../../ug-dashboard.php?tab={$selectedMenuNo}");
             }else{
-                
+                header("location: ../../ug-dashboard.php?tab={$selectedMenuNo}&saveEditErr=1");
             }
 
         }
