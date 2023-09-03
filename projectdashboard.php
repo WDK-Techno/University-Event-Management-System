@@ -398,6 +398,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                 <div class="container p-0 scrollable-div-inside">
 
                                     <?php
+                                    $teamMemberNo = 1;
                                     foreach ($teamMembers as $teamMember) {
 
                                         $projectMember = new Undergraduate(null, null, null, null, null, null);
@@ -432,14 +433,80 @@ if (!$project->loadDataFromProjectID($con)) {
                                             <div class="col-1 tabel-column-type-1 d-flex">
                                                 <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
 
-                                                    <!--                                                    <ion-icon class="my-auto me-2" type="button"-->
-                                                    <!--                                                              data-bs-toggle="modal"-->
-                                                    <!--                                                              data-bs-target=""-->
-                                                    <!--                                                              name="create-outline"></ion-icon>-->
+                                                    <!--========== Delete team category button =========-->
                                                     <ion-icon class="my-auto" type="button"
                                                               data-bs-toggle="modal"
-                                                              data-bs-target=""
+                                                              data-bs-target="#delete-project-member-<?= $teamMemberNo ?>"
                                                               name="trash-outline"></ion-icon>
+                                                </div>
+
+                                                <!-- =========== Delete team category button model =========== -->
+                                                <div class="modal fade"
+                                                     id="delete-project-member-<?= $teamMemberNo ?>"
+                                                     tabindex="-1"
+                                                     role="dialog"
+                                                     aria-labelledby="exampleModalCenterTitle"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered"
+                                                         role="document">
+                                                        <div class="modal-content">
+                                                            <!--=== form =====-->
+                                                            <form action="process/projectdashboard/deleteTeamMember.php"
+                                                                  method="post">
+                                                                <div class="modal-header py-2 px-2"
+                                                                     style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                                                    <div class="d-flex flex-row w-100 justify-content-between">
+
+                                                                        <div class="ms-2 my-auto fs-4 fw-bold">
+                                                                            <?=$projectMember->getFirstName() ?> <?= $projectMember->getLastName() ?>
+
+                                                                        </div>
+                                                                        <div class="ms-2 my-auto fs-4 fw-bold">
+                                                                            <?=$projectMemberTeam->getCategoryName() ?>
+                                                                        </div>
+
+                                                                        <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                                        <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                                        <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                                             style="font-size: 1.3rem; color: var(--accent-color3);">
+                                                                            Delete
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!--======= hidden ==========-->
+                                                                    <input type="hidden" name="menuNo"
+                                                                           value="7">
+                                                                    <input type="hidden" name="ug_id"
+                                                                           value="<?= $projectMember->getUserId() ?>">
+                                                                    <input type="hidden" name="cat_id"
+                                                                           value="<?= $projectMemberTeam->getCategoryID() ?>">
+                                                                </div>
+
+                                                                <div class="modal-body"
+                                                                     style="background-color: var(--lighter-secondary);">
+                                                                    <div class="d-flex fw-normal fs-5">
+                                                                        Do you want to Delete this Team Member ?
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer"
+                                                                     style="background-color: var(--primary);">
+                                                                    <button type="button"
+                                                                            class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">
+                                                                        Close
+                                                                    </button>
+                                                                    <button type="submit"
+                                                                            name="submit"
+                                                                            class="btn fw-bold"
+                                                                            style="background-color: var(--accent-color3); color: var(--primary);">
+                                                                        Delete
+                                                                    </button>
+
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
