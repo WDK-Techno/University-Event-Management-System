@@ -265,8 +265,8 @@ if (isset($_SESSION['user_id'])) {
                                                 <div class="button shadow-sm r" id="button-3">
                                                     <input type="checkbox" class="checkbox status-toggle" checked
                                                            project-id="<?= $project->getProjectID() ?>">
-                                                    <div class="knobs"></div>
-                                                    <div class="layer"></div>
+                                                    <div class="knobs" ></div>
+                                                    <div class="layer" ></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -450,11 +450,11 @@ if (isset($_SESSION['user_id'])) {
         document.addEventListener("DOMContentLoaded", function () {
             const statusToggles = document.querySelectorAll(".status-toggle");
 
+
             statusToggles.forEach(function (statusToggle) {
                 statusToggle.addEventListener("change", function () {
                     const isChecked = statusToggle.checked;
                     const projectId = statusToggle.getAttribute("project-id");
-                    console.log(projectId);
                     updateStatus(isChecked, projectId);
                 });
             });
@@ -470,6 +470,8 @@ if (isset($_SESSION['user_id'])) {
                     }
                 };
                 xhr.send("status=" + status + "&projectId=" + projectId);
+                console.log(status);
+                console.log(projectId);
             }
         });
     </script>
