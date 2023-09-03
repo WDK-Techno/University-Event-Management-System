@@ -466,10 +466,7 @@ class Club extends User
             $pstmt->bindValue(4, $this->clubDescription);
             $pstmt->bindValue(5, $this->user_id);
             $pstmt->execute();
-    return $rs;
-            } else {
-                return false;
-            }
+
             return $pstmt->rowCount() > 0;
 
         } catch (PDOException $exc) {
