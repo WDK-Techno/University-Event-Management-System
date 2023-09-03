@@ -2,7 +2,6 @@
 require_once "classes/DBConnector.php";
 require_once "classes/Event.php";
 
-//require_once('db-connect.php');
 
 use classes\DBConnector;
 use classes\Event;
@@ -52,9 +51,7 @@ if (!empty($rs)) {
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
-    <script src="./assets/js/jquery-3.6.0.min.js"></script>
-    <script src="./assets/js/bootstrap.min.js"></script>
-    <script src="./fullcalendar/lib/main.min.js"></script>
+
 </head>
 
 <body>
@@ -112,42 +109,43 @@ if (!empty($rs)) {
                                 </div>
                             </div>
                         </div>
-                        <!-- Event Details Modal -->
-                        <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal"
-                             aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content rounded-0">
-                                    <div class="modal-header rounded-0">
-                                        <h5 class="modal-title">Schedule Details</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body rounded-0">
-                                        <div class="container-fluid">
-                                            <dl>
-                                                <dt class="text-muted">Title</dt>
-                                                <dd id="title" class="fw-bold fs-4"></dd>
-                                                <dt class="text-muted">Description</dt>
-                                                <dd id="description" class=""></dd>
-                                                <dt class="text-muted">Start</dt>
-                                                <dd id="start" class=""></dd>
-                                                <dt class="text-muted">End</dt>
-                                                <dd id="end" class=""></dd>
-                                            </dl>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer rounded-0">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Event Details Modal -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Event Details Modal -->
+    <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-0">
+                <div class="modal-header rounded-0">
+                    <h5 class="modal-title">Schedule Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body rounded-0">
+                    <div class="container-fluid">
+                        <dl>
+                            <dt class="text-muted">Title</dt>
+                            <dd id="title" class="fw-bold fs-4"></dd>
+                            <dt class="text-muted">Description</dt>
+                            <dd id="description" class=""></dd>
+                            <dt class="text-muted">Start</dt>
+                            <dd id="start" class=""></dd>
+                            <dt class="text-muted">End</dt>
+                            <dd id="end" class=""></dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="modal-footer rounded-0">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Event Details Modal -->
 
     <!-- <div class="container3-fluid py-6 mb-6"> -->
     <div class="container p-5">
@@ -492,6 +490,9 @@ if (!empty($rs)) {
     </div>
 
 </div>
+<script src="./fullcalendar/lib/main.min.js"></script>
+<script src="./assets/js/jquery-3.6.0.min.js"></script>
+<script src="./assets/js/bootstrap.min.js"></script>
 <!-- =====back to top button====-->
 <a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top border border-dark" role="button"><i
             class="fas fa-chevron-up"></i></a>
@@ -537,6 +538,9 @@ if (!empty($rs)) {
     });
 
 </script>
+
+
+
 
 <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"-->
 <!--        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"-->
