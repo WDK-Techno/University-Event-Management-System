@@ -238,6 +238,9 @@ if (isset($_SESSION['user_id'])) {
 
 
             <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4">
+                <div>
+
+
                 <?php
                 $i = 1;
                 foreach ($projects as $project) {
@@ -263,17 +266,10 @@ if (isset($_SESSION['user_id'])) {
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button shadow-sm r" id="button-3">
-<<<<<<< Updated upstream
-                                                    <input type="checkbox" class="checkbox status-toggle" checked
-                                                           project-id="<?= $project->getProjectID() ?>">
-                                                    <div class="knobs" ></div>
-                                                    <div class="layer" ></div>
-=======
                                                     <input type="checkbox" class="checkbox status-toggle"
                                                            name="project-id-<?= $project->getProjectID() ?>" checked>
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
->>>>>>> Stashed changes
                                                 </div>
                                             </div>
                                         </div>
@@ -296,6 +292,7 @@ if (isset($_SESSION['user_id'])) {
                     <?php
                     $i++;
                 } ?>
+                </div>
             </div>
         </div>
         <div id="menu-content-2" class="main-content hide">
