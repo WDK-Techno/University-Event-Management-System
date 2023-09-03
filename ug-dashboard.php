@@ -170,8 +170,10 @@ if (isset($_SESSION['user_id'])) {
             <div id="menu-content-1" class="main-content hide ms-1">
             </div>
             <div id="menu-content-2" class="main-content hide">
-                <h1>Task </h1>
-          
+                <div class="m-4">
+                    <h1>Task </h1>
+                </div>
+
 
                 <div class="card m-4" style="">
                             <div class="card-header team-member-table pb-0 m-4"
