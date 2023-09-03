@@ -125,8 +125,8 @@ $user4 = $userObj->getRowCount();
                     </li> -->
                 </ul>
 
-                <div class="bell-notification" current-count="<?php echo $user4 ;?>">
-                    <ion-icon name="notifications-outline"></ion-icon>
+                <a href="superadmindashboard.php?tab=3"><div class="bell-notification" current-count="<?php echo $user4 ;?>">
+                    <ion-icon name="notifications-outline"></ion-icon></a>
     
                 </div>
                 <form action="process/logout.php" method="post">
