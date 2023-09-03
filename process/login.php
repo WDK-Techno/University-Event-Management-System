@@ -33,6 +33,14 @@ if(isset($_POST['submit'],$_POST['username'],$_POST['password'])){
 
                     header("location: ../ug-dashboard.php");
                 }
+                if ($user->getStatus() == "deactive"){
+
+                    $ug = new Undergraduate(null, null, null, null, null, null);
+                    $ug->setUserId($user->getUserId());
+                    $ug->loadDataFromUserID($con);
+
+                    header("location: ../content/restrict.php?fname={$ug->getFirstName()}&lname={$ug->getLastName()}&typ=ug_deactive");
+                }
 
             }
             if ($user->getRole() == "club"){
