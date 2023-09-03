@@ -63,21 +63,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     <!-- ======= Main Content ====== -->
     <div class="w-100" style="height: 100vh;">
-        <div class="container"
+        <div class="container "
              style="position:absolute; left:0; right:0; top: 55%; transform: translateY(-50%); -ms-transform: translateY(-50%); -moz-transform: translateY(-50%); -webkit-transform: translateY(-50%); -o-transform: translateY(-50%);">
-            <div class="row justify-content-center">
-                <div class="col-md-7 col-lg-6 col-xl-6 col-xxl-4">
-                    <div class="card shadow-lg o-hidden border-0 my-5">
-                        <div class="card-body p-0">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="p-5 bg-transparent">
-                                        <div class="text-center">
-                                            <h4 class="text-dark mb-4">User Login</h4>
+            <div class="row justify-content-center ">
+                <div class="col-md-7 col-lg-6 col-xl-6 col-xxl-4 ">
+                    <div class="card shadow-lg bg-transparent">
+                        <div class="card-body p-0 ">
+                            <div class="row ">
+                                <div class="col-lg-12 ">
+                                    <div class="p-4 " style="border-radius: 10px; padding: 40px 30px; background-color: rgba(255,255,255,0.13); backdrop-filter: blur(1px);  box-shadow: -3px -3px 9px #fff4,3px 3px 7px rgba(147, 149, 151, 0.671)">
+                                        <div class="text-center" style="font-weight: bold;">
+                                            <h4 class="text-dark mb-4" style="font-weight: bold; font-size:28px">User Login</h4>
                                         </div><!-- Start: Login Form -->
                                         <form action="process/login.php" method="post" class="user">
                                             <div class="mb-3">
-                                                <input class="form-control form-control-user" type="email"
+                                                <input class="form-control form-control-user"  type="email"
                                                        id="email" aria-describedby="emailHelp"
                                                        placeholder="Enter Email Address" name="username" required="">
                                             </div>
@@ -93,15 +93,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                             </div><!-- End: Error Message -->
 
                                             <button
-                                                    class="btn btn-primary d-block btn-user w-100" id="submitBtn"
+                                                    class="d-block btn-user w-100" style="background-color:#CD5C5C; font-weight: bold; border-radius: 8px; padding: 6px" id="submitBtn"
                                                     name="submit" type="submit">Login
                                             </button>
                                             <hr>
                                         </form><!-- End: Login Form --><!-- Start: Forgot Password -->
-                                        <div class="text-center"><a class="small" href="forgot-password.html">Forgot
+                                        <div class="text-center"><a class="small" style="color:#CD5C5C; font-size:15px; font-weight: bold;" href="forgot-password.html">Forgot
                                                 Password?</a></div><!-- End: Forgot Password -->
                                         <!-- Start: Register -->
-                                        <div class="text-center"><a class="small" href="register.html">Create an
+                                        <div class="text-center"><a class="small" style="color:#CD5C5C; font-size:15px; font-weight: bold;" href="register.html">Create an
                                                 Account!</a></div><!-- End: Register -->
                                     </div>
                                 </div>
