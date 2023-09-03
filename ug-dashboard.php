@@ -415,6 +415,7 @@ if (isset($_SESSION['user_id'])) {
                             <div class="d-flex flex-column" style="color: var(--primary);">
                                 <div class="col">
                                     <div class="mb-3">
+                                        <input type="hidden" name="ug_id" value="<?= $ug->getUserId() ?>">
                                         <label class="form-label" for="first_name">
                                             <strong>First Name</strong>
                                         </label>
