@@ -165,11 +165,11 @@ $user4 = $userObj->getRowCount();
                 <table id="myTable">
                     <thead>
                     <tr>
-                        
+                        <th></th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Contact No</th>
-                        <th></th>
+                        <th>Status</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -180,20 +180,26 @@ $user4 = $userObj->getRowCount();
                     foreach ($user1 as $users) {
                         ?>
                         <tr>
-                            
+                            <td><img class="img-thumbnail shadow-sm" src="assets/images/profile_img/ug/<?php echo $users->profile_image; ?>" style="border-radius:50%; width:46px; height:46px"></td>
                             <td><?php echo $users->first_name; ?> <?php echo $users->last_name; ?></td>
                             <td><?php echo $users->user_name; ?></td>
                             <td><?php echo $users->contact_no; ?></td>
+                            <td>
+                            <?php
+                                 if($users->status == "active"){
+                                    echo "<a href='status.php?user_id=$users->user_id&status=deactive' style='text-decoration:none'><p>Active</p></a>";
+                                 }elseif($users->status == "deactive"){
+                                    echo "<a href='status.php?user_id=$users->user_id&status=active' style='text-decoration:none;color:red'><p>Deactive</p></a>";
+                                 }
+                                 ?>
+
+                            </td>
                             <td>
                                 <button type="submit" class="btn btn-primary "
                                         style="border: none;width: 96px;height: 38px;">Edit
                                 </button>
                             </td>
-                            <td>
-                                <button type="submit" class="btn btn-success "
-                                        style="border: none;width: 96px;height: 38px;">Deactivate
-                                </button>
-                            </td>
+                
                             <td>
                             <form action="process/admindashboard/ugdelete.php" method="post">
                                                 <input type="hidden" name="user_id" value="<?php echo $users->user_id; ?>">
@@ -228,11 +234,11 @@ $user4 = $userObj->getRowCount();
                     <thead>
                     <tr>
                         
-                        
+                        <th></th>
                         <th>Name</th>
                         <th>email</th>
                         <th>Contact No</th>
-                        <th></th>
+                        <th>Status</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -243,20 +249,25 @@ $user4 = $userObj->getRowCount();
                     foreach ($user2 as $users) {
                         ?>
                         <tr>
-                           
+                            <td><img class="img-thumbnail shadow-sm" src="assets/images/profile_img/club/<?php echo $users->profile_image; ?>" style="border-radius:50%; width:46px; height:46px"></td>
                             <td><?php echo $users->name; ?></td>
                             <td><?php echo $users->user_name; ?></td>
                             <td><?php echo $users->contact_no; ?></td>
+                            <td>
+                            <?php
+                                 if($users->status == "active"){
+                                    echo "<a href='status.php?user_id=$users->user_id&status=deactive' style='text-decoration:none'><p>Active</p></a>";
+                                 }elseif($users->status == "deactive"){
+                                    echo "<a href='status.php?user_id=$users->user_id&status=active' style='text-decoration:none;color:red'><p>Deactive</p></a>";
+                                 }
+                                 ?>
+                            </td>
                             <td>
                                 <button type="submit" class="btn btn-primary "
                                         style="border: none;width: 96px;height: 38px;">Edit
                                 </button>
                             </td>
-                            <td>
-                                <button type="submit" class="btn btn-success "
-                                        style="border: none;width: 96px;height: 38px;">Deactivate
-                                </button>
-                            </td>
+                            
                             <td>
                             <form action="process/admindashboard/clubdelete.php" method="post">
                                                 <input type="hidden" name="user_id"
