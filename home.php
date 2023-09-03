@@ -67,23 +67,25 @@ if (!empty($rs)) {
           <span class="navbar-toggler-icon"></span>
         </button> -->
         <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
-        <div class="" id="navbarSupportedContent">
+        <div class="d-flex" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <!-- <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li> -->
             </ul>
-            <form class="d-flex">
+
+            <a href="register.php" class="d-flex" style="text-decoration: none">
                 <button class="btn btn-outline-secondary d-flex align-items-center" type="submit"><Span
                             class="d-none d-lg-inline pe-2">SignUp</Span>
-                    <ion-icon style="font-size: 1.0rem;;"
-                              name=" person-add-outline"></ion-icon>
+                    <ion-icon style="font-size: 1.0rem;" name="person-add-outline"></ion-icon>
                 </button>
+            </a>
+            <a href="login.php" class="d-flex" style="text-decoration: none">
                 <button class="btn btn-outline-primary ms-2 d-flex align-items-center" type="submit"><Span
                             class="d-none d-lg-inline-block pe-2">LogIn</Span>
                     <ion-icon style="font-size: 1.5rem;" name="log-in-outline"></ion-icon>
                 </button>
-            </form>
+            </a>
         </div>
     </div>
 </nav>
@@ -411,7 +413,7 @@ if (!empty($rs)) {
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
             <img src="assets/images/homepage/kavindra.jpg" class="card-img-top position-sticky "
-                 style="width: 290px;height: 330px" alt="...">
+                 style="width: 290px;height: 330px; object-fit: cover" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Kavindra Weerasingha</h5>
                 <p class="card-text">UWU/CST/20/068</p>
@@ -427,7 +429,7 @@ if (!empty($rs)) {
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
             <img src="assets/images/homepage/heli.jpg" class="card-img-top position-sticky"
-                 style="width: 290px;height: 330px" alt="...">
+                 style="width: 290px;height: 330px; object-fit: cover" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Kavinda Helitha</h5>
                 <p class="card-text">UWU/CST/20/070</p>
@@ -443,7 +445,7 @@ if (!empty($rs)) {
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
             <img src="assets/images/homepage/anuranga.jpg" class="card-img-top position-sticky"
-                 style="width: 290px;height: 330px" alt="...">
+                 style="width: 290px;height: 330px; object-fit: cover" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Anuranga</h5>
                 <p class="card-text">UWU/CST/20/085</p>
@@ -459,7 +461,7 @@ if (!empty($rs)) {
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
             <img src="assets/images/homepage/ishara.jpg" class="card-img-top position-sticky"
-                 style="width: 290px;height: 330px" alt="...">
+                 style="width: 290px;height: 330px; object-fit: cover" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Ishara Suvini</h5>
                 <p class="card-text">UWU/CST/20/087</p>
@@ -475,7 +477,7 @@ if (!empty($rs)) {
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
             <img src="assets/images/homepage/thilini.jpg" class="card-img-top position-sticky"
-                 style="width: 290px;height: 330px" alt="...">
+                 style="width: 290px;height: 330px; object-fit: cover" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Thilini Priyangika</h5>
                 <p class="card-text">UWU/CST/20/089</p>
@@ -491,7 +493,8 @@ if (!empty($rs)) {
 
 </div>
 <!-- =====back to top button====-->
-<a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top border border-dark" role="button"><i class="fas fa-chevron-up"></i></a>
+<a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top border border-dark" role="button"><i
+            class="fas fa-chevron-up"></i></a>
 <!-- ======== Footer ======== -->
 <?php include('content/footer.php') ?>
 
@@ -513,7 +516,7 @@ if (!empty($rs)) {
 </script>
 <!-- =====back to top button====-->
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $(window).scroll(function () {
             if ($(this).scrollTop() > 50) {
                 $('#back-to-top').fadeIn();
