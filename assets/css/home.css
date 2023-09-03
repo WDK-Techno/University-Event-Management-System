@@ -1,6 +1,16 @@
 #main{
     margin-top: 80px;
 }
+:root {
+    --primary: #2F3C7E;
+    --secondary: #FBEAEB;
+    --darker-primary: #1D2561;
+    --lighter-secondary: #FDF6F7;
+    --accent-color: #1F8A70;
+    --accent-color2: #93e017;
+    --accent-color3: #e36d24;
+
+}
 .footer{
     display: block;
 
@@ -100,6 +110,15 @@
     right: 25px;
     display: none;
 }
+
+/* Define the hover effect class */
+.hover-effect {
+    background-color: #7eb224; /* Change to the desired background color on hover */
+    transition: background-color 0.3s ease; /* Add a smooth transition */
+    color: #fff; /* Change to the desired text color on hover */
+}
+
+
 
 .bi{
     font-size: 25px;
