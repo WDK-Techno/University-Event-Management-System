@@ -3,11 +3,10 @@
 
 namespace classes;
 
-use Cassandra\Exception\DivideByZeroException;
 use PDO;
 use PDOException;
 
-class SubTask
+class SubTask extends MainTask
 {
     private $subTaskID;
     private $subTaskName;
@@ -15,30 +14,28 @@ class SubTask
     private $deadline;
     private $assignedMemberID;
     private $isTaskCompleted;
-    private $mainTaskID;
-    private $status;
+    private $subTaskStatus;
 
 
     public function __construct($subTaskID, $subTaskName, $description, $deadline, $assignedMemberID, $isTaskCompleted, $mainTaskID, $status)
     {
+        parent::__construct($mainTaskID);
+
         $this->subTaskID = $subTaskID;
         $this->subTaskName = $subTaskName;
         $this->description = $description;
         $this->deadline = $deadline;
         $this->assignedMemberID = $assignedMemberID;
         $this->isTaskCompleted = $isTaskCompleted;
-        $this->mainTaskID = $mainTaskID;
-        $this->status = $status;
+        $this->subTaskStatus = $status;
     }
 
 
-
-
-    public function addNewSubTask($con){
+    public function addNewSubTask($con)
+    {
         try {
 
-            $con = DBConnector::getConnection();
-            $query ="INSERT INTO sub_task (sub_task_name, description, deadline, asign_member_id, main_task_id)
+            $query = "INSERT INTO sub_task (sub_task_name, description, deadline, asign_member_id, main_task_id)
 VALUES (?,?,?,?,?)";
 
             $pstmt = $con->prepare($query);
@@ -50,11 +47,10 @@ VALUES (?,?,?,?,?)";
             $pstmt->execute();
 
             return $pstmt->rowCount() > 0;
-        }catch (PDOException $exc){
+        } catch (PDOException $exc) {
             die("Error In adding subTask " . $exc->getMessage());
         }
     }
-
 
 
     public static function getSubTasksListFromProjectID($con, $projectID)
@@ -90,6 +86,30 @@ VALUES (?,?,?,?,?)";
     public function loadSubTaskFromSubTaskID($con)
     {
 
+        $query = "SELECT * FROM sub_task WHERE sub_task_id=?";
+        $pstmt = $con->prepare($query);
+        $pstmt->bindValue(1, $this->subTaskID);
+        $pstmt->execute();
+        $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
+        if (!empty($rs)) {
+            $this->subTaskID = $rs->sub_task_id;
+            $this->subTaskName = $rs->sub_task_name;
+            $this->description = $rs->description;
+            $this->deadline = $rs->deadline;
+            $this->assignedMemberID = $rs->asign_member_id;
+            $this->isTaskCompleted = $rs->task_complete;
+            $this->mainTaskID = $rs->main_task_id;
+            $this->subTaskStatus = $rs->status;
+
+            $rs1 = parent::loadMainTaskFromTaskID($con);
+            if ($rs){
+                return true;
+            }else{
+                return true;
+            }
+        }else{
+            return false;
+        }
 
     }
 
@@ -104,7 +124,7 @@ VALUES (?,?,?,?,?)";
 
             $taskArray = array();
 
-            $query = "SELECT * FROM sub_task WHERE asing_member_id=?";
+            $query = "SELECT * FROM sub_task WHERE asign_member_id=?";
 
             $pstmt = $con->prepare($query);
             $pstmt->bindValue(1, $userID);
@@ -120,10 +140,10 @@ VALUES (?,?,?,?,?)";
 
                 }
             }
-        }catch (PDOException $exc) {
+        } catch (PDOException $exc) {
             die("Error In Get Sub Tasks List From Project ID " . $exc->getMessage());
         }
-        
+
         return $subTasks;
     }
 
@@ -226,33 +246,17 @@ VALUES (?,?,?,?,?)";
     /**
      * @return mixed
      */
-    public function getMainTaskID()
+    public function getSubTaskStatus()
     {
-        return $this->mainTaskID;
+        return $this->subTaskStatus;
     }
 
     /**
-     * @param mixed $mainTaskID
+     * @param mixed $subTaskStatus
      */
-    public function setMainTaskID($mainTaskID)
+    public function setSubTaskStatus($subTaskStatus)
     {
-        $this->mainTaskID = $mainTaskID;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param mixed $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
+        $this->subTaskStatus = $subTaskStatus;
     }
 
 
