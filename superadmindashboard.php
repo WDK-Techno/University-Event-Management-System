@@ -177,7 +177,7 @@ $user4 = $userObj->getRowCount();
                         <th>Name</th>
                         <th>Email</th>
                         <th>Contact No</th>
-                        <th>Status</th>
+                        <th class="text-center">Status</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -190,20 +190,22 @@ $user4 = $userObj->getRowCount();
 
                         ?>
                         <tr>
-                            <td><img class="img-thumbnail shadow-sm" src="assets/images/profile_img/ug/<?php echo $users->profile_image; ?>" style="border-radius:50%; width:46px; height:46px"></td>
+                            <td><img class="shadow-sm" src="assets/images/profile_img/ug/<?php echo $users->profile_image; ?>" style="border-radius:50%; width:46px; height:46px"></td>
                             <td><?php echo $users->first_name; ?> <?php echo $users->last_name; ?></td>
                             <td><?php echo $users->user_name; ?></td>
                             <td><?php echo $users->contact_no; ?></td>
                             <td>
-                               <div class="label">
+                             
                             <?php
-                                 if($users->status == "active"){
-                                    echo "<p><a href='process/admindashboard/ugStatus.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;color:green'>Active</a></p>";
-                                 }elseif($users->status == "deactive"){
-                                    echo "<a href='process/admindashboard/ugStatus.php?user_id=$users->user_id&status=active' style='text-decoration:none;color:red'><p>Deactive</p></a>";
-                                 }
-                                 ?>
-                              </div>
+                                if($users->status == "active"){
+                                   echo "<a class='my-auto btn btn-outline-success' href='process/admindashboard/ugStatus.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;'>Active</a>";
+                                }elseif($users->status == "deactive"){
+                                   echo "<a class='my-auto btn btn-outline-warning' href='process/admindashboard/ugStatus.php?user_id=$users->user_id&status=active'  style='text-decoration:none;'>Deactive</a>";
+                                }
+                                 
+                            ?>
+                              
+                              
                             </td>
                             <td>
                                 <button type="submit" class="btn btn-primary "
