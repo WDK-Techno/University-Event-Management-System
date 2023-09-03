@@ -197,9 +197,9 @@ $user4 = $userObj->getRowCount();
                             <td>
                             <?php
                                  if($users->status == "active"){
-                                    echo "<a href='process/admindashboard/status.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;color:green'><p>Active</p></a>";
+                                    echo "<a href='process/admindashboard/ugStatus.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;color:green'><p>Active</p></a>";
                                  }elseif($users->status == "deactive"){
-                                    echo "<a href='process/admindashboard/status.php?user_id=$users->user_id&status=active' style='text-decoration:none;color:red'><p>Deactive</p></a>";
+                                    echo "<a href='process/admindashboard/ugStatus.php?user_id=$users->user_id&status=active' style='text-decoration:none;color:red'><p>Deactive</p></a>";
                                  }
                                  ?>
 

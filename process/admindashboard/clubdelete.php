@@ -8,5 +8,5 @@ if (isset($_POST["user_id"])) {
     $user_id = $_POST["user_id"];
     $userObj = new \classes\Admin();
     $userObj->clubdelete($user_id);
-    header("Location:../../superadmindashboard.php");
+    header("Location:../../superadmindashboard.php?tab=2");
 }
