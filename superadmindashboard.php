@@ -18,6 +18,14 @@ $user2 = $userObj->getClubs();
 $user3 = $userObj->getRequests();
 $user4 = $userObj->getRowCount();
 ?>
+<?php
+ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $selected_menuNo = 1;
+    if (isset($_GET['tab'])) {
+        $selected_menuNo = $_GET['tab'];
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +76,7 @@ $user4 = $userObj->getRowCount();
 
         <hr>
         <ul class="nav nav-pills flex-column navbar-text mb-auto">
-            <li id="menu-1" class="sideBar-btn activate" onclick="showMenuContent(1)">
+            <li id="menu-1" class="sideBar-btn" onclick="showMenuContent(1)">
                 <a href="#" class="nav-link d-flex justify-content-start">
                     <ion-icon name="person-circle-outline"></ion-icon>
                     <span class="sideBar-btn-text my-auto">Undergraduates</span>
@@ -152,7 +160,7 @@ $user4 = $userObj->getRowCount();
     </div>
 
 
-    <div id="menu-content-1" class="main-content show">
+    <div id="menu-content-1" class="main-content hide">
         <h1 class="text-center fw-bold">Undergraduates Details</h1>
         <section class="table_header mx-auto"; style="color:#1D2561">
             <div>
@@ -178,6 +186,8 @@ $user4 = $userObj->getRowCount();
                     <?php
                     
                     foreach ($user1 as $users) {
+                        if($users->status !== "delete"){
+
                         ?>
                         <tr>
                             <td><img class="img-thumbnail shadow-sm" src="assets/images/profile_img/ug/<?php echo $users->profile_image; ?>" style="border-radius:50%; width:46px; height:46px"></td>
@@ -187,9 +197,9 @@ $user4 = $userObj->getRowCount();
                             <td>
                             <?php
                                  if($users->status == "active"){
-                                    echo "<a href='status.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;color:green'><p>Active</p></a>";
+                                    echo "<a href='process/admindashboard/status.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;color:green'><p>Active</p></a>";
                                  }elseif($users->status == "deactive"){
-                                    echo "<a href='status.php?user_id=$users->user_id&status=active' style='text-decoration:none;color:red'><p>Deactive</p></a>";
+                                    echo "<a href='process/admindashboard/status.php?user_id=$users->user_id&status=active' style='text-decoration:none;color:red'><p>Deactive</p></a>";
                                  }
                                  ?>
 
@@ -210,7 +220,8 @@ $user4 = $userObj->getRowCount();
                             </td>
                         </tr>
                         <?php
-                        
+                    
+                        }                       
                     }
                     ?>
                     </tbody>
@@ -256,9 +267,9 @@ $user4 = $userObj->getRowCount();
                             <td>
                             <?php
                                  if($users->status == "active"){
-                                    echo "<a href='status.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;color:green'><p>Active</p></a>";
+                                    echo "<a href='process/admindashboard/status.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;color:green'><p>Active</p></a>";
                                  }elseif($users->status == "deactive"){
-                                    echo "<a href='status.php?user_id=$users->user_id&status=active' style='text-decoration:none;color:red'><p>Deactive</p></a>";
+                                    echo "<a href='process/admindashboard/status.php?user_id=$users->user_id&status=active' style='text-decoration:none;color:red'><p>Deactive</p></a>";
                                  }
                                  ?>
                             </td>
@@ -307,7 +318,7 @@ $user4 = $userObj->getRowCount();
                     </thead>
                     <tbody>
                     <?php
-
+                    $newClubNo=1;
                     foreach ($user3 as $users) {
  
                         
@@ -319,11 +330,12 @@ $user4 = $userObj->getRowCount();
                         <td><?php echo $users->register_date; ?></td>
                         <td>
 
-                         <button type="button" id="acceptButton" class="btn btn-success   btnedit">Accept</button>
+                         <button type="button" id="acceptButton" class="btn btn-success   btnedit" data-bs-toggle="modal"
+                                 data-bs-target="#confirmModal-<?=$newClubNo ?>">Accept</button>
 
                             <!-- Bootstrap Modal -->
-                            <div class="modal" id="confirmModal" tabindex="-1" role="dialog">
-                                <div class="modal-dialog" role="document">
+                            <div class="modal fade" id="confirmModal-<?=$newClubNo ?>" tabindex="-1" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header" style="background-color:var(--darker-primary); color:white">
                                             <h5 class="modal-title">Confirmation</h5>
@@ -339,7 +351,7 @@ $user4 = $userObj->getRowCount();
                                                 <button type="submit" class="btn btn-primary">Yes</button>
                                             </form>
                                             <button type="button" class="btn btn-secondary" id="no"
-                                                    data-dismiss="modal">No
+                                                    data-bs-dismiss="modal">No
                                             </button>
 
                                         </div>
@@ -349,11 +361,13 @@ $user4 = $userObj->getRowCount();
                         </td>
 
                         <td>
-                            <button type="button" class="btn btn-danger  btnedit" id="declineButton">Decline</button>
+                            <button type="button" class="btn btn-danger  btnedit" data-bs-toggle="modal"
+                                 data-bs-target="#declineModal-<?=$newClubNo ?>">Decline</button>
 
                             <!-- Bootstrap Modal for Decline -->
-                            <div class="modal" id="declineModal" tabindex="-1" role="dialog_1">
-                                <div class="modal-dialog" role="document">
+                            <div class="modal fade" id="declineModal-<?=$newClubNo ?>" tabindex="-1" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered"
+                                 role="document">
                                     <div class="modal-content">
                                         <div class="modal-header" style="background-color:var(--darker-primary); color:white">
                                             <h5 class="modal-title">Confirmation</h5>
@@ -369,7 +383,7 @@ $user4 = $userObj->getRowCount();
                                                 <button type="submit" class="btn btn-danger">Yes</button>
                                             </form>
                                             <button type="button" class="btn btn-secondary" id="decline"
-                                                    data-dismiss="modal">No
+                                                    data-bs-dismiss="modal">No
                                             </button>
 
                                         </div>
@@ -382,6 +396,7 @@ $user4 = $userObj->getRowCount();
                     </tr>
                     <tr>
                         <?php
+                        $newClubNo++;
                         }
                         ?>
 
@@ -397,7 +412,12 @@ $user4 = $userObj->getRowCount();
     </div>
 
 </div>
-
+ <!--=========== Selected Menu change when loading ============-->
+ <script>
+        document.getElementById("menu-<?php echo $selected_menuNo ?>").classList.add("activate");
+        document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.remove("hide");
+        document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.add("show");
+    </script>
 
 <!-- ==== Boostrap Script ==== -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"

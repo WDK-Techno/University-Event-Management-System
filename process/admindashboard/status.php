@@ -9,5 +9,5 @@ if ($_SERVER["REQUEST_METHOD"] === "GET"){
     $status = $_GET["status"];
     $userObj = new \classes\Admin();
     $userObj->status($user_id, $status);
-    header("Location:../../superadmindashboard.php");
+    header("Location:../../superadmindashboard.php?tab=2");
 }
