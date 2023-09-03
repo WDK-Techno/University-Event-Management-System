@@ -25,6 +25,7 @@ if (isset($_SESSION['user_id'])) {
     $ug = new Undergraduate(null, null, null, null, null, null);
     $ug->setUserId($ugID);
     $ug->loadDataFromUserID($con);
+    $ug->saveChangesToDatabase($con);
 
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -410,7 +411,7 @@ if (isset($_SESSION['user_id'])) {
                             Settings</p>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form action="process/ug-dashboard/update.php" method="POST">
                             <div class="d-flex flex-column" style="color: var(--primary);">
                                 <div class="col">
                                     <div class="mb-3">

@@ -311,6 +311,7 @@ class Undergraduate extends User
         }
     }
 
+
 }
 
 class Club extends User
@@ -482,6 +483,8 @@ class Club extends User
             die("Error in update data to DB " . $exc->getMessage());
         }
     }
+
+    
 
 
 }
