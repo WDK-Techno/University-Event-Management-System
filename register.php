@@ -46,8 +46,8 @@
     <div class="w-100" style="height: 100vh;">
         <div class="container">
             <div class="row mh-100vh">
-                <div class="screen bg-transparent " >
-                    <div class="p-4 screen__content" style="background-color: rgba(255,255,255,0.13); backdrop-filter: blur(3px);  box-shadow: -3px -3px 9px #fff4,3px 3px 7px rgba(147, 149, 151, 0.671)">
+                <div class="screen  " >
+                    <div class=" screen__content" >
                         <h3 style="padding: 30px 0px 30px 0px;color: black;font-weight: bold; " align="center">
                             Register </h3>
                         <div class="text-center m-3">

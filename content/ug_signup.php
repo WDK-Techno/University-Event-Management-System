@@ -53,10 +53,10 @@
         <div class="container"
              style="position:absolute; left:0; right:0; top: 55%; transform: translateY(-50%); -ms-transform: translateY(-50%); -moz-transform: translateY(-50%); -webkit-transform: translateY(-50%); -o-transform: translateY(-50%);">
             <div class="row d-flex d-xl-flex justify-content-center justify-content-xl-center">
-                <div class="col-sm-7 col-lg-6 col-xl-6 col-xxl-4 bg-transparent shadow-lg" style="border-radius: 5px;">
-                    <div class="p-5" style="border-radius: 10px; padding: 40px 30px; background-color: rgba(255,255,255,0.13); backdrop-filter: blur(-1px);  box-shadow: -3px -3px 9px #fff4,3px 3px 7px rgba(147, 149, 151, 0.671)">
-                        <div class="text-center" >
-                            <h4 class=" mb-4" style="font-weight: bold; font-size:33px; color:#191970">Undergraduates</h4>
+                <div class="col-sm-7 col-lg-6 col-xl-6 col-xxl-4 bg-white shadow-lg" style="border-radius: 5px;">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h4 class="text-dark mb-4">Undergraduates</h4>
                         </div><!-- Start: Register Form -->
                         <form action="../process/signup/reg_ug.php" method="post" class="user"><!-- Start: Username -->
                             <!-- Start: Email -->
@@ -93,13 +93,13 @@
                                 <p id="emailErrorMsg" class="text-danger" style="display:none;">Paragraph</p>
                                 <p id="passwordErrorMsg" class="text-danger" style="display:none;">Paragraph</p>
                             </div><!-- End: Email Error Message -->
-                            <button class="btn btn-primary d-block btn-user w-100" style=" background-color: #2b14bc; font-weight: bold;"
+                            <button class="btn btn-primary d-block btn-user w-100" style=" background-color: #2b14bc;"
                                     id="submitBtn" name="submit" type="submit">Sign Up
                             </button>
                             <hr>
 
                             <!-- End: Forgot Password --><!-- Start: Login -->
-                            <div class="text-center" style="font-size:18px; font-weight: bold;"><a class="small" href="login.html">Already have an account?
+                            <div class="text-center"><a class="small" href="login.html">Already have an account?
                                     Login!</a>
                             </div><!-- End: Login -->
                         </form>

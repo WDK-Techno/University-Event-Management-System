@@ -195,14 +195,15 @@ $user4 = $userObj->getRowCount();
                             <td><?php echo $users->user_name; ?></td>
                             <td><?php echo $users->contact_no; ?></td>
                             <td>
+                               <div class="label">
                             <?php
                                  if($users->status == "active"){
-                                    echo "<a href='process/admindashboard/ugStatus.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;color:green'><p>Active</p></a>";
+                                    echo "<p><a href='process/admindashboard/ugStatus.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;color:green'>Active</a></p>";
                                  }elseif($users->status == "deactive"){
                                     echo "<a href='process/admindashboard/ugStatus.php?user_id=$users->user_id&status=active' style='text-decoration:none;color:red'><p>Deactive</p></a>";
                                  }
                                  ?>
-
+                              </div>
                             </td>
                             <td>
                                 <button type="submit" class="btn btn-primary "
