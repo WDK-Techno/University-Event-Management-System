@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                                 <h4 class="mb-3" style="color: var(--accent-color3);">
                                                     Need Admin Approval</h4>
                                             </div>
-                                            <div class="text-center my-2 fw-bold fs-4" style="color: var(--darker-primary);"><?=$name?> Club</div>
+                                            <div class="text-center my-2 fw-bold fs-4" style="color: var(--darker-primary);"><?=$name?></div>
                                             <div class="fw-light">Your Club is not get approved yet</div>
                                             <div class="fw-light">Please Contact Admin</div>
                                             <div class="fw-bold">Contact No : 077789456</div>
@@ -88,6 +88,23 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
                                             <?php
                                         }
+
+                                        if ($typ === "club_deactive") {
+                                            $name = $_GET['name'];
+                                            ?>
+                                            <div class="text-center">
+                                                <h4 class="mb-3" style="color: var(--accent-color3);">
+                                                    Deactivate Account</h4>
+                                            </div>
+                                            <div class="text-center my-2 fw-bold fs-4" style="color: var(--darker-primary);"><?=$name?></div>
+                                            <div class="fw-light">Your account is deactivated</div>
+                                            <div class="fw-light">Please Contact Admin</div>
+                                            <div class="fw-bold">Contact No : 077789456</div>
+                                            <div class="fw-bold">Email : admin@gmail.com</div>
+
+                                            <?php
+                                        }
+
                                         ?>
                                         <?php
                                         if ($typ === "ug_deactive") {

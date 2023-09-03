@@ -71,17 +71,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         <div class="card-body p-0 ">
                             <div class="row ">
                                 <div class="col-lg-12 ">
-                                    <div class="p-4 " >
+                                    <div class="p-4">
                                         <div class="text-center">
                                             <h4 class="text-dark mb-4">User Login</h4>
                                         </div><!-- Start: Login Form -->
                                         <form action="process/login.php" method="post" class="user">
-                                            <div class="mb-3">
+                                            <div class="mb-3 mx-2">
                                                 <input class="form-control form-control-user"  type="email"
                                                        id="email" aria-describedby="emailHelp"
                                                        placeholder="Enter Email Address" name="username" required="">
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-3 mx-2">
                                                 <input class="form-control form-control-user" type="password"
                                                        placeholder="Password" name="password" required="">
                                             </div>

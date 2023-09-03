@@ -61,6 +61,13 @@ if(isset($_POST['submit'],$_POST['username'],$_POST['password'])){
 
                     header("location: ../content/restrict.php?name={$club->getClubName()}&typ=new");
                 }
+                if($user->getStatus() == "deactive"){
+                    $club = new Club(null, null, null, null);
+                    $club->setUserId($user->getUserId());
+                    $club->loadDataFromUserID($con);
+
+                    header("location: ../content/restrict.php?name={$club->getClubName()}&typ=club_deactive");
+                }
             }
             if ($user->getRole() == "admin"){
                 header("location: ../superadmindashboard.php");
