@@ -127,6 +127,7 @@ $user4 = $userObj->getRowCount();
 
                 <div class="bell-notification" current-count="<?php echo $user4 ;?>">
                     <ion-icon name="notifications-outline"></ion-icon>
+    
                 </div>
                 <form action="process/logout.php" method="post">
                     <button class="my-2 btn btn-outline-secondary d-flex align-items-center" type="submit" name="submit5"><Span
@@ -270,9 +271,9 @@ $user4 = $userObj->getRowCount();
                             <td>
                             <?php
                                  if($users->status == "active"){
-                                    echo "<a href='process/admindashboard/status.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;color:green'><p>Active</p></a>";
+                                    echo "<a class='my-auto btn btn-outline-success' href='process/admindashboard/status.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;'>Active</a>";
                                  }elseif($users->status == "deactive"){
-                                    echo "<a href='process/admindashboard/status.php?user_id=$users->user_id&status=active' style='text-decoration:none;color:red'><p>Deactive</p></a>";
+                                    echo "<a class='my-auto btn btn-outline-warning' href='process/admindashboard/status.php?user_id=$users->user_id&status=active' style='text-decoration:none;'>Deactive</a>";
                                  }
                                  ?>
                             </td>
