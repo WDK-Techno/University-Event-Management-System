@@ -416,7 +416,10 @@ if (isset($_SESSION['user_id'])) {
             </div>
 
         </div>
-
+        <!--=== pre loader ===-->
+        <?php include_once "content/preloader.php" ?>
+        <!--=== Preloader Script file ===-->
+        <?php include_once "content/commonJS.php" ?>
 
         <!--    =============== execute upload image button ==========-->
         <script>

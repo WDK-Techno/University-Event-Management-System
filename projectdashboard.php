@@ -1176,6 +1176,10 @@ if (!$project->loadDataFromProjectID($con)) {
         </div>
 
     </div>
+    <!--=== pre loader ===-->
+    <?php include_once "content/preloader.php" ?>
+    <!--=== Preloader Script file ===-->
+    <?php include_once "content/commonJS.php" ?>
     <!--=========== Selected Menu change when loading ============-->
     <script>
         document.getElementById("menu-<?php echo $selected_menuNo ?>").classList.add("activate");

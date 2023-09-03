@@ -61,6 +61,8 @@ if (isset($_SESSION['user_id'])) {
     </head>
 
     <body style="box-sizing: border-box;">
+
+
     <!-- =======  side bar ======= -->
     <div class="sideBar w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:block;" id="mySidebar">
 
@@ -121,7 +123,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
     </div>
     <!-- ============== main content ===================== -->
-    <div id="main" style="height: 100vh;">
+    <div id="main" style="height: 100vh; overflow-y: hidden;">
 
         <!-- ======= Navigation Bar =======    -->
         <div class="">
@@ -173,7 +175,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
 
 
-        <div id="menu-content-1" class="main-content hide ms-1">
+        <div id="menu-content-1" class="main-content hide ms-1" style="height: 100%; overflow-y: hidden;">
             <div class="d-flex mt-3 mb-2 ">
                 <button class="btn fw-bold d-flex ms-2 shadow-sm"
                         style=" color: var(--lighter-secondary) !important; background-color: var(--primary);"
@@ -237,8 +239,7 @@ if (isset($_SESSION['user_id'])) {
             <hr/>
 
 
-            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4">
-                <div>
+            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
 
 
                 <?php
@@ -267,7 +268,8 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="button-cover">
                                                 <div class="button shadow-sm r" id="button-3">
                                                     <input type="checkbox" class="checkbox status-toggle"
-                                                           name="project-id-<?= $project->getProjectID() ?>" checked>
+                                                           name="project-id-<?= $project->getProjectID() ?>"
+                                                           checked>
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -292,8 +294,9 @@ if (isset($_SESSION['user_id'])) {
                     <?php
                     $i++;
                 } ?>
-                </div>
             </div>
+
+
         </div>
         <div id="menu-content-2" class="main-content hide">
             <h1>Content 2</h1>
@@ -403,6 +406,11 @@ if (isset($_SESSION['user_id'])) {
         </div>
 
     </div>
+
+    <!--=== pre loader ===-->
+    <?php include_once "content/preloader.php" ?>
+    <!--=== Preloader Script file ===-->
+    <?php include_once "content/commonJS.php" ?>
 
     <script>
         function createNewProject() {
