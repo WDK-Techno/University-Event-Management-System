@@ -143,7 +143,7 @@ class User
         }
     }
 
-    protected function saveUserChangesToDataBase($con)
+    public function saveUserChangesToDataBase($con)
     {
         $query = "UPDATE user SET password=?,status=? WHERE user_id=?";
         $pstmt = $con->prepare($query);
@@ -291,7 +291,6 @@ class Undergraduate extends User
 
     public function saveChangesToDatabase($con)
     {
-        $con = DBConnector::getConnection();
         $query = "UPDATE undergraduate SET first_name=?,last_name=?,
                          contact_no=?,profile_image=? WHERE user_id=?";
         $pstmt = $con->prepare($query);
@@ -302,13 +301,8 @@ class Undergraduate extends User
         $pstmt->bindValue(5, $this->user_id);
         $pstmt->execute();
 
-        if ($pstmt->rowCount() > 0) {
-            $rs = parent::saveUserChangesToDataBase($con);
-            return $rs;
+        return $pstmt->rowCount() > 0;
 
-        } else {
-            return false;
-        }
     }
 
 
@@ -472,12 +466,8 @@ class Club extends User
             $pstmt->bindValue(4, $this->clubDescription);
             $pstmt->bindValue(5, $this->user_id);
             $pstmt->execute();
-            if ($pstmt->rowCount() > 0) {
-                $rs = parent::saveUserChangesToDataBase($con);
-                return $rs;
-            } else {
-                return false;
-            }
+
+            return $pstmt->rowCount() > 0;
 
         } catch (PDOException $exc) {
             die("Error in update data to DB " . $exc->getMessage());
