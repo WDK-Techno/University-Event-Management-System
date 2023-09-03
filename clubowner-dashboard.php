@@ -61,6 +61,8 @@ if (isset($_SESSION['user_id'])) {
     </head>
 
     <body style="box-sizing: border-box;">
+
+
     <!-- =======  side bar ======= -->
     <div class="sideBar w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:block;" id="mySidebar">
 
@@ -404,6 +406,11 @@ if (isset($_SESSION['user_id'])) {
         </div>
 
     </div>
+
+    <!--=== pre loader ===-->
+    <?php include_once "content/preloader.php" ?>
+    <!--=== Preloader Script file ===-->
+    <?php include_once "content/commonJS.php" ?>
 
     <script>
         function createNewProject() {
