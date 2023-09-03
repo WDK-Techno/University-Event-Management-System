@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
         $user_id = $_POST["user_id"];
         $userObj = new \classes\Admin();
         $userObj->updateStatus($user_id);
-        header("Location:../../superadmindashboard.php");
+        header("Location:../../superadmindashboard.php?tab=3");
       
     }
 

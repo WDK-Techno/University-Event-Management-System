@@ -19,7 +19,7 @@ class Admin{
     public function getClubs(){
         $dbuser = new DBConnector();
         $con = $dbuser->getConnection();
-        $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no,u.status,club.profile_image FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'active'";
+        $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no,u.status,club.profile_image FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'active' || status = 'deactive' ";
         $pstmt = $con->prepare($query);
         $pstmt->execute();
         $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
@@ -76,11 +76,9 @@ class Admin{
         $dbuser = new DBConnector();
         $con = $dbuser->getConnection();
         $query1 = "UPDATE `user` SET status = 'delete' WHERE user_id = ?";
-        $query2 = "DELETE FROM undergraduate WHERE user_id = ?";
+        
 
-        $pstmt2 = $con->prepare($query2);
-        $pstmt2->bindValue(1,$user_id);
-        $pstmt2->execute();
+        
 
         $pstmt1 = $con->prepare($query1);
         $pstmt1->bindValue(1,$user_id);

@@ -7,5 +7,4 @@
 .idea/Project1.iml
 .idea/modules.xml
 .idea/dataSources.xml
-classes/Admin.php
-superadmindashboard.php
+assets/js/adminscript.js
