@@ -29,13 +29,13 @@ function handleWindowSizeChange(x) {
 function sideBarControl() {
   // ==== side bar expanding =====
   if (sidebarExpand == false) {
-   // ====== side bar expanding for smaller devices =====
+    // ====== side bar expanding for smaller devices =====
     if(deviceSizeIsSmalle){
       document.getElementById("main").style.marginLeft = "80px";
       document.getElementById("mySidebar").style.width = "280px";
       document.getElementById("mySidebar").style.display = "block";
       document.getElementById("openNav").style.display = "block";
-      
+
       document.getElementById("openNav").setAttribute("name","chevron-back-circle-outline");
 
       var elememts = document.getElementsByClassName("sideBar-btn-text");
@@ -43,8 +43,8 @@ function sideBarControl() {
         document.getElementsByClassName("sideBar-btn-text")[i].style.display = "block";
       }
       document.getElementById("user-name").style.display = "block";
-      document.getElementById("project-details").style.display = "block";
-      
+      // document.getElementById("project-details").style.display = "block";
+
       sidebarExpand = true;
 
     }
@@ -54,7 +54,7 @@ function sideBarControl() {
       document.getElementById("mySidebar").style.width = "280px";
       document.getElementById("mySidebar").style.display = "block";
       document.getElementById("openNav").style.display = "block";
-      
+
       document.getElementById("openNav").setAttribute("name","chevron-back-circle-outline");
 
       var elememts = document.getElementsByClassName("sideBar-btn-text");
@@ -62,11 +62,11 @@ function sideBarControl() {
         document.getElementsByClassName("sideBar-btn-text")[i].style.display = "block";
       }
       document.getElementById("user-name").style.display = "block";
-      document.getElementById("project-details").style.display = "block";
-      
+      // document.getElementById("project-details").style.display = "block";
+
       sidebarExpand = true;
     }
-    
+
 
   } else {
     // ===== Side bar smalling ====
@@ -74,21 +74,20 @@ function sideBarControl() {
     document.getElementById("mySidebar").style.width = "80px";
     document.getElementById("mySidebar").style.display = "block";
     document.getElementById("openNav").style.display = "block";
-    
+
     document.getElementById("openNav").setAttribute("name","chevron-forward-circle-outline");
-    
+
     var elememts = document.getElementsByClassName("sideBar-btn-text");
     for(var i=0;i<elememts.length;i++){
       document.getElementsByClassName("sideBar-btn-text")[i].style.display = "none";
     }
     document.getElementById("user-name").style.display = "none";
-    document.getElementById("project-details").style.display = "none";
-    
+    // document.getElementById("project-details").style.display = "none";
+
     sidebarExpand = false;
   }
-  
-}
 
+}
 
 // Create media queries for different device sizes
 var x = window.matchMedia("(max-width: 768px)");

@@ -93,6 +93,13 @@
     border-color:#000;
     color:#000;
 }
+/*=====back to top button====-*/
+.back-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: none;
+}
 
 .bi{
     font-size: 25px;

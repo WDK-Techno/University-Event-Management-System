@@ -60,7 +60,7 @@ if (!$project->loadDataFromProjectID($con)) {
     $teamMembers = TeamMember::getMemberListFromProjectID($con, $project->getProjectID());
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $selected_menuNo = 7;
+        $selected_menuNo = 1;
         if (isset($_GET['tab'])) {
             $selected_menuNo = $_GET['tab'];
         }
@@ -190,16 +190,16 @@ if (!$project->loadDataFromProjectID($con)) {
                 </li>
             </ul>
             <hr>
-            <div id="user-name">
-                <div class="d-flex justify-content-start">
-                    <ion-icon name="person-circle-outline" class="d-block my-auto w3-text-lime"
-                              style="font-size:2.8rem;"></ion-icon>
-                    <span class="ms-2 w3-text-light-green">
-                        <strong class="d-block">Kavindra</strong>
-                        <strong class="d-block">Weerasinghe</strong>
-                    </span>
-                </div>
-            </div>
+<!--            <div id="user-name">-->
+<!--                <div class="d-flex justify-content-start">-->
+<!--                    <ion-icon name="person-circle-outline" class="d-block my-auto w3-text-lime"-->
+<!--                              style="font-size:2.8rem;"></ion-icon>-->
+<!--                    <span class="ms-2 w3-text-light-green">-->
+<!--                        <strong class="d-block">Kavindra</strong>-->
+<!--                        <strong class="d-block">Weerasinghe</strong>-->
+<!--                    </span>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
     <!-- ============== main content ===================== -->
@@ -548,19 +548,23 @@ if (!$project->loadDataFromProjectID($con)) {
                             <?php
                             $eventNo = 1;
                             foreach ($events as $event) {
-                                $event = new Event($event->getEventId(),null,null,null,
-                                null,null,null);
+                                $event = new Event($event->getEventId(), null, null, null,
+                                    null, null, null);
                                 $event->loadDataFromeventId($con);
                                 ?>
                                 <div class="col-md-3 shadow-sm p-3 m-2 rounded-5 fw-normal"
                                      style="font-size: 1.0rem; background-color: var(--lighter-secondary); color: var(--darker-primary);">
+
                                     <div class="d-flex flex-column">
                                         <div><?= $event->getEventName() ?></div>
                                         <div><?= $event->getEventDescription() ?></div>
                                         <div><?= $event->getEventStartDate() ?></div>
                                         <div><?= $event->getEventEndDate() ?></div>
+
                                     </div>
                                     <div style="font-size: 1.5rem;">
+                                        <div class="my-auto fs-5"><?= $event->geteventDescription() . "<br>" . $event->getEventStartDate() ?>
+                                        </div>
                                         <div class="d-flex mx-auto card-list-option-buttons"
                                              style="font-size: 1.7rem;">
                                             <!--========== edit event button =========-->
@@ -629,15 +633,17 @@ if (!$project->loadDataFromProjectID($con)) {
                                                                     <!-- Row 3: Event Date -->
                                                                     <div class="form-group">
                                                                         <input class="form-control text-center"
-                                                                               type="datetime-local" name="event_start_date"
-                                                                               value="<?=$event->getEventStartDate() ?>"
+                                                                               type="datetime-local"
+                                                                               name="event_start_date"
+                                                                               value="<?= $event->getEventStartDate() ?>"
                                                                                placeholder="Event Date"/>
                                                                     </div>
 
                                                                     <div class="form-group">
                                                                         <input class="form-control text-center"
-                                                                               type="datetime-local" name="event_end_date"
-                                                                               value="<?=$event->getEventEndDate() ?>"
+                                                                               type="datetime-local"
+                                                                               name="event_end_date"
+                                                                               value="<?= $event->getEventEndDate() ?>"
                                                                                placeholder="Event Date"/>
                                                                     </div>
                                                                 </div>
