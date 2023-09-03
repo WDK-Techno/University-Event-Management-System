@@ -162,7 +162,7 @@ if (!empty($rs)) {
                                 <div class="box front ">
                                     <img alt="" src="assets/images/homepage/f1.jpg">
                                 </div>
-                                <div class="box back hover-effect" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         IEEE is a leader in engineering and technology education, providing resources
                                         for pre-university,
@@ -271,10 +271,10 @@ if (!empty($rs)) {
                         </div>
                         <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
-                                <div class="box front" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                <div class="box front">
                                     <img alt="" src="assets/images/homepage/f8.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back"  style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         The LAN Challenge is an annual gaming extravagance commemorating its fifth
                                         chapter in 2023. Since
@@ -423,6 +423,10 @@ if (!empty($rs)) {
         </div>';
             }
             ?>
+
+            
+
+
         </div>
         </div>
 

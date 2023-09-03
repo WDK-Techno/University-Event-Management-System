@@ -112,11 +112,6 @@
 }
 
 /* Define the hover effect class */
-.hover-effect {
-    background-color: #7eb224; /* Change to the desired background color on hover */
-    transition: background-color 0.3s ease; /* Add a smooth transition */
-    color: #fff; /* Change to the desired text color on hover */
-}
 
 
 
