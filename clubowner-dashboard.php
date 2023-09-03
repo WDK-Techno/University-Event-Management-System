@@ -108,7 +108,7 @@ if (isset($_SESSION['user_id'])) {
                     <li id="menu-4" class="sideBar-btn" onclick="showMenuContent(4)">
                         <a href="#" class="nav-link d-flex justify-content-start">
                             <ion-icon name="document-text-outline"></ion-icon>
-                            <span class="sideBar-btn-text my-auto">Progress</span>
+                            <span class="sideBar-btn-text my-auto">Public Flyers</span>
                         </a>
                     </li>
                     <li id="menu-5" class="sideBar-btn" onclick="showMenuContent(5)">
@@ -263,7 +263,9 @@ if (isset($_SESSION['user_id'])) {
                                             Access
                                         </button>
                                     </div>
+                        </form>
                                     <div class="card-body py-4 d-flex">
+                                        <div class="  flex-row">
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button shadow-sm r" id="button-3">
@@ -274,6 +276,18 @@ if (isset($_SESSION['user_id'])) {
                                                     <div class="layer"></div>
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        <div>
+                                            <form action="process/clubownerdashboard/deleteProject.php" method="post">
+                                                <input type="hidden" name="user_id"
+                                                       value="<?= $project->getProjectID() ?>">
+                                                <button type="submit" name="submit" class="btn btn-danger"
+                                                        style="border: none;width: 96px;height: 38px;">Delete
+                                                </button>
+                                            </form>
+                                        </div>
+
                                         </div>
 
 
@@ -288,7 +302,7 @@ if (isset($_SESSION['user_id'])) {
                                     </div>
                                 </div>
                             </div>
-                        </form>
+
                     </div>
 
                     <?php
