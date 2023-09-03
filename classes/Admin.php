@@ -9,7 +9,7 @@ class Admin{
     public function getUsers(){
         $dbuser = new DBConnector();
         $con = $dbuser->getConnection();
-        $query = "SELECT u.user_id,u.user_name,ug.first_name,ug.last_name,ug.contact_no FROM user u JOIN undergraduate ug ON u.user_id = ug.user_id";
+        $query = "SELECT u.user_id,u.user_name,ug.first_name,ug.last_name,ug.contact_no,u.status,ug.profile_image FROM user u JOIN undergraduate ug ON u.user_id = ug.user_id";
         $pstmt = $con->prepare($query);
         $pstmt->execute();
         $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
@@ -19,7 +19,7 @@ class Admin{
     public function getClubs(){
         $dbuser = new DBConnector();
         $con = $dbuser->getConnection();
-        $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'active'";
+        $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no,u.status,club.profile_image FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'active'";
         $pstmt = $con->prepare($query);
         $pstmt->execute();
         $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
@@ -42,6 +42,16 @@ class Admin{
         $query = "UPDATE `user` SET status = 'active' WHERE user_id = ?" ;
         $pstmt = $con->prepare($query);
         $pstmt->bindValue(1, $user_id);
+        $pstmt->execute();
+
+    }
+    public function status($user_id, $status){
+        $dbuser = new DBConnector();
+        $con = $dbuser->getConnection();
+        $query = "UPDATE `user` SET status = ? WHERE user_id = ?" ;
+        $pstmt = $con->prepare($query);
+        $pstmt->bindValue(1, $status);
+        $pstmt->bindValue(2, $user_id);
         $pstmt->execute();
 
     }
