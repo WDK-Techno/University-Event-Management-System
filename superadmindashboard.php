@@ -187,7 +187,7 @@ $user4 = $userObj->getRowCount();
                             <td>
                             <?php
                                  if($users->status == "active"){
-                                    echo "<a href='status.php?user_id=$users->user_id&status=deactive' style='text-decoration:none'><p>Active</p></a>";
+                                    echo "<a href='status.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;color:green'><p>Active</p></a>";
                                  }elseif($users->status == "deactive"){
                                     echo "<a href='status.php?user_id=$users->user_id&status=active' style='text-decoration:none;color:red'><p>Deactive</p></a>";
                                  }
@@ -256,7 +256,7 @@ $user4 = $userObj->getRowCount();
                             <td>
                             <?php
                                  if($users->status == "active"){
-                                    echo "<a href='status.php?user_id=$users->user_id&status=deactive' style='text-decoration:none'><p>Active</p></a>";
+                                    echo "<a href='status.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;color:green'><p>Active</p></a>";
                                  }elseif($users->status == "deactive"){
                                     echo "<a href='status.php?user_id=$users->user_id&status=active' style='text-decoration:none;color:red'><p>Deactive</p></a>";
                                  }
@@ -325,14 +325,14 @@ $user4 = $userObj->getRowCount();
                             <div class="modal" id="confirmModal" tabindex="-1" role="dialog">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
-                                        <div class="modal-header">
+                                        <div class="modal-header" style="background-color:var(--darker-primary); color:white">
                                             <h5 class="modal-title">Confirmation</h5>
 
                                         </div>
-                                        <div class="modal-body">
-                                            Are you sure you want to proceed?
+                                        <div class="modal-body" style="font-size: 20px">
+                                            Are you sure you want to accept?
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer" style="background-color:var(--darker-primary)">
                                             <form action="process/admindashboard/updateStatus.php" method="post">
                                                 <input type="hidden" name="user_id"
                                                        value="<?php echo $users->user_id; ?>">
@@ -355,14 +355,14 @@ $user4 = $userObj->getRowCount();
                             <div class="modal" id="declineModal" tabindex="-1" role="dialog_1">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
-                                        <div class="modal-header">
+                                        <div class="modal-header" style="background-color:var(--darker-primary); color:white">
                                             <h5 class="modal-title">Confirmation</h5>
 
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body" style="font-size: 20px">
                                             Are you sure you want to decline?
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer" style="background-color:var(--darker-primary)">
                                             <form action="process/admindashboard/declineRequest.php" method="post">
                                                 <input type="hidden" name="user_id"
                                                        value="<?php echo $users->user_id; ?>">
