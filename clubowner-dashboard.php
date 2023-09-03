@@ -28,7 +28,7 @@ if (isset($_SESSION['user_id'])) {
     $loadUserData = $undergraduate->loadDataFromUserID($con);
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $selected_menuNo = 5;
+        $selected_menuNo = 1;
         if (isset($_GET['tab'])) {
             $selected_menuNo = $_GET['tab'];
         }
@@ -237,7 +237,10 @@ if (isset($_SESSION['user_id'])) {
             <hr/>
 
 
-            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-3">
+            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4">
+                <div>
+
+
                 <?php
                 $i = 1;
                 foreach ($projects as $project) {
@@ -246,7 +249,7 @@ if (isset($_SESSION['user_id'])) {
                     <div class="col">
                         <form action="process/clubownerdashboard/getIntoProject.php" method="post">
                             <div class="rounded border">
-                                <div class="card d-block shadow-sm h-80">
+                                <div class="card d-block shadow-sm">
                                     <div class="card-header p-3 text-white"
                                          style="background-color: var(--primary)">
                                         <h5 class="card-title fw-bold"
@@ -263,8 +266,8 @@ if (isset($_SESSION['user_id'])) {
                                         <div class="toggle-button-cover">
                                             <div class="button-cover">
                                                 <div class="button shadow-sm r" id="button-3">
-                                                    <input type="checkbox" class="checkbox status-toggle" checked
-                                                           project-id="<?= $project->getProjectID() ?>">
+                                                    <input type="checkbox" class="checkbox status-toggle"
+                                                           name="project-id-<?= $project->getProjectID() ?>" checked>
                                                     <div class="knobs"></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -273,7 +276,7 @@ if (isset($_SESSION['user_id'])) {
 
 
                                         <!-------------------------------------------------->
-                                        <div class="">
+                                        <div class="d-flex" style="width:200px">
                                             <img class="img-thumbnail shadow-sm"
                                                  style="width: 150px; height: 150px;"
                                                  src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
@@ -289,6 +292,7 @@ if (isset($_SESSION['user_id'])) {
                     <?php
                     $i++;
                 } ?>
+                </div>
             </div>
         </div>
         <div id="menu-content-2" class="main-content hide">
@@ -450,11 +454,11 @@ if (isset($_SESSION['user_id'])) {
         document.addEventListener("DOMContentLoaded", function () {
             const statusToggles = document.querySelectorAll(".status-toggle");
 
+
             statusToggles.forEach(function (statusToggle) {
                 statusToggle.addEventListener("change", function () {
                     const isChecked = statusToggle.checked;
                     const projectId = statusToggle.getAttribute("project-id");
-                    console.log(projectId);
                     updateStatus(isChecked, projectId);
                 });
             });
@@ -470,6 +474,8 @@ if (isset($_SESSION['user_id'])) {
                     }
                 };
                 xhr.send("status=" + status + "&projectId=" + projectId);
+                console.log(status);
+                console.log(projectId);
             }
         });
     </script>
