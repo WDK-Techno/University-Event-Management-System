@@ -4,10 +4,10 @@ use classes\Admin;
 require_once '../../classes/admin.php';
 require_once '../../classes/DBConnector.php';
 
-if (isset($_POST["user_id"])) {
-    $user_id = $_POST["user_id"];
-    
+if ($_SERVER["REQUEST_METHOD"] === "GET"){
+    $user_id = $_GET["user_id"];
+    $status = $_GET["status"];
     $userObj = new \classes\Admin();
-    $userObj->ugdelete($user_id);
+    $userObj->status($user_id, $status);
     header("Location:../../superadmindashboard.php?tab=1");
 }

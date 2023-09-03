@@ -60,12 +60,7 @@ class Admin{
         $dbuser = new DBConnector();
         $con = $dbuser->getConnection();
         $query1 = "UPDATE `user` SET status = 'delete' WHERE user_id = ?";
-        $query2 = "DELETE FROM club WHERE user_id = ?";
-
-        $pstmt2 = $con->prepare($query2);
-        $pstmt2->bindValue(1,$user_id);
-        $pstmt2->execute();
-
+        
         $pstmt1 = $con->prepare($query1);
         $pstmt1->bindValue(1,$user_id);
         $pstmt1->execute();
@@ -76,10 +71,6 @@ class Admin{
         $dbuser = new DBConnector();
         $con = $dbuser->getConnection();
         $query1 = "UPDATE `user` SET status = 'delete' WHERE user_id = ?";
-        
-
-        
-
         $pstmt1 = $con->prepare($query1);
         $pstmt1->bindValue(1,$user_id);
         $pstmt1->execute();
@@ -91,12 +82,6 @@ class Admin{
         $dbuser = new DBConnector();
         $con = $dbuser->getConnection();
         $query1 = "UPDATE `user` SET status = 'delete' WHERE user_id = ?";
-        $query2 = "DELETE FROM club WHERE user_id = ?";
-
-        $pstmt2 = $con->prepare($query2);
-        $pstmt2->bindValue(1,$user_id);
-        $pstmt2->execute();
-
         $pstmt1 = $con->prepare($query1);
         $pstmt1->bindValue(1,$user_id);
         $pstmt1->execute();
