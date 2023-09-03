@@ -157,48 +157,48 @@ if (!empty($rs)) {
             <div class="carousel-inner justify-content-center">
                 <div class="carousel-item active">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4" style="height: 500px; width: 400px">
+                        <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
-                                <div class="box front  w-100">
+                                <div class="box front ">
                                     <img alt="" src="assets/images/homepage/f1.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         IEEE is a leader in engineering and technology education, providing resources
                                         for pre-university,
                                         university, and continuing professional education.
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn " style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 400px">
+                        <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front ">
                                     <img alt="" src="assets/images/homepage/f2.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         Students of Faculty of Management annually organize “ENM Trophy Cricket
                                         Encounter” inviting the
                                         students of fellow degree programs of the University.
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-success" style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 400px">
+                        <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f3.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         Students of Animal Science degree program annually organize “ANS Trophy Football
                                         Tournament”
                                         inviting the students of fellow degree programs of the University.
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-success" style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
                                 </div>
                             </div>
                         </div>
@@ -206,48 +206,48 @@ if (!empty($rs)) {
                 </div>
                 <div class="carousel-item">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4" style="height: 500px; width: 400px">
+                        <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f4.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         Empowering of Youth as Agri-Entrepreneurs Faculty of Animal Science and Export
                                         Agriculture, Uva
                                         Wellassa University.
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-success" style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 400px">
+                        <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f5.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         The Faculty of Applied Sciences of Uva Wellassa University of Sri Lanka (UWU) is
                                         organizing UWU EXPO.
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-success" style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4" style="height: 500px; width: 400px">
+                        <div class="col-md-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f6.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         UBL Cell is organizing a Business Plan Competition to identify potential
                                         undergraduate entrepreneurs
                                         who have realistic business ideas and to assist them to grow up as sustainable
                                         entrepreneurs
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-success" style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
                                 </div>
                             </div>
                         </div>
@@ -255,49 +255,49 @@ if (!empty($rs)) {
                 </div>
                 <div class="carousel-item">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4" style="height: 500px; width: 400px">
+                        <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f7.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         A workshop on “How to start your own business?” was conducted at the university
                                         on 20th Wednesday
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-success" style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 400px">
+                        <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f8.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back"  style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         The LAN Challenge is an annual gaming extravagance commemorating its fifth
                                         chapter in 2023. Since
                                         the challenge has brought together epic gamers in the Uva Wellassa
                                         student community.
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-success" style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 400px">
+                        <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/aurora.png">
                                 </div>
-                                <div class="box back">
+                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         The Aurora is always a highly anticipated event on UWU’s annual event calendar
                                         hosted by students of
                                         Department of Animal Science under the guidance of Academic staff, Department of
                                         Animal Science.
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-success" style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
                                 </div>
                             </div>
                         </div>
@@ -423,6 +423,10 @@ if (!empty($rs)) {
         </div>';
             }
             ?>
+
+            
+
+
         </div>
         </div>
 
