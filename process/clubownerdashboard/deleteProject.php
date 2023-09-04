@@ -11,18 +11,17 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     if (isset($_POST["submit"])) {
 
-
-
             $projectId = $_POST['user_id'];
-            $status = "deactive";
             $project = new Project(null, null, null, null, null, null, null);
             $project->setProjectID($projectId);
             $project->loadDataFromProjectID($con);
-            $project->setStatus($status);
+            $project->setStatus("delete");
             $rs=$project->saveChangesToDataBase($con);
 
             if($rs){
                 header("Location:../../clubowner-dashboard.php?tab=1");
+            }else{
+                header("Location:../../clubowner-dashboard.php?tab=1&errDelete=1");
             }
 
 

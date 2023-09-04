@@ -1,10 +1,11 @@
 <?php
 require_once "classes/DBConnector.php";
 require_once "classes/Event.php";
-
+require_once "classes/User.php";
 
 use classes\DBConnector;
 use classes\Event;
+use classes\Club;
 
 $con = DBConnector::getConnection();
 $query = "SELECT * FROM event";
@@ -128,8 +129,8 @@ if (!empty($rs)) {
                 <div class="modal-body rounded-0">
                     <div class="container-fluid">
                         <dl>
-<!--                            <dt class="text-muted">Title</dt>-->
-<!--                            <dd id="title" class="fw-bold fs-4"></dd>-->
+                            <!--                            <dt class="text-muted">Title</dt>-->
+                            <!--                            <dd id="title" class="fw-bold fs-4"></dd>-->
                             <dt class="text-muted">Description</dt>
                             <dd id="description" class=""></dd>
                             <dt class="text-muted">Start</dt>
@@ -162,13 +163,17 @@ if (!empty($rs)) {
                                 <div class="box front ">
                                     <img alt="" src="assets/images/homepage/f1.jpg">
                                 </div>
-                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         IEEE is a leader in engineering and technology education, providing resources
                                         for pre-university,
                                         university, and continuing professional education.
                                     </p>
-                                    <button class="btn " style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
+                                    <button class="btn "
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -177,13 +182,17 @@ if (!empty($rs)) {
                                 <div class="box front ">
                                     <img alt="" src="assets/images/homepage/f2.jpg">
                                 </div>
-                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         Students of Faculty of Management annually organize “ENM Trophy Cricket
                                         Encounter” inviting the
                                         students of fellow degree programs of the University.
                                     </p>
-                                    <button class="btn btn-success" style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
+                                    <button class="btn btn-success"
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -192,13 +201,17 @@ if (!empty($rs)) {
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f3.jpg">
                                 </div>
-                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         Students of Animal Science degree program annually organize “ANS Trophy Football
                                         Tournament”
                                         inviting the students of fellow degree programs of the University.
                                     </p>
-                                    <button class="btn btn-success" style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
+                                    <button class="btn btn-success"
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -211,13 +224,17 @@ if (!empty($rs)) {
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f4.jpg">
                                 </div>
-                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         Empowering of Youth as Agri-Entrepreneurs Faculty of Animal Science and Export
                                         Agriculture, Uva
                                         Wellassa University.
                                     </p>
-                                    <button class="btn btn-success" style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
+                                    <button class="btn btn-success"
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -226,12 +243,16 @@ if (!empty($rs)) {
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f5.jpg">
                                 </div>
-                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         The Faculty of Applied Sciences of Uva Wellassa University of Sri Lanka (UWU) is
                                         organizing UWU EXPO.
                                     </p>
-                                    <button class="btn btn-success" style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
+                                    <button class="btn btn-success"
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -240,14 +261,18 @@ if (!empty($rs)) {
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f6.jpg">
                                 </div>
-                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         UBL Cell is organizing a Business Plan Competition to identify potential
                                         undergraduate entrepreneurs
                                         who have realistic business ideas and to assist them to grow up as sustainable
                                         entrepreneurs
                                     </p>
-                                    <button class="btn btn-success" style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
+                                    <button class="btn btn-success"
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -260,12 +285,16 @@ if (!empty($rs)) {
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f7.jpg">
                                 </div>
-                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         A workshop on “How to start your own business?” was conducted at the university
                                         on 20th Wednesday
                                     </p>
-                                    <button class="btn btn-success" style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
+                                    <button class="btn btn-success"
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -274,14 +303,18 @@ if (!empty($rs)) {
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f8.jpg">
                                 </div>
-                                <div class="box back"  style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         The LAN Challenge is an annual gaming extravagance commemorating its fifth
                                         chapter in 2023. Since
                                         the challenge has brought together epic gamers in the Uva Wellassa
                                         student community.
                                     </p>
-                                    <button class="btn btn-success" style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
+                                    <button class="btn btn-success"
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -290,14 +323,18 @@ if (!empty($rs)) {
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/aurora.png">
                                 </div>
-                                <div class="box back" style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         The Aurora is always a highly anticipated event on UWU’s annual event calendar
                                         hosted by students of
                                         Department of Animal Science under the guidance of Academic staff, Department of
                                         Animal Science.
                                     </p>
-                                    <button class="btn btn-success" style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">Register</button>
+                                    <button class="btn btn-success"
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -415,7 +452,12 @@ if (!empty($rs)) {
             $sql = "SELECT * FROM club";
             $pstmt = $con->query($sql);
             while ($row = $pstmt->fetch(PDO::FETCH_ASSOC)) {
-                echo '<div class = "postcard rounded p-3 m-3 shadow-sm" style="background-color: #c0c0c069;align-items: center;text-align: center">
+                $club = new Club(null, null, null, null);
+                $club->setUserId($row['user_id']);
+                $club->loadDataFromUserID($con);
+                if ($club->getStatus() !== "delete") {
+
+                    echo '<div class = "postcard rounded p-3 m-3 shadow-sm" style="background-color: #c0c0c069;align-items: center;text-align: center">
         <h2 class="postcard__title blue text-primary fw-bold">' . $row['name'] . '</h2>
         <div class="d-flex justify-content-center align-items-center p-2">
          <i class="fa-solid fa-phone fa-lg pe-2 text-success"></i> 
@@ -424,10 +466,9 @@ if (!empty($rs)) {
         <h4>' . $row['description'] . '</h4>
         <h4 class="font-monospace small fst-italic"> Registed on: ' . $row['register_date'] . '</h4>
         </div>';
+                }
             }
             ?>
-
-            
 
 
         </div>

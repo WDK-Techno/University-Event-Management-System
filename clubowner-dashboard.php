@@ -245,6 +245,9 @@ if (isset($_SESSION['user_id'])) {
                 <?php
                 $i = 1;
                 foreach ($projects as $project) {
+                    if ($project->getStatus() !== "delete"){
+
+
                     ?>
 
                     <div class="col">
@@ -303,6 +306,9 @@ if (isset($_SESSION['user_id'])) {
                                 </div>
                             </div>
 
+                    <?php
+                    }
+                    ?>
                     </div>
 
                     <?php
