@@ -128,8 +128,8 @@ if (!empty($rs)) {
                 <div class="modal-body rounded-0">
                     <div class="container-fluid">
                         <dl>
-                            <dt class="text-muted">Title</dt>
-                            <dd id="title" class="fw-bold fs-4"></dd>
+<!--                            <dt class="text-muted">Title</dt>-->
+<!--                            <dd id="title" class="fw-bold fs-4"></dd>-->
                             <dt class="text-muted">Description</dt>
                             <dd id="description" class=""></dd>
                             <dt class="text-muted">Start</dt>

@@ -60,7 +60,7 @@ if (!$project->loadDataFromProjectID($con)) {
     $teamMembers = TeamMember::getMemberListFromProjectID($con, $project->getProjectID());
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $selected_menuNo = 1;
+        $selected_menuNo = 7;
         if (isset($_GET['tab'])) {
             $selected_menuNo = $_GET['tab'];
         }
