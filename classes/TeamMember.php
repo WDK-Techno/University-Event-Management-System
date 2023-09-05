@@ -33,6 +33,21 @@ class TeamMember
         }
 
     }
+    public function deleteUserFromProjectTeam($con){
+        try {
+
+            $query = "DELETE FROM project_team WHERE ug_id=? AND category_id=?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1,$this->ugID);
+            $pstmt->bindValue(2,$this->categoryID);
+            $pstmt->execute();
+
+            return $pstmt->rowCount()>0;
+
+        }catch (PDOException $exc){
+            die("Error in deleting member from project team ". $exc->getMessage());
+        }
+    }
 
     public static function getMemberListFromCategoryID($con, $categoryID)
     {
