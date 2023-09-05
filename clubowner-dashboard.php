@@ -253,13 +253,14 @@ if (isset($_SESSION['user_id'])) {
                         ?>
 
                         <div class="col">
-                            <form action="process/clubownerdashboard/getIntoProject.php" method="post">
-                                <div class="rounded border">
-                                    <div class="card d-block shadow-sm">
-                                        <div class="card-header p-3 text-white"
-                                             style="background-color: var(--primary)">
-                                            <h5 class="card-title fw-bold"
-                                                style="font-size: 1.5rem"><?= $project->getProjectName() ?></h5>
+
+                            <div class="rounded border">
+                                <div class="card d-block shadow-sm">
+                                    <div class="card-header p-3 text-white"
+                                         style="background-color: var(--primary)">
+                                        <h5 class="card-title fw-bold"
+                                            style="font-size: 1.5rem"><?= $project->getProjectName() ?></h5>
+                                        <form action="process/clubownerdashboard/getIntoProject.php" method="post">
                                             <!--==== hidden ======-->
                                             <input type="hidden" name="project_id"
                                                    value="<?= $project->getProjectID() ?>">
@@ -267,46 +268,49 @@ if (isset($_SESSION['user_id'])) {
                                             <button type="submit" name="submit" class="btn my-2 btn-outline-light">
                                                 Access
                                             </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="card-body py-4 d-flex">
-                                <div class="  flex-row">
-                                    <div class="toggle-button-cover">
-                                        <div class="button-cover">
-                                            <div class="button shadow-sm r" id="button-3">
-                                                <input type="checkbox" class="checkbox status-toggle"
-                                                       name="project-id-<?= $project->getProjectID() ?>"
-                                                       checked>
-                                                <div class="knobs"></div>
-                                                <div class="layer"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <form action="process/clubownerdashboard/deleteProject.php" method="post">
-                                            <input type="hidden" name="user_id"
-                                                   value="<?= $project->getProjectID() ?>">
-                                            <button type="submit" name="submit" class="btn btn-danger"
-                                                    style="border: none;width: 96px;height: 38px;">Delete
-                                            </button>
                                         </form>
                                     </div>
+                                    <div class="card-body py-4 d-flex">
+                                        <div class="  flex-row">
+                                            <div class="toggle-button-cover">
+                                                <div class="button-cover">
+                                                    <div class="button shadow-sm r" id="button-3">
+                                                        <input type="checkbox" class="checkbox status-toggle"
+                                                               name="project-id-<?= $project->getProjectID() ?>"
+                                                               checked>
+                                                        <div class="knobs"></div>
+                                                        <div class="layer"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
+                                            <div>
+                                                <form action="process/clubownerdashboard/deleteProject.php"
+                                                      method="post">
+                                                    <input type="hidden" name="user_id"
+                                                           value="<?= $project->getProjectID() ?>">
+                                                    <button type="submit" name="submit" class="btn btn-danger"
+                                                            style="border: none;width: 96px;height: 38px;">Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                        </div>
+
+
+                                        <!-------------------------------------------------->
+                                        <div class="d-flex" style="width:200px">
+                                            <img class="img-thumbnail shadow-sm"
+                                                 style="width: 150px; height: 150px;"
+                                                 src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
+                                                 alt="">
+                                        </div>
+
+                                    </div>
                                 </div>
-
-
-                                <!-------------------------------------------------->
-                                <div class="d-flex" style="width:200px">
-                                    <img class="img-thumbnail shadow-sm"
-                                         style="width: 150px; height: 150px;"
-                                         src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
-                                         alt="">
-                                </div>
-
                             </div>
+
+
                         </div>
                         <?php
                     }
