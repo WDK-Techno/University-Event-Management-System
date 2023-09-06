@@ -114,6 +114,7 @@ if (!$project->loadDataFromProjectID($con)) {
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="assets/css/projectdashboard.css">
+        <link rel="stylesheet" href="assets/css/event.css">
 
         <!-- ===== Boostrap CSS ==== -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -457,7 +458,8 @@ if (!$project->loadDataFromProjectID($con)) {
                                                                      style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
                                                                     <div class="d-flex flex-row w-100 justify-content-between">
 
-                                                                        <div class="ms-2 my-auto fs-4 fw-bold">Team Member
+                                                                        <div class="ms-2 my-auto fs-4 fw-bold">Team
+                                                                            Member
                                                                         </div>
 
                                                                         <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
@@ -483,11 +485,13 @@ if (!$project->loadDataFromProjectID($con)) {
                                                                         <div class="fw-bold">
                                                                             Do you want to Delete this Team Member ?
                                                                         </div>
-                                                                        <div class="fw-bold" style="color: var(--primary); font-size: 1.1rem;">
-                                                                            <?=$projectMember->getFirstName() ?> <?= $projectMember->getLastName() ?>
+                                                                        <div class="fw-bold"
+                                                                             style="color: var(--primary); font-size: 1.1rem;">
+                                                                            <?= $projectMember->getFirstName() ?> <?= $projectMember->getLastName() ?>
                                                                         </div>
-                                                                        <div class="fw-bold" style="color: var(--accent-color); font-size: 1.1rem;">
-                                                                        <?=$projectMemberTeam->getCategoryName() ?>
+                                                                        <div class="fw-bold"
+                                                                             style="color: var(--accent-color); font-size: 1.1rem;">
+                                                                            <?= $projectMemberTeam->getCategoryName() ?>
                                                                         </div>
 
                                                                     </div>
@@ -615,8 +619,8 @@ if (!$project->loadDataFromProjectID($con)) {
                         </div>
                     </div>
                     <!-- ========== Event list body =========== -->
-                    <div style="overflow-y: auto; height:;">
-                        <div class="row container card-event-list ">
+                    <div class="position-absolute" style="overflow-y: auto;">
+                        <div class="row col-md-12 m-1">
                             <?php
                             $eventNo = 1;
                             foreach ($events as $event) {
@@ -625,185 +629,207 @@ if (!$project->loadDataFromProjectID($con)) {
                                 $event->loadDataFromeventId($con);
                                 ?>
 
-                                <div class="col-md-3 shadow-sm m-3 p-0  fw-normal"
-                                     style=" background-color: var(--lighter-secondary); color: var(--darker-primary);">
-
-                                    <div>
-                                        <div class="header  p-3  text-white m-0" style="background-color: var(--primary);text-align: center;font-size: 2rem">
-                                            <div class="my-auto"><?=$event->getEventName()?></div>
-
-                                        </div>
-                                        <div class="my-auto p-3" style="font-size:1.5rem"><?=$event->geteventDescription() ."<br>". $event->getEventStartDate() ."<br>". $event->getEventEndDate()?>
-                                        </div>
-                                        <div class="d-flex mx-auto p-3 card-list-option-buttons"
-                                             style="font-size: 1.7rem;">
-                                            <!--========== edit event button =========-->
-                                            <ion-icon class="me-2 my-auto" type="button"
-                                                      data-bs-toggle="modal"
-                                                      data-bs-target="#edit-event<?= $eventNo ?>"
-                                                      name="create-outline"></ion-icon>
-
-                                            <!-- =========== edit event button model =========== -->
-                                            <div class="modal fade"
-                                                 id="edit-event<?= $eventNo ?>"
-                                                 tabindex="-1"
-                                                 role="dialog"
-                                                 aria-labelledby="exampleModalCenterTitle"
-                                                 aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered"
-                                                     role="document">
-                                                    <div class="modal-content">
-                                                        <!--=== form =====-->
-                                                        <form action="process/projectdashboard/editEvent.php"
-                                                              method="post">
-                                                            <div class="modal-header py-2 px-2"
-                                                                 style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
-                                                                <div class="d-flex flex-row w-100 justify-content-between">
-
-                                                                    <div class="ms-2 my-auto fs-4 fw-bold">
-                                                                        Event
-                                                                    </div>
-
-                                                                    <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
-                                                                    <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
-                                                                    <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
-                                                                         style="font-size: 1.3rem; color: var(--accent-color2);">
-                                                                        Edit
-                                                                    </div>
-                                                                </div>
-
-                                                                <!--======= hidden ==========-->
-                                                                <input type="hidden" name="menuNo"
-                                                                       value="6">
-                                                                <input type="hidden" name="event_id"
-                                                                       value="<?= $event->getEventId() ?>">
-                                                            </div>
-
-                                                            <div class="modal-body "
-                                                                 style="background-color: var(--lighter-secondary);">
-                                                                <div class="grid px-5 ">
-                                                                    <!-- Row 1: Event Name -->
-                                                                    <div class="form-group p-2">
-                                                                        <input class="form-control text-center"
-                                                                               type="text" name="name"
-                                                                               value="<?= $event->getEventName() ?>"
-                                                                               placeholder="Event Name"/>
-                                                                    </div>
-
-
-
-                                                                    <!-- Row 2: Event Description -->
-                                                                    <div class="form-group p-2">
-                                                                        <input class="form-control text-center"
-                                                                               type="text" name="description"
-                                                                               value="<?= $event->getEventDescription() ?>"
-                                                                               placeholder="Event Description"/>
-                                                                    </div>
-
-
-
-
-                                                                    <!-- Row 3: Event Date -->
-                                                                    <div class="form-group p-2">
-                                                                        <input class="form-control text-center"
-                                                                               type="datetime-local" name="event_start_date"
-                                                                               value="<?=$event->getEventStartDate() ?>"
-                                                                               placeholder="Event Strat Date"/>
-                                                                    </div>
-
-
-                                                                    <div class="form-group p-2">
-                                                                        <input class="form-control text-center"
-                                                                               type="datetime-local" name="event_end_date"
-                                                                               value="<?=$event->getEventEndDate() ?>"
-                                                                               placeholder="Event End Date"/>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer"
-                                                                 style="background-color: var(--primary);">
-                                                                <button type="button"
-                                                                        class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">
-                                                                    Close
-                                                                </button>
-                                                                <button type="submit"
-                                                                        name="submit"
-                                                                        class="btn fw-bold"
-                                                                        style="background-color: var(--secondary); color: var(--primary);">
-                                                                    Update
-                                                                </button>
-
-                                                            </div>
-                                                        </form>
-                                                    </div>
-
+                                <div class="col-md-4 shadow-sm p-0 m-2 fw-normal card card1-margin" style="width: 30%">
+                                    <div class="card1-header no-border">
+                                        <h5 class="card1-title"><?= $event->getEventName() ?></h5>
+                                    </div>
+                                    <div class="card1-body pt-0">
+                                        <div class="widget-49">
+                                            <div class="widget-49-title-wrapper">
+                                                <div class="widget-49-date-primary">
+                                                    <span class="widget-49-date-day"><?=
+                                                        date('d', strtotime($event->getEventStartDate()));
+                                                        ?></span></span>
+                                                    <span class="widget-49-date-month"><?=
+                                                        date('M', strtotime($event->getEventStartDate()));
+                                                        ?></span>
+                                                </div>
+                                                <div class="widget-49-meeting-info">
+                                                    <span class="widget-49-pro-title"><?= $event->getEventName() ?></span>
+                                                    <span class="widget-49-meeting-time"><?=
+                                                        date('g:i A, l', strtotime($event->getEventStartDate())) . ' to ' . date('g:i A, l', strtotime($event->getEventEndDate())); ?></span>
                                                 </div>
                                             </div>
-                                            <!--========== Delete event button =========-->
-                                            <ion-icon class="my-auto" type="button" data-bs-toggle="modal"
-                                                      data-bs-target="#delete-event<?= $eventNo ?>"
-                                                      name="trash-outline"></ion-icon>
-                                            <!-- =========== Delete event button model =========== -->
-                                            <div class="modal fade"
-                                                 id="delete-event<?= $eventNo ?>"
-                                                 tabindex="-1"
-                                                 role="dialog"
-                                                 aria-labelledby="exampleModalCenterTitle"
-                                                 aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered"
-                                                     role="document">
-                                                    <div class="modal-content">
-                                                        <!--=== form =====-->
-                                                        <form action="process/projectdashboard/deleteevent.php"
-                                                              method="post">
-                                                            <div class="modal-header py-2 px-2"
-                                                                 style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
-                                                                <div class="d-flex flex-row w-100 justify-content-between">
+                                            <ol class="widget-49-meeting-points">
+                                                <li class="widget-49-meeting-item">
+                                                    <span><?= $event->geteventDescription() ?></span></li>
+                                                <li class="widget-49-meeting-item">
+                                                    <span><?= $event->getEventStartDate() ?></span></li>
+                                                <li class="widget-49-meeting-item">
+                                                    <span><?= $event->getEventEndDate() ?></span></li>
+                                            </ol>
+                                            <div class="widget-49-meeting-action">
+                                                <div class="d-flex justify-content-end mx-auto p-3 card-list-option-buttons"
+                                                     style="font-size: 1.7rem;">
+                                                    <a href="#" class="btn btn-sm btn-flash-border-primary">View All</a>
+                                                    <!--========== edit event button =========-->
+                                                    <ion-icon class="me-2 my-auto" type="button"
+                                                              data-bs-toggle="modal"
+                                                              data-bs-target="#edit-event<?= $eventNo ?>"
+                                                              name="create-outline"></ion-icon>
 
-                                                                    <div class="ms-2 my-auto fs-4 fw-bold">
-                                                                        <?= $event->getEventName() ?>
+                                                    <!-- =========== edit event button model =========== -->
+                                                    <div class="modal fade"
+                                                         id="edit-event<?= $eventNo ?>"
+                                                         tabindex="-1"
+                                                         role="dialog"
+                                                         aria-labelledby="exampleModalCenterTitle"
+                                                         aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered"
+                                                             role="document">
+                                                            <div class="modal-content">
+                                                                <!--=== form =====-->
+                                                                <form action="process/projectdashboard/editEvent.php"
+                                                                      method="post">
+                                                                    <div class="modal-header py-2 px-2"
+                                                                         style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                                                        <div class="d-flex flex-row w-100 justify-content-between">
+
+                                                                            <div class="ms-2 my-auto fs-4 fw-bold">
+                                                                                Event
+                                                                            </div>
+
+                                                                            <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                                            <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                                            <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                                                 style="font-size: 1.3rem; color: var(--accent-color2);">
+                                                                                Edit
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!--======= hidden ==========-->
+                                                                        <input type="hidden" name="menuNo"
+                                                                               value="6">
+                                                                        <input type="hidden" name="event_id"
+                                                                               value="<?= $event->getEventId() ?>">
                                                                     </div>
 
-                                                                    <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
-                                                                    <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
-                                                                    <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
-                                                                         style="font-size: 1.3rem; color: var(--accent-color3);">
-                                                                        Delete
+                                                                    <div class="modal-body "
+                                                                         style="background-color: var(--lighter-secondary);">
+                                                                        <div class="grid px-5 ">
+                                                                            <!-- Row 1: Event Name -->
+                                                                            <div class="form-group p-2">
+                                                                                <input class="form-control text-center"
+                                                                                       type="text" name="name"
+                                                                                       value="<?= $event->getEventName() ?>"
+                                                                                       placeholder="Event Name"/>
+                                                                            </div>
+
+
+                                                                            <!-- Row 2: Event Description -->
+                                                                            <div class="form-group p-2">
+                                                                                <input class="form-control text-center"
+                                                                                       type="text" name="description"
+                                                                                       value="<?= $event->getEventDescription() ?>"
+                                                                                       placeholder="Event Description"/>
+                                                                            </div>
+
+
+                                                                            <!-- Row 3: Event Date -->
+                                                                            <div class="form-group p-2">
+                                                                                <input class="form-control text-center"
+                                                                                       type="datetime-local"
+                                                                                       name="event_start_date"
+                                                                                       value="<?= $event->getEventStartDate() ?>"
+                                                                                       placeholder="Event Strat Date"/>
+                                                                            </div>
+
+
+                                                                            <div class="form-group p-2">
+                                                                                <input class="form-control text-center"
+                                                                                       type="datetime-local"
+                                                                                       name="event_end_date"
+                                                                                       value="<?= $event->getEventEndDate() ?>"
+                                                                                       placeholder="Event End Date"/>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
+                                                                    <div class="modal-footer"
+                                                                         style="background-color: var(--primary);">
+                                                                        <button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-bs-dismiss="modal">
+                                                                            Close
+                                                                        </button>
+                                                                        <button type="submit"
+                                                                                name="submit"
+                                                                                class="btn fw-bold"
+                                                                                style="background-color: var(--secondary); color: var(--primary);">
+                                                                            Update
+                                                                        </button>
 
-                                                                <!--======= hidden ==========-->
-                                                                <input type="hidden" name="menuNo"
-                                                                       value="6">
-                                                                <input type="hidden" name="event_id"
-                                                                       value="<?= $event->getEventId() ?>">
+                                                                    </div>
+                                                                </form>
                                                             </div>
 
-                                                            <div class="modal-body"
-                                                                 style="background-color: var(--lighter-secondary);">
-                                                                <div class="d-flex fw-normal fs-5">
-                                                                    Do you want to Delete this Event ?
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer"
-                                                                 style="background-color: var(--primary);">
-                                                                <button type="button"
-                                                                        class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">
-                                                                    Close
-                                                                </button>
-                                                                <button type="submit"
-                                                                        name="submit"
-                                                                        class="btn fw-bold"
-                                                                        style="background-color: var(--accent-color3); color: var(--primary);">
-                                                                    Delete
-                                                                </button>
-
-                                                            </div>
-                                                        </form>
+                                                        </div>
                                                     </div>
+                                                    <!--========== Delete event button =========-->
+                                                    <ion-icon class="my-auto" type="button" data-bs-toggle="modal"
+                                                              data-bs-target="#delete-event<?= $eventNo ?>"
+                                                              name="trash-outline"></ion-icon>
+                                                    <!-- =========== Delete event button model =========== -->
+                                                    <div class="modal fade"
+                                                         id="delete-event<?= $eventNo ?>"
+                                                         tabindex="-1"
+                                                         role="dialog"
+                                                         aria-labelledby="exampleModalCenterTitle"
+                                                         aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered"
+                                                             role="document">
+                                                            <div class="modal-content">
+                                                                <!--=== form =====-->
+                                                                <form action="process/projectdashboard/deleteevent.php"
+                                                                      method="post">
+                                                                    <div class="modal-header py-2 px-2"
+                                                                         style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                                                        <div class="d-flex flex-row w-100 justify-content-between">
 
+                                                                            <div class="ms-2 my-auto fs-4 fw-bold">
+                                                                                <?= $event->getEventName() ?>
+                                                                            </div>
+
+                                                                            <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                                            <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                                            <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                                                 style="font-size: 1.3rem; color: var(--accent-color3);">
+                                                                                Delete
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!--======= hidden ==========-->
+                                                                        <input type="hidden" name="menuNo"
+                                                                               value="6">
+                                                                        <input type="hidden" name="event_id"
+                                                                               value="<?= $event->getEventId() ?>">
+                                                                    </div>
+
+                                                                    <div class="modal-body"
+                                                                         style="background-color: var(--lighter-secondary);">
+                                                                        <div class="d-flex fw-normal fs-5">
+                                                                            Do you want to Delete this Event ?
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer"
+                                                                         style="background-color: var(--primary);">
+                                                                        <button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-bs-dismiss="modal">
+                                                                            Close
+                                                                        </button>
+                                                                        <button type="submit"
+                                                                                name="submit"
+                                                                                class="btn fw-bold"
+                                                                                style="background-color: var(--accent-color3); color: var(--primary);">
+                                                                            Delete
+                                                                        </button>
+
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
