@@ -3,11 +3,13 @@ session_start();
 require_once 'classes/DBConnector.php';
 require_once 'classes/Project.php';
 require_once 'classes/User.php';
+require_once 'classes/PublicFlyer.php';
 
 use classes\DBConnector;
 use classes\Project;
 use classes\Club;
 use classes\Undergraduate;
+use classes\PublicFlyer;
 
 
 $con = DBConnector::getConnection();
@@ -17,6 +19,7 @@ if (isset($_SESSION['user_id'])) {
 
     $clubid = $_SESSION['user_id'];
     $projects = Project::getProjectListFromClubID($con, $clubid);
+    $publicFlyers=PublicFlyer::getFlyersListFromClubID($con,$clubid);
 
     $club = new Club(null, null, null, null);
     $club->setUserId($clubid);
@@ -326,8 +329,111 @@ if (isset($_SESSION['user_id'])) {
         <div id="menu-content-3" class="main-content hide">
             <h1>Content 3</h1>
         </div>
+
+
+        <!-- ======= flyer area ===== -->
         <div id="menu-content-4" class="main-content hide">
-            <h1>Content 4</h1>
+
+            <div class="d-flex pt-2 mt-3 mb-2 ">
+                <button class="btn fw-bold d-flex ms-2 shadow-sm"
+                        style=" color: var(--lighter-secondary) !important; background-color: var(--primary);"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                    <ion-icon class="my-auto" name="add-outline"
+                              style="font-size: 1.4rem;"></ion-icon>
+                    <div class="my-auto ms-1 me-auto">New Flyer </div>
+                </button>
+            </div>
+
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header py-2 px-2"
+                             style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                            <!--                                <h5 class="modal-title" id="exampleModalLabel">Project details</h5>-->
+                            <div class="ms-2 my-auto fs-4 fw-bold">
+                                Create Flyer
+                            </div>
+                            <!--                                <button type="button" class="btn-close" data-bs-dismiss="modal"-->
+                            <!--                                        aria-label="Close"></button>-->
+                        </div>
+                        <form action="process/clubownerdashboard/addFlyer.php" method="POST"
+                              enctype="multipart/form-data">
+                            <div class="modal-body" style="background-color: var(--lighter-secondary);">
+                                <input type="hidden" name="club_id"
+                                       value="<?= $clubid?>">
+                                    <div class="fw-bold " style="color: var(--primary);">Caption</div>
+                                    <input class="form-control text-center" type="text"
+                                           name="caption" id="caption"
+                                           placeholder="caption" required/>
+
+
+                                    <div class="fw-bold my-2" style="color: var(--primary);">Flyer Image</div>
+                                    <input type="file" class="form-control custom-file-input" id="fl_image" name="fl_image" required/>
+
+                                    <div class="fw-bold my-2" style="color: var(--primary);">Start Date</div>
+                                    <input class="form-control w-50" type="datetime-local" name="start_date" required>
+
+                                   <div class="fw-bold my-2" style="color: var(--primary);">End Date</div>
+                                   <input class="form-control w-50" type="datetime-local" name="end_date" required>
+
+
+                                <div class="fw-bold my-2" style="color: var(--primary);">Link</div>
+                                 <input type="url" name="url" id="url"
+                                       placeholder="https://example.com" pattern="https://.*" size="30" required />
+
+
+
+                                <div class="mt-2 text-center" id="add-flyer-error"
+                                     style="color: var(--accent-color3)">
+                                </div>
+
+                            </div>
+                            <div class="modal-footer" style="background-color: var(--primary);">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                </button>
+                                <button
+                                        onclick=""
+                                        class="btn fw-bold"
+                                        type="submit" name="submit"
+                                        style="background-color: var(--secondary); color: var(--primary);">
+                                    ADD
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <hr/>
+
+            <!--===view flyer part-->
+            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; ">
+              <?php
+              $r=1;
+
+              foreach ( $publicFlyers as $publicFlyer){
+
+
+
+
+              ?>
+                <div class="col">
+                <div id="cardEntrada-2" class="p-4 text-center shadow-lg m-5 rounded-5" style="background: linear-gradient(171deg, var(--primary) 0%, var(--accent-color) 100%), var(--bs-purple);width: 280px;"><img class="pt-2 w-50" src="swiftui.png" />
+                    <p class="fw-light text-white m-0"><?= $publicFlyer->getCaption()?></p>
+                    <hr class="text-white" /><img src="swiftui.png" style="width: 10%;" />
+                    <div class="col-12"><button class="btn" type="button" data-bs-target="#modalRecibirCadaber" data-bs-toggle="modal"></button></div>
+                </div>
+                </div>
+                      <?php
+
+                      $r++;
+                     }
+                      ?>
+            </div>
+
+
         </div>
         <div id="menu-content-5" class="main-content hide">
 
