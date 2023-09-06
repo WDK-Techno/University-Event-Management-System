@@ -111,7 +111,20 @@ class TeamCategory
         }
 
     }
+    public function deleteTeamCategory($con){
+        try {
 
+            $query = "DELETE FROM team_category WHERE category_id=?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1,$this->categoryID);
+            $pstmt->execute();
+
+            return $pstmt->rowCount()>0;
+
+        }catch (PDOException $exc){
+            die("Error in deleting Team Category ". $exc->getMessage());
+        }
+    }
     public static function getTeamCategoeryListFromProjectID($con, $projectID)
     {
         $teamCategories = array();

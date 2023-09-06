@@ -46,8 +46,8 @@
     <div class="w-100" style="height: 100vh;">
         <div class="container">
             <div class="row mh-100vh">
-                <div class="screen">
-                    <div class="screen__content">
+                <div class="screen  " >
+                    <div class=" screen__content" >
                         <h3 style="padding: 30px 0px 30px 0px;color: black;font-weight: bold; " align="center">
                             Register </h3>
                         <div class="text-center m-3">

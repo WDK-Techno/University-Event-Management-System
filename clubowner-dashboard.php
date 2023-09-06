@@ -28,7 +28,7 @@ if (isset($_SESSION['user_id'])) {
     $loadUserData = $undergraduate->loadDataFromUserID($con);
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $selected_menuNo = 5;
+        $selected_menuNo = 1;
         if (isset($_GET['tab'])) {
             $selected_menuNo = $_GET['tab'];
         }
@@ -61,6 +61,8 @@ if (isset($_SESSION['user_id'])) {
     </head>
 
     <body style="box-sizing: border-box;">
+
+
     <!-- =======  side bar ======= -->
     <div class="sideBar w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:block;" id="mySidebar">
 
@@ -106,7 +108,7 @@ if (isset($_SESSION['user_id'])) {
                     <li id="menu-4" class="sideBar-btn" onclick="showMenuContent(4)">
                         <a href="#" class="nav-link d-flex justify-content-start">
                             <ion-icon name="document-text-outline"></ion-icon>
-                            <span class="sideBar-btn-text my-auto">Progress</span>
+                            <span class="sideBar-btn-text my-auto">Public Flyers</span>
                         </a>
                     </li>
                     <li id="menu-5" class="sideBar-btn" onclick="showMenuContent(5)">
@@ -121,7 +123,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
     </div>
     <!-- ============== main content ===================== -->
-    <div id="main" style="height: 100vh;">
+    <div id="main" style="height: 100vh; overflow-y: hidden;">
 
         <!-- ======= Navigation Bar =======    -->
         <div class="">
@@ -173,7 +175,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
 
 
-        <div id="menu-content-1" class="main-content hide ms-1">
+        <div id="menu-content-1" class="main-content hide ms-1" style="height: 100%; overflow-y: hidden;">
             <div class="d-flex mt-3 mb-2 ">
                 <button class="btn fw-bold d-flex ms-2 shadow-sm"
                         style=" color: var(--lighter-secondary) !important; background-color: var(--primary);"
@@ -237,43 +239,67 @@ if (isset($_SESSION['user_id'])) {
             <hr/>
 
 
-            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-3">
+            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
+
+
                 <?php
                 $i = 1;
-                foreach ($projects as $project) {
-                    ?>
+                foreach ($projects
 
-                    <div class="col">
-                        <form action="process/clubownerdashboard/getIntoProject.php" method="post">
+                         as $project) {
+                    if ($project->getStatus() !== "delete") {
+
+
+                        ?>
+
+                        <div class="col">
+
                             <div class="rounded border">
-                                <div class="card d-block shadow-sm h-80">
+                                <div class="card d-block shadow-sm">
                                     <div class="card-header p-3 text-white"
                                          style="background-color: var(--primary)">
                                         <h5 class="card-title fw-bold"
                                             style="font-size: 1.5rem"><?= $project->getProjectName() ?></h5>
-                                        <!--==== hidden ======-->
-                                        <input type="hidden" name="project_id"
-                                               value="<?= $project->getProjectID() ?>">
+                                        <form action="process/clubownerdashboard/getIntoProject.php" method="post">
+                                            <!--==== hidden ======-->
+                                            <input type="hidden" name="project_id"
+                                                   value="<?= $project->getProjectID() ?>">
 
-                                        <button type="submit" name="submit" class="btn my-2 btn-outline-light">
-                                            Access
-                                        </button>
+                                            <button type="submit" name="submit" class="btn my-2 btn-outline-light">
+                                                Access
+                                            </button>
+                                        </form>
                                     </div>
                                     <div class="card-body py-4 d-flex">
-                                        <div class="toggle-button-cover">
-                                            <div class="button-cover">
-                                                <div class="button shadow-sm r" id="button-3">
-                                                    <input type="checkbox" class="checkbox status-toggle" checked
-                                                           project-id="<?= $project->getProjectID() ?>">
-                                                    <div class="knobs"></div>
-                                                    <div class="layer"></div>
+                                        <div class="  flex-row">
+                                            <div class="toggle-button-cover">
+                                                <div class="button-cover">
+                                                    <div class="button shadow-sm r" id="button-3">
+                                                        <input type="checkbox" class="checkbox status-toggle"
+                                                               name="project-id-<?= $project->getProjectID() ?>"
+                                                               checked>
+                                                        <div class="knobs"></div>
+                                                        <div class="layer"></div>
+                                                    </div>
                                                 </div>
                                             </div>
+
+                                            <div>
+                                                <form action="process/clubownerdashboard/deleteProject.php"
+                                                      method="post">
+                                                    <input type="hidden" name="user_id"
+                                                           value="<?= $project->getProjectID() ?>">
+                                                    <button type="submit" name="submit" class="btn btn-danger"
+                                                            style="border: none;width: 96px;height: 38px;">Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+
                                         </div>
 
 
                                         <!-------------------------------------------------->
-                                        <div class="">
+                                        <div class="d-flex" style="width:200px">
                                             <img class="img-thumbnail shadow-sm"
                                                  style="width: 150px; height: 150px;"
                                                  src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
@@ -283,14 +309,17 @@ if (isset($_SESSION['user_id'])) {
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
 
-                    <?php
+
+                        </div>
+                        <?php
+                    }
                     $i++;
                 } ?>
             </div>
         </div>
+
+
         <div id="menu-content-2" class="main-content hide">
             <h1>Content 2</h1>
         </div>
@@ -342,7 +371,7 @@ if (isset($_SESSION['user_id'])) {
                     <p class="m-0 fw-bold" style="color: var(--darker-primary); font-size: 1.3rem;">Club Settings</p>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form action="process/clubownerdashboard/editClubDetails.php" method="post">
                         <?php
 
                         if ($loadClubData){
@@ -351,20 +380,20 @@ if (isset($_SESSION['user_id'])) {
                         <div class="row" style="color: var(--primary);">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label class="form-label" for="first_name">
+                                    <label class="form-label" for="club_name">
                                         <strong>Club Name</strong>
                                     </label>
-                                    <input id="first_name" class="form-control" type="text"
-                                           value="<?= $club->getClubName() ?>" name="first_name"/>
+                                    <input id="club_name" class="form-control" type="text"
+                                           value="<?= $club->getClubName() ?>" name="club_name"/>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="mb-3">
-                                    <label class="form-label" for="first_name">
+                                    <label class="form-label" for="contact_no">
                                         <strong>Contact number</strong>
                                     </label>
-                                    <input id="first_name" class="form-control" type="text"
-                                           value="<?= $club->getContactNo() ?>" name="first_name"/>
+                                    <input id="contact_no" class="form-control" type="text"
+                                           value="<?= $club->getContactNo() ?>" name="contact_no"/>
                                 </div>
                             </div>
 
@@ -374,9 +403,13 @@ if (isset($_SESSION['user_id'])) {
                             <textarea class="form-control" name="desc" id="" cols="25"
                                       rows="7"><?= $club->getClubDescription() ?></textarea>
                         </div>
+                        <!--======= hidden ==========-->
+                        <input type="hidden" name="menuNo" value="5">
+                        <input type="hidden" name="club_id"
+                               value="<?= $club->getUserId() ?>">
                         <button class="btn fw-bold d-flex mt-2 ms-auto me-0"
                                 style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
-                                type="submit" name="submit_desc">
+                                type="submit" name="submit">
                             <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
                                       name="save-outline"></ion-icon>
                             <div class="my-auto ms-1 me-auto">Save</div>
@@ -395,6 +428,11 @@ if (isset($_SESSION['user_id'])) {
         </div>
 
     </div>
+
+    <!--=== pre loader ===-->
+    <?php include_once "content/preloader.php" ?>
+    <!--=== Preloader Script file ===-->
+    <?php include_once "content/commonJS.php" ?>
 
     <script>
         function createNewProject() {
@@ -446,11 +484,11 @@ if (isset($_SESSION['user_id'])) {
         document.addEventListener("DOMContentLoaded", function () {
             const statusToggles = document.querySelectorAll(".status-toggle");
 
+
             statusToggles.forEach(function (statusToggle) {
                 statusToggle.addEventListener("change", function () {
                     const isChecked = statusToggle.checked;
                     const projectId = statusToggle.getAttribute("project-id");
-                    console.log(projectId);
                     updateStatus(isChecked, projectId);
                 });
             });
@@ -466,6 +504,8 @@ if (isset($_SESSION['user_id'])) {
                     }
                 };
                 xhr.send("status=" + status + "&projectId=" + projectId);
+                console.log(status);
+                console.log(projectId);
             }
         });
     </script>

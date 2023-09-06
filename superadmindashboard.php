@@ -18,6 +18,14 @@ $user2 = $userObj->getClubs();
 $user3 = $userObj->getRequests();
 $user4 = $userObj->getRowCount();
 ?>
+<?php
+ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $selected_menuNo = 1;
+    if (isset($_GET['tab'])) {
+        $selected_menuNo = $_GET['tab'];
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +76,7 @@ $user4 = $userObj->getRowCount();
 
         <hr>
         <ul class="nav nav-pills flex-column navbar-text mb-auto">
-            <li id="menu-1" class="sideBar-btn activate" onclick="showMenuContent(1)">
+            <li id="menu-1" class="sideBar-btn" onclick="showMenuContent(1)">
                 <a href="#" class="nav-link d-flex justify-content-start">
                     <ion-icon name="person-circle-outline"></ion-icon>
                     <span class="sideBar-btn-text my-auto">Undergraduates</span>
@@ -87,12 +95,12 @@ $user4 = $userObj->getRowCount();
                 </a>
             </li>
 
-            <li id="menu-5" class="sideBar-btn" onclick="showMenuContent(5)">
+            <!-- <li id="menu-5" class="sideBar-btn" onclick="showMenuContent(5)">
                 <a href="#" class="nav-link d-flex justify-content-start">
                     <ion-icon name="settings-outline"></ion-icon>
                     <span class="sideBar-btn-text my-auto">Settings</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
         <hr>
     </div>
@@ -117,8 +125,9 @@ $user4 = $userObj->getRowCount();
                     </li> -->
                 </ul>
 
-                <div class="bell-notification" current-count="<?php echo $user4 ;?>">
-                    <ion-icon name="notifications-outline"></ion-icon>
+                <a href="superadmindashboard.php?tab=3"><div class="bell-notification" current-count="<?php echo $user4 ;?>">
+                    <ion-icon name="notifications-outline"></ion-icon></a>
+    
                 </div>
                 <form action="process/logout.php" method="post">
                     <button class="my-2 btn btn-outline-secondary d-flex align-items-center" type="submit" name="submit5"><Span
@@ -152,7 +161,7 @@ $user4 = $userObj->getRowCount();
     </div>
 
 
-    <div id="menu-content-1" class="main-content show">
+    <div id="menu-content-1" class="main-content hide">
         <h1 class="text-center fw-bold">Undergraduates Details</h1>
         <section class="table_header mx-auto"; style="color:#1D2561">
             <div>
@@ -165,11 +174,11 @@ $user4 = $userObj->getRowCount();
                 <table id="myTable">
                     <thead>
                     <tr>
-                        
+                        <th></th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Contact No</th>
-                        <th></th>
+                        <th class="text-center">Status</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -178,22 +187,33 @@ $user4 = $userObj->getRowCount();
                     <?php
                     
                     foreach ($user1 as $users) {
+                        if($users->status !== "delete"){
+
                         ?>
                         <tr>
-                            
+                            <td><img class="shadow-sm" src="assets/images/profile_img/ug/<?php echo $users->profile_image; ?>" style="border-radius:50%; width:46px; height:46px"></td>
                             <td><?php echo $users->first_name; ?> <?php echo $users->last_name; ?></td>
                             <td><?php echo $users->user_name; ?></td>
                             <td><?php echo $users->contact_no; ?></td>
+                            <td>
+                             
+                            <?php
+                                if($users->status == "active"){
+                                   echo "<a class='my-auto btn btn-outline-success' href='process/admindashboard/ugStatus.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;'>Active</a>";
+                                }elseif($users->status == "deactive"){
+                                   echo "<a class='my-auto btn btn-outline-warning' href='process/admindashboard/ugStatus.php?user_id=$users->user_id&status=active'  style='text-decoration:none;'>Deactive</a>";
+                                }
+                                 
+                            ?>
+                              
+                              
+                            </td>
                             <td>
                                 <button type="submit" class="btn btn-primary "
                                         style="border: none;width: 96px;height: 38px;">Edit
                                 </button>
                             </td>
-                            <td>
-                                <button type="submit" class="btn btn-success "
-                                        style="border: none;width: 96px;height: 38px;">Deactivate
-                                </button>
-                            </td>
+                
                             <td>
                             <form action="process/admindashboard/ugdelete.php" method="post">
                                                 <input type="hidden" name="user_id" value="<?php echo $users->user_id; ?>">
@@ -204,7 +224,8 @@ $user4 = $userObj->getRowCount();
                             </td>
                         </tr>
                         <?php
-                        
+                    
+                        }                       
                     }
                     ?>
                     </tbody>
@@ -228,11 +249,11 @@ $user4 = $userObj->getRowCount();
                     <thead>
                     <tr>
                         
-                        
+                        <th></th>
                         <th>Name</th>
                         <th>email</th>
                         <th>Contact No</th>
-                        <th></th>
+                        <th>Status</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -243,20 +264,25 @@ $user4 = $userObj->getRowCount();
                     foreach ($user2 as $users) {
                         ?>
                         <tr>
-                           
+                            <td><img class="img-thumbnail shadow-sm" src="assets/images/profile_img/club/<?php echo $users->profile_image; ?>" style="border-radius:50%; width:46px; height:46px"></td>
                             <td><?php echo $users->name; ?></td>
                             <td><?php echo $users->user_name; ?></td>
                             <td><?php echo $users->contact_no; ?></td>
+                            <td>
+                            <?php
+                                 if($users->status == "active"){
+                                    echo "<a class='my-auto btn btn-outline-success' href='process/admindashboard/status.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;'>Active</a>";
+                                 }elseif($users->status == "deactive"){
+                                    echo "<a class='my-auto btn btn-outline-warning' href='process/admindashboard/status.php?user_id=$users->user_id&status=active' style='text-decoration:none;'>Deactive</a>";
+                                 }
+                                 ?>
+                            </td>
                             <td>
                                 <button type="submit" class="btn btn-primary "
                                         style="border: none;width: 96px;height: 38px;">Edit
                                 </button>
                             </td>
-                            <td>
-                                <button type="submit" class="btn btn-success "
-                                        style="border: none;width: 96px;height: 38px;">Deactivate
-                                </button>
-                            </td>
+                            
                             <td>
                             <form action="process/admindashboard/clubdelete.php" method="post">
                                                 <input type="hidden" name="user_id"
@@ -296,7 +322,7 @@ $user4 = $userObj->getRowCount();
                     </thead>
                     <tbody>
                     <?php
-
+                    $newClubNo=1;
                     foreach ($user3 as $users) {
  
                         
@@ -308,27 +334,28 @@ $user4 = $userObj->getRowCount();
                         <td><?php echo $users->register_date; ?></td>
                         <td>
 
-                         <button type="button" id="acceptButton" class="btn btn-success   btnedit">Accept</button>
+                         <button type="button" id="acceptButton" class="btn btn-success   btnedit" data-bs-toggle="modal"
+                                 data-bs-target="#confirmModal-<?=$newClubNo ?>">Accept</button>
 
                             <!-- Bootstrap Modal -->
-                            <div class="modal" id="confirmModal" tabindex="-1" role="dialog">
-                                <div class="modal-dialog" role="document">
+                            <div class="modal fade" id="confirmModal-<?=$newClubNo ?>" tabindex="-1" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
-                                        <div class="modal-header">
+                                        <div class="modal-header" style="background-color:var(--darker-primary); color:white">
                                             <h5 class="modal-title">Confirmation</h5>
 
                                         </div>
-                                        <div class="modal-body">
-                                            Are you sure you want to proceed?
+                                        <div class="modal-body" style="font-size: 20px">
+                                            Are you sure you want to accept?
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer" style="background-color:var(--darker-primary)">
                                             <form action="process/admindashboard/updateStatus.php" method="post">
                                                 <input type="hidden" name="user_id"
                                                        value="<?php echo $users->user_id; ?>">
                                                 <button type="submit" class="btn btn-primary">Yes</button>
                                             </form>
                                             <button type="button" class="btn btn-secondary" id="no"
-                                                    data-dismiss="modal">No
+                                                    data-bs-dismiss="modal">No
                                             </button>
 
                                         </div>
@@ -338,27 +365,29 @@ $user4 = $userObj->getRowCount();
                         </td>
 
                         <td>
-                            <button type="button" class="btn btn-danger  btnedit" id="declineButton">Decline</button>
+                            <button type="button" class="btn btn-danger  btnedit" data-bs-toggle="modal"
+                                 data-bs-target="#declineModal-<?=$newClubNo ?>">Decline</button>
 
                             <!-- Bootstrap Modal for Decline -->
-                            <div class="modal" id="declineModal" tabindex="-1" role="dialog_1">
-                                <div class="modal-dialog" role="document">
+                            <div class="modal fade" id="declineModal-<?=$newClubNo ?>" tabindex="-1" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered"
+                                 role="document">
                                     <div class="modal-content">
-                                        <div class="modal-header">
+                                        <div class="modal-header" style="background-color:var(--darker-primary); color:white">
                                             <h5 class="modal-title">Confirmation</h5>
 
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body" style="font-size: 20px">
                                             Are you sure you want to decline?
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer" style="background-color:var(--darker-primary)">
                                             <form action="process/admindashboard/declineRequest.php" method="post">
                                                 <input type="hidden" name="user_id"
                                                        value="<?php echo $users->user_id; ?>">
                                                 <button type="submit" class="btn btn-danger">Yes</button>
                                             </form>
                                             <button type="button" class="btn btn-secondary" id="decline"
-                                                    data-dismiss="modal">No
+                                                    data-bs-dismiss="modal">No
                                             </button>
 
                                         </div>
@@ -371,6 +400,7 @@ $user4 = $userObj->getRowCount();
                     </tr>
                     <tr>
                         <?php
+                        $newClubNo++;
                         }
                         ?>
 
@@ -386,7 +416,16 @@ $user4 = $userObj->getRowCount();
     </div>
 
 </div>
-
+<!--=== pre loader ===-->
+<?php include_once "content/preloader.php" ?>
+<!--=== Preloader Script file ===-->
+<?php include_once "content/commonJS.php" ?>
+ <!--=========== Selected Menu change when loading ============-->
+ <script>
+        document.getElementById("menu-<?php echo $selected_menuNo ?>").classList.add("activate");
+        document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.remove("hide");
+        document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.add("show");
+    </script>
 
 <!-- ==== Boostrap Script ==== -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
