@@ -420,18 +420,27 @@ if (isset($_SESSION['user_id'])) {
                   $publicFlyerObj->loadFlyerFromFlyerID($con);
 
               ?>
-                <div class="col">
-                <div id="cardEntrada-2" class="p-4 text-center shadow-lg m-5 rounded-5" style="background: linear-gradient(171deg, var(--primary) 0%, var(--accent-color) 100%), var(--bs-purple);width: 280px;"><img class="pt-2 w-50" src="swiftui.png" />
-                    <p class="fw-light text-white m-0"><?=$publicFlyerObj->getCaption()?></p>
-                    <hr class="text-white" /><img src="swiftui.png" style="width: 10%;" />
-                    <div class="col-12"><button class="btn" type="button" data-bs-target="#modalRecibirCadaber" data-bs-toggle="modal"></button></div>
+            <div class="col ">
+            <div class="container">
+                <div class="row gy-4 gy-md-0">
+                    <div class="col-md-6">
+                        <div class="p-xl-5 m-xl-5">
+                            <img class="rounded img-fluid fit-cover" width="100px" height="100px" src="assets/images/flyer_img/<?= $publicFlyerObj->getFlyerImg()?>" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 d-md-flex align-items-md-center">
+                        <div style="max-width: 350px;">
+                            <p class="my-3"><?=$publicFlyerObj->getCaption()?></p>
+                        </div>
+                    </div>
                 </div>
-                </div>
-                      <?php
+            </div>
+            </div>
+                <?php
 
-                      $r++;
-                     }
-                      ?>
+                $r++;
+                }
+                ?>
             </div>
 
 
