@@ -409,19 +409,20 @@ if (isset($_SESSION['user_id'])) {
             <hr/>
 
             <!--===view flyer part-->
-            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; ">
+            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4" >
               <?php
               $r=1;
 
               foreach ( $publicFlyers as $publicFlyer){
 
-
-
+                  $publicFlyerObj = new PublicFlyer( $publicFlyer->getFlyerID(),null,null,null,null,
+                  null,null,null);
+                  $publicFlyerObj->loadFlyerFromFlyerID($con);
 
               ?>
                 <div class="col">
                 <div id="cardEntrada-2" class="p-4 text-center shadow-lg m-5 rounded-5" style="background: linear-gradient(171deg, var(--primary) 0%, var(--accent-color) 100%), var(--bs-purple);width: 280px;"><img class="pt-2 w-50" src="swiftui.png" />
-                    <p class="fw-light text-white m-0"><?= $publicFlyer->getCaption()?></p>
+                    <p class="fw-light text-white m-0"><?=$publicFlyerObj->getCaption()?></p>
                     <hr class="text-white" /><img src="swiftui.png" style="width: 10%;" />
                     <div class="col-12"><button class="btn" type="button" data-bs-target="#modalRecibirCadaber" data-bs-toggle="modal"></button></div>
                 </div>

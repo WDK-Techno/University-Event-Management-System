@@ -61,76 +61,52 @@ class PublicFlyer
         $this->caption = $caption;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getLink()
     {
         return $this->link;
     }
 
-    /**
-     * @param mixed $link
-     */
+
     public function setLink($link)
     {
         $this->link = $link;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getFlyerImg()
     {
         return $this->flyerImg;
     }
 
-    /**
-     * @param mixed $flyerImg
-     */
+
     public function setFlyerImg($flyerImg)
     {
         $this->flyerImg = $flyerImg;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getClubID()
     {
         return $this->clubID;
     }
 
-    /**
-     * @param mixed $clubID
-     */
+
     public function setClubID($clubID)
     {
         $this->clubID = $clubID;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getStatus()
     {
         return $this->status;
     }
 
-    /**
-     * @param mixed $status
-     */
+
     public function setStatus($status)
     {
         $this->status = $status;
-    }
-
-
-
-
-
-    public function saveChangesToDatabase($con){
-
     }
 
     public function __construct($flyerID,$startDate,$endDate,$caption,$link,$flyerImg,$clubID,$status)
@@ -216,7 +192,7 @@ class PublicFlyer
             $pstmt->execute();
             $result = $pstmt->fetchAll(PDO::FETCH_OBJ);
 
-            if (!empty($rssult)) {
+            if (!empty($result)) {
                 foreach ($result as $use) {
                     $publicFlyer=new PublicFlyer($use->flyer_id,$use->start_date,
                     $use->end_date,$use->caption,$use->link,$use->flyer_image,
@@ -231,5 +207,8 @@ class PublicFlyer
         return $publicFlyers;
     }
 
+    public function saveChangesToDatabase($con){
+
+    }
 
 }
