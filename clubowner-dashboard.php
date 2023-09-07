@@ -409,7 +409,7 @@ if (isset($_SESSION['user_id'])) {
             <hr/>
 
             <!--===view flyer part-->
-            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4" >
+            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-3" >
               <?php
               $r=1;
 
@@ -420,17 +420,33 @@ if (isset($_SESSION['user_id'])) {
                   $publicFlyerObj->loadFlyerFromFlyerID($con);
 
               ?>
-            <div class="col ">
+            <div class="col rounded border ">
             <div class="container">
                 <div class="row gy-4 gy-md-0">
                     <div class="col-md-6">
-                        <div class="p-xl-5 m-xl-5">
-                            <img class="rounded img-fluid fit-cover" width="100px" height="100px" src="assets/images/flyer_img/<?= $publicFlyerObj->getFlyerImg()?>" />
+                        <div class="p-xl-5 w-100 h-100 m-xl-5">
+                            <img class="rounded img-fluid "  src="assets/images/flyer_img/<?= $publicFlyerObj->getFlyerImg()?>"  />
                         </div>
                     </div>
-                    <div class="col-md-6 d-md-flex align-items-md-center">
-                        <div style="max-width: 350px;">
-                            <p class="my-3"><?=$publicFlyerObj->getCaption()?></p>
+                    <div class="col-md-6 d-md-flex flex-column">
+                        <div class="fw-bold my-2" style="color: var(--primary);">Caption</div>
+                        <div >
+                            <?=$publicFlyerObj->getCaption()?>
+                        </div>
+
+
+                           <div class="fw-bold my-2" style="color: var(--primary);">Start Date</div>
+                           <div >
+                               <?=$publicFlyerObj->getStartDate()?>
+                           </div>
+                           <div class="fw-bold my-2" style="color: var(--primary);">End Date</div>
+                           <div >
+                               <?=$publicFlyerObj->getEndDate()?>
+                           </div>
+
+                        <div class="fw-bold my-2" style="color: var(--primary);">Link</div>
+                        <div >
+                            <?=$publicFlyerObj->getLink()?>
                         </div>
                     </div>
                 </div>
