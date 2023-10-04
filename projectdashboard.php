@@ -539,7 +539,6 @@ if (!$project->loadDataFromProjectID($con)) {
         </div>
         <div id="menu-content-5" class="main-content hide">
             <h1>Content 5</h1>
-            <div id="menu-content-2" class="main-content hide">
 
                 <div class="container-fluid">
                     <div class="row d-flex">
@@ -550,15 +549,15 @@ if (!$project->loadDataFromProjectID($con)) {
                                 <div class="btn fw-bold my-auto me-0 ms-auto d-flex"
                                      style="color: var(--lighter-secondary) !important; background-color: var(--primary);"
                                      type="button" data-bs-toggle="modal"
-                                     data-bs-target="#add-new-team-member">
+                                     data-bs-target="#add-new-task">
                                     <ion-icon class="my-auto" name="add-outline"></ion-icon>
-                                    <div class="my-auto">Member</div>
+                                    <div class="my-auto">Task</div>
                                 </div>
                             </div>
 
                             <!-- ========= add member button model ========== -->
                             <div class="modal fade"
-                                 id="add-new-team-member"
+                                 id="add-new-task"
                                  tabindex="-1"
                                  role="dialog"
                                  aria-labelledby="exampleModalCenterTitle"
@@ -643,20 +642,35 @@ if (!$project->loadDataFromProjectID($con)) {
                                      style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
 
                                     <div class="row p-0 fw-bold">
-                                        <div class="col-1"></div>
-                                        <div class="col-3 text-center py-2 rounded-top-3"
-                                             style="background-color: var(--primary);">Name
+                                        <div class="col-1 text-center py-2 rounded-top-3"
+                                             style="background-color: var(--primary);">Published
                                         </div>
-                                        <div class="col-3 text-center py-2 rounded-top-3"
+                                        <div class="col-1 text-center py-2 rounded-top-3"
                                              style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
-                                            Email
+                                            Publish Date
+                                        </div>
+                                        <div class="col-1 text-center py-2 rounded-top-3"
+                                             style="background-color: var(--primary);">Time
                                         </div>
                                         <div class="col-2 text-center py-2 rounded-top-3"
-                                             style="background-color: var(--primary);">Contact No
-                                        </div>
-                                        <div class="col-2 text-center py-2 rounded-top-3"
                                              style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
-                                            Team
+                                            Topic
+                                        </div>
+                                        <div class="col-3 text-center py-2 rounded-top-3"
+                                             style="background-color: var(--primary);">
+                                            Description
+                                        </div>
+                                        <div class="col-1 text-center py-2 rounded-top-3"
+                                             style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                                            Designer
+                                        </div>
+                                        <div class="col-1 text-center py-2 rounded-top-3"
+                                             style="background-color: var(--primary);">
+                                            Caption Writter
+                                        </div>
+                                        <div class="col-1 text-center py-2 rounded-top-3"
+                                             style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                                            Verify
                                         </div>
                                         <div class="col-1">
 
@@ -690,18 +704,34 @@ if (!$project->loadDataFromProjectID($con)) {
                                                              alt="">
                                                     </div>
                                                 </div>
+                                                <div class="col-1 tabel-column-type-1 d-flex">
+<!--                                                    <div class="my-auto">--><?//= $projectMember->getFirstName() ?><!-- --><?//= $projectMember->getLastName() ?><!--</div>-->
+                                                </div>
+                                                <div class="col-1 tabel-column-type-1 d-flex">
+<!--                                                    <div class="my-auto">--><?//= $projectMember->getFirstName() ?><!-- --><?//= $projectMember->getLastName() ?><!--</div>-->
+                                                </div>
+                                                <div class="col-1 tabel-column-type-1 d-flex">
+<!--                                                    <div class="my-auto">--><?//= $projectMember->getFirstName() ?><!-- --><?//= $projectMember->getLastName() ?><!--</div>-->
+                                                </div>
+                                                <div class="col-2 tabel-column-type-1 d-flex">
+<!--                                                    <div class="my-auto">--><?//= $projectMember->getFirstName() ?><!-- --><?//= $projectMember->getLastName() ?><!--</div>-->
+                                                </div>
                                                 <div class="col-3 tabel-column-type-1 d-flex">
 <!--                                                    <div class="my-auto">--><?//= $projectMember->getFirstName() ?><!-- --><?//= $projectMember->getLastName() ?><!--</div>-->
                                                 </div>
-                                                <div class="col-3 d-flex tabel-column-type-2">
+                                                <div class="col-1 tabel-column-type-1 d-flex">
+<!--                                                    <div class="my-auto">--><?//= $projectMember->getFirstName() ?><!-- --><?//= $projectMember->getLastName() ?><!--</div>-->
+                                                </div>
+                                                <div class="col-1 d-flex tabel-column-type-2">
 <!--                                                    <div class="my-auto mx-auto">--><?//= $projectMember->getUsername() ?><!--</div>-->
                                                 </div>
-                                                <div class="col-2 d-flex tabel-column-type-1">
+                                                <div class="col-1 d-flex tabel-column-type-1">
 <!--                                                    <div class="my-auto mx-auto">--><?//= $projectMember->getContactNo() ?><!--</div>-->
                                                 </div>
-                                                <div class="col-2 d-flex tabel-column-type-2">
-<!--                                                    <div class="my-auto mx-auto">--><?//= $projectMemberTeam->getCategoryName() ?><!--</div>-->
+                                                <div class="col-1 d-flex tabel-column-type-1">
+                                                    <!--    <div class="my-auto mx-auto">--><?//= $projectMember->getContactNo() ?><!--</div>-->
                                                 </div>
+
                                                 <div class="col-1 tabel-column-type-1 d-flex">
                                                     <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
 
@@ -800,7 +830,6 @@ if (!$project->loadDataFromProjectID($con)) {
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
         <div id="menu-content-6" class="main-content hide">
             <div class="col-12 p-5 d-flex justify-content-center ">
