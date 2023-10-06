@@ -538,13 +538,11 @@ if (!$project->loadDataFromProjectID($con)) {
             <h1>Content 4</h1>
         </div>
         <div id="menu-content-5" class="main-content hide">
-            <h1>Content 5</h1>
-
                 <div class="container-fluid">
                     <div class="row d-flex">
                         <div class="col-11 mx-auto">
 
-                            <!-- ======= add member button ======== -->
+                            <!-- ======= add task button ======== -->
                             <div class="d-flex mt-3 mb-2">
                                 <div class="btn fw-bold my-auto me-0 ms-auto d-flex"
                                      style="color: var(--lighter-secondary) !important; background-color: var(--primary);"
@@ -555,7 +553,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                 </div>
                             </div>
 
-                            <!-- ========= add member button model ========== -->
+                            <!-- ========= add task button model ========== -->
                             <div class="modal fade"
                                  id="add-new-task"
                                  tabindex="-1"
@@ -572,7 +570,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                                 <div class="d-flex flex-row w-100 justify-content-between">
 
                                                     <div class="ms-2 my-auto fs-4 fw-bold">
-                                                        Team Member
+                                                        Task
                                                     </div>
 
                                                     <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
@@ -696,126 +694,38 @@ if (!$project->loadDataFromProjectID($con)) {
 //
 //                                            ?>
                                             <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
-                                                <div class="col-1 d-flex tabel-column-type-2">
-                                                    <div class="my-auto">
-                                                        <img class="rounded-circle"
-                                                             style="width: 40px; height: 40px; object-fit: cover;"
-<!--                                                             src="assets/images/profile_img/ug/--><?//= $projectMember->getProfileImg() ?><!--"-->
-                                                             alt="">
-                                                    </div>
+
+                                                <div class="col-1 tabel-column-type-1 d-flex">
+                                                    <input type="checkbox" name="published" value="published">
                                                 </div>
                                                 <div class="col-1 tabel-column-type-1 d-flex">
-<!--                                                    <div class="my-auto">--><?//= $projectMember->getFirstName() ?><!-- --><?//= $projectMember->getLastName() ?><!--</div>-->
+
                                                 </div>
                                                 <div class="col-1 tabel-column-type-1 d-flex">
-<!--                                                    <div class="my-auto">--><?//= $projectMember->getFirstName() ?><!-- --><?//= $projectMember->getLastName() ?><!--</div>-->
-                                                </div>
-                                                <div class="col-1 tabel-column-type-1 d-flex">
-<!--                                                    <div class="my-auto">--><?//= $projectMember->getFirstName() ?><!-- --><?//= $projectMember->getLastName() ?><!--</div>-->
+
                                                 </div>
                                                 <div class="col-2 tabel-column-type-1 d-flex">
-<!--                                                    <div class="my-auto">--><?//= $projectMember->getFirstName() ?><!-- --><?//= $projectMember->getLastName() ?><!--</div>-->
+
                                                 </div>
                                                 <div class="col-3 tabel-column-type-1 d-flex">
-<!--                                                    <div class="my-auto">--><?//= $projectMember->getFirstName() ?><!-- --><?//= $projectMember->getLastName() ?><!--</div>-->
+
                                                 </div>
                                                 <div class="col-1 tabel-column-type-1 d-flex">
-<!--                                                    <div class="my-auto">--><?//= $projectMember->getFirstName() ?><!-- --><?//= $projectMember->getLastName() ?><!--</div>-->
+
                                                 </div>
                                                 <div class="col-1 d-flex tabel-column-type-2">
-<!--                                                    <div class="my-auto mx-auto">--><?//= $projectMember->getUsername() ?><!--</div>-->
+
                                                 </div>
                                                 <div class="col-1 d-flex tabel-column-type-1">
-<!--                                                    <div class="my-auto mx-auto">--><?//= $projectMember->getContactNo() ?><!--</div>-->
+                                                    <input type="checkbox" name="verify" value="verify">
                                                 </div>
                                                 <div class="col-1 d-flex tabel-column-type-1">
-                                                    <!--    <div class="my-auto mx-auto">--><?//= $projectMember->getContactNo() ?><!--</div>-->
+
                                                 </div>
 
                                                 <div class="col-1 tabel-column-type-1 d-flex">
                                                     <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
 
-                                                        <!--========== Delete team Member button =========-->
-                                                        <ion-icon class="my-auto" type="button"
-                                                                  data-bs-toggle="modal"
-<!--                                                                  data-bs-target="#delete-project-member---><?//= $teamMemberNo ?><!--"-->
-                                                                  name="trash-outline"></ion-icon>
-                                                    </div>
-
-                                                    <!-- =========== Delete team Member button model =========== -->
-                                                    <div class="modal fade"
-<!--                                                         id="delete-project-member---><?//= $teamMemberNo ?><!--"-->
-                                                         tabindex="-1"
-                                                         role="dialog"
-                                                         aria-labelledby="exampleModalCenterTitle"
-                                                         aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered"
-                                                             role="document">
-                                                            <div class="modal-content">
-                                                                <!--=== form =====-->
-                                                                <form action="process/projectdashboard/deleteTeamMember.php"
-                                                                      method="post">
-                                                                    <div class="modal-header py-2 px-2"
-                                                                         style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
-                                                                        <div class="d-flex flex-row w-100 justify-content-between">
-
-                                                                            <div class="ms-2 my-auto fs-4 fw-bold">Team
-                                                                                Member
-                                                                            </div>
-
-                                                                            <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
-                                                                            <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
-                                                                            <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
-                                                                                 style="font-size: 1.3rem; color: var(--accent-color3);">
-                                                                                Delete
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <!--======= hidden ==========-->
-                                                                        <input type="hidden" name="menuNo"
-                                                                               value="2">
-                                                                        <input type="hidden" name="ug_id"
-<!--                                                                               value="--><?//= $projectMember->getUserId() ?><!--">-->
-                                                                        <input type="hidden" name="cat_id"
-<!--                                                                               value="--><?//= $projectMemberTeam->getCategoryID() ?><!--">-->
-                                                                    </div>
-
-                                                                    <div class="modal-body"
-                                                                         style="background-color: var(--lighter-secondary);">
-                                                                        <div class="d-flex flex-column fw-normal fs-5">
-                                                                            <div class="fw-bold">
-                                                                                Do you want to Delete this Team Member ?
-                                                                            </div>
-                                                                            <div class="fw-bold"
-                                                                                 style="color: var(--primary); font-size: 1.1rem;">
-<!--                                                                                --><?//= $projectMember->getFirstName() ?><!-- --><?//= $projectMember->getLastName() ?>
-                                                                            </div>
-                                                                            <div class="fw-bold"
-                                                                                 style="color: var(--accent-color); font-size: 1.1rem;">
-<!--                                                                                --><?//= $projectMemberTeam->getCategoryName() ?>
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer"
-                                                                         style="background-color: var(--primary);">
-                                                                        <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-bs-dismiss="modal">
-                                                                            Close
-                                                                        </button>
-                                                                        <button type="submit"
-                                                                                name="submit"
-                                                                                class="btn fw-bold"
-                                                                                style="background-color: var(--accent-color3); color: var(--primary);">
-                                                                            Delete
-                                                                        </button>
-
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
