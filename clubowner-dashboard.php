@@ -332,7 +332,7 @@ if (isset($_SESSION['user_id'])) {
 
 
         <!-- ======= flyer area ===== -->
-        <div id="menu-content-4" class="main-content hide">
+        <div id="menu-content-4" class="main-content hide" >
 
             <div class="d-flex pt-2 mt-3 mb-2 ">
                 <button class="btn fw-bold d-flex ms-2 shadow-sm"
@@ -345,7 +345,7 @@ if (isset($_SESSION['user_id'])) {
             </div>
 
             <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
+                 aria-hidden="true" >
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header py-2 px-2"
@@ -409,7 +409,7 @@ if (isset($_SESSION['user_id'])) {
             <hr/>
 
             <!--===view flyer part-->
-            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-3" >
+            <div class="ml-1 row  row-cols-1 row-cols-md-3 row-cols-xl-4 "  >
               <?php
               $r=1;
 
@@ -420,22 +420,25 @@ if (isset($_SESSION['user_id'])) {
                   $publicFlyerObj->loadFlyerFromFlyerID($con);
 
               ?>
-            <div class="col rounded border ">
+            <div class="m-2 col rounded border ">
             <div class="container">
-                <div class="row gy-4 gy-md-0">
-                    <div class="col-md-6">
-                        <div class="p-xl-5 w-100 h-100 m-xl-5">
-                            <img class="rounded img-fluid "  src="assets/images/flyer_img/<?= $publicFlyerObj->getFlyerImg()?>"  />
+                <div class="row row-col-lg-12 col-md-12 col-sm-12 ">
+                    <div ">
+
+                        <div class="ratio ratio-16x9">
+                            <img class="rounded img-fluid"
+                                 src="assets/images/flyer_img/<?= $publicFlyerObj->getFlyerImg()?>" alt="Flyer Image" />
                         </div>
+
                     </div>
-                    <div class="col-md-6 d-md-flex flex-column">
+                    <div >
                         <div class="fw-bold my-2" style="color: var(--primary);">Caption</div>
                         <div >
-                            <?=$publicFlyerObj->getCaption()?>
+                            <textarea class="form-control" name="desc" id="" cols="25"
+                                      rows="3"><?=$publicFlyerObj->getCaption()?></textarea>
+
                         </div>
-
-
-                           <div class="fw-bold my-2" style="color: var(--primary);">Start Date</div>
+                        <div class="fw-bold my-2" style="color: var(--primary);">Start Date</div>
                            <div >
                                <?=$publicFlyerObj->getStartDate()?>
                            </div>
@@ -446,7 +449,9 @@ if (isset($_SESSION['user_id'])) {
 
                         <div class="fw-bold my-2" style="color: var(--primary);">Link</div>
                         <div >
-                            <?=$publicFlyerObj->getLink()?>
+                            <input id="link_address" class="form-control" type="text"
+                                   value="<?=$publicFlyerObj->getLink()?>" name="link_address"/>
+
                         </div>
                     </div>
                 </div>
