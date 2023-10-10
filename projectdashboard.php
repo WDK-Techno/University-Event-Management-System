@@ -909,8 +909,8 @@ if (!$project->loadDataFromProjectID($con)) {
                         </div>
                     </div>
                     <!-- ========== Event list body =========== -->
-                    <div class="position-absolute">
-                        <div class="row col-md-12 m-1">
+                    <div class="">
+                        <div class="d-flex col-md-12 m-1">
                             <?php
                             $eventNo = 1;
                             foreach ($events as $event) {
@@ -959,7 +959,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                         </div>
                                     </div>
                                 </div> -->
-                                <div class="card p-0 shadow-sm mb-3 mx-3" style="width: 200px; height: 250px;">
+                                <div class="card p-0 shadow-sm mb-3 mx-3" style="width: 200px; max-height: 330px">
 
                                     <div class="card-header d-flex" style="background-color: var(--primary);">
                                         <span class="fw-bold fs-3 mx-auto" style="color: var(--lighter-secondary);"><?=$event->getEventName()?></span>
@@ -977,6 +977,29 @@ if (!$project->loadDataFromProjectID($con)) {
                                                    <?=strtoupper(date('M', strtotime($event->getEventStartDate())));?>
                                                </span>
                                                <span class="fs-5 fw-bold mt-0 p-0 text-dark">2023</span> 
+                                            </div>
+                                        </div>
+
+<!--                                        <div class="row mt-2">-->
+<!--                                            <p class="my-auto text-center">--><?php //=$event->getEventDescription()?><!--</p>-->
+<!---->
+<!--                                        </div>-->
+                                        <div class="row mt-2">
+                                            <div class="d-flex justify-content-center mx-auto">
+                                                <ion-icon class="mx-1 my-auto" style="font-size: 1.7rem; color: var(--accent-color);" name="alarm-outline"></ion-icon>
+                                                <div class="fw-bold my-auto" style="font-size: 1.4rem; color: var(--accent-color3);"><?=date('g:i A', strtotime($event->getEventStartDate()))?></div>
+                                            </div>
+                                            <div class="d-flex justify-content-center mx-auto">
+                                                <div class="d-flex fw-bold" style="font-size: 1.0rem;">
+                                                    <div class="bg-dark d-flex px-1 py-0 text-light">
+                                                        <span class="">2</span>
+                                                        <span class="">H</span>
+                                                    </div>
+                                                    <div class="bg-secondary d-flex px-1 py-0 text-light">
+                                                        <span class="">30</span>
+                                                        <span>Min</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
