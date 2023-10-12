@@ -918,47 +918,6 @@ if (!$project->loadDataFromProjectID($con)) {
                                     null, null, null);
                                 $event->loadDataFromeventId($con);
                                 ?>
-
-                                <!-- <div class="col-md-4 shadow-sm p-3 m-2 fw-normal card card1-margin d-flex justify-content-between" style="width: 18rem;">
-                                    <div class="card1-body pt-0">
-                                        <div class="card1-header no-border">
-                                            <h5 class="card1-title"><?= $event->getEventName() ?></h5>
-                                        </div>
-                                        <div class="widget-49">
-                                            <div class="widget-49-title-wrapper">
-                                                <div class="widget-49-date-primary">
-                                                    <span class="widget-49-date-day"><?=
-                                                        date('d', strtotime($event->getEventStartDate()));
-                                                        ?></span></span>
-                                                    <span class="widget-49-date-month"><?=
-                                                        date('M', strtotime($event->getEventStartDate()));
-                                                        ?></span>
-                                                </div>
-                                                <div class="widget-49-meeting-info">
-                                                    <span class="widget-49-pro-title"><?= $event->getEventName() ?></span>
-                                                    <span class="widget-49-meeting-time"><?=
-                                                        date('g:i A, l', strtotime($event->getEventStartDate())) . ' to ' . date('g:i A, l', strtotime($event->getEventEndDate())); ?></span>
-                                                </div>
-                                            </div>
-                                            <div class="m-3 mt-5">
-                                                <div>
-                                                    <span><?= $event->geteventDescription() ?></span></div>
-                                                <div >
-                                                    <span><?= $event->getEventStartDate() ?></span></div>
-                                                <div >
-                                                    <span><?= $event->getEventEndDate() ?></span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="widget-49-meeting-action">
-                                        <div class="d-flex justify-content-end mx-auto p-3 card-list-option-buttons"
-                                             style="font-size: 1.7rem;">
-
-                                            
-                                        </div>
-                                    </div>
-                                </div> -->
                                 <div class="card p-0 shadow-sm mb-3 mx-3" style="width: 200px; max-height: 330px">
 
                                     <div class="card-header d-flex" style="background-color: var(--primary);">
@@ -976,7 +935,7 @@ if (!$project->loadDataFromProjectID($con)) {
                                                <span class="fs-2 fw-bold mb-0 p-0 text-danger">
                                                    <?=strtoupper(date('M', strtotime($event->getEventStartDate())));?>
                                                </span>
-                                               <span class="fs-5 fw-bold mt-0 p-0 text-dark">2023</span> 
+                                               <span class="fs-5 ps-1 fw-bold mt-0 p-0 text-secondary"><?=strtoupper(date('Y', strtotime($event->getEventStartDate())));?></span>
                                             </div>
                                         </div>
 
@@ -986,18 +945,29 @@ if (!$project->loadDataFromProjectID($con)) {
 <!--                                        </div>-->
                                         <div class="row mt-2">
                                             <div class="d-flex justify-content-center mx-auto">
-                                                <ion-icon class="mx-1 my-auto" style="font-size: 1.7rem; color: var(--accent-color);" name="alarm-outline"></ion-icon>
-                                                <div class="fw-bold my-auto" style="font-size: 1.4rem; color: var(--accent-color3);"><?=date('g:i A', strtotime($event->getEventStartDate()))?></div>
+                                                <ion-icon class="mx-1 my-auto" style="font-size: 1.7rem; color: var(--darker-primary);" name="alarm-outline"></ion-icon>
+                                                <div class="fw-bold my-auto" style="font-size: 1.4rem; color: var(--darker-primary);"><?=date('g:i A', strtotime($event->getEventStartDate()))?></div>
                                             </div>
-                                            <div class="d-flex justify-content-center mx-auto">
-                                                <div class="d-flex fw-bold" style="font-size: 1.0rem;">
-                                                    <div class="bg-dark d-flex px-1 py-0 text-light">
-                                                        <span class="">2</span>
-                                                        <span class="">H</span>
+                                            <div class="d-flex mt-1 justify-content-center mx-auto">
+                                                <div class="d-flex fw-bold shadow-sm" style="font-size: 1.0rem;">
+                                                    <?php
+                                                    $startDate = new DateTime(strval($event->getEventStartDate()));
+                                                    $endDate = new DateTime(strval($event->getEventEndDate()));
+
+                                                    $diff = date_diff($endDate,$startDate);
+                                                    $hours = $diff->format("%H");
+                                                    $minutes = $diff->format("%i");
+                                                    if ($minutes<10){
+                                                        $minutes = "0".$minutes;
+                                                    }
+                                                    ?>
+                                                    <div class="d-flex px-1 py-0" style="background-color: var(--darker-primary)">
+                                                        <span class="text-light"><?=$hours?></span>
+                                                        <span class="" style="color: var(--secondary)">H</span>
                                                     </div>
-                                                    <div class="bg-secondary d-flex px-1 py-0 text-light">
-                                                        <span class="">30</span>
-                                                        <span>Min</span>
+                                                    <div class="d-flex px-1 py-0" style="background-color: var(--accent-color)">
+                                                        <span class="text-light"><?=$minutes?></span>
+                                                        <span class="" style="color: var(--accent-color2)">Min</span>
                                                     </div>
                                                 </div>
                                             </div>
