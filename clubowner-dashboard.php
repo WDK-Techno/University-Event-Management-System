@@ -421,7 +421,7 @@ if (isset($_SESSION['user_id'])) {
             <hr/>
 
             <!--===view flyer part-->
-            <div class="ml-1 row  row-cols-1 row-cols-md-3 row-cols-xl-4 ">
+            <div class="ml-1   row  row-cols-1 row-cols-md-3 row-cols-xl-4 " style="max-height: 300px; overflow-y: auto;">
                 <?php
                 $r = 1;
 
@@ -434,6 +434,7 @@ if (isset($_SESSION['user_id'])) {
                 $publicFlyerObj->loadFlyerFromFlyerID($con);
 
                 ?>
+                <div >
                 <div class="m-2 col rounded border ">
                     <div class="container">
                         <div class="row row-col-lg-12 col-md-12 col-sm-12 ">
@@ -472,6 +473,8 @@ if (isset($_SESSION['user_id'])) {
                         </div>
                     </div>
                 </div>
+            </div>
+
             </div>
             <?php
 
