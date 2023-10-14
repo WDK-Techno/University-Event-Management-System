@@ -19,7 +19,7 @@ if (isset($_SESSION['user_id'])) {
 
     $clubid = $_SESSION['user_id'];
     $projects = Project::getProjectListFromClubID($con, $clubid);
-    $publicFlyers=PublicFlyer::getFlyersListFromClubID($con,$clubid);
+    $publicFlyers = PublicFlyer::getFlyersListFromClubID($con, $clubid);
 
     $club = new Club(null, null, null, null);
     $club->setUserId($clubid);
@@ -331,8 +331,8 @@ if (isset($_SESSION['user_id'])) {
         </div>
 
 
-        <!-- ======= flyer area ===== -->
-        <div id="menu-content-4" class="main-content hide" >
+        <!-- ======= flyer  added area ===== -->
+        <div id="menu-content-4" class="main-content hide">
 
             <div class="d-flex pt-2 mt-3 mb-2 ">
                 <button class="btn fw-bold d-flex ms-2 shadow-sm"
@@ -340,12 +340,12 @@ if (isset($_SESSION['user_id'])) {
                         data-bs-toggle="modal" data-bs-target="#exampleModal2">
                     <ion-icon class="my-auto" name="add-outline"
                               style="font-size: 1.4rem;"></ion-icon>
-                    <div class="my-auto ms-1 me-auto">New Flyer </div>
+                    <div class="my-auto ms-1 me-auto">New Flyer</div>
                 </button>
             </div>
-
+            <!-- ======= flyer  added area  hidden part===== -->
             <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true" >
+                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header py-2 px-2"
@@ -361,27 +361,39 @@ if (isset($_SESSION['user_id'])) {
                               enctype="multipart/form-data">
                             <div class="modal-body" style="background-color: var(--lighter-secondary);">
                                 <input type="hidden" name="club_id"
-                                       value="<?= $clubid?>">
-                                    <div class="fw-bold " style="color: var(--primary);">Caption</div>
-                                    <input class="form-control text-center" type="text"
-                                           name="caption" id="caption"
-                                           placeholder="caption" required/>
+                                       value="<?= $clubid ?>">
+                                <div class="fw-bold " style="color: var(--primary);">Caption</div>
+
+                                <input class="form-control text-center" type="text"
+                                       name="caption" id="caption"
+                                       placeholder="caption" required/>
 
 
-                                    <div class="fw-bold my-2" style="color: var(--primary);">Flyer Image</div>
-                                    <input type="file" class="form-control custom-file-input" id="fl_image" name="fl_image" required/>
+                                <div class="fw-bold my-2" style="color: var(--primary);">Flyer Image</div>
+                                <input type="file" class="form-control custom-file-input" id="fl_image" name="fl_image"
+                                       required/>
+                                <div class="d-flex mx-auto my-3">
+                                    <span class="d-flex">
+                                    <div class="fw-bold mx-2" style="color: var(--primary);">Start Date</div>
+                                    <input class="form-control w-50" type="date" name="start_date" required>
+                                        <div class="fw-bold mx-2" style="color: var(--primary);">Start Time</div>
+                                    <input class="form-control w-50" type="time" name="start_time" required>
+                                    </span>
+                                </div>
 
-                                    <div class="fw-bold my-2" style="color: var(--primary);">Start Date</div>
-                                    <input class="form-control w-50" type="datetime-local" name="start_date" required>
-
-                                   <div class="fw-bold my-2" style="color: var(--primary);">End Date</div>
-                                   <input class="form-control w-50" type="datetime-local" name="end_date" required>
+                                <div class="d-flex mx-auto my-3">
+                                    <span class="d-flex">
+                                <div class="fw-bold mx-2" style="color: var(--primary);">End Date</div>
+                                <input class="form-control w-50" type="date" name="end_date" required>
+                                        <div class="fw-bold mx-2" style="color: var(--primary);">End Time</div>
+                                    <input class="form-control w-50" type="time" name="end_time" required>
+                                    </span>
+                                </div>
 
 
                                 <div class="fw-bold my-2" style="color: var(--primary);">Link</div>
-                                 <input type="url" name="url" id="url"
-                                       placeholder="https://example.com" pattern="https://.*" size="30" required />
-
+                                <input type="url" name="url" id="url"
+                                       placeholder="https://example.com" pattern="https://.*" size="30" required/>
 
 
                                 <div class="mt-2 text-center" id="add-flyer-error"
@@ -409,160 +421,164 @@ if (isset($_SESSION['user_id'])) {
             <hr/>
 
             <!--===view flyer part-->
-            <div class="ml-1 row  row-cols-1 row-cols-md-3 row-cols-xl-4 "  >
-              <?php
-              $r=1;
+            <div class="ml-1 row  row-cols-1 row-cols-md-3 row-cols-xl-4 ">
+                <?php
+                $r = 1;
 
-              foreach ( $publicFlyers as $publicFlyer){
+                foreach ($publicFlyers
 
-                  $publicFlyerObj = new PublicFlyer( $publicFlyer->getFlyerID(),null,null,null,null,
-                  null,null,null);
-                  $publicFlyerObj->loadFlyerFromFlyerID($con);
+                as $publicFlyer){
 
-              ?>
-            <div class="m-2 col rounded border ">
-            <div class="container">
-                <div class="row row-col-lg-12 col-md-12 col-sm-12 ">
-                    <div ">
+                $publicFlyerObj = new PublicFlyer($publicFlyer->getFlyerID(), null, null, null, null,
+                    null, null, null);
+                $publicFlyerObj->loadFlyerFromFlyerID($con);
 
-                        <div class="ratio ratio-16x9">
-                            <img class="rounded img-fluid"
-                                 src="assets/images/flyer_img/<?= $publicFlyerObj->getFlyerImg()?>" alt="Flyer Image" />
+                ?>
+                <div class="m-2 col rounded border ">
+                    <div class="container">
+                        <div class="row row-col-lg-12 col-md-12 col-sm-12 ">
+                            <div
+                            ">
+
+                            <div class="ratio ratio-16x9">
+                                <img class="rounded img-fluid"
+                                     src="assets/images/flyer_img/<?= $publicFlyerObj->getFlyerImg() ?>"
+                                     alt="Flyer Image"/>
+                            </div>
+
                         </div>
-
-                    </div>
-                    <div >
-                        <div class="fw-bold my-2" style="color: var(--primary);">Caption</div>
-                        <div >
+                        <div>
+                            <div class="fw-bold my-2" style="color: var(--primary);">Caption</div>
+                            <div>
                             <textarea class="form-control" name="desc" id="" cols="25"
-                                      rows="3"><?=$publicFlyerObj->getCaption()?></textarea>
+                                      rows="3"><?= $publicFlyerObj->getCaption() ?></textarea>
 
-                        </div>
-                        <div class="fw-bold my-2" style="color: var(--primary);">Start Date</div>
-                           <div >
-                               <?=$publicFlyerObj->getStartDate()?>
-                           </div>
-                           <div class="fw-bold my-2" style="color: var(--primary);">End Date</div>
-                           <div >
-                               <?=$publicFlyerObj->getEndDate()?>
-                           </div>
+                            </div>
+                            <div class="fw-bold my-2" style="color: var(--primary);">Start Date</div>
+                            <div>
+                                <?= $publicFlyerObj->getStartDate() ?>
+                            </div>
+                            <div class="fw-bold my-2" style="color: var(--primary);">End Date</div>
+                            <div>
+                                <?= $publicFlyerObj->getEndDate() ?>
+                            </div>
 
-                        <div class="fw-bold my-2" style="color: var(--primary);">Link</div>
-                        <div >
-                            <input id="link_address" class="form-control" type="text"
-                                   value="<?=$publicFlyerObj->getLink()?>" name="link_address"/>
+                            <div class="fw-bold my-2" style="color: var(--primary);">Link</div>
+                            <div>
+                                <input id="link_address" class="form-control" type="text"
+                                       value="<?= $publicFlyerObj->getLink() ?>" name="link_address"/>
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
-                <?php
+            <?php
 
-                $r++;
-                }
-                ?>
-            </div>
-
-
+            $r++;
+            }
+            ?>
         </div>
-        <div id="menu-content-5" class="main-content hide">
 
-            <div class="text-center d-flex">
-                <?php
-                if ($loadClubData) {
-                    ?>
-                    <!-- ======= project image area ===== -->
-                    <div class="d-flex flex-column mx-auto my-3">
-                        <img class="rounded-circle img-thumbnail shadow-sm"
-                             style="width: 150px; height: 150px; object-fit: cover;"
-                             src="assets/images/profile_img/club/<?= $club->getProfileImage() ?>"
-                             alt="">
-                        <form action="process/clubownerdashboard/saveProfileImage.php" method="post"
-                              enctype="multipart/form-data">
-                            <div class="btn fw-bold d-flex mx-4 mt-2 shadow-sm" type="button"
-                                 onclick="fileUploadBtn()"
-                                 style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
-                                <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
-                                          name="cloud-upload-outline"></ion-icon>
-                                <div class="my-auto ms-1 me-auto">Upload</div>
-                                <input type="file" class="form-control d-none" name="image_upload"
-                                       id="image_upload" onchange="saveImgSubmit()"/>
 
-                            </div>
-                            <!--======= hidden ==========-->
-                            <input type="hidden" name="menuNo" value="5">
-                            <input type="hidden" name="club_id"
-                                   value="<?= $club->getUserId() ?>">
-                            <input class="d-none" type="submit" name="image_save_submit"
-                                   id="image_save_submit"/>
-                        </form>
-                    </div>
+    </div>
+    <div id="menu-content-5" class="main-content hide">
 
-                <?php }
+        <div class="text-center d-flex">
+            <?php
+            if ($loadClubData) {
                 ?>
-            </div>
+                <!-- ======= project image area ===== -->
+                <div class="d-flex flex-column mx-auto my-3">
+                    <img class="rounded-circle img-thumbnail shadow-sm"
+                         style="width: 150px; height: 150px; object-fit: cover;"
+                         src="assets/images/profile_img/club/<?= $club->getProfileImage() ?>"
+                         alt="">
+                    <form action="process/clubownerdashboard/saveProfileImage.php" method="post"
+                          enctype="multipart/form-data">
+                        <div class="btn fw-bold d-flex mx-4 mt-2 shadow-sm" type="button"
+                             onclick="fileUploadBtn()"
+                             style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                            <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
+                                      name="cloud-upload-outline"></ion-icon>
+                            <div class="my-auto ms-1 me-auto">Upload</div>
+                            <input type="file" class="form-control d-none" name="image_upload"
+                                   id="image_upload" onchange="saveImgSubmit()"/>
 
-            <div class="card shadow-sm mb-3 mx-4">
-                <div class="card-header py-3">
-                    <p class="m-0 fw-bold" style="color: var(--darker-primary); font-size: 1.3rem;">Club Settings</p>
-                </div>
-                <div class="card-body">
-                    <form action="process/clubownerdashboard/editClubDetails.php" method="post">
-                        <?php
-
-                        if ($loadClubData){
-                        ?>
-
-                        <div class="row" style="color: var(--primary);">
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label class="form-label" for="club_name">
-                                        <strong>Club Name</strong>
-                                    </label>
-                                    <input id="club_name" class="form-control" type="text"
-                                           value="<?= $club->getClubName() ?>" name="club_name"/>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label class="form-label" for="contact_no">
-                                        <strong>Contact number</strong>
-                                    </label>
-                                    <input id="contact_no" class="form-control" type="text"
-                                           value="<?= $club->getContactNo() ?>" name="contact_no"/>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row px-2" style="color: var(--primary);">
-                            <div class="fw-bold">Description</div>
-                            <textarea class="form-control" name="desc" id="" cols="25"
-                                      rows="7"><?= $club->getClubDescription() ?></textarea>
                         </div>
                         <!--======= hidden ==========-->
                         <input type="hidden" name="menuNo" value="5">
                         <input type="hidden" name="club_id"
                                value="<?= $club->getUserId() ?>">
-                        <button class="btn fw-bold d-flex mt-2 ms-auto me-0"
-                                style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
-                                type="submit" name="submit">
-                            <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
-                                      name="save-outline"></ion-icon>
-                            <div class="my-auto ms-1 me-auto">Save</div>
-
-                        </button>
+                        <input class="d-none" type="submit" name="image_save_submit"
+                               id="image_save_submit"/>
                     </form>
-                    <?php
-                    } else {
-                        echo "Club data not found for the given user ID.";
-                    }
-                    ?>
                 </div>
-            </div>
 
-
+            <?php }
+            ?>
         </div>
+
+        <div class="card shadow-sm mb-3 mx-4">
+            <div class="card-header py-3">
+                <p class="m-0 fw-bold" style="color: var(--darker-primary); font-size: 1.3rem;">Club Settings</p>
+            </div>
+            <div class="card-body">
+                <form action="process/clubownerdashboard/editClubDetails.php" method="post">
+                    <?php
+
+                    if ($loadClubData){
+                    ?>
+
+                    <div class="row" style="color: var(--primary);">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="form-label" for="club_name">
+                                    <strong>Club Name</strong>
+                                </label>
+                                <input id="club_name" class="form-control" type="text"
+                                       value="<?= $club->getClubName() ?>" name="club_name"/>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="form-label" for="contact_no">
+                                    <strong>Contact number</strong>
+                                </label>
+                                <input id="contact_no" class="form-control" type="text"
+                                       value="<?= $club->getContactNo() ?>" name="contact_no"/>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row px-2" style="color: var(--primary);">
+                        <div class="fw-bold">Description</div>
+                        <textarea class="form-control" name="desc" id="" cols="25"
+                                  rows="7"><?= $club->getClubDescription() ?></textarea>
+                    </div>
+                    <!--======= hidden ==========-->
+                    <input type="hidden" name="menuNo" value="5">
+                    <input type="hidden" name="club_id"
+                           value="<?= $club->getUserId() ?>">
+                    <button class="btn fw-bold d-flex mt-2 ms-auto me-0"
+                            style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
+                            type="submit" name="submit">
+                        <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
+                                  name="save-outline"></ion-icon>
+                        <div class="my-auto ms-1 me-auto">Save</div>
+
+                    </button>
+                </form>
+                <?php
+                } else {
+                    echo "Club data not found for the given user ID.";
+                }
+                ?>
+            </div>
+        </div>
+
+
+    </div>
 
     </div>
 
