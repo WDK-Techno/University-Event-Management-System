@@ -16,6 +16,7 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
               pathinfo($_FILES['fl_image']['name'])['extension'] == "jpeg" ||
               pathinfo($_FILES['fl_image']['name'])['extension'] == "JPG" ||
               pathinfo($_FILES['fl_image']['name'])['extension'] == "png") {
+              $fl_topic=strip_tags($_POST['topic']);
               $fl_caption=strip_tags($_POST['caption']);
               $startDate = $_POST['start_date'];
               $start_time=$_POST['start_time'];
@@ -36,7 +37,7 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
 
               if (move_uploaded_file($tempname, $folder)) {
                   echo "File moved successfully.<br>";
-                  $publicFlyer=new PublicFlyer(null,$fl_StartDate,$fl_EndDate,$fl_caption,$fl_link,$filename,$club_id,"active");
+                  $publicFlyer=new PublicFlyer(null,$fl_StartDate,$fl_EndDate,$fl_caption,$fl_link,$filename,$club_id,"active",$fl_topic);
                   $rs=$publicFlyer->addNewFlyer($con);
 
                   if ($rs){

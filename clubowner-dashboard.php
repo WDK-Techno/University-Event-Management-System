@@ -362,11 +362,23 @@ if (isset($_SESSION['user_id'])) {
                             <div class="modal-body" style="background-color: var(--lighter-secondary);">
                                 <input type="hidden" name="club_id"
                                        value="<?= $clubid ?>">
-                                <div class="fw-bold " style="color: var(--primary);">Caption</div>
+
+
+                                <div class="fw-bold " style="color: var(--primary);">Topic</div>
 
                                 <input class="form-control text-center" type="text"
+                                       name="topic" id="topic"
+                                       placeholder="Topic" required/>
+
+
+                                <div class="fw-bold " style="color: var(--primary);">Caption</div>
+                                <div>
+
+                                <textarea  class="form-control"   cols="25"
+                                           rows="2"
                                        name="caption" id="caption"
-                                       placeholder="caption" required/>
+                                           placeholder="caption" required> </textarea>
+                                </div>
 
 
                                 <div class="fw-bold my-2" style="color: var(--primary);">Flyer Image</div>
@@ -421,7 +433,9 @@ if (isset($_SESSION['user_id'])) {
             <hr/>
 
             <!--===view flyer part-->
-            <div class="ml-1   row  row-cols-1 row-cols-md-3 row-cols-xl-4 " style="max-height: 300px; overflow-y: auto;">
+
+            <div class="container shadow bg-body rounded" style="max-height: 500px ; overflow-y: auto;">
+            <div class="ml-1   row  row-cols-1 row-cols-md-3 row-cols-xl-4 " >
                 <?php
                 $r = 1;
 
@@ -430,7 +444,7 @@ if (isset($_SESSION['user_id'])) {
                 as $publicFlyer){
 
                 $publicFlyerObj = new PublicFlyer($publicFlyer->getFlyerID(), null, null, null, null,
-                    null, null, null);
+                    null, null, null,null);
                 $publicFlyerObj->loadFlyerFromFlyerID($con);
 
                 ?>
@@ -449,6 +463,12 @@ if (isset($_SESSION['user_id'])) {
 
                         </div>
                         <div>
+                            <div class="fw-bold my-2" style="color: var(--primary);">Topic</div>
+                            <div>
+                            <textarea class="form-control" name="desc" id="" cols="25"
+                                      rows="1"><?= $publicFlyerObj->getFlyerTopic() ?></textarea>
+
+                            </div>
                             <div class="fw-bold my-2" style="color: var(--primary);">Caption</div>
                             <div>
                             <textarea class="form-control" name="desc" id="" cols="25"
@@ -476,11 +496,13 @@ if (isset($_SESSION['user_id'])) {
             </div>
 
             </div>
+
             <?php
 
             $r++;
             }
             ?>
+            </div>
         </div>
 
 

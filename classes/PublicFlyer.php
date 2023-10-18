@@ -14,6 +14,9 @@ class PublicFlyer
     private $clubID;
     private $status;
 
+    private $flyerTopic;
+
+
 
     public function getFlyerID()
     {
@@ -109,7 +112,25 @@ class PublicFlyer
         $this->status = $status;
     }
 
-    public function __construct($flyerID,$startDate,$endDate,$caption,$link,$flyerImg,$clubID,$status)
+    /**
+     * @return mixed
+     */
+    public function getFlyerTopic()
+    {
+        return $this->flyerTopic;
+    }
+
+    /**
+     * @param mixed $flyerTopic
+     */
+    public function setFlyerTopic($flyerTopic)
+    {
+        $this->flyerTopic = $flyerTopic;
+    }
+
+
+
+    public function __construct($flyerID,$startDate,$endDate,$caption,$link,$flyerImg,$clubID,$status,$flyerTopic)
     {
         $this->flyerID=$flyerID;
         $this->startDate=$startDate;
@@ -119,13 +140,14 @@ class PublicFlyer
         $this->flyerImg=$flyerImg;
         $this->clubID=$clubID;
         $this->status=$status;
+        $this->flyerTopic=$flyerTopic;
 
     }
 
     public function  addNewFlyer($con){
 
         try {
-            $query= "INSERT INTO public_flyer(start_date,end_date,caption,link,flyer_image,club_id,status) VALUES(?,?,?,?,?,?,?)";
+            $query= "INSERT INTO public_flyer(start_date,end_date,caption,link,flyer_image,club_id,status,flyer_topic) VALUES(?,?,?,?,?,?,?,?)";
             $pstmt=$con->prepare($query);
             $pstmt->bindValue(1,$this->startDate);
             $pstmt->bindValue(2,$this->endDate);
@@ -134,6 +156,7 @@ class PublicFlyer
             $pstmt->bindValue(5,$this->flyerImg);
             $pstmt->bindValue(6,$this->clubID);
             $pstmt->bindValue(7,$this->status);
+            $pstmt->bindValue(8,$this->flyerTopic);
             $pstmt->execute();
 
 
@@ -170,6 +193,7 @@ class PublicFlyer
                 $this->flyerImg= $rs->flyer_image;
                 $this->clubID=$rs->club_id;
                 $this->status = $rs->status;
+                $this->flyerTopic=$rs->flyer_topic;
                 return true;
             } else {
                 return false;
@@ -196,7 +220,7 @@ class PublicFlyer
                 foreach ($result as $use) {
                     $publicFlyer=new PublicFlyer($use->flyer_id,$use->start_date,
                     $use->end_date,$use->caption,$use->link,$use->flyer_image,
-                        $use->club_id,$use->status);
+                        $use->club_id,$use->status,$use->flyer_topic);
 
                     $publicFlyers[]=$publicFlyer;
                 }
