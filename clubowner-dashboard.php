@@ -434,76 +434,74 @@ if (isset($_SESSION['user_id'])) {
 
             <!--===view flyer part-->
 
-            <div class="container shadow bg-body rounded" style="max-height: 500px ; overflow-y: auto;">
-            <div class="ml-1   row  row-cols-1 row-cols-md-3 row-cols-xl-4 " >
+
+            <div class="ml-1    row-cols-1 row-cols-md-3 row-cols-xl-4 " >
+
                 <?php
-                $r = 1;
+                $flyerno = 1;
 
                 foreach ($publicFlyers
 
                 as $publicFlyer){
 
-                $publicFlyerObj = new PublicFlyer($publicFlyer->getFlyerID(), null, null, null, null,
+                $publicFlyerObj =
+                    new PublicFlyer($publicFlyer->getFlyerID(), null, null, null, null,
                     null, null, null,null);
                 $publicFlyerObj->loadFlyerFromFlyerID($con);
 
                 ?>
-                <div >
-                <div class="m-2 col rounded border ">
-                    <div class="container">
-                        <div class="row row-col-lg-12 col-md-12 col-sm-12 ">
-                            <div
-                            ">
+                    <!--===view flyer part  card-->
 
-                            <div class="ratio ratio-16x9">
-                                <img class="rounded img-fluid"
-                                     src="assets/images/flyer_img/<?= $publicFlyerObj->getFlyerImg() ?>"
-                                     alt="Flyer Image"/>
-                            </div>
+                    <div class="card" style="width: 18rem">
 
+                        <div class="card-header fw-bold"  style=" color: var(--lighter-secondary) !important; background-color: var(--primary);"><?= $publicFlyerObj->getFlyerTopic() ?></div>
+                        <img class="card-img-top" src="assets/images/flyer_img/<?= $publicFlyerObj->getFlyerImg() ?>" alt="Card image cap" />
+                        <!----------------- card  body ------------------->
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $publicFlyerObj->getCaption()?></h5>
                         </div>
-                        <div>
-                            <div class="fw-bold my-2" style="color: var(--primary);">Topic</div>
-                            <div>
-                            <textarea class="form-control" name="desc" id="" cols="25"
-                                      rows="1"><?= $publicFlyerObj->getFlyerTopic() ?></textarea>
+                        <!----------------- card  footer ------------------->
+                        <div class="card-footer">
+                            <!----------------- edit button ------------------->
+                            <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#editflyer<?= $flyerno?>">
+                                <ion-icon name="create-outline" size="large"></ion-icon>
+                            </button>
+
+                            <!----------------- Modal for flyer ------------------>
+                            <div class="modal fade" id="editflyer<?= $flyerno?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title  <?= $flyerno?></h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ...
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             </div>
-                            <div class="fw-bold my-2" style="color: var(--primary);">Caption</div>
-                            <div>
-                            <textarea class="form-control" name="desc" id="" cols="25"
-                                      rows="3"><?= $publicFlyerObj->getCaption() ?></textarea>
-
-                            </div>
-                            <div class="fw-bold my-2" style="color: var(--primary);">Start Date</div>
-                            <div>
-                                <?= $publicFlyerObj->getStartDate() ?>
-                            </div>
-                            <div class="fw-bold my-2" style="color: var(--primary);">End Date</div>
-                            <div>
-                                <?= $publicFlyerObj->getEndDate() ?>
-                            </div>
-
-                            <div class="fw-bold my-2" style="color: var(--primary);">Link</div>
-                            <div>
-                                <input id="link_address" class="form-control" type="text"
-                                       value="<?= $publicFlyerObj->getLink() ?>" name="link_address"/>
-
-                            </div>
-                        </div>
                     </div>
-                </div>
-            </div>
 
-            </div>
+
+
+
+
 
             <?php
-
-            $r++;
+                    $flyerno++;
             }
             ?>
+
             </div>
-        </div>
+
+
 
 
     </div>
