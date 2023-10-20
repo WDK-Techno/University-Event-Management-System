@@ -906,17 +906,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                         <input class="form-control text-center" type="text" required
                                                name="description" placeholder="Description"/><br>
                                         <input class="form-control text-center" type="date" required
-                                               name="event_date" placeholder="Event Start Date"/><br>
+                                               name="event_date" placeholder="Event Date"/><br>
                                         <div class="d-flex mx-auto">
                                             <span class="d-flex me-5">
                                                 <div class="my-auto me-3">Start<br>Time</div>
-                                            <input class="form-control text-center" style="width: fit-content" type="time" required
+                                            <input class="form-control text-center" style="width: fit-content"
+                                                   type="time" required
                                                    name="event_start_time"/>
                                             </span>
 
                                             <span class="d-flex">
                                                <div class="my-auto me-3">End<br>Time</div>
-                                            <input class="form-control text-center" style="width: fit-content" type="time" required
+                                            <input class="form-control text-center" style="width: fit-content"
+                                                   type="time" required
                                                    name="event_end_time"/>
                                             </span>
 
@@ -1059,43 +1061,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                            value="<?= $event->getEventId() ?>">
                                                 </div>
 
-                                                <div class="modal-body "
+                                                <div class="modal-body"
                                                      style="background-color: var(--lighter-secondary);">
-                                                    <div class="grid px-5 ">
-                                                        <!-- Row 1: Event Name -->
-                                                        <div class="form-group p-2">
+                                                    <div class="d-flex flex-column p-2">
+                                                        <input class="form-control text-center" type="text" required
+                                                               name="name" placeholder="Event Name"
+                                                               value="<?= $event->getEventName() ?>"/><br>
+                                                        <input class="form-control text-center" type="text"
+                                                               value="<?= $event->getEventDescription() ?>" required
+                                                               name="description" placeholder="Description"/><br>
+                                                        <input class="form-control text-center" type="date"
+                                                               value="<?= date('Y-m-d', strtotime($event->getEventStartDate())); ?>"
+                                                               required
+                                                               name="event_date" placeholder="Event Date"/><br>
+
+                                                        <div class="d-flex mx-auto" style="font-size: 1.0rem">
+                                                            <!--start time-->
+                                                            <span class="d-flex me-5">
+                                                                <div class="my-auto me-3">Start<br>Time</div>
                                                             <input class="form-control text-center"
-                                                                   type="text" name="name"
-                                                                   value="<?= $event->getEventName() ?>"
-                                                                   placeholder="Event Name"/>
-                                                        </div>
-
-
-                                                        <!-- Row 2: Event Description -->
-                                                        <div class="form-group p-2">
+                                                                   style="width: fit-content"
+                                                                   type="time"
+                                                                   value="<?= date('H:i', strtotime($event->getEventStartDate())); ?>"
+                                                                   required
+                                                                   name="event_start_time"/>
+                                                            </span>
+                                                            <!--end time-->
+                                                            <span class="d-flex">
+                                                               <div class="my-auto me-3">End<br>Time</div>
                                                             <input class="form-control text-center"
-                                                                   type="text" name="description"
-                                                                   value="<?= $event->getEventDescription() ?>"
-                                                                   placeholder="Event Description"/>
-                                                        </div>
-
-
-                                                        <!-- Row 3: Event Date -->
-                                                        <div class="form-group p-2">
-                                                            <input class="form-control text-center"
-                                                                   type="datetime-local"
-                                                                   name="event_start_date"
-                                                                   value="<?= $event->getEventStartDate() ?>"
-                                                                   placeholder="Event Strat Date"/>
-                                                        </div>
-
-
-                                                        <div class="form-group p-2">
-                                                            <input class="form-control text-center"
-                                                                   type="datetime-local"
-                                                                   name="event_end_date"
-                                                                   value="<?= $event->getEventEndDate() ?>"
-                                                                   placeholder="Event End Date"/>
+                                                                   style="width: fit-content"
+                                                                   type="time" value="<?= date('H:i', strtotime($event->getEventEndDate())); ?>" required
+                                                                   name="event_end_time"/>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
