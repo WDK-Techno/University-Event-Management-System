@@ -471,17 +471,48 @@ if (isset($_SESSION['user_id'])) {
                             <div class="modal fade" id="editflyer<?= $flyerno?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title  <?= $flyerno?></h1>
+                                        <div class="modal-header" style=" color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Flyer  <?= $flyerno?></h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            ...
+                                            <form method="post" action="process/clubownerdashboard/editFlyer.php">
+                                                <input type="hidden" name="menuNo" value="4">
+                                                <input type="hidden" name="flyerId" value="<?= $publicFlyerObj->getFlyerID()?>">
+
+                                                <div class="container">
+                                                    <div class="row py-1">
+                                                        <input type="text" name="flyerUpdateTopic" class="form-control text-center"  placeholder="<?= $publicFlyerObj->getFlyerTopic()?>">
+                                                    </div>
+                                                    <div class="row py-1">
+                                                        <input type="text" name="flyerUpdateCaption" class="form-control text-center" rows="2" placeholder="<?= $publicFlyerObj->getCaption()?>">
+                                                    </div>
+                                                    <div class="row py-1">
+                                                        <input type="text" name="flyerUpdateLink" class="form-control text-center"  placeholder="<?= $publicFlyerObj->getLink()?>">
+                                                    </div>
+                                                    <div class="row py-1">
+                                                        <input type="datetime-local" name="flyerUpdateStartdate" class="form-control"  placeholder="<?= $publicFlyerObj->getStartDate()?>">
+                                                    </div>
+                                                    <div class="row py-1">
+                                                        <input type="datetime-local" name="flyerUpdateSEnddate" class="form-control"  placeholder="<?= $publicFlyerObj->getEndDate()?>">
+                                                    </div>
+                                                    <div class="row">
+                                                        <?= $publicFlyerObj->getEndDate()?>
+                                                    </div>
+
+
+                                                </div>
+
+
+
+
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                            <button type="button" class="btn" style="color: var(--accent-color2)!important;background-color: var(--primary);">Save changes</button>
                                         </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
