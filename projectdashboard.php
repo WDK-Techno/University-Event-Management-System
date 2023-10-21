@@ -60,7 +60,7 @@ $events = Event::getEventListFromProjectID($con, $project->getProjectID());
 $teamMembers = TeamMember::getMemberListFromProjectID($con, $project->getProjectID());
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $selected_menuNo = 6;
+    $selected_menuNo = 3;
     if (isset($_GET['tab'])) {
         $selected_menuNo = $_GET['tab'];
     }
@@ -120,7 +120,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
           crossorigin="anonymous">
 
-
+    <!-- ======= daypilot Grant chart ========== -->
+    <script src="GrantChart/js/daypilot/daypilot-all.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -531,7 +532,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </div>
     </div>
     <div id="menu-content-3" class="main-content hide">
-        <h1>Content 3</h1>
+<!--        <h1>Content 3</h1>-->
+        <?php include_once "content/GrantChart.php" ?>
     </div>
     <div id="menu-content-4" class="main-content hide">
         <h1>Content 4</h1>
@@ -1091,7 +1093,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                                <div class="my-auto me-3">End<br>Time</div>
                                                             <input class="form-control text-center"
                                                                    style="width: fit-content"
-                                                                   type="time" value="<?= date('H:i', strtotime($event->getEventEndDate())); ?>" required
+                                                                   type="time"
+                                                                   value="<?= date('H:i', strtotime($event->getEventEndDate())); ?>"
+                                                                   required
                                                                    name="event_end_time"/>
                                                             </span>
                                                         </div>
