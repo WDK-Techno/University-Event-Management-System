@@ -474,7 +474,5 @@ class Club extends User
         }
     }
 
-    
-
 
 }
