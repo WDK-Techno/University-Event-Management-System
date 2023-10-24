@@ -259,6 +259,7 @@ $user4 = $club->getRowCount($con);
                         <th>Name</th>
                         <th>email</th>
                         <th>Contact No</th>
+                        <th>description</th>
                         <th>Status</th>
                         <th></th>
                         <th></th>
@@ -274,6 +275,7 @@ $user4 = $club->getRowCount($con);
                             <td><?php echo $users->name; ?></td>
                             <td><?php echo $users->user_name; ?></td>
                             <td><?php echo $users->contact_no; ?></td>
+                            <td><?php echo $users->description; ?></td>
                             <td>
                             <?php
                                  if($users->status == "active"){

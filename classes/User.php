@@ -483,7 +483,7 @@ class Club extends User
     }
 
     public function getClubs($con){
-        $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no,u.status,club.profile_image FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'active' || status = 'deactive' ";
+        $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no,u.status,club.profile_image,club.description FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'active' || status = 'deactive' ";
         $pstmt = $con->prepare($query);
         $pstmt->execute();
         $rs = $pstmt->fetchAll(\PDO::FETCH_OBJ);
