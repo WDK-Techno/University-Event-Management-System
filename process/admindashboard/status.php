@@ -1,11 +1,32 @@
 <?php
-require_once '../../classes/Admin.php';
+require_once '../../classes/User.php';
 require_once '../../classes/DBConnector.php';
-use classes\Admin;
+
+use classes\DBConnector;
+use classes\Undergraduate;
+
 if ($_SERVER["REQUEST_METHOD"] === "GET"){
-    $user_id = $_GET["user_id"];
-    $status = $_GET["status"];
-    $userObj = new Admin();
-    $userObj->status($user_id, $status);
-    header("Location:../../superadmindashboard.php?tab=2");
+    if(isset($_GET["user_id"])){
+        $user_id = $_GET["user_id"];
+        $con = DBConnector::getConnection();
+        $status = $_GET["status"];
+        echo $status;
+        $undergraduate = new Undergraduate('','','','','','');
+        $undergraduate->setUserId($user_id);
+        $undergraduate->loadDataFromUserID($con);
+        if($status=="deactive"){
+    
+        $undergraduate->setStatus(status:'deactive');
+       
+    
+        }elseif($status=="active"){
+            $undergraduate->setStatus(status:'active');
+    
+        }
+        
+       
+        
+        $rs = $undergraduate->saveUserChangesToDataBase($con);
+    header("Location:../../superadmindashboard.php?tab=1");
+    }
 }

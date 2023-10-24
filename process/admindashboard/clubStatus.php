@@ -1,22 +1,30 @@
 <?php
+
 require_once '../../classes/User.php';
 require_once '../../classes/DBConnector.php';
 use classes\DBConnector;
 use classes\Club;
 
-
-if ($_SERVER["REQUEST_METHOD"] === "POST"){
-    if(isset($_POST["user_id"])){
-    $user_id = $_POST["user_id"];
+if ($_SERVER["REQUEST_METHOD"] === "GET"){
+    if(isset($_GET["user_id"])){
+    $user_id = $_GET["user_id"];
     $con = DBConnector::getConnection();
-    
-    // echo $user_id;
+    $status = $_GET["status"];
+    echo $status;
     $club = new Club('','','','');
     $club->setUserId($user_id);
-    // $undergraduate->ugdelete($con);
     $club->loadDataFromUserID($con);
-    $club->setStatus("delete");
+    if($status=="deactive"){
+
+    $club->setStatus(status:'deactive');
+   
+
+    }elseif($status=="active"){
+        $club->setStatus(status:'active');
+
+    }
+    
     $rs = $club->saveUserChangesToDataBase($con);
     header("Location:../../superadmindashboard.php?tab=2");
-    }
+}
 }
