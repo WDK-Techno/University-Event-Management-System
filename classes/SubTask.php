@@ -102,7 +102,7 @@ VALUES (?,?,?,?,?)";
             $this->subTaskStatus = $rs->status;
 
             $rs1 = parent::loadMainTaskFromTaskID($con);
-            if ($rs){
+            if ($rs1){
                 return true;
             }else{
                 return true;
@@ -122,7 +122,7 @@ VALUES (?,?,?,?,?)";
     {
         try {
 
-            $taskArray = array();
+            $subTasks = array();
 
             $query = "SELECT * FROM sub_task WHERE asign_member_id=?";
 
