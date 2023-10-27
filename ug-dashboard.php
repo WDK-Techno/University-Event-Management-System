@@ -18,6 +18,8 @@ $con = DBConnector::getConnection();
 if (isset($_SESSION['user_id'])) {
 
 
+
+
     $ugID = $_SESSION['user_id'];
 
     //    $club = new Club(null, null, null, null);
