@@ -4,12 +4,14 @@ require_once 'classes/DBConnector.php';
 require_once 'classes/Project.php';
 require_once 'classes/User.php';
 require_once 'classes/PublicFlyer.php';
+require_once 'classes/clubownerDashGetCount.php';
 
 use classes\DBConnector;
 use classes\Project;
 use classes\Club;
 use classes\Undergraduate;
 use classes\PublicFlyer;
+use classes\clubownerDashGetCount;
 
 
 $con = DBConnector::getConnection();
@@ -354,7 +356,14 @@ if (isset($_SESSION['user_id'])) {
                             <div class="row">
                                 <div class="col-8">
                                     <h4 class="title-text mt-0">Total members</h4>
-                                    <h3 class="font-weight-semibold mb-1" id="stat-count">1000</h3>
+                                    <h3 class="font-weight-semibold mb-1" id="stat-count">
+
+                                        <?php
+                                            $clubcount=new clubownerDashGetCount(null,null);
+                                            $clubcount->setClubId($clubid);
+                                            $clubcount->loadCountToClubOwnerDashboard($con);
+                                            echo  $clubcount->getUserCount();
+                                        ?></h3>
                                 </div>
                                 <!--end col-->
                                 <div class="col-4 text-center align-self-center">
@@ -370,7 +379,7 @@ if (isset($_SESSION['user_id'])) {
                             <div class="row">
                                 <div class="col-8">
                                     <h4 class="title-text mt-0">Ongoing Pro</h4>
-                                    <h3 class="font-weight-semibold mb-1" >3</h3>
+                                    <h3 class="font-weight-semibold mb-1" >3000</h3>
                                 </div>
                                 <!--end col-->
                                 <div class="col-4 text-center align-self-center">
@@ -386,7 +395,7 @@ if (isset($_SESSION['user_id'])) {
                             <div class="row">
                                 <div class="col-8">
                                     <h4 class="title-text mt-0">Complete</h4>
-                                    <h3 class="font-weight-semibold mb-1">10</h3>
+                                    <h3 class="font-weight-semibold mb-1">1000</h3>
                                 </div>
                                 <!--end col-->
                                 <div class="col-4 text-center align-self-center">
@@ -575,10 +584,6 @@ if (isset($_SESSION['user_id'])) {
                                                         <input type="datetime-local" name="flyerUpdateEndDate" class="form-control text-center"
                                                                onfocus="this.type='datetime-local'" onblur="this.type='text'"
                                                                value="<?= $publicFlyerObj->getEndDate() ?>">
-                                                    </div>
-                                                    <div class="row py-1">
-                                                        <!-- File input field for image upload -->
-                                                        <input type="file" name="flyerUpdateImage" accept="image/*">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
