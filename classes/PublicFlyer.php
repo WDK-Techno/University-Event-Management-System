@@ -233,6 +233,24 @@ class PublicFlyer
 
     public function saveChangesToDatabase($con){
 
+        try {
+            $query="UPDATE public_flyer SET start_date=?,end_date=?,caption=?,link=?,flyer_image=?,club_id=?,status=?,flyer_topic=? WHERE flyer_id=?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindvlue(1,$this->startDate);
+            $pstmt->bindvlue(2,$this->endDate);
+            $pstmt->bindvlue(3,$this->caption);
+            $pstmt->bindvlue(4,$this->link);
+            $pstmt->bindvlue(5,$this->flyerImg);
+            $pstmt->bindvlue(6,$this->clubID);
+            $pstmt->bindvlue(7,$this->status);
+            $pstmt->bindvlue(8,$this->flyerTopic);
+            $pstmt->bindvlue(9,$this->flyerID);
+            $pstmt->execute();
+            return $pstmt->rowCount() > 0;
+        } catch (PDOException $exc) {
+            die("Error in Update Database" . $exc->getMessage());
+        }
+
     }
 
 }

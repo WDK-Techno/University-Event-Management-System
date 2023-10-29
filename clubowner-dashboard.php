@@ -332,8 +332,14 @@ if (isset($_SESSION['user_id'])) {
                             <div class="row">
                                 <div class="col-8">
                                     <h4 class="title-text mt-0">Total projects</h4>
-                                    <h3 class="font-weight-semibold mb-1">24k</h3>
+
+                                    <h3 class="font-weight-semibold mb-1"><?php
+                                        $projects = Project::getProjectListFromClubID($con, $clubid); // Assuming $con and $clubId are defined.
+
+                                        echo count($projects);?>
+                                    </h3>
                                 </div>
+
                                 <!--end col-->
                                 <div class="col-4 text-center align-self-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M12.41 148.02l232.94 105.67c6.8 3.09 14.49 3.09 21.29 0l232.94-105.67c16.55-7.51 16.55-32.52 0-40.03L266.65 2.31a25.607 25.607 0 0 0-21.29 0L12.41 107.98c-16.55 7.51-16.55 32.53 0 40.04zm487.18 88.28l-58.09-26.33-161.64 73.27c-7.56 3.43-15.59 5.17-23.86 5.17s-16.29-1.74-23.86-5.17L70.51 209.97l-58.1 26.33c-16.55 7.5-16.55 32.5 0 40l232.94 105.59c6.8 3.08 14.49 3.08 21.29 0L499.59 276.3c16.55-7.5 16.55-32.5 0-40zm0 127.8l-57.87-26.23-161.86 73.37c-7.56 3.43-15.59 5.17-23.86 5.17s-16.29-1.74-23.86-5.17L70.29 337.87 12.41 364.1c-16.55 7.5-16.55 32.5 0 40l232.94 105.59c6.8 3.08 14.49 3.08 21.29 0L499.59 404.1c16.55-7.5 16.55-32.5 0-40z"/></svg>
@@ -536,7 +542,7 @@ if (isset($_SESSION['user_id'])) {
                             </button>
 
                             <!----------------- Modal for flyer ------------------>
-                            <div class="modal fade" id="editflyer<?= $flyerno?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="editflyer<?= $flyerno?>" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header" style=" color: var(--lighter-secondary) !important; background-color: var(--primary);">
@@ -546,42 +552,37 @@ if (isset($_SESSION['user_id'])) {
                                         <div class="modal-body">
                                             <form method="post" action="process/clubownerdashboard/editFlyer.php">
                                                 <input type="hidden" name="menuNo" value="4">
-                                                <input type="hidden" name="flyerId" value="<?= $publicFlyerObj->getFlyerID()?>">
+                                                <input type="hidden" name="flyerId" value="<?= $publicFlyerObj->getFlyerID() ?>">
+                                                <input type="hidden" name="clubId" value="<?= $publicFlyerObj->getClubID() ?>">
 
                                                 <div class="container">
                                                     <div class="row py-1">
-                                                        <input type="text" name="flyerUpdateTopic" class="form-control text-center"  placeholder="<?= $publicFlyerObj->getFlyerTopic()?>">
+                                                        <input type="text" name="flyerUpdateTopic" class="form-control text-center" value="<?= $publicFlyerObj->getFlyerTopic() ?>">
                                                     </div>
                                                     <div class="row py-1">
-                                                        <input type="text" name="flyerUpdateCaption" class="form-control text-center" rows="2" placeholder="<?= $publicFlyerObj->getCaption()?>">
+                                                        <input type="text" name="flyerUpdateCaption" class="form-control text-center" rows="2" value="<?= $publicFlyerObj->getCaption() ?>">
                                                     </div>
                                                     <div class="row py-1">
-                                                        <input type="text" name="flyerUpdateLink" class="form-control text-center"  placeholder="<?= $publicFlyerObj->getLink()?>">
+                                                        <input type="text" name="flyerUpdateLink" class="form-control text-center" value="<?= $publicFlyerObj->getLink() ?>">
                                                     </div>
                                                     <div class="row py-1">
-                                                        <input type="datetime-local" name="flyerUpdateStartdate" class="form-control"  placeholder="<?= $publicFlyerObj->getStartDate()?>">
+                                                        <input type="datetime-local" name="flyerUpdateStartDate" class="form-control text-center"
+                                                               onfocus="this.type='datetime-local'" onblur="this.type='text'"
+                                                               id="date" value="<?= $publicFlyerObj->getStartDate() ?>">
                                                     </div>
                                                     <div class="row py-1">
-                                                        <input type="datetime-local" name="flyerUpdateSEnddate" class="form-control"  placeholder="<?= $publicFlyerObj->getEndDate()?>">
+                                                        <input type="datetime-local" name="flyerUpdateEndDate" class="form-control text-center"
+                                                               onfocus="this.type='datetime-local'" onblur="this.type='text'"
+                                                               value="<?= $publicFlyerObj->getEndDate() ?>">
                                                     </div>
-                                                    <div class="row">
-                                                        <?= $publicFlyerObj->getEndDate()?>
-                                                    </div>
-
-
                                                 </div>
-
-
-
-
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" name="submit" class="btn" style="color: var(--accent-color2)!important;background-color: var(--primary);">Save changes</button>
+                                                </div>
+                                            </form>
 
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn" style="color: var(--accent-color2)!important;background-color: var(--primary);">Save changes</button>
-                                        </div>
-                                        </form>
-                                    </div>
                                 </div>
                             </div>
 
