@@ -556,6 +556,7 @@ if (isset($_SESSION['user_id'])) {
                                                 <input type="hidden" name="clubId" value="<?= $publicFlyerObj->getClubID() ?>">
 
                                                 <div class="container">
+
                                                     <div class="row py-1">
                                                         <input type="text" name="flyerUpdateTopic" class="form-control text-center" value="<?= $publicFlyerObj->getFlyerTopic() ?>">
                                                     </div>
@@ -575,6 +576,10 @@ if (isset($_SESSION['user_id'])) {
                                                                onfocus="this.type='datetime-local'" onblur="this.type='text'"
                                                                value="<?= $publicFlyerObj->getEndDate() ?>">
                                                     </div>
+                                                    <div class="row py-1">
+                                                        <!-- File input field for image upload -->
+                                                        <input type="file" name="flyerUpdateImage" accept="image/*">
+                                                    </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -590,15 +595,12 @@ if (isset($_SESSION['user_id'])) {
                     </div>
 
 
-
-
-
-
             <?php
                     $flyerno++;
             }
             ?>
 
+            </div>
             </div>
 
 
@@ -807,6 +809,7 @@ if (isset($_SESSION['user_id'])) {
 
     <!-- ====== Script files ===== -->
     <script src="assets/js/clubownerdashboard.js"></script>
+
 
     </body>
     </html>
