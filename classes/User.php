@@ -473,6 +473,29 @@ class Club extends User
             die("Error in update data to DB " . $exc->getMessage());
         }
     }
+    public function loadDataFromCategoryID($con)
+    {
+
+        $query = "SELECT * FROM club INNER JOIN user ON club.user_id = user.user_id WHERE user.user_id =?";
+        $pstmt = $con->prepare($query);
+        $pstmt->bindValue(1, $this->user_id);
+        $pstmt->execute();
+        $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
+        if (!empty($rs)) {
+            $this->username = $rs->user_name;
+            $this->role = $rs->role;
+            $this->status = $rs->status;
+            $this->clubName = $rs->name;
+            $this->contactNo = $rs->contact_no;
+            $this->registerDate = $rs->register_date;
+            $this->profileImage = $rs->profile_image;
+            $this->clubDescription = $rs->description;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 }

@@ -53,13 +53,20 @@ $projectChair->loadDataFromUserID($con);
 
 //Get Team Category List
 $teamCategories = TeamCategory::getTeamCategoeryListFromProjectID($con, $project->getProjectID());
-$teamDesigners = TeamMember::getTeamMembersByCategoryID($con, 1);
+$teamDesigners = TeamMember::getTeamMembersByCategoryID($con, 11);
 $teamCaptionWritters = TeamMember::getSecrataryMembersByCategoryID($con, 2);
 
 //Get Events List
 $events = Event::getEventListFromProjectID($con, $project->getProjectID());
 
 $teamMembers = TeamMember::getMemberListFromProjectID($con, $project->getProjectID());
+
+//Get Project List
+$projects = Project::getProjectList($con);
+
+//Get Task List
+$PRTasks = PRTask::getTaskListFromProjectID($con);
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $selected_menuNo = 7;
@@ -566,7 +573,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                              role="document">
                             <div class="modal-content">
                                 <!--=== form =====-->
-                                <form>
+                                <form action="process/projectdashboard/addNewTask.php" method="POST">
                                     <div class="modal-header py-2 px-2"
                                          style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
                                         <div class="d-flex flex-row w-100 justify-content-between">
@@ -602,34 +609,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                         </div>
                                         <!-- ===== select team ======= -->
                                         <div class="d-flex mt-2 px-5">
-                                            <select id="add-member-team-select" class="form-select ms-auto me-0"
+                                            <select id="project_id" class="form-select ms-auto me-0"
                                                     style="width: 50%;"
-                                                    name="project_team_id" id="" required>
+                                                    name="project_id" id="project_id" required>
+                                                <option class="text-center" value="" selected>-- Project
+                                                    --
+                                                </option>
+                                                <?php
+                                                foreach ($projects as $project) {
+                                                    ?>
+                                                    <option value="<?=  $project->getProjectID() ?>"><?= $project->getProjectName() ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                            <select id="designer_id" class="form-select ms-auto me-0"
+                                                    style="width: 50%;"
+                                                    name="designer_id" id="" required>
                                                 <option class="text-center" value="" selected>-- Select Designer --
                                                 </option>
                                                 <?php
                                                 foreach ($teamDesigners[0] as $teamDesigner) {
                                                     ?>
-                                                    <option value="<?=  htmlspecialchars($teamDesigner['user_id']) ?>"><?=  htmlspecialchars($teamDesigner['first_name']) ?></option>
+                                                    <option value="<?=  htmlspecialchars($teamDesigner['user_id']) ?>"><?=  htmlspecialchars($teamDesigner['first_name']), $teamDesigner['last_name'] ?></option>
                                                     <?php
                                                 }
                                                 ?>
                                             </select>
 
-                                            <select id="add-member-team-select" class="form-select ms-auto me-0"
+                                            <select id="caption_writer_id" class="form-select ms-auto me-0"
                                                     style="width: 50%;"
-                                                    name="project_team_id" id="" required>
+                                                    name="caption_writer_id" id="" required>
                                                 <option class="text-center" value="" selected>-- Select Caption Writter
                                                     --
                                                 </option>
                                                 <?php
                                                 foreach ($teamCaptionWritters[0] as $teamCaptionWritter) {
                                                     ?>
-                                                    <option value="<?=  htmlspecialchars($teamCaptionWritter['user_id']) ?>"><?=  htmlspecialchars($teamCaptionWritter['first_name']) ?></option>
+                                                    <option value="<?=  htmlspecialchars($teamCaptionWritter['user_id']) ?>"><?=  htmlspecialchars($teamCaptionWritter['first_name']), $teamCaptionWritter['last_name'] ?></option>
                                                     <?php
                                                 }
                                                 ?>
                                             </select>
+
                                         </div>
                                         <div class="mt-2 text-center" id="add-member-team-error"
                                              style="color: var(--accent-color3)"></div>
@@ -641,8 +663,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                 data-bs-dismiss="modal">
                                             Close
                                         </button>
-                                        <button type="button"
-                                                onclick="addMemberToProject()"
+                                        <button type="submit"
+                                                name="submit"
                                                 class="btn fw-bold"
                                                 style="background-color: var(--secondary); color: var(--primary);">
                                             ADD
@@ -702,18 +724,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                              style="background-color: var(--secondary);">
                             <div class="container p-0 scrollable-div-inside">
 
-                                <!--                                        --><?php
-                                //                                        $teamMemberNo = 1;
-                                //                                        foreach ($teamMembers as $teamMember) {
-                                //
-                                //                                            $projectMember = new Undergraduate(null, null, null, null, null, null);
-                                //                                            $projectMember->setUserId($teamMember->getUgID());
-                                //                                            $projectMember->loadDataFromUserID($con);
-                                //
-                                //                                            $projectMemberTeam = new TeamCategory($teamMember->getCategoryID(), null, null, null);
-                                //                                            $projectMemberTeam->loadDataByTeamID($con);
-                                //
-                                //                                            ?>
+                                <?php
+                                foreach ($PRTasks as $PRTask) {
+                                    $PRTask = new PRTask($PRTask->getprID(),null,null,$PRTask->gettopic(),$PRTask->getdescription(),$PRTask->getdesignerID(),$PRTask->gettopic(),null,$PRTask->getcaptionWriterID(),null,null,null,$PRTask->getprojectID(),null);
+                                }
+                                ?>
                                 <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
 
                                     <div class="col-1 tabel-column-type-1 d-flex">
@@ -741,7 +756,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                         <input type="checkbox" name="verify" value="verify">
                                     </div>
                                     <div class="col-1 d-flex tabel-column-type-1">
-
+                                        <ion-icon class="my-auto" type="button"
+                                                  data-bs-toggle="modal"
+                                                  data-bs-target="#delete-project-member-<?= $teamMemberNo ?>"
+                                                  name="trash-outline"></ion-icon>
                                     </div>
 
                                     <div class="col-1 tabel-column-type-1 d-flex">

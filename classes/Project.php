@@ -246,5 +246,30 @@ class Project
 
         return $projects;
     }
+    public static function getProjectList($con){
+
+        $projects = array();
+        try {
+
+            $query = "SELECT * FROM project";
+            $pstmt = $con->prepare($query);
+            $pstmt->execute();
+            $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
+            if (!empty($rs)) {
+
+                foreach ($rs as $row) {
+                    $project = new Project($row->project_id, $row->name,
+                        $row->club_id, $row->project_chair_id, $row->status, $row->start_date, $row->profile_image);
+                    $projects[] = $project;
+                }
+
+            }
+        } catch (PDOException $exc) {
+            die("Error in Database Loading" . $exc->getMessage());
+        }
+
+        return $projects;
+    }
+
 
 }
