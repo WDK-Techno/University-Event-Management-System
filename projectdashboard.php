@@ -21,7 +21,6 @@ if (!isset($_SESSION['project_id'])) {
     header("location: clubowner-dashboard.php");
 }
 $projectIDFromSession = $_SESSION['project_id'];
-
 $loggedUserID = $_SESSION['user_id'];
 $loggedUserRole = $_SESSION['role'];
 $loggedUserImg = $_SESSION['profile_img'];
@@ -531,6 +530,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             </div>
         </div>
     </div>
+
     <div id="menu-content-3" class="main-content hide">
 <!--        <h1>Content 3</h1>-->
         <?php include_once "content/GrantChart.php" ?>

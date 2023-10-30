@@ -1,18 +1,24 @@
 <?php
 
-$host = "localhost";
-$port = 3306;
-$username = "root";
-$password = "";
-$database = "gantt_test";
+//$host = "localhost";
+//$port = 3306;
+//$username = "root";
+//$password = "";
+//$database = "gantt_test";
+//
+//$db = new PDO("mysql:host=$host;port=$port",
+//               $username,
+//               $password);
+//$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//
+//$db->exec("CREATE DATABASE IF NOT EXISTS `$database`");
+//$db->exec("use `$database`");
 
-$db = new PDO("mysql:host=$host;port=$port",
-               $username,
-               $password);
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+require_once "../classes/DBConnector.php";
 
-$db->exec("CREATE DATABASE IF NOT EXISTS `$database`");
-$db->exec("use `$database`");
+use \classes\DbConnector;
+
+$db = DbConnector::getConnection();
 
 function tableExists($dbh, $id)
 {
@@ -58,7 +64,7 @@ date_default_timezone_set("UTC");
 
 function db_get_max_ordinal($parent) {
     global $db;
-    $str = "SELECT max(ordinal) FROM task WHERE parent_id = :parent";
+    $str = "SELECT max(ordinal) FROM main_task WHERE parent_id = :parent";
     if ($parent == null) {
         $str = str_replace("= :parent", "is null", $str);
         $stmt = $db->prepare($str);
@@ -74,7 +80,7 @@ function db_get_max_ordinal($parent) {
 function db_get_task($id) {
     global $db;
 
-    $str = "SELECT * FROM task WHERE id = :id";
+    $str = "SELECT * FROM main_task WHERE main_task_id = :id";
     $stmt = $db->prepare($str);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
@@ -86,7 +92,7 @@ function db_update_task_parent($id, $parent, $ordinal) {
 
     $now = (new DateTime("now"))->format('Y-m-d H:i:s');
 
-    $str = "UPDATE task SET parent_id = :parent, ordinal = :ordinal, ordinal_priority = :priority WHERE id = :id";
+    $str = "UPDATE main_task SET parent_id = :parent, ordinal = :ordinal, ordinal_priority = :priority WHERE main_task_id = :id";
     $stmt = $db->prepare($str);
     $stmt->bindParam(":id", $id);
     $stmt->bindParam(":parent", $parent);
@@ -109,7 +115,7 @@ function db_update_task_ordinal($id, $ordinal) {
 
     $now = (new DateTime("now"))->format('Y-m-d H:i:s');
 
-    $str = "UPDATE task SET ordinal = :ordinal, ordinal_priority = :priority WHERE id = :id";
+    $str = "UPDATE main_task SET ordinal = :ordinal, ordinal_priority = :priority WHERE main_task_id = :id";
     $stmt = $db->prepare($str);
     $stmt->bindParam(":id", $id);
     $stmt->bindParam(":ordinal", $ordinal);
@@ -120,7 +126,7 @@ function db_update_task_ordinal($id, $ordinal) {
 function db_update_task($id, $start, $end) {
     global $db;
 
-    $str = "UPDATE task SET start = :start, end = :end WHERE id = :id";
+    $str = "UPDATE main_task SET start_date = :start, end_date = :end WHERE main_task_id = :id";
     $stmt = $db->prepare($str);
     $stmt->bindParam(":id", $id);
     $stmt->bindParam(":start", $start);
@@ -131,7 +137,7 @@ function db_update_task($id, $start, $end) {
 function db_update_task_full($id, $start, $end, $name, $complete) {
     global $db;
 
-    $str = "UPDATE task SET start = :start, end = :end, name = :name, complete = :complete WHERE id = :id";
+    $str = "UPDATE main_task SET start_date = :start, end_date = :end, main_task_name = :name, complete = :complete WHERE main_task_id = :id";
     $stmt = $db->prepare($str);
     $stmt->bindParam(":id", $id);
     $stmt->bindParam(":start", $start);
@@ -144,7 +150,7 @@ function db_update_task_full($id, $start, $end, $name, $complete) {
 function db_get_tasks($parent) {
     global $db;
 
-    $str = 'SELECT * FROM task WHERE parent_id = :parent ORDER BY ordinal, ordinal_priority desc';
+    $str = 'SELECT * FROM main_task WHERE parent_id = :parent ORDER BY ordinal, ordinal_priority desc';
     if ($parent == null) {
         $str = str_replace("= :parent", "is null", $str);
         $stmt = $db->prepare($str);

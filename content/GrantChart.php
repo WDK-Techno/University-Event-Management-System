@@ -9,8 +9,9 @@
 <script>
 
     const dp = new DayPilot.Gantt("dp");
-    dp.startDate = new DayPilot.Date("2023-08-05");
-    dp.days = 100;
+    dp.startDate = new DayPilot.Date("<?= $project->getStartDate() ?>");
+<!--    --><?php //$days = strtotime($project->getEndDate()) - strtotime($project->getStartDate()) ?>
+    dp.days =100;
     dp.linkBottomMargin = 5;
     dp.rowCreateHandling = 'Enabled';
     dp.linkCreateHandling = "Disabled";
@@ -56,7 +57,8 @@
         const data = {
             name: args.text,
             start: dp.startDate,
-            end: dp.startDate.addDays(3)
+            end: dp.startDate.addDays(3),
+            project_id: <?= $project->getProjectID() ?>
         };
         await DayPilot.Http.post("GrantChart/gantt_task_create.php", data);
         loadTasks();
@@ -69,6 +71,7 @@
             id: args.task.id(),
             start: args.newStart,
             end: args.newEnd
+
         };
 
         await DayPilot.Http.post("GrantChart/gantt_task_move.php", data);
