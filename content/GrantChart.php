@@ -10,8 +10,11 @@
 
     const dp = new DayPilot.Gantt("dp");
     dp.startDate = new DayPilot.Date("<?= $project->getStartDate() ?>");
-<!--    --><?php //$days = strtotime($project->getEndDate()) - strtotime($project->getStartDate()) ?>
-    dp.days =100;
+    <?php
+        $diff = strtotime(strval($project->getEndDate())) - strtotime(strval($project->getStartDate()));
+        $days = abs(round($diff/86400));
+    ?>
+    dp.days =<?=intval($days)?>;
     dp.linkBottomMargin = 5;
     dp.rowCreateHandling = 'Enabled';
     dp.linkCreateHandling = "Disabled";
