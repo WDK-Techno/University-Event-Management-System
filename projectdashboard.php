@@ -64,9 +64,6 @@ $teamMembers = TeamMember::getMemberListFromProjectID($con, $project->getProject
 //Get Project List
 $projects = Project::getProjectList($con);
 
-//Get Task List
-$PRTasks = PRTask::getTaskListFromProjectID($con);
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $selected_menuNo = 7;
