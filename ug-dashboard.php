@@ -228,6 +228,8 @@ if (isset($_SESSION['user_id'])) {
                             $project = new Project($subTaskObj->getProjectID(), null, null, null, null, null, null);
                             $project->loadDataFromProjectID($con);
                             ?>
+
+                            <form action="process/ug-dashboard/editTask_compleat.php" method="post">
                             <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
                                 <div class="col-1 d-flex tabel-column-type-2">
                                     <div class="my-auto">
@@ -247,8 +249,8 @@ if (isset($_SESSION['user_id'])) {
                                     <div class="my-auto mx-auto"><?=$subTaskObj->getDeadline() ?></div>
                                 </div>
                                 <div class="col-2 d-flex tabel-column-type-2">
-                                    <div class="my-auto mx-auto"><input type="checkbox" id="cheak" name="vehicle1"
-                                                                        value="finished"></i></div>
+                                    <div class="my-auto mx-auto"><input type="checkbox" id="cheak" name="checkTask"
+                                                                        value="finished"></div>
                                 </div>
                                 <div class="col-1 tabel-column-type-1 d-flex">
                                     <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
@@ -261,10 +263,15 @@ if (isset($_SESSION['user_id'])) {
                                     </div>
                                 </div>
                             </div>
+
                             <?php
 
                         }
                         ?>
+                                <div>
+                                    <button class="update-button" type="submit">Update</button>
+                                </div>
+                            </form>
                         <!--                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px; background-color:#A3A2EC;">-->
                         <!--                                            <div class="col-1 d-flex tabel-column-type-2">-->
                         <!--                                                <div class="my-auto">-->
