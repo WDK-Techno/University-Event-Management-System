@@ -63,25 +63,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     <!-- ======= Main Content ====== -->
     <div class="w-100" style="height: 100vh;">
-        <div class="container"
+        <div class="container "
              style="position:absolute; left:0; right:0; top: 55%; transform: translateY(-50%); -ms-transform: translateY(-50%); -moz-transform: translateY(-50%); -webkit-transform: translateY(-50%); -o-transform: translateY(-50%);">
-            <div class="row justify-content-center">
-                <div class="col-md-7 col-lg-6 col-xl-6 col-xxl-4">
-                    <div class="card shadow-lg o-hidden border-0 my-5">
-                        <div class="card-body p-0">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="p-5 bg-transparent">
+            <div class="row justify-content-center ">
+                <div class="col-md-7 col-lg-6 col-xl-6 col-xxl-4 ">
+                    <div class="card shadow-lg ">
+                        <div class="card-body p-0 ">
+                            <div class="row ">
+                                <div class="col-lg-12 ">
+                                    <div class="p-4">
                                         <div class="text-center">
                                             <h4 class="text-dark mb-4">User Login</h4>
                                         </div><!-- Start: Login Form -->
                                         <form action="process/login.php" method="post" class="user">
-                                            <div class="mb-3">
-                                                <input class="form-control form-control-user" type="email"
+                                            <div class="mb-3 mx-2">
+                                                <input class="form-control form-control-user"  type="email"
                                                        id="email" aria-describedby="emailHelp"
                                                        placeholder="Enter Email Address" name="username" required="">
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-3 mx-2">
                                                 <input class="form-control form-control-user" type="password"
                                                        placeholder="Password" name="password" required="">
                                             </div>

@@ -15,8 +15,7 @@ if (isset($_POST['submit'])) {
 
     $event = new Event($eventId,null,null ,null, null, null,"active");
     $event->loadDataFromeventId($con);
-    $event->setStatus("delete");
-    $result = $event->saveChangesToDataBase($con);
+    $result = $event->deleteEvenet($con);
 
     if ($result) {
         header("location: ../../projectdashboard.php?tab={$selectedMenuNo}");

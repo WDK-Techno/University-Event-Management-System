@@ -15,8 +15,12 @@ if (isset($_POST['submit'],$_POST['name'])){
         $eventName = $_POST['name'];
         $eventId = $_POST['event_id'];
         $eventDescription = $_POST['description'];
-        $eventStartDate = $_POST['event_start_date'];
-        $eventEndDate = $_POST['event_end_date'];
+        $eventDate = $_POST['event_date'];
+        $eventStartTime = $_POST['event_start_time'];
+        $eventEndTime = $_POST['event_end_time'];
+
+        $eventStartDate = $eventDate." ".$eventStartTime;
+        $eventEndDate = $eventDate." ".$eventEndTime;
 
         $event = new Event($eventId,null,null,null,null, null, null);
         $event->loadDataFromeventId($con);

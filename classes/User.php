@@ -305,6 +305,14 @@ class Undergraduate extends User
 
     }
 
+    public function getUndergraduates($con){
+        $query = "SELECT u.user_id,u.user_name,ug.first_name,ug.last_name,ug.contact_no,ug.profile_image,u.status FROM user u JOIN undergraduate ug ON u.user_id = ug.user_id";
+        $pstmt = $con->prepare($query);
+        $pstmt->execute();
+        $rs = $pstmt->fetchAll(\PDO::FETCH_OBJ);
+        return $rs;
+    }
+
 
 }
 
@@ -473,6 +481,32 @@ class Club extends User
             die("Error in update data to DB " . $exc->getMessage());
         }
     }
+
+    public function getClubs($con){
+        $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no,u.status,club.profile_image,club.description FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'active' || status = 'deactive' ";
+        $pstmt = $con->prepare($query);
+        $pstmt->execute();
+        $rs = $pstmt->fetchAll(\PDO::FETCH_OBJ);
+        return $rs;
+    }
+
+    public function getRequests($con){
+    $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no,club.register_date FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'new'";
+    $pstmt = $con->prepare($query);
+    $pstmt->execute();
+    $rs = $pstmt->fetchAll(\PDO::FETCH_OBJ);
+    return $rs;
+    }
+
+    public function getRowCount($con){
+    $query = "SELECT * FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'new'";
+    $pstmt = $con->prepare($query);
+    $pstmt->execute();
+    $rs = $pstmt->fetchAll(\PDO::FETCH_OBJ);
+    $count = $pstmt->rowCount();
+    return $count;
+    }
+
 
     
 

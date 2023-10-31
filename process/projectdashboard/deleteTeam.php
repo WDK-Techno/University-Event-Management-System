@@ -14,9 +14,7 @@ if (isset($_POST['submit'])) {
     $teamCatID = $_POST['category_id'];
 
     $teamCat = new TeamCategory($teamCatID, null, null, null);
-    $teamCat->loadDataByTeamID($con);
-    $teamCat->setStatus("delete");
-    $result = $teamCat->updateChanges($con);
+    $result = $teamCat->deleteTeamCategory($con);
 
     if ($result) {
         header("location: ../../projectdashboard.php?tab={$selectedMenuNo}");

@@ -1,12 +1,22 @@
 <?php
-use classes\Admin;
-
-require_once '../../classes/admin.php';
+require_once '../../classes/User.php';
 require_once '../../classes/DBConnector.php';
+use classes\DBConnector;
+use classes\Club;
 
-if (isset($_POST["user_id"])) {
+
+if ($_SERVER["REQUEST_METHOD"] === "POST"){
+    if(isset($_POST["user_id"])){
     $user_id = $_POST["user_id"];
-    $userObj = new \classes\Admin();
-    $userObj->declineRequest($user_id);
-    header("Location:../../superadmindashboard.php");
+    $con = DBConnector::getConnection();
+    
+    // echo $user_id;
+    $club = new Club('','','','');
+    $club->setUserId($user_id);
+    // $undergraduate->ugdelete($con);
+    $club->loadDataFromUserID($con);
+    $club->setStatus("delete");
+    $rs = $club->saveUserChangesToDataBase($con);
+    header("Location:../../superadmindashboard.php?tab=3");
+    }
 }

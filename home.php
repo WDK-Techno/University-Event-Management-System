@@ -1,11 +1,11 @@
 <?php
 require_once "classes/DBConnector.php";
 require_once "classes/Event.php";
-
-//require_once('db-connect.php');
+require_once "classes/User.php";
 
 use classes\DBConnector;
 use classes\Event;
+use classes\Club;
 
 $con = DBConnector::getConnection();
 $query = "SELECT * FROM event";
@@ -52,9 +52,7 @@ if (!empty($rs)) {
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
-    <script src="./assets/js/jquery-3.6.0.min.js"></script>
-    <script src="./assets/js/bootstrap.min.js"></script>
-    <script src="./fullcalendar/lib/main.min.js"></script>
+
 </head>
 
 <body>
@@ -67,30 +65,32 @@ if (!empty($rs)) {
           <span class="navbar-toggler-icon"></span>
         </button> -->
         <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
-        <div class="" id="navbarSupportedContent">
+        <div class="d-flex" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <!-- <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li> -->
             </ul>
-            <form class="d-flex">
+
+            <a href="register.php" class="d-flex" style="text-decoration: none">
                 <button class="btn btn-outline-secondary d-flex align-items-center" type="submit"><Span
                             class="d-none d-lg-inline pe-2">SignUp</Span>
-                    <ion-icon style="font-size: 1.0rem;;"
-                              name=" person-add-outline"></ion-icon>
+                    <ion-icon style="font-size: 1.0rem;" name="person-add-outline"></ion-icon>
                 </button>
+            </a>
+            <a href="login.php" class="d-flex" style="text-decoration: none">
                 <button class="btn btn-outline-primary ms-2 d-flex align-items-center" type="submit"><Span
                             class="d-none d-lg-inline-block pe-2">LogIn</Span>
                     <ion-icon style="font-size: 1.5rem;" name="log-in-outline"></ion-icon>
                 </button>
-            </form>
+            </a>
         </div>
     </div>
 </nav>
 
 <!-- ======= Main Content ====== -->
 <div>
-    <div class="container">
+    <div class="container m-0">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -110,42 +110,43 @@ if (!empty($rs)) {
                                 </div>
                             </div>
                         </div>
-                        <!-- Event Details Modal -->
-                        <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal"
-                             aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content rounded-0">
-                                    <div class="modal-header rounded-0">
-                                        <h5 class="modal-title">Schedule Details</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body rounded-0">
-                                        <div class="container-fluid">
-                                            <dl>
-                                                <dt class="text-muted">Title</dt>
-                                                <dd id="title" class="fw-bold fs-4"></dd>
-                                                <dt class="text-muted">Description</dt>
-                                                <dd id="description" class=""></dd>
-                                                <dt class="text-muted">Start</dt>
-                                                <dd id="start" class=""></dd>
-                                                <dt class="text-muted">End</dt>
-                                                <dd id="end" class=""></dd>
-                                            </dl>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer rounded-0">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Event Details Modal -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Event Details Modal -->
+    <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-0">
+                <div class="modal-header rounded-0">
+                    <h5 class="modal-title">Schedule Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body rounded-0">
+                    <div class="container-fluid">
+                        <dl>
+                            <!--                            <dt class="text-muted">Title</dt>-->
+                            <!--                            <dd id="title" class="fw-bold fs-4"></dd>-->
+                            <dt class="text-muted">Description</dt>
+                            <dd id="description" class=""></dd>
+                            <dt class="text-muted">Start</dt>
+                            <dd id="start" class=""></dd>
+                            <dt class="text-muted">End</dt>
+                            <dd id="end" class=""></dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="modal-footer rounded-0">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Event Details Modal -->
 
     <!-- <div class="container3-fluid py-6 mb-6"> -->
     <div class="container p-5">
@@ -157,48 +158,60 @@ if (!empty($rs)) {
             <div class="carousel-inner justify-content-center">
                 <div class="carousel-item active">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4" style="height: 500px; width: 400px">
+                        <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
-                                <div class="box front  w-100">
+                                <div class="box front ">
                                     <img alt="" src="assets/images/homepage/f1.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         IEEE is a leader in engineering and technology education, providing resources
                                         for pre-university,
                                         university, and continuing professional education.
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn "
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 400px">
+                        <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front ">
                                     <img alt="" src="assets/images/homepage/f2.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         Students of Faculty of Management annually organize “ENM Trophy Cricket
                                         Encounter” inviting the
                                         students of fellow degree programs of the University.
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-success"
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 400px">
+                        <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f3.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         Students of Animal Science degree program annually organize “ANS Trophy Football
                                         Tournament”
                                         inviting the students of fellow degree programs of the University.
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-success"
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -206,48 +219,60 @@ if (!empty($rs)) {
                 </div>
                 <div class="carousel-item">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4" style="height: 500px; width: 400px">
+                        <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f4.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         Empowering of Youth as Agri-Entrepreneurs Faculty of Animal Science and Export
                                         Agriculture, Uva
                                         Wellassa University.
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-success"
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 400px">
+                        <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f5.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         The Faculty of Applied Sciences of Uva Wellassa University of Sri Lanka (UWU) is
                                         organizing UWU EXPO.
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-success"
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4" style="height: 500px; width: 400px">
+                        <div class="col-md-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f6.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         UBL Cell is organizing a Business Plan Competition to identify potential
                                         undergraduate entrepreneurs
                                         who have realistic business ideas and to assist them to grow up as sustainable
                                         entrepreneurs
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-success"
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -255,49 +280,61 @@ if (!empty($rs)) {
                 </div>
                 <div class="carousel-item">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4" style="height: 500px; width: 400px">
+                        <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f7.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         A workshop on “How to start your own business?” was conducted at the university
                                         on 20th Wednesday
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-success"
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 400px">
+                        <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/f8.jpg">
                                 </div>
-                                <div class="box back">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         The LAN Challenge is an annual gaming extravagance commemorating its fifth
                                         chapter in 2023. Since
                                         the challenge has brought together epic gamers in the Uva Wellassa
                                         student community.
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-success"
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4" style="height: 500px; width: 400px">
+                        <div class="col-lg-4" style="height: 450px; width: 400px">
                             <div class="card h-100">
                                 <div class="box front">
                                     <img alt="" src="assets/images/homepage/aurora.png">
                                 </div>
-                                <div class="box back">
+                                <div class="box back"
+                                     style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                     <p>
                                         The Aurora is always a highly anticipated event on UWU’s annual event calendar
                                         hosted by students of
                                         Department of Animal Science under the guidance of Academic staff, Department of
                                         Animal Science.
                                     </p>
-                                    <button class="btn btn-success">Register</button>
+                                    <button class="btn btn-success"
+                                            style="color: var(--lighter-secondary) !important;; background-color: var(--accent-color2);">
+                                        Register
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -406,12 +443,45 @@ if (!empty($rs)) {
         </div>
     </div>
 </div>
+<div class="p-4">
+    <h1 class="heading p-3">Our Clubs</h1>
+
+    <div class="d-flex flex-column justify-content-center align-items-center" style="height: 200px;">
+        <div class="w-75" style="overflow-y: scroll; overflow-x: hidden;">
+            <?php
+            $sql = "SELECT * FROM club";
+            $pstmt = $con->query($sql);
+            while ($row = $pstmt->fetch(PDO::FETCH_ASSOC)) {
+                $club = new Club(null, null, null, null);
+                $club->setUserId($row['user_id']);
+                $club->loadDataFromUserID($con);
+                if ($club->getStatus() !== "delete") {
+
+                    echo '<div class = "postcard rounded p-3 m-3 shadow-sm" style="background-color: #c0c0c069;align-items: center;text-align: center">
+        <h2 class="postcard__title blue text-primary fw-bold">' . $row['name'] . '</h2>
+        <div class="d-flex justify-content-center align-items-center p-2">
+         <i class="fa-solid fa-phone fa-lg pe-2 text-success"></i> 
+        <span>' . $row['contact_no'] . '</span>
+        </div>
+        <h4>' . $row['description'] . '</h4>
+        <h4 class="font-monospace small fst-italic"> Registed on: ' . $row['register_date'] . '</h4>
+        </div>';
+                }
+            }
+            ?>
+
+
+        </div>
+    </div>
+
+
+</div>
 <h1 class="heading">Our Team</h1>
 <div class="row row-cols-1 row-cols-md-5 g-4 p-5">
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
             <img src="assets/images/homepage/kavindra.jpg" class="card-img-top position-sticky "
-                 style="width: 290px;height: 330px" alt="...">
+                 style="width: 290px;height: 330px; object-fit: cover" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Kavindra Weerasingha</h5>
                 <p class="card-text">UWU/CST/20/068</p>
@@ -427,7 +497,7 @@ if (!empty($rs)) {
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
             <img src="assets/images/homepage/heli.jpg" class="card-img-top position-sticky"
-                 style="width: 290px;height: 330px" alt="...">
+                 style="width: 290px;height: 330px; object-fit: cover" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Kavinda Helitha</h5>
                 <p class="card-text">UWU/CST/20/070</p>
@@ -443,7 +513,7 @@ if (!empty($rs)) {
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
             <img src="assets/images/homepage/anuranga.jpg" class="card-img-top position-sticky"
-                 style="width: 290px;height: 330px" alt="...">
+                 style="width: 290px;height: 330px; object-fit: cover" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Anuranga</h5>
                 <p class="card-text">UWU/CST/20/085</p>
@@ -459,7 +529,7 @@ if (!empty($rs)) {
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
             <img src="assets/images/homepage/ishara.jpg" class="card-img-top position-sticky"
-                 style="width: 290px;height: 330px" alt="...">
+                 style="width: 290px;height: 330px; object-fit: cover" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Ishara Suvini</h5>
                 <p class="card-text">UWU/CST/20/087</p>
@@ -475,7 +545,7 @@ if (!empty($rs)) {
     <div class="col d-flex justify-content-center">
         <div class="card-profile d-flex flex-column justify-content-center">
             <img src="assets/images/homepage/thilini.jpg" class="card-img-top position-sticky"
-                 style="width: 290px;height: 330px" alt="...">
+                 style="width: 290px;height: 330px; object-fit: cover" alt="...">
             <div class="card-profile-body">
                 <h5 class="card-title">Thilini Priyangika</h5>
                 <p class="card-text">UWU/CST/20/089</p>
@@ -490,12 +560,19 @@ if (!empty($rs)) {
     </div>
 
 </div>
+<script src="./fullcalendar/lib/main.min.js"></script>
+<script src="./assets/js/jquery-3.6.0.min.js"></script>
+<script src="./assets/js/bootstrap.min.js"></script>
 <!-- =====back to top button====-->
-<a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top border border-dark" role="button"><i class="fas fa-chevron-up"></i></a>
+<a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top border border-dark" role="button"><i
+            class="fas fa-chevron-up"></i></a>
 <!-- ======== Footer ======== -->
 <?php include('content/footer.php') ?>
 
-
+<!--=== pre loader ===-->
+<?php include_once "content/preloader.php" ?>
+<!--=== Preloader Script file ===-->
+<?php include_once "content/commonJS.php" ?>
 <!-- ==== Boostrap Script ==== -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
@@ -513,7 +590,7 @@ if (!empty($rs)) {
 </script>
 <!-- =====back to top button====-->
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $(window).scroll(function () {
             if ($(this).scrollTop() > 50) {
                 $('#back-to-top').fadeIn();
@@ -531,6 +608,7 @@ if (!empty($rs)) {
     });
 
 </script>
+
 
 <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"-->
 <!--        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"-->

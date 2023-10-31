@@ -1,13 +1,12 @@
 <?php
 
 
-
-
 namespace classes;
 
 use PDO;
 use PDOException;
-class SubTask
+
+class SubTask extends MainTask
 {
     private $subTaskID;
     private $subTaskName;
@@ -15,27 +14,44 @@ class SubTask
     private $deadline;
     private $assignedMemberID;
     private $isTaskCompleted;
-    private $mainTaskID;
-    private $status;
+    private $subTaskStatus;
 
 
     public function __construct($subTaskID, $subTaskName, $description, $deadline, $assignedMemberID, $isTaskCompleted, $mainTaskID, $status)
     {
+        parent::__construct($mainTaskID);
+
         $this->subTaskID = $subTaskID;
         $this->subTaskName = $subTaskName;
         $this->description = $description;
         $this->deadline = $deadline;
         $this->assignedMemberID = $assignedMemberID;
         $this->isTaskCompleted = $isTaskCompleted;
-        $this->mainTaskID = $mainTaskID;
-        $this->status = $status;
+        $this->subTaskStatus = $status;
     }
 
 
     public function addNewSubTask($con)
     {
+        try {
 
+            $query = "INSERT INTO sub_task (sub_task_name, description, deadline, asign_member_id, main_task_id)
+VALUES (?,?,?,?,?)";
+
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1, $this->subTaskName);
+            $pstmt->bindValue(2, $this->description);
+            $pstmt->bindValue(3, $this->deadline);
+            $pstmt->bindValue(4, $this->assignedMemberID);
+            $pstmt->bindValue(5, $this->mainTaskID);
+            $pstmt->execute();
+
+            return $pstmt->rowCount() > 0;
+        } catch (PDOException $exc) {
+            die("Error In adding subTask " . $exc->getMessage());
+        }
     }
+
 
     public static function getSubTasksListFromProjectID($con, $projectID)
 
@@ -43,39 +59,92 @@ class SubTask
         try {
 
             $subTasks = array();
-//            $con = DBConnector::getConnection();
+
             $query = "SELECT * FROM sub_task WHERE main_task_id in 
                              (SELECT main_task_id FROM main_task WHERE project_id = ?)";
             $pstmt = $con->prepare($query);
-            $pstmt->bindValue(1,$projectID);
+            $pstmt->bindValue(1, $projectID);
             $pstmt->execute();
             $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
-            if (!empty($rs)){
-                foreach ($rs as $row){
-                    $subTask = new SubTask($row->sub_task_id,$row->sub_task_name,$row->description,
-                        $row->deadline,$row->asign_member_id,$row->task_complete,
-                        $row->main_task_id,$row->status);
+            if (!empty($rs)) {
+                foreach ($rs as $row) {
+                    $subTask = new SubTask($row->sub_task_id, $row->sub_task_name, $row->description,
+                        $row->deadline, $row->asign_member_id, $row->task_complete,
+                        $row->main_task_id, $row->status);
                     $subTasks[] = $subTask;
 
                 }
             }
-        }catch (PDOException $exc){
+        } catch (PDOException $exc) {
             die("Error In Get Sub Tasks List From Project ID " . $exc->getMessage());
         }
 
         return $subTasks;
     }
 
+
     public function loadSubTaskFromSubTaskID($con)
     {
 
+        $query = "SELECT * FROM sub_task WHERE sub_task_id=?";
+        $pstmt = $con->prepare($query);
+        $pstmt->bindValue(1, $this->subTaskID);
+        $pstmt->execute();
+        $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
+        if (!empty($rs)) {
+            $this->subTaskID = $rs->sub_task_id;
+            $this->subTaskName = $rs->sub_task_name;
+            $this->description = $rs->description;
+            $this->deadline = $rs->deadline;
+            $this->assignedMemberID = $rs->asign_member_id;
+            $this->isTaskCompleted = $rs->task_complete;
+            $this->mainTaskID = $rs->main_task_id;
+            $this->subTaskStatus = $rs->status;
+
+            $rs1 = parent::loadMainTaskFromTaskID($con);
+            if ($rs1){
+                return true;
+            }else{
+                return true;
+            }
+        }else{
+            return false;
+        }
+
     }
+
     public function savChangesToDatabase($con)
     {
 
     }
-    public static function getSubTaskListFromUserID($con,$userID){
 
+    public static function getSubTaskListFromUserID($con, $userID)
+    {
+        try {
+
+            $subTasks = array();
+
+            $query = "SELECT * FROM sub_task WHERE asign_member_id=?";
+
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1, $userID);
+            $pstmt->execute();
+            $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
+
+            if (!empty($rs)) {
+                foreach ($rs as $row) {
+                    $subTask = new SubTask($row->sub_task_id, $row->sub_task_name, $row->description,
+                        $row->deadline, $row->asign_member_id, $row->task_complete,
+                        $row->main_task_id, $row->status);
+                    $subTasks[] = $subTask;
+
+                }
+            }
+        } catch (PDOException $exc) {
+            die("Error In Get Sub Tasks List From Project ID " . $exc->getMessage());
+        }
+
+        return $subTasks;
     }
 
     /**
@@ -177,35 +246,18 @@ class SubTask
     /**
      * @return mixed
      */
-    public function getMainTaskID()
+    public function getSubTaskStatus()
     {
-        return $this->mainTaskID;
+        return $this->subTaskStatus;
     }
 
     /**
-     * @param mixed $mainTaskID
+     * @param mixed $subTaskStatus
      */
-    public function setMainTaskID($mainTaskID)
+    public function setSubTaskStatus($subTaskStatus)
     {
-        $this->mainTaskID = $mainTaskID;
+        $this->subTaskStatus = $subTaskStatus;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param mixed $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
-
 
 
 }
