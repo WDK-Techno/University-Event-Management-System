@@ -10,39 +10,52 @@ $con = DBConnector::getConnection();
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     if (isset($_POST['submit'])) {
-        if (!empty($_POST["flyerId"]) && !empty($_POST["clubId"]) && !empty($_POST["flyerUpdateTopic"]) &&
-            !empty($_POST["flyerUpdateCaption"]) && !empty($_POST["flyerUpdateLink"]) && !empty($_POST["flyerUpdateStartDate"]) &&
-            !empty($_POST["flyerUpdateEndDate"])) {
-            $flyerId = $_POST["flyerId"];
-            $clubId = $_POST["clubId"];
-            $flyerUpdateTopic = strip_tags($_POST["flyerUpdateTopic"]);
-            $flyerUpdateCaption = strip_tags($_POST["flyerUpdateCaption"]);
-            $flyerUpdateLink = strip_tags($_POST["flyerUpdateLink"]);
-            $flyerUpdateStartDate = strip_tags($_POST["flyerUpdateStartDate"]);
-            $flyerUpdateEndDate = strip_tags($_POST["flyerUpdateEndDate"]);
+        $fileName =var_dump($_FILES['flyerUpdateImg']['name']);
 
-            $updateDate = new PublicFlyer(null, null, null, null, null, null, null, null, null);
+        $fileTmpName = $_FILES['flyerUpdateImg']['tmp_name'];
+        $fileSize = $_FILES['flyerUpdateImg']['size'];
+        $fileError = $_FILES['flyerUpdateImg']['error'];
+        $fileType = $_FILES['flyerUpdateImg']['type'];
 
-            $updateDate->setFlyerID($flyerId);
-            $updateDate->setClubID($clubId);
-            $updateDate->setFlyerTopic($flyerUpdateTopic);
-            $updateDate->setCaption($flyerUpdateCaption);
-            $updateDate->setLink($flyerUpdateLink);
-            $updateDate->setStartDate($flyerUpdateStartDate);
-            $updateDate->setEndDate($flyerUpdateEndDate);
-            $rs = $updateDate->saveChangesToDatabase($con);
-
-            if ($rs) {
-                header("location: ../../clubowner-dashboard.php?tab=4");
-            } else {
-                header("location: ../../clubowner-dashboard.php?tab=4&error");
-            }
+        echo $fileName."<br>";
+        echo  $fileTmpName."<br>";
+        echo  $fileError."<br>";
+        echo  $fileType."<br>";
 
 
-        } else {
-            //is empty
-            header("location: ../../clubowner-dashboard.php?tab=4");
-        }
+       // if (!empty($_POST["flyerId"]) && !empty($_POST["clubId"]) && !empty($_POST["flyerUpdateTopic"]) &&
+           // !empty($_POST["flyerUpdateCaption"]) && !empty($_POST["flyerUpdateLink"]) && !empty($_POST["flyerUpdateStartDate"]) &&
+           // !empty($_POST["flyerUpdateEndDate"])) {
+          //  $flyerId = $_POST["flyerId"];
+          // $clubId = $_POST["clubId"];
+          // $flyerUpdateTopic = strip_tags($_POST["flyerUpdateTopic"]);
+          // $flyerUpdateCaption = strip_tags($_POST["flyerUpdateCaption"]);
+          // $flyerUpdateLink = strip_tags($_POST["flyerUpdateLink"]);
+          // $flyerUpdateStartDate = strip_tags($_POST["flyerUpdateStartDate"]);
+          // $flyerUpdateEndDate = strip_tags($_POST["flyerUpdateEndDate"]);
+
+          // $updateDate = new PublicFlyer(null, null, null, null, null, null, null, null, null);
+
+          // $updateDate->setFlyerID($flyerId);
+          // $updateDate->setClubID($clubId);
+          // $updateDate->setFlyerTopic($flyerUpdateTopic);
+          // $updateDate->setCaption($flyerUpdateCaption);
+          // $updateDate->setLink($flyerUpdateLink);
+          // $updateDate->setStartDate($flyerUpdateStartDate);
+          // $updateDate->setEndDate($flyerUpdateEndDate);
+          // $rs = $updateDate->saveChangesToDatabase($con);
+
+          // if ($rs) {
+          //     header("location: ../../clubowner-dashboard.php?tab=4");
+          // } else {
+          //     header("location: ../../clubowner-dashboard.php?tab=4&error");
+          // }
+
+//
+       // } else {
+       //     //is empty
+       //     header("location: ../../clubowner-dashboard.php?tab=4");
+       // }
 
 
     } else {

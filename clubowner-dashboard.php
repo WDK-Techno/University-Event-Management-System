@@ -61,6 +61,7 @@ if (isset($_SESSION['user_id'])) {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
               crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
     </head>
@@ -578,7 +579,7 @@ if (isset($_SESSION['user_id'])) {
                                                 aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post" action="process/clubownerdashboard/editFlyer.php">
+                                        <form method="post" action="process/clubownerdashboard/editFlyer.php" enctype="multipart/form-data">
                                             <input type="hidden" name="menuNo" value="4">
                                             <input type="hidden" name="flyerId"
                                                    value="<?= $publicFlyerObj->getFlyerID() ?>">
@@ -586,17 +587,34 @@ if (isset($_SESSION['user_id'])) {
                                                    value="<?= $publicFlyerObj->getClubID() ?>">
 
                                             <div class="container">
+                                                <div class="row py-1">
+                                                    <div class="col-6">
+                                                        <div class="upload">
+                                                            <img src="assets/images/flyer_img/<?= $publicFlyerObj->getFlyerImg() ?>" id="image">
+                                                            <div class="rightRound" id="upload">
+                                                                <input type="file" name="flyerUpdateImg" id="fileImg" accept=".jpg, .jpeg, .png">
+                                                                <i class="fa fa-camera"></i>
+                                                            </div>
+                                                            <div class="leftRound" id="cancel" style="display: none;">
+                                                                <i class="fa fa-times"></i>
+                                                            </div>
+                                                            <div class="rightRound" id="confirm" style="display: none;">
 
-                                                <div class="row py-1">
-                                                    <input type="text" name="flyerUpdateTopic"
-                                                           class="form-control text-center"
-                                                           value="<?= $publicFlyerObj->getFlyerTopic() ?>">
+                                                                <i class="fa fa-check"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="row py-1">
+                                                            <input type="text" name="flyerUpdateTopic" class="form-control text-center" value="<?= $publicFlyerObj->getFlyerTopic() ?>">
+                                                        </div>
+                                                        <div class="row py-1">
+                                                            <input type="text" name="flyerUpdateCaption" class="form-control text-center" rows="2" value="<?= $publicFlyerObj->getCaption() ?>">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row py-1">
-                                                    <input type="text" name="flyerUpdateCaption"
-                                                           class="form-control text-center" rows="2"
-                                                           value="<?= $publicFlyerObj->getCaption() ?>">
-                                                </div>
+
+
                                                 <div class="row py-1">
                                                     <input type="text" name="flyerUpdateLink"
                                                            class="form-control text-center"
