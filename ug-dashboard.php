@@ -249,7 +249,7 @@ if (isset($_SESSION['user_id'])) {
                                     <div class="my-auto mx-auto"><?=$subTaskObj->getDeadline() ?></div>
                                 </div>
                                 <div class="col-2 d-flex tabel-column-type-2">
-                                    <div class="my-auto mx-auto"><input type="checkbox" id="cheak" name="checkTask"
+                                    <div class="my-auto mx-auto"><input type="checkbox" id="cheak" name='checkTask[]'
                                                                         value="finished"></div>
                                 </div>
                                 <div class="col-1 tabel-column-type-1 d-flex">
@@ -269,7 +269,7 @@ if (isset($_SESSION['user_id'])) {
                         }
                         ?>
                                 <div>
-                                    <button class="update-button" type="submit">Update</button>
+                                    <button class="update-button" type="submit" name="update">Update</button>
                                 </div>
                             </form>
                         <!--                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px; background-color:#A3A2EC;">-->
