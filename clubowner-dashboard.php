@@ -591,16 +591,14 @@ if (isset($_SESSION['user_id'])) {
                                                     <div class="col-6">
                                                         <div class="upload">
                                                             <img src="assets/images/flyer_img/<?= $publicFlyerObj->getFlyerImg() ?>" id="image">
+                                                            <input type="hidden" name="flyerUpdateImg2"  id="fileImg2" value="<?= $publicFlyerObj->getFlyerImg() ?>">
+
                                                             <div class="rightRound" id="upload">
                                                                 <input type="file" name="flyerUpdateImg" id="fileImg" accept=".jpg, .jpeg, .png">
                                                                 <i class="fa fa-camera"></i>
                                                             </div>
                                                             <div class="leftRound" id="cancel" style="display: none;">
                                                                 <i class="fa fa-times"></i>
-                                                            </div>
-                                                            <div class="rightRound" id="confirm" style="display: none;">
-
-                                                                <i class="fa fa-check"></i>
                                                             </div>
                                                         </div>
                                                     </div>
