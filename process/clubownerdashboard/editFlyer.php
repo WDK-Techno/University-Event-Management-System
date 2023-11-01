@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                    if($rs) {
                        header("location: ../../clubowner-dashboard.php?tab=4&error");
                    }else{
-                       header("location: ../../clubowner-dashboard.php?tab=4&error");
+                       header("location: ../../clubowner-dashboard.php?tab=4&error2");
                    }
             } else {
                 //empty fileds
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                     if (file_exists($filename)) {
                                         unlink($filename);
                                     }
-                                    header("location: ../../clubowner-dashboard.php?tab=4&error");
+                                    header("location: ../../clubowner-dashboard.php?tab=4&error ");
                                 }else{
                                     header("location: ../../clubowner-dashboard.php?tab=4&error");
                                 }
