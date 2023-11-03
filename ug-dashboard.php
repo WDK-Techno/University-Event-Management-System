@@ -249,8 +249,8 @@ if (isset($_SESSION['user_id'])) {
                                     <div class="my-auto mx-auto"><?=$subTaskObj->getDeadline() ?></div>
                                 </div>
                                 <div class="col-2 d-flex tabel-column-type-2">
-                                    <div class="my-auto mx-auto"><input type="checkbox" id="cheak" name='checkTask[]'
-                                                                        value="finished"></div>
+                                    <div class="my-auto mx-auto">
+                                        <input type="checkbox" id="cheak" name='checkTask[]' value="<?=$subTaskObj->getSubTaskID() ?>"></div>
                                 </div>
                                 <div class="col-1 tabel-column-type-1 d-flex">
                                     <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
