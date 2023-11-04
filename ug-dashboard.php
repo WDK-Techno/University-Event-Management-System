@@ -374,6 +374,98 @@ if (isset($_SESSION['user_id'])) {
             </div>
 
         </div>
+        <div id="menu-content-2" class="main-content hide">
+            <div class="m-4">
+                <h1>Task </h1>
+            </div>
+
+
+            <div class="card mx-4" style="">
+                <div class="card-header team-member-table pb-0"
+                     style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+
+                    <div class="row p-0 fw-bold">
+                        <div class="col-1"></div>
+                        <div class="col-3 text-center py-2 rounded-top-3"
+                             style="background-color: var(--primary);">Project Name
+                        </div>
+                        <div class="col-3 text-center py-2 rounded-top-3"
+                             style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                            Task
+                        </div>
+                        <div class="col-2 text-center py-2 rounded-top-3"
+                             style="background-color: var(--primary);">DeadLine
+                        </div>
+                        <div class="col-2 text-center py-2 rounded-top-3"
+                             style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                            Task Complete
+                        </div>
+
+                        <div class="col-1">
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-body pt-0 bg-dark-subtle scrollable-div Flipped"
+                     style="background-color: var(--secondary);">
+                    <div class="container p-0 scrollable-div-inside">
+
+                        <?php
+                        foreach ($subTasks as $subTask) {
+                        $subTaskObj = new SubTask($subTask->getSubTaskID(), null, null, null, null, null, null, null);
+                        $subTaskObj->loadSubTaskFromSubTaskID($con);
+                        $project = new Project($subTaskObj->getProjectID(), null, null, null, null, null, null);
+                        $project->loadDataFromProjectID($con);
+                        ?>
+
+                        <form action="process/ug-dashboard/editTask_compleat.php" method="post">
+                            <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
+                                <div class="col-1 d-flex tabel-column-type-2">
+                                    <div class="my-auto">
+                                        <img class="rounded-circle"
+                                             style="width: 40px; height: 40px; object-fit: cover;"
+                                             src="assets/images/profile_img/project/<?=$project->getProfileImage()?>"
+                                             alt="">
+                                    </div>
+                                </div>
+                                <div class="col-3 tabel-column-type-1 d-flex">
+                                    <div class="my-auto"><?= $project->getProjectName() ?></div>
+                                </div>
+                                <div class="col-3 d-flex tabel-column-type-2">
+                                    <div class="my-auto mx-auto"><?=$subTaskObj->getSubTaskName() ?></div>
+                                </div>
+                                <div class="col-2 d-flex tabel-column-type-1">
+                                    <div class="my-auto mx-auto"><?=$subTaskObj->getDeadline() ?></div>
+                                </div>
+                                <div class="col-2 d-flex tabel-column-type-2">
+                                    <div class="my-auto mx-auto">
+                                        <input type="checkbox" id="cheak" name='checkTask[]' value="<?=$subTaskObj->getSubTaskID() ?>"></div>
+                                </div>
+                                <div class="col-1 tabel-column-type-1 d-flex">
+                                    <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
+
+
+                                        <ion-icon class="my-auto" type="button"
+                                                  data-bs-toggle="modal"
+                                                  data-bs-target=""
+                                                  name="trash-outline"></ion-icon>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <?php
+
+                            }
+                            ?>
+                          
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
         <div id="menu-content-3" class="main-content hide">
             <h1>Content 3</h1>
         </div>
