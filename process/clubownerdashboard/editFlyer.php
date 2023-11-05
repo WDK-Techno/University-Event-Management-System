@@ -41,13 +41,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
                 $rs = $updateDate->saveChangesToDatabase($con);
                    if($rs) {
-                       header("location: ../../clubowner-dashboard.php?tab=4&error");
+                       header("location: ../../clubowner-dashboard.php?tab=4");
                    }else{
-                       header("location: ../../clubowner-dashboard.php?tab=4&error2");
+                       header("location: ../../clubowner-dashboard.php?tab=4&updateFlyer=1");
                    }
             } else {
                 //empty fileds
-                header("location: ../../clubowner-dashboard.php?tab=4&error");
+                header("location: ../../clubowner-dashboard.php?tab=4&updateFlyer=2");
             }
         } else {
             if (!empty($_POST["flyerId"]) && !empty($_POST["clubId"]) && !empty($_POST["flyerUpdateTopic"]) &&
@@ -101,25 +101,25 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                                     if (file_exists($filename)) {
                                         unlink($filename);
                                     }
-                                    header("location: ../../clubowner-dashboard.php?tab=4&error ");
+                                    header("location: ../../clubowner-dashboard.php?tab=4&updateFlyer=3");
                                 }else{
-                                    header("location: ../../clubowner-dashboard.php?tab=4&error");
+                                    header("location: ../../clubowner-dashboard.php?tab=4&updateFlyer=4");
                                 }
                             }else{
                                 //image not upload
-                                header("location: ../../clubowner-dashboard.php?tab=4&error");
+                                header("location: ../../clubowner-dashboard.php?tab=4&updateFlyer=5");
                             }
                         }else{
                             //image size
-                            header("location: ../../clubowner-dashboard.php?tab=4&error");
+                            header("location: ../../clubowner-dashboard.php?tab=4&updateFlyer=6");
                         }
                     }else{
                         //image file format
-                        header("location: ../../clubowner-dashboard.php?tab=4&error");
+                        header("location: ../../clubowner-dashboard.php?tab=4&updateFlyer=7");
                     }
                 } else {
                     //image file format
-                    header("location: ../../clubowner-dashboard.php?tab=4&error");
+                    header("location: ../../clubowner-dashboard.php?tab=4&updateFlyer=8");
 
                 }
 
@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
             } else {
                 //empty fileds
-                header("location: ../../clubowner-dashboard.php?tab=4&error");
+                header("location: ../../clubowner-dashboard.php?tab=4&updateFlyer=9");
             }
         }
 
@@ -158,10 +158,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     } else {
         //is not submit
-        header("location: ../../clubowner-dashboard.php?tab=4");
+        header("location: ../../clubowner-dashboard.php?tab=4&updateFlyer=10");
     }
 
 } else {
     //is not post
-    header("location: ../../clubowner-dashboard.php?tab=4");
+    header("location: ../../clubowner-dashboard.php?tab=4&updateFlyer=10");
 }

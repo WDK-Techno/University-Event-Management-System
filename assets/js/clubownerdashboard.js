@@ -136,4 +136,30 @@ document.getElementById("cancel").onclick = function() {
 
 }
 
+function validateForm() {
+  // Check if all required fields are filled in
+  const inputs = document.querySelectorAll('#editflyer<?= $flyerno ?> input[required], #editflyer<?= $flyerno ?> select[required]');
+
+  let isValid = true;
+
+  for (const input of inputs) {
+    if (!input.value.trim()) {
+      isValid = false;
+      break;
+    }
+  }
+
+  if (isValid) {
+    // If all required fields are filled, hide the error message and close the modal
+    document.getElementById('error-message').style.display = 'none';
+    $('#editflyer<?= $flyerno ?>').modal('hide');
+    return true; // Allow form submission
+  } else {
+    // If any required field is empty, show the error message and keep the modal open
+    document.getElementById('error-message').style.display = 'block';
+    return false; // Prevent form submission
+  }
+}
+
+
 
