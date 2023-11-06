@@ -333,15 +333,33 @@ if (isset($_SESSION['user_id'])) {
                                     </div>
                                 </div>
 
-                                <div>
-                                    <form action="process/clubownerdashboard/deleteProject.php"
-                                          method="post">
-                                        <input type="hidden" name="user_id"
-                                               value="<?= $project->getProjectID() ?>">
-                                        <button type="submit" name="submit" class="btn btn-danger"
-                                                style="border: none;width: 96px;height: 38px;">Delete
-                                        </button>
-                                    </form>
+                                <div><!-- Button to trigger the modal -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#<?= $project->getProjectID() ?>">
+                                        Delete
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="<?= $project->getProjectID() ?>" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete <?= $project->getProjectName() ?>?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <form action="process/clubownerdashboard/deleteProject.php" method="post">
+                                                        <input type="hidden" name="user_id" value="<?= $project->getProjectID() ?>">
+                                                        <button type="submit" name="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                             </div>
@@ -371,18 +389,25 @@ if (isset($_SESSION['user_id'])) {
 
     <div id="menu-content-2" class="main-content hide">
 
-        <div class="row">
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+        <div class="row py-1">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-1">
                 <div class="card card-eco">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-8">
                                 <h4 class="title-text mt-0">Total projects</h4>
 
-                                <h3 class="font-weight-semibold mb-1"><?php
+                                <h3 class="font-weight-semibold mb-1">
+                                    <?php
                                     $projects = Project::getProjectListFromClubID($con, $clubid); // Assuming $con and $clubId are defined.
 
-                                    echo count($projects); ?>
+                                    $activeProjects = array_filter($projects, function ($project) {
+                                        return $project->getStatus() !== 'delete';
+                                    });
+
+                                    echo count($activeProjects);
+                                    ?>
+
                                 </h3>
                             </div>
 
@@ -397,7 +422,65 @@ if (isset($_SESSION['user_id'])) {
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-1">
+                <div class="card card-eco">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h4 class="title-text mt-0">Active Projects</h4>
+                                <h3 class="font-weight-semibold mb-1" id="stat-count">
+
+                                    <?php
+                                    $projects = Project::getProjectListFromClubID($con, $clubid); // Assuming $con and $clubId are defined.
+
+                                    $activeProjects = array_filter($projects, function ($project) {
+                                        return $project->getStatus() === 'active';
+                                    });
+
+                                    echo count($activeProjects);
+                                    ?>
+                            </div>
+                            <!--end col-->
+                            <div class="col-4 text-center align-self-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 640 512">
+                                    <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-1">
+                <div class="card card-eco">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h4 class="title-text mt-0">Deactive Projects</h4>
+                                <h3 class="font-weight-semibold mb-1" id="stat-count">
+
+                                    <?php
+                                    $projects = Project::getProjectListFromClubID($con, $clubid); // Assuming $con and $clubId are defined.
+
+                                    $activeProjects = array_filter($projects, function ($project) {
+                                        return $project->getStatus() === 'deactive';
+                                    });
+
+                                    echo count($activeProjects);
+                                    ?>
+                            </div>
+                            <!--end col-->
+                            <div class="col-4 text-center align-self-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 640 512">
+                                    <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-1">
                 <div class="card card-eco">
                     <div class="card-body">
                         <div class="row">
@@ -423,7 +506,7 @@ if (isset($_SESSION['user_id'])) {
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-1">
                 <div class="card card-eco">
                     <div class="card-body">
                         <div class="row">
@@ -442,7 +525,7 @@ if (isset($_SESSION['user_id'])) {
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-1">
                 <div class="card card-eco">
                     <div class="card-body">
                         <div class="row">
@@ -605,12 +688,12 @@ if (isset($_SESSION['user_id'])) {
                 <div class="card-footer">
                     <!----------------- edit button ------------------->
                     <button type="button" class="btn " data-bs-toggle="modal"
-                            data-bs-target="#editflyer<?= $flyerno ?>">
+                            data-bs-target="#editFlyer">
                         <ion-icon name="create-outline" size="large"></ion-icon>
                     </button>
 
                     <!----------------- Modal for flyer ------------------>
-                    <div class="modal fade" id="editflyer<?= $flyerno ?>" tabindex="-1" data-bs-backdrop="static"
+                    <div class="modal fade" id="editFlyer" tabindex="-1" data-bs-backdrop="static"
                          data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -622,12 +705,8 @@ if (isset($_SESSION['user_id'])) {
                                             aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <div id="error-message" class="alert alert-danger"
-                                         style="display: <?= $errorMessage_settings ? 'block' : 'none' ?>;">
-                                        <?= $errorMessage_settings ?>
-                                    </div>
                                     <form method="post" action="process/clubownerdashboard/editFlyer.php"
-                                          enctype="multipart/form-data" onsubmit="return validateForm()">
+                                          enctype="multipart/form-data" >
                                         <input type="hidden" name="menuNo" value="4">
                                         <input type="hidden" name="flyerId"
                                                value="<?= $publicFlyerObj->getFlyerID() ?>">
