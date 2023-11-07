@@ -200,4 +200,18 @@ class Event
         }
         return $events;
     }
+
+    public function deleteEvenet($con){
+        try {
+            $query = "DELETE FROM event WHERE event_id=?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1, $this->eventId);
+            $pstmt->execute();
+            return $pstmt->rowCount() > 0;
+        } catch (PDOException $exc) {
+            die("Error in Update Database" . $exc->getMessage());
+        }
+    }
+
 }
+

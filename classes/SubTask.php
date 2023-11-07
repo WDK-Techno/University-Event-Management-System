@@ -81,6 +81,33 @@ VALUES (?,?,?,?,?)";
 
         return $subTasks;
     }
+    public function loadCompeatSubTaskFromSubTaskID($con){
+        $query = "SELECT * FROM sub_task WHERE task_complete = 1 and sub_task_id=?";
+        $pstmt = $con->prepare($query);
+        $pstmt->bindValue(1, $this->subTaskID);
+        $pstmt->execute();
+        $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
+        if (!empty($rs)) {
+            $this->subTaskID = $rs->sub_task_id;
+            $this->subTaskName = $rs->sub_task_name;
+            $this->description = $rs->description;
+            $this->deadline = $rs->deadline;
+            $this->assignedMemberID = $rs->asign_member_id;
+            $this->isTaskCompleted = $rs->task_complete;
+            $this->mainTaskID = $rs->main_task_id;
+            $this->subTaskStatus = $rs->status;
+
+            $rs1 = parent::loadMainTaskFromTaskID($con);
+            if ($rs1){
+                return true;
+            }else{
+                return true;
+            }
+        }else{
+            return false;
+        }
+
+    }
 
 
     public function loadSubTaskFromSubTaskID($con)
@@ -102,7 +129,7 @@ VALUES (?,?,?,?,?)";
             $this->subTaskStatus = $rs->status;
 
             $rs1 = parent::loadMainTaskFromTaskID($con);
-            if ($rs){
+            if ($rs1){
                 return true;
             }else{
                 return true;
@@ -122,7 +149,7 @@ VALUES (?,?,?,?,?)";
     {
         try {
 
-            $taskArray = array();
+            $subTasks = array();
 
             $query = "SELECT * FROM sub_task WHERE asign_member_id=?";
 

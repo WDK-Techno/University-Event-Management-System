@@ -6,17 +6,23 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 require_once 'classes/DBConnector.php';
-require_once 'classes/Admin.php';
+require_once "classes/User.php";
+
 
 use classes\DBConnector;
-use classes\Admin;
+use classes\Club;
+use classes\Undergraduate;
 
-$userObj = new Admin();
+$con = DBConnector::getConnection();
 
-$user1 = $userObj->getUsers();
-$user2 = $userObj->getClubs();
-$user3 = $userObj->getRequests();
-$user4 = $userObj->getRowCount();
+$undergraduate = new Undergraduate('','','','','','');
+$user1= $undergraduate->getUndergraduates($con);
+
+$club = new Club('','','','');
+$user2 = $club->getClubs($con);
+$user3 = $club->getRequests($con);
+$user4 = $club->getRowCount($con);
+
 ?>
 <?php
  if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -199,9 +205,9 @@ $user4 = $userObj->getRowCount();
                              
                             <?php
                                 if($users->status == "active"){
-                                   echo "<a class='my-auto btn btn-outline-success' href='process/admindashboard/ugStatus.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;'>Active</a>";
+                                   echo "<a class='my-auto btn btn-outline-success' href='process/admindashboard/status.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;'>Active</a>";
                                 }elseif($users->status == "deactive"){
-                                   echo "<a class='my-auto btn btn-outline-warning' href='process/admindashboard/ugStatus.php?user_id=$users->user_id&status=active'  style='text-decoration:none;'>Deactive</a>";
+                                   echo "<a class='my-auto btn btn-outline-warning' href='process/admindashboard/status.php?user_id=$users->user_id&status=active'  style='text-decoration:none;'>Deactive</a>";
                                 }
                                  
                             ?>
@@ -253,6 +259,7 @@ $user4 = $userObj->getRowCount();
                         <th>Name</th>
                         <th>email</th>
                         <th>Contact No</th>
+                        <th>description</th>
                         <th>Status</th>
                         <th></th>
                         <th></th>
@@ -268,12 +275,13 @@ $user4 = $userObj->getRowCount();
                             <td><?php echo $users->name; ?></td>
                             <td><?php echo $users->user_name; ?></td>
                             <td><?php echo $users->contact_no; ?></td>
+                            <td><?php echo $users->description; ?></td>
                             <td>
                             <?php
                                  if($users->status == "active"){
-                                    echo "<a class='my-auto btn btn-outline-success' href='process/admindashboard/status.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;'>Active</a>";
+                                    echo "<a class='my-auto btn btn-outline-success' href='process/admindashboard/clubStatus.php?user_id=$users->user_id&status=deactive' style='text-decoration:none;'>Active</a>";
                                  }elseif($users->status == "deactive"){
-                                    echo "<a class='my-auto btn btn-outline-warning' href='process/admindashboard/status.php?user_id=$users->user_id&status=active' style='text-decoration:none;'>Deactive</a>";
+                                    echo "<a class='my-auto btn btn-outline-warning' href='process/admindashboard/clubStatus.php?user_id=$users->user_id&status=active' style='text-decoration:none;'>Deactive</a>";
                                  }
                                  ?>
                             </td>
