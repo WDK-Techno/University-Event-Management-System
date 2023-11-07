@@ -38,7 +38,7 @@ $project = new Project($projectIDFromSession, null, null, null, null, null, null
 
 if (!$project->loadDataFromProjectID($con)) {
     die("Cannot Load From Database");
-} else {
+} else
 
 //Get Club Details
 $club = new Club(null, null, null, null);
@@ -52,11 +52,19 @@ $projectChair->loadDataFromUserID($con);
 
 //Get Team Category List
 $teamCategories = TeamCategory::getTeamCategoeryListFromProjectID($con, $project->getProjectID());
+$teamDesigners = TeamMember::getTeamMembersByCategoryID($con, 11);
+$teamCaptionWritters = TeamMember::getSecrataryMembersByCategoryID($con, 2);
 
+//Get Events List
+$events = Event::getEventListFromProjectID($con, $project->getProjectID());
 //Get Events List
 $events = Event::getEventListFromProjectID($con, $project->getProjectID());
 
 $teamMembers = TeamMember::getMemberListFromProjectID($con, $project->getProjectID());
+
+//Get Project List
+$projects = Project::getProjectList($con);
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $selected_menuNo = 3;
@@ -82,6 +90,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['imgUploadErr'])) {
         $error_imgUpload = $_GET['imgUploadErr'];
 
+        if ($error_imgUpload == 1) {
+            $errorMessage_settings = "Database Error";
+        }
+        if ($error_imgUpload == 2) {
+            $errorMessage_settings = "Error in Moving File";
+        }
+        if ($error_imgUpload == 3) {
+            $errorMessage_settings = "File Size larger than 10mb";
+        }
+        if ($error_imgUpload == 4) {
+            $errorMessage_settings = "Error in File Uploading";
+        }
+        if ($error_imgUpload == 5) {
+            $errorMessage_settings = "Invalid file format";
+        }
+    }
+}
+?>
         if ($error_imgUpload == 1) {
             $errorMessage_settings = "Database Error";
         }
@@ -545,7 +571,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <div class="row d-flex">
                 <div class="col-11 mx-auto">
 
-                    <!-- ======= add member button ======== -->
+                    <!-- ======= add task button ======== -->
                     <div class="d-flex mt-3 mb-2">
                         <div class="btn fw-bold my-auto me-0 ms-auto d-flex"
                              style="color: var(--lighter-secondary) !important; background-color: var(--primary);"
@@ -556,7 +582,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                     </div>
 
-                    <!-- ========= add member button model ========== -->
+                    <!-- ========= add task button model ========== -->
                     <div class="modal fade"
                          id="add-new-task"
                          tabindex="-1"
@@ -567,13 +593,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                              role="document">
                             <div class="modal-content">
                                 <!--=== form =====-->
-                                <form>
+                                <form action="process/projectdashboard/addNewTask.php" method="POST">
                                     <div class="modal-header py-2 px-2"
                                          style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
                                         <div class="d-flex flex-row w-100 justify-content-between">
 
                                             <div class="ms-2 my-auto fs-4 fw-bold">
-                                                Team Member
+                                                Task
                                             </div>
 
                                             <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
@@ -585,34 +611,67 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                         </div>
 
                                         <!--======= hidden ==========-->
-                                        <input type="hidden" name="menuNo" value="2">
+                                        <input type="hidden" name="menuNo" value="5">
                                     </div>
 
                                     <div class="modal-body"
                                          style="background-color: var(--lighter-secondary);">
                                         <!-- ====== input username ====== -->
-                                        <div class="d-flex px-5">
-                                            <input class="form-control text-center" type="email"
-                                                   name="username" id="add-member-username-input"
-                                                   placeholder="Email" required/>
+                                        <div class="d-flex mt-2 px-5">
+                                            <input class="form-control text-center"
+                                                   name="topic" id="add-topic"
+                                                   placeholder="Topic" required/>
+                                        </div>
+                                        <div class="d-flex mt-2 px-5">
+                                            <input class="form-control text-center"
+                                                   name="description" id="add-description"
+                                                   placeholder="Description" required/>
                                         </div>
                                         <!-- ===== select team ======= -->
                                         <div class="d-flex mt-2 px-5">
-                                            <select id="add-member-team-select" class="form-select ms-auto me-0"
+                                            <select id="project_id" class="form-select ms-auto me-0"
                                                     style="width: 50%;"
-                                                    name="project_team_id" id="" required>
-                                                <option class="text-center" value="" selected>-- Select Team --
+                                                    name="project_id" id="project_id" required>
+                                                <option class="text-center" value="" selected>-- Project
+                                                    --
                                                 </option>
-                                                <!--                                                        --><?php
-                                                //                                                        foreach ($teamCategories as $teamCategory) {
-                                                //                                                            ?>
-                                                <!--                                                            <option value="-->
-                                                <?//= $teamCategory->getCategoryID() ?><!--">-->
-                                                <?//= $teamCategory->getCategoryName() ?><!--</option>-->
-                                                <!--                                                            --><?php
+                                                <?php
+                                                foreach ($projects as $project) {
+                                                    ?>
+                                                    <option value="<?=  $project->getProjectID() ?>"><?= $project->getProjectName() ?></option>
+                                                    <?php
                                                 }
-                                                //                                                        ?>
+                                                ?>
                                             </select>
+                                            <select id="designer_id" class="form-select ms-auto me-0"
+                                                    style="width: 50%;"
+                                                    name="designer_id" id="" required>
+                                                <option class="text-center" value="" selected>-- Select Designer --
+                                                </option>
+                                                <?php
+                                                foreach ($teamDesigners[0] as $teamDesigner) {
+                                                    ?>
+                                                    <option value="<?=  htmlspecialchars($teamDesigner['user_id']) ?>"><?=  htmlspecialchars($teamDesigner['first_name']), $teamDesigner['last_name'] ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+
+                                            <select id="caption_writer_id" class="form-select ms-auto me-0"
+                                                    style="width: 50%;"
+                                                    name="caption_writer_id" id="" required>
+                                                <option class="text-center" value="" selected>-- Select Caption Writter
+                                                    --
+                                                </option>
+                                                <?php
+                                                foreach ($teamCaptionWritters[0] as $teamCaptionWritter) {
+                                                    ?>
+                                                    <option value="<?=  htmlspecialchars($teamCaptionWritter['user_id']) ?>"><?=  htmlspecialchars($teamCaptionWritter['first_name']), $teamCaptionWritter['last_name'] ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+
                                         </div>
                                         <div class="mt-2 text-center" id="add-member-team-error"
                                              style="color: var(--accent-color3)"></div>
@@ -624,8 +683,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                 data-bs-dismiss="modal">
                                             Close
                                         </button>
-                                        <button type="button"
-                                                onclick="addMemberToProject()"
+                                        <button type="submit"
+                                                name="submit"
                                                 class="btn fw-bold"
                                                 style="background-color: var(--secondary); color: var(--primary);">
                                             ADD
@@ -634,7 +693,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                     </div>
                                 </form>
                             </div>
-
                         </div>
                     </div>
 
@@ -686,179 +744,66 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                              style="background-color: var(--secondary);">
                             <div class="container p-0 scrollable-div-inside">
 
-                                <!--                                        --><?php
-                                //                                        $teamMemberNo = 1;
-                                //                                        foreach ($teamMembers as $teamMember) {
-                                //
-                                //                                            $projectMember = new Undergraduate(null, null, null, null, null, null);
-                                //                                            $projectMember->setUserId($teamMember->getUgID());
-                                //                                            $projectMember->loadDataFromUserID($con);
-                                //
-                                //                                            $projectMemberTeam = new TeamCategory($teamMember->getCategoryID(), null, null, null);
-                                //                                            $projectMemberTeam->loadDataByTeamID($con);
-                                //
-                                //                                            ?>
+                                <?php
+                                foreach ($PRTasks as $PRTask) {
+                                    $PRTask = new PRTask($PRTask->getprID(),null,null,$PRTask->gettopic(),$PRTask->getdescription(),$PRTask->getdesignerID(),$PRTask->gettopic(),null,$PRTask->getcaptionWriterID(),null,null,null,$PRTask->getprojectID(),null);
+                                }
+                                ?>
                                 <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
-                                    <div class="col-1 d-flex tabel-column-type-2">
-                                        <div class="my-auto">
-                                            <img class="rounded-circle"
-                                                 style="width: 40px; height: 40px; object-fit: cover;"
-                                            <!--                                                             src="assets/images/profile_img/ug/-->
-                                            <? //= $projectMember->getProfileImg() ?><!--"-->
-                                            alt="">
-                                        </div>
+
+                                    <div class="col-1 tabel-column-type-1 d-flex">
+                                        <input type="checkbox" name="published" value="published">
                                     </div>
                                     <div class="col-1 tabel-column-type-1 d-flex">
-                                        <!--                                                    <div class="my-auto">-->
-                                        <? //= $projectMember->getFirstName() ?><!-- -->
-                                        <? //= $projectMember->getLastName() ?><!--</div>-->
+
                                     </div>
                                     <div class="col-1 tabel-column-type-1 d-flex">
-                                        <!--                                                    <div class="my-auto">-->
-                                        <? //= $projectMember->getFirstName() ?><!-- -->
-                                        <? //= $projectMember->getLastName() ?><!--</div>-->
-                                    </div>
-                                    <div class="col-1 tabel-column-type-1 d-flex">
-                                        <!--                                                    <div class="my-auto">-->
-                                        <? //= $projectMember->getFirstName() ?><!-- -->
-                                        <? //= $projectMember->getLastName() ?><!--</div>-->
+
                                     </div>
                                     <div class="col-2 tabel-column-type-1 d-flex">
-                                        <!--                                                    <div class="my-auto">-->
-                                        <? //= $projectMember->getFirstName() ?><!-- -->
-                                        <? //= $projectMember->getLastName() ?><!--</div>-->
+
                                     </div>
                                     <div class="col-3 tabel-column-type-1 d-flex">
-                                        <!--                                                    <div class="my-auto">-->
-                                        <? //= $projectMember->getFirstName() ?><!-- -->
-                                        <? //= $projectMember->getLastName() ?><!--</div>-->
+
                                     </div>
                                     <div class="col-1 tabel-column-type-1 d-flex">
-                                        <!--                                                    <div class="my-auto">-->
-                                        <? //= $projectMember->getFirstName() ?><!-- -->
-                                        <? //= $projectMember->getLastName() ?><!--</div>-->
+
                                     </div>
                                     <div class="col-1 d-flex tabel-column-type-2">
-                                        <!--                                                    <div class="my-auto mx-auto">-->
-                                        <? //= $projectMember->getUsername() ?><!--</div>-->
+
                                     </div>
                                     <div class="col-1 d-flex tabel-column-type-1">
-                                        <!--                                                    <div class="my-auto mx-auto">-->
-                                        <? //= $projectMember->getContactNo() ?><!--</div>-->
+                                        <input type="checkbox" name="verify" value="verify">
                                     </div>
                                     <div class="col-1 d-flex tabel-column-type-1">
-                                        <!--    <div class="my-auto mx-auto">-->
-                                        <? //= $projectMember->getContactNo() ?><!--</div>-->
+                                        <ion-icon class="my-auto" type="button"
+                                                  data-bs-toggle="modal"
+                                                  data-bs-target="#delete-project-member-<?= $teamMemberNo ?>"
+                                                  name="trash-outline"></ion-icon>
                                     </div>
 
                                     <div class="col-1 tabel-column-type-1 d-flex">
                                         <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
 
-                                            <!--========== Delete team Member button =========-->
-                                            <ion-icon class="my-auto" type="button"
-                                                      data-bs-toggle="modal"
-                                            <!--                                                                  data-bs-target="#delete-project-member--->
-                                            <? //= $teamMemberNo ?><!--"-->
-                                            name="trash-outline"></ion-icon>
-                                        </div>
-
-                                        <!-- =========== Delete team Member button model =========== -->
-                                        <div class="modal fade"
-                                        <!--                                                         id="delete-project-member--->
-                                        <? //= $teamMemberNo ?><!--"-->
-                                        tabindex="-1"
-                                        role="dialog"
-                                        aria-labelledby="exampleModalCenterTitle"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered"
-                                             role="document">
-                                            <div class="modal-content">
-                                                <!--=== form =====-->
-                                                <form action="process/projectdashboard/deleteTeamMember.php"
-                                                      method="post">
-                                                    <div class="modal-header py-2 px-2"
-                                                         style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
-                                                        <div class="d-flex flex-row w-100 justify-content-between">
-
-                                                            <div class="ms-2 my-auto fs-4 fw-bold">Team
-                                                                Member
-                                                            </div>
-
-                                                            <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
-                                                            <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
-                                                            <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
-                                                                 style="font-size: 1.3rem; color: var(--accent-color3);">
-                                                                Delete
-                                                            </div>
-                                                        </div>
-
-                                                        <!--======= hidden ==========-->
-                                                        <input type="hidden" name="menuNo"
-                                                               value="2">
-                                                        <input type="hidden" name="ug_id"
-                                                        <!--                                                                               value="-->
-                                                        <? //= $projectMember->getUserId() ?><!--">-->
-                                                        <input type="hidden" name="cat_id"
-                                                        <!--                                                                               value="-->
-                                                        <? //= $projectMemberTeam->getCategoryID() ?><!--">-->
-                                                    </div>
-
-                                                    <div class="modal-body"
-                                                         style="background-color: var(--lighter-secondary);">
-                                                        <div class="d-flex flex-column fw-normal fs-5">
-                                                            <div class="fw-bold">
-                                                                Do you want to Delete this Team Member ?
-                                                            </div>
-                                                            <div class="fw-bold"
-                                                                 style="color: var(--primary); font-size: 1.1rem;">
-                                                                <!--                                                                                -->
-                                                                <? //= $projectMember->getFirstName() ?><!-- --><? //= $projectMember->getLastName() ?>
-                                                            </div>
-                                                            <div class="fw-bold"
-                                                                 style="color: var(--accent-color); font-size: 1.1rem;">
-                                                                <!--                                                                                --><? //= $projectMemberTeam->getCategoryName() ?>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer"
-                                                         style="background-color: var(--primary);">
-                                                        <button type="button"
-                                                                class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">
-                                                            Close
-                                                        </button>
-                                                        <button type="submit"
-                                                                name="submit"
-                                                                class="btn fw-bold"
-                                                                style="background-color: var(--accent-color3); color: var(--primary);">
-                                                            Delete
-                                                        </button>
-
-                                                    </div>
-                                                </form>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
+
+                                <?php
+                                $teamMemberNo++
+                                ?>
+
                             </div>
-
-                            <?php
-                            $teamMemberNo++
-                            ?>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div id="menu-content-6" class="main-content hide">
-    <div class="col-12 p-5 d-flex justify-content-center ">
-        <div class="col-md-12 mx-auto">
-            <div class=" d-flex w-100">
+    <div id="menu-content-6" class="main-content hide">
+        <div class="col-12 p-5 d-flex justify-content-center ">
+            <div class="col-md-12 mx-auto">
+                <div class=" d-flex w-100">
 
                 <div class="btn btn-success fw-bold my-auto ms-auto me-2 d-flex"
                      type="button" data-bs-toggle="modal"
