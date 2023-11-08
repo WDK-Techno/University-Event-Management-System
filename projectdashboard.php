@@ -63,7 +63,7 @@ $events = Event::getEventListFromProjectID($con, $project->getProjectID());
 $teamMembers = TeamMember::getMemberListFromProjectID($con, $project->getProjectID());
 
 //Get Project List
-$projects = Project::getProjectList($con);
+//$projects = Project::getProjectList($con);
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -90,24 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['imgUploadErr'])) {
         $error_imgUpload = $_GET['imgUploadErr'];
 
-        if ($error_imgUpload == 1) {
-            $errorMessage_settings = "Database Error";
-        }
-        if ($error_imgUpload == 2) {
-            $errorMessage_settings = "Error in Moving File";
-        }
-        if ($error_imgUpload == 3) {
-            $errorMessage_settings = "File Size larger than 10mb";
-        }
-        if ($error_imgUpload == 4) {
-            $errorMessage_settings = "Error in File Uploading";
-        }
-        if ($error_imgUpload == 5) {
-            $errorMessage_settings = "Invalid file format";
-        }
-    }
-}
-?>
         if ($error_imgUpload == 1) {
             $errorMessage_settings = "Database Error";
         }
@@ -1196,7 +1178,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                                             <input class="shadow-sm text-center form-control"
                                                    name="project_name" type="text"
-                                                   value="<?= $project->getProjectName() ?>" required/>
+                                                   value="<?=$project->getProjectName() ?>" required/>
                                             <!--======= hidden ==========-->
                                             <input type="hidden" name="menuNo" value="7">
                                             <input type="hidden" name="project_id"
