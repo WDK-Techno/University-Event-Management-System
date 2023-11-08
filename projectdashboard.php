@@ -64,7 +64,7 @@ $PRTasks = PRTask::getTaskListFromProjectID($con, $project->getProjectID());
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $selected_menuNo = 3;
+    $selected_menuNo = 5;
     if (isset($_GET['tab'])) {
         $selected_menuNo = $_GET['tab'];
     }
@@ -288,6 +288,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                     <!-- ======= add task button ======== -->
                     <div class="d-flex mt-3 mb-2">
+                        <div class="d-flex ms-auto me-0">
+
+                            <select id="designer_id" class="form-select"
+                                    style="width: 50%;"
+                                    name="designer_id" id="" required>
+                                <option class="text-center" value="" selected>-- Define Design Team --
+                                </option>
+                                <?php
+                                foreach ($teamCategories as $teamCategory) {
+                                    ?>
+                                    <option value="<?= $teamCategory->getCategoryID() ?>"><?= $teamCategory->getCategoryName() ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                            <select id="designer_id" class="form-select ms-2"
+                                    style="width: 50%;"
+                                    name="designer_id" id="" required>
+                                <option class="text-center" value="" selected>-- Define Writing Team --
+                                </option>
+                                <?php
+                                foreach ($teamCategories as $teamCategory) {
+                                    ?>
+                                <option value="<?= $teamCategory->getCategoryID() ?>"><?= $teamCategory->getCategoryName() ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
                         <div class="btn fw-bold my-auto me-0 ms-auto d-flex"
                              style="color: var(--lighter-secondary) !important; background-color: var(--primary);"
                              type="button" data-bs-toggle="modal"

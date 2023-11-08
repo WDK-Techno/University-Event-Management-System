@@ -138,7 +138,6 @@ class PRTask
         } catch (PDOException $exc) {
             die("Error in Event Adding" . $exc->getMessage());
         }
-
     }
     public static function getTaskListFromProjectID($con, $project_id)
     {

@@ -16,6 +16,8 @@ class Project
     private $profileImage;
     private $endDate;
     private $description;
+    private $designTeamID;
+    private $writingTeamID;
 
 
     public function getProjectID()
@@ -122,7 +124,25 @@ class Project
         $this->description = $description;
     }
 
+    public function getDesignTeamID()
+    {
+        return $this->designTeamID;
+    }
 
+    public function setDesignTeamID($designTeamID): void
+    {
+        $this->designTeamID = $designTeamID;
+    }
+
+    public function getWritingTeamID()
+    {
+        return $this->writingTeamID;
+    }
+
+    public function setWritingTeamID($writingTeamID): void
+    {
+        $this->writingTeamID = $writingTeamID;
+    }
 
     public function __construct($projectID, $projectName, $clubID, $projectChairID, $status, $startDate, $profileImage)
     {
@@ -183,6 +203,8 @@ class Project
                 $this->profileImage = $rs->profile_image;
                 $this->endDate = $rs->end_date;
                 $this->description = $rs->description;
+                $this->designTeamID = $rs->design_team_id;
+                $this->writingTeamID = $rs->writing_team_id;
 
                 return true;
             } else {
@@ -201,7 +223,7 @@ class Project
         try {
 
             $query = "UPDATE project SET name=?,project_chair_id=?,status=?,start_date=?,
-                   end_date=?,description=?,profile_image=? WHERE project_id=?";
+                   end_date=?,description=?,profile_image=?,design_team_id=?,writing_team_id=? WHERE project_id=?";
             $pstmt = $con->prepare($query);
             $pstmt->bindValue(1, $this->projectName);
             $pstmt->bindValue(2, $this->projectChairID);
@@ -211,6 +233,8 @@ class Project
             $pstmt->bindValue(6, $this->description);
             $pstmt->bindValue(7, $this->profileImage);
             $pstmt->bindValue(8, $this->projectID);
+            $pstmt->bindValue(9, $this->designTeamID);
+            $pstmt->bindValue(10, $this->writingTeamID);
             $pstmt->execute();
 
             return $pstmt->rowCount() > 0;
@@ -221,7 +245,8 @@ class Project
     }
 
 
-    public static function getProjectListFromClubID($con,$clubId){
+    public static function getProjectListFromClubID($con, $clubId)
+    {
 
         $projects = array();
         try {
@@ -246,7 +271,9 @@ class Project
 
         return $projects;
     }
-    public static function getProjectList($con){
+
+    public static function getProjectList($con)
+    {
 
         $projects = array();
         try {
