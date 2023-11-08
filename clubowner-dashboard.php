@@ -674,7 +674,7 @@ if (isset($_SESSION['user_id'])) {
             <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
 
                 <?php
-                $flyerno = 1;
+                $flyerNo = 1;
 
                 foreach ($publicFlyers
 
@@ -685,13 +685,16 @@ if (isset($_SESSION['user_id'])) {
                             null, null, null, null);
                     $publicFlyerObj->loadFlyerFromFlyerID($con);
 
+                    if ($publicFlyerObj->getStatus() != "delete"){
+
                     ?>
                     <!--===view flyer part  card-->
                     <div class="col">
                         <div class="card" style="width: 18rem">
 
                             <div class="card-header fw-bold"
-                                 style=" color: var(--lighter-secondary) !important; background-color: var(--primary);"><?= $publicFlyerObj->getFlyerTopic() ?></div>
+                                 style=" color: var(--lighter-secondary) !important; background-color: var(--primary);"><?= $publicFlyerObj->getFlyerTopic() ?>
+                            </div>
                             <img class="card-img-top"
                                  src="assets/images/flyer_img/<?= $publicFlyerObj->getFlyerImg() ?>"
                                  alt="Card image cap"/>
@@ -700,16 +703,16 @@ if (isset($_SESSION['user_id'])) {
                                 <h5 class="card-title"><?= $publicFlyerObj->getCaption() ?></h5>
                             </div>
                             <!----------------- card  footer ------------------->
-                            <div class="card-footer">
+                            <div class="card-footer" style="color: var(--lighter-secondary)!important; background-color: var(--accent-color3);">
                                 <!----------------- edit button ------------------->
                                 <button type="button" class="btn " data-bs-toggle="modal"
                                         data-bs-target="#edit<?= $publicFlyerObj->getFlyerID() ?>">
-                                    <ion-icon name="create-outline" size="large"></ion-icon>
+                                    <ion-icon name="create-outline" size="small"></ion-icon>
                                 </button>
                                 <!----------------- delete button ------------------->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                <button type="button" class="btn" data-bs-toggle="modal"
                                         data-bs-target="#<?= $publicFlyerObj->getFlyerID() ?>">
-                                    Delete
+                                    <ion-icon name="trash-outline" size="small"></ion-icon>
                                 </button>
 
                                 <!----------------- Modal for update flyer ------------------>
@@ -720,7 +723,7 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="modal-header"
                                                  style=" color: var(--lighter-secondary) !important; background-color: var(--primary);">
                                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit
-                                                    Flyer <?= $flyerno ?></h1>
+                                                    Flyer <?= $flyerNo ?></h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                             </div>
@@ -842,7 +845,8 @@ if (isset($_SESSION['user_id'])) {
                         </div>
                     </div>
                     <?php
-                    $flyerno++;
+                    }
+                    $flyerNo++;
                 }
                 ?>
             </div>
