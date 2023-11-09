@@ -98,42 +98,43 @@ class TeamMember
         return $teamMembers;
     }
 
-    public static function getTeamMembersByCategoryID($con, $categoryID)
-    {
-        $teamMembers = array();
-        try {
-            $query = "SELECT u.* FROM undergraduate u JOIN project_team pt ON u.user_id = pt.ug_id WHERE pt.category_id = ?;";
-            $pstmt = $con->prepare($query);
-            $pstmt->bindValue(1, $categoryID);
-            $pstmt->execute();
-            $rs = $pstmt->fetchAll(PDO::FETCH_ASSOC);
+//    public static function getTeamMembersByCategoryID($con, $categoryID)
+//    {
+//        $teamMembers = array();
+//        try {
+//            $query = "SELECT u.* FROM undergraduate u JOIN project_team pt ON u.user_id = pt.ug_id WHERE pt.category_id = ?;";
+//            $pstmt = $con->prepare($query);
+//            $pstmt->bindValue(1, $categoryID);
+//            $pstmt->execute();
+//            $rs = $pstmt->fetchAll(PDO::FETCH_ASSOC);
+//
+//            $teamMembers[] = $rs;
+//
+//        } catch
+//        (PDOException $exc) {
+//            die("Error in Member Data Loading " . $exc->getMessage());
+//        }
+//        return $teamMembers;
+//    }
 
-            $teamMembers[] = $rs;
-
-        } catch
-        (PDOException $exc) {
-            die("Error in Member Data Loading " . $exc->getMessage());
-        }
-        return $teamMembers;
-    }
-    public static function getSecrataryMembersByCategoryID($con, $categoryID)
-    {
-        $teamMembers = array();
-        try {
-            $query = "SELECT u.* FROM undergraduate u JOIN project_team pt ON u.user_id = pt.ug_id WHERE pt.category_id = ?;";
-            $pstmt = $con->prepare($query);
-            $pstmt->bindValue(1, $categoryID);
-            $pstmt->execute();
-            $rs = $pstmt->fetchAll(PDO::FETCH_ASSOC);
-
-            $teamMembers[] = $rs;
-
-        } catch
-        (PDOException $exc) {
-            die("Error in Member Data Loading " . $exc->getMessage());
-        }
-        return $teamMembers;
-    }
+//    public static function getSecrataryMembersByCategoryID($con, $categoryID)
+//    {
+//        $teamMembers = array();
+//        try {
+//            $query = "SELECT u.* FROM undergraduate u JOIN project_team pt ON u.user_id = pt.ug_id WHERE pt.category_id = ?;";
+//            $pstmt = $con->prepare($query);
+//            $pstmt->bindValue(1, $categoryID);
+//            $pstmt->execute();
+//            $rs = $pstmt->fetchAll(PDO::FETCH_ASSOC);
+//
+//            $teamMembers[] = $rs;
+//
+//        } catch
+//        (PDOException $exc) {
+//            die("Error in Member Data Loading " . $exc->getMessage());
+//        }
+//        return $teamMembers;
+//    }
 
     public function getCategoryID()
     {

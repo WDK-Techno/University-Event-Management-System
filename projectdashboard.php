@@ -52,8 +52,8 @@ $projectChair->loadDataFromUserID($con);
 
 //Get Team Category List
 $teamCategories = TeamCategory::getTeamCategoeryListFromProjectID($con, $project->getProjectID());
-$teamDesigners = TeamMember::getTeamMembersByCategoryID($con, 11);
-$teamCaptionWritters = TeamMember::getSecrataryMembersByCategoryID($con, 2);
+$desingTeamMembers = TeamMember::getMemberListFromCategoryID($con, $project->getDesignTeamID());
+$writingTeamMembers = TeamMember::getMemberListFromCategoryID($con, $project->getWritingTeamID());
 
 //Get Events List
 $events = Event::getEventListFromProjectID($con, $project->getProjectID());
@@ -344,11 +344,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <!-- ======= add task button ======== -->
                             <?php
                             $isDisabled = "disabled";
-                            if ($project->getDesignTeamID() != null && $project->getWritingTeamID() != null){
+                            if ($project->getDesignTeamID() != null && $project->getWritingTeamID() != null) {
                                 $isDisabled = "";
                             }
                             ?>
-                            <div class="btn fw-bold my-auto me-0 ms-auto d-flex <?=$isDisabled?>"
+                            <div class="btn fw-bold my-auto me-0 ms-auto d-flex <?= $isDisabled ?>"
                                  style="color: var(--lighter-secondary) !important; background-color: var(--primary); height: fit-content"
                                  type="button" data-bs-toggle="modal"
                                  data-bs-target="#add-new-task">
@@ -400,7 +400,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                             <div class="d-flex mt-2 px-5">
                                                 <input class="form-control text-center"
                                                        name="description" id="add-description"
-                                                       placeholder="Description" required/>
+                                                       placeholder="Description" />
                                             </div>
                                             <!-- ===== select team ======= -->
                                             <div class="d-flex mt-2 px-5">
@@ -411,9 +411,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                     <option class="text-center" value="" selected>-- Select Designer --
                                                     </option>
                                                     <?php
-                                                    foreach ($teamDesigners[0] as $teamDesigner) {
+                                                    foreach ($desingTeamMembers as $desingTeamMember) {
+                                                        $member = new Undergraduate(null, null, null, null, null, null);
+                                                        $member->setUserId($desingTeamMember->getUgID());
+                                                        $member->loadDataFromUserID($con);
                                                         ?>
-                                                        <option value="<?= htmlspecialchars($teamDesigner['user_id']) ?>"><?= htmlspecialchars($teamDesigner['first_name']), $teamDesigner['last_name'] ?></option>
+                                                        <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
                                                         <?php
                                                     }
                                                     ?>
@@ -427,9 +430,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                         --
                                                     </option>
                                                     <?php
-                                                    foreach ($teamCaptionWritters[0] as $teamCaptionWritter) {
+                                                    foreach ($writingTeamMembers as $writingTeamMember) {
+                                                        $member = new Undergraduate(null, null, null, null, null, null);
+                                                        $member->setUserId($writingTeamMember->getUgID());
+                                                        $member->loadDataFromUserID($con);
                                                         ?>
-                                                        <option value="<?= htmlspecialchars($teamCaptionWritter['user_id']) ?>"><?= htmlspecialchars($teamCaptionWritter['first_name']), $teamCaptionWritter['last_name'] ?></option>
+                                                        <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
                                                         <?php
                                                     }
                                                     ?>
@@ -438,6 +444,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                             </div>
                                             <div class="mt-2 text-center" id="add-member-team-error"
                                                  style="color: var(--accent-color3)"></div>
+
+                                            <!--======= hidden ==========-->
+                                            <input type="hidden" name="menuNo" value="5">
+                                            <input type="hidden" name="project_id"
+                                                   value="<?= $project->getProjectID() ?>">
 
                                         </div>
                                         <div class="modal-footer" style="background-color: var(--primary);">
