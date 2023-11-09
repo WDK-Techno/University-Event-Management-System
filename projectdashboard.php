@@ -545,7 +545,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                 <div class="my-auto fw-bold"><?= $task->gettopic() ?></div>
                                             </div>
                                             <div class="col-3 tabel-column-type-1 d-flex justify-content-center">
-                                                <div class="my-auto"><?= $task->getdescription() ?></div>
+                                                <div class="my-auto text-center"><?= $task->getdescription() ?></div>
                                             </div>
                                             <div class="col-1 tabel-column-type-2 d-flex justify-content-center"
                                                  style="font-size: 0.8rem; text-align: center">
