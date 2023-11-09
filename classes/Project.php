@@ -232,9 +232,9 @@ class Project
             $pstmt->bindValue(5, $this->endDate);
             $pstmt->bindValue(6, $this->description);
             $pstmt->bindValue(7, $this->profileImage);
-            $pstmt->bindValue(8, $this->projectID);
-            $pstmt->bindValue(9, $this->designTeamID);
-            $pstmt->bindValue(10, $this->writingTeamID);
+            $pstmt->bindValue(8, $this->designTeamID);
+            $pstmt->bindValue(9, $this->writingTeamID);
+            $pstmt->bindValue(10, $this->projectID);
             $pstmt->execute();
 
             return $pstmt->rowCount() > 0;

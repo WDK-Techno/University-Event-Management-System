@@ -285,246 +285,273 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <div class="container-fluid">
             <div class="row d-flex">
                 <div class="col-11 mx-auto">
+                    <div class="d-flex flex-column mt-3 mb-2">
+                        <div class="d-flex my-3 mx-auto w-100">
+                            <!-- ======= define PR dropdowns ======== -->
+                            <div class="d-flex ms-0 me-auto my-auto">
+                                <form action="process/projectdashboard/definePRTeams.php" method="POST" class="d-flex"
+                                      style="height: fit-content">
+                                    <select id="design_team_id" class="form-select" onchange="defineSubmit()"
+                                            style="width: 50%;"
+                                            name="design_team_id" id="" required>
 
-                    <!-- ======= add task button ======== -->
-                    <div class="d-flex mt-3 mb-2">
-                        <div class="d-flex ms-auto me-0">
+                                        <option class="text-center" value="">-- Define Design Team --
+                                        </option>
+                                        <?php
+                                        $isSelected = "";
+                                        foreach ($teamCategories as $teamCategory) {
+                                            if ($project->getDesignTeamID() == $teamCategory->getCategoryID()) {
+                                                $isSelected = "selected";
+                                            } else {
+                                                $isSelected = "";
+                                            }
+                                            ?>
+                                            <option value="<?= $teamCategory->getCategoryID() ?>" <?= $isSelected ?>><?= $teamCategory->getCategoryName() ?></option>
+                                            <?php
 
-                            <select id="designer_id" class="form-select"
-                                    style="width: 50%;"
-                                    name="designer_id" id="" required>
-                                <option class="text-center" value="" selected>-- Define Design Team --
-                                </option>
-                                <?php
-                                foreach ($teamCategories as $teamCategory) {
-                                    ?>
-                                    <option value="<?= $teamCategory->getCategoryID() ?>"><?= $teamCategory->getCategoryName() ?></option>
-                                    <?php
-                                }
-                                ?>
-                            </select>
-                            <select id="designer_id" class="form-select ms-2"
-                                    style="width: 50%;"
-                                    name="designer_id" id="" required>
-                                <option class="text-center" value="" selected>-- Define Writing Team --
-                                </option>
-                                <?php
-                                foreach ($teamCategories as $teamCategory) {
-                                    ?>
-                                <option value="<?= $teamCategory->getCategoryID() ?>"><?= $teamCategory->getCategoryName() ?></option>
-                                <?php
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="btn fw-bold my-auto me-0 ms-auto d-flex"
-                             style="color: var(--lighter-secondary) !important; background-color: var(--primary);"
-                             type="button" data-bs-toggle="modal"
-                             data-bs-target="#add-new-task">
-                            <ion-icon class="my-auto" name="add-outline"></ion-icon>
-                            <div class="my-auto">Task</div>
-                        </div>
-                    </div>
+                                        }
+                                        ?>
+                                    </select>
+                                    <select id="sec_team_id" class="form-select ms-2" onchange="defineSubmit()"
+                                            style="width: 50%;"
+                                            name="sec_team_id" id="" required>
+                                        <option class="text-center" value="" selected>-- Define Writing Team --
+                                        </option>
+                                        <?php
+                                        $isSelected = "";
+                                        foreach ($teamCategories as $teamCategory) {
+                                            if ($project->getWritingTeamID() == $teamCategory->getCategoryID()) {
+                                                $isSelected = "selected";
+                                            } else {
+                                                $isSelected = "";
+                                            }
+                                            ?>
+                                            <option value="<?= $teamCategory->getCategoryID() ?>" <?= $isSelected ?>><?= $teamCategory->getCategoryName() ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <!--======= hidden ==========-->
+                                    <input type="hidden" name="menuNo" value="5">
+                                    <input type="hidden" name="project_id"
+                                           value="<?= $project->getProjectID() ?>">
+                                    <input class="d-none" type="submit" name="define_submit"
+                                           id="define_submit"/>
 
-                    <!-- ========= add task button model ========== -->
-                    <div class="modal fade"
-                         id="add-new-task"
-                         tabindex="-1"
-                         role="dialog"
-                         aria-labelledby="exampleModalCenterTitle"
-                         aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered"
-                             role="document">
-                            <div class="modal-content">
-                                <!--=== form =====-->
-                                <form action="process/projectdashboard/addNewTask.php" method="POST">
-                                    <div class="modal-header py-2 px-2"
-                                         style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
-                                        <div class="d-flex flex-row w-100 justify-content-between">
-
-                                            <div class="ms-2 my-auto fs-4 fw-bold">
-                                                Task
-                                            </div>
-
-                                            <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
-                                            <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
-                                            <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
-                                                 style="font-size: 1.3rem; color: var(--accent-color2);">
-                                                New
-                                            </div>
-                                        </div>
-
-                                        <!--======= hidden ==========-->
-                                        <input type="hidden" name="menuNo" value="5">
-                                    </div>
-
-                                    <div class="modal-body"
-                                         style="background-color: var(--lighter-secondary);">
-                                        <!-- ====== input username ====== -->
-                                        <div class="d-flex mt-2 px-5">
-                                            <input class="form-control text-center"
-                                                   name="topic" id="add-topic"
-                                                   placeholder="Topic" required/>
-                                        </div>
-                                        <div class="d-flex mt-2 px-5">
-                                            <input class="form-control text-center"
-                                                   name="description" id="add-description"
-                                                   placeholder="Description" required/>
-                                        </div>
-                                        <!-- ===== select team ======= -->
-                                        <div class="d-flex mt-2 px-5">
-
-                                            <select id="designer_id" class="form-select ms-auto me-0"
-                                                    style="width: 50%;"
-                                                    name="designer_id" id="" required>
-                                                <option class="text-center" value="" selected>-- Select Designer --
-                                                </option>
-                                                <?php
-                                                foreach ($teamDesigners[0] as $teamDesigner) {
-                                                    ?>
-                                                    <option value="<?= htmlspecialchars($teamDesigner['user_id']) ?>"><?= htmlspecialchars($teamDesigner['first_name']), $teamDesigner['last_name'] ?></option>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </select>
-
-                                            <select id="caption_writer_id" class="form-select ms-auto me-0"
-                                                    style="width: 50%;"
-                                                    name="caption_writer_id" id="" required>
-                                                <option class="text-center" value="" selected>-- Select Caption Writter
-                                                    --
-                                                </option>
-                                                <?php
-                                                foreach ($teamCaptionWritters[0] as $teamCaptionWritter) {
-                                                    ?>
-                                                    <option value="<?= htmlspecialchars($teamCaptionWritter['user_id']) ?>"><?= htmlspecialchars($teamCaptionWritter['first_name']), $teamCaptionWritter['last_name'] ?></option>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </select>
-
-                                        </div>
-                                        <div class="mt-2 text-center" id="add-member-team-error"
-                                             style="color: var(--accent-color3)"></div>
-
-                                    </div>
-                                    <div class="modal-footer" style="background-color: var(--primary);">
-                                        <button type="button"
-                                                class="btn btn-secondary"
-                                                data-bs-dismiss="modal">
-                                            Close
-                                        </button>
-                                        <button type="submit"
-                                                name="submit"
-                                                class="btn fw-bold"
-                                                style="background-color: var(--secondary); color: var(--primary);">
-                                            ADD
-                                        </button>
-
-                                    </div>
                                 </form>
                             </div>
-                        </div>
-                    </div>
 
-
-                    <!-- ========== member table ============ -->
-                    <div class="card" style="">
-                        <div class="card-header team-member-table pb-0"
-                             style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
-
-                            <div class="row p-0 fw-bold">
-                                <div class="col-1 text-center py-2 rounded-top-3"
-                                     style="background-color: var(--primary);">Published
-                                </div>
-                                <div class="col-1 text-center py-2 rounded-top-3"
-                                     style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
-                                    Publish Date
-                                </div>
-                                <div class="col-1 text-center py-2 rounded-top-3"
-                                     style="background-color: var(--primary);">Time
-                                </div>
-                                <div class="col-2 text-center py-2 rounded-top-3"
-                                     style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
-                                    Topic
-                                </div>
-                                <div class="col-3 text-center py-2 rounded-top-3"
-                                     style="background-color: var(--primary);">
-                                    Description
-                                </div>
-                                <div class="col-1 text-center py-2 rounded-top-3"
-                                     style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
-                                    Designer
-                                </div>
-                                <div class="col-1 text-center py-2 rounded-top-3"
-                                     style="background-color: var(--primary);">
-                                    Caption Writter
-                                </div>
-                                <div class="col-1 text-center py-2 rounded-top-3"
-                                     style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
-                                    Verify
-                                </div>
-                                <div class="col-1">
-
-                                </div>
+                            <!-- ======= add task button ======== -->
+                            <div class="btn fw-bold my-auto me-0 ms-auto d-flex"
+                                 style="color: var(--lighter-secondary) !important; background-color: var(--primary); height: fit-content"
+                                 type="button" data-bs-toggle="modal"
+                                 data-bs-target="#add-new-task">
+                                <ion-icon class="my-auto" name="add-outline"></ion-icon>
+                                <div class="my-auto">Task</div>
                             </div>
-
                         </div>
 
-                        <div class="card-body pt-0 bg-dark-subtle scrollable-div Flipped"
-                             style="background-color: var(--secondary);">
-                            <div class="container p-0 scrollable-div-inside">
+                        <!-- ========= add task button model ========== -->
+                        <div class="modal fade"
+                             id="add-new-task"
+                             tabindex="-1"
+                             role="dialog"
+                             aria-labelledby="exampleModalCenterTitle"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered"
+                                 role="document">
+                                <div class="modal-content">
+                                    <!--=== form =====-->
+                                    <form action="process/projectdashboard/addNewTask.php" method="POST">
+                                        <div class="modal-header py-2 px-2"
+                                             style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                            <div class="d-flex flex-row w-100 justify-content-between">
 
-                                <?php
+                                                <div class="ms-2 my-auto fs-4 fw-bold">
+                                                    Task
+                                                </div>
 
-                                foreach ($PRTasks as $PRTask) {
-                                    $PRTask = new PRTask($PRTask->getprID(), null, null, $PRTask->gettopic(), $PRTask->getdescription(), $PRTask->getdesignerID(), $PRTask->gettopic(), null, $PRTask->getcaptionWriterID(), null, null, null, $PRTask->getprojectID(), null);
-                                }
-                                ?>
-                                <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
+                                                <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                     style="font-size: 1.3rem; color: var(--accent-color2);">
+                                                    New
+                                                </div>
+                                            </div>
 
-                                    <div class="col-1 tabel-column-type-1 d-flex">
-                                        <input type="checkbox" name="published" value="published">
-                                    </div>
-                                    <div class="col-1 tabel-column-type-1 d-flex">
+                                            <!--======= hidden ==========-->
+                                            <input type="hidden" name="menuNo" value="5">
+                                        </div>
 
-                                    </div>
-                                    <div class="col-1 tabel-column-type-1 d-flex">
+                                        <div class="modal-body"
+                                             style="background-color: var(--lighter-secondary);">
+                                            <!-- ====== input username ====== -->
+                                            <div class="d-flex mt-2 px-5">
+                                                <input class="form-control text-center"
+                                                       name="topic" id="add-topic"
+                                                       placeholder="Topic" required/>
+                                            </div>
+                                            <div class="d-flex mt-2 px-5">
+                                                <input class="form-control text-center"
+                                                       name="description" id="add-description"
+                                                       placeholder="Description" required/>
+                                            </div>
+                                            <!-- ===== select team ======= -->
+                                            <div class="d-flex mt-2 px-5">
 
-                                    </div>
-                                    <div class="col-2 tabel-column-type-1 d-flex">
+                                                <select id="designer_id" class="form-select ms-auto me-0"
+                                                        style="width: 50%;"
+                                                        name="designer_id" id="" required>
+                                                    <option class="text-center" value="" selected>-- Select Designer --
+                                                    </option>
+                                                    <?php
+                                                    foreach ($teamDesigners[0] as $teamDesigner) {
+                                                        ?>
+                                                        <option value="<?= htmlspecialchars($teamDesigner['user_id']) ?>"><?= htmlspecialchars($teamDesigner['first_name']), $teamDesigner['last_name'] ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
 
-                                    </div>
-                                    <div class="col-3 tabel-column-type-1 d-flex">
+                                                <select id="caption_writer_id" class="form-select ms-auto me-0"
+                                                        style="width: 50%;"
+                                                        name="caption_writer_id" id="" required>
+                                                    <option class="text-center" value="" selected>-- Select Caption
+                                                        Writter
+                                                        --
+                                                    </option>
+                                                    <?php
+                                                    foreach ($teamCaptionWritters[0] as $teamCaptionWritter) {
+                                                        ?>
+                                                        <option value="<?= htmlspecialchars($teamCaptionWritter['user_id']) ?>"><?= htmlspecialchars($teamCaptionWritter['first_name']), $teamCaptionWritter['last_name'] ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
 
-                                    </div>
-                                    <div class="col-1 tabel-column-type-1 d-flex">
-
-                                    </div>
-                                    <div class="col-1 d-flex tabel-column-type-2">
-
-                                    </div>
-                                    <div class="col-1 d-flex tabel-column-type-1">
-                                        <input type="checkbox" name="verify" value="verify">
-                                    </div>
-                                    <div class="col-1 d-flex tabel-column-type-1">
-                                        <ion-icon class="my-auto" type="button"
-                                                  data-bs-toggle="modal"
-                                                  data-bs-target="#delete-project-member-<?= $teamMemberNo ?>"
-                                                  name="trash-outline"></ion-icon>
-                                    </div>
-
-                                    <div class="col-1 tabel-column-type-1 d-flex">
-                                        <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
+                                            </div>
+                                            <div class="mt-2 text-center" id="add-member-team-error"
+                                                 style="color: var(--accent-color3)"></div>
 
                                         </div>
+                                        <div class="modal-footer" style="background-color: var(--primary);">
+                                            <button type="button"
+                                                    class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="submit"
+                                                    name="submit"
+                                                    class="btn fw-bold"
+                                                    style="background-color: var(--secondary); color: var(--primary);">
+                                                ADD
+                                            </button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- ========== member table ============ -->
+                        <div class="card" style="height: fit-content">
+                            <div class="card-header team-member-table pb-0"
+                                 style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+
+                                <div class="row p-0 fw-bold">
+                                    <div class="col-1 text-center py-2 rounded-top-3"
+                                         style="background-color: var(--primary);">Published
+                                    </div>
+                                    <div class="col-1 text-center py-2 rounded-top-3"
+                                         style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                                        Publish Date
+                                    </div>
+                                    <div class="col-1 text-center py-2 rounded-top-3"
+                                         style="background-color: var(--primary);">Time
+                                    </div>
+                                    <div class="col-2 text-center py-2 rounded-top-3"
+                                         style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                                        Topic
+                                    </div>
+                                    <div class="col-3 text-center py-2 rounded-top-3"
+                                         style="background-color: var(--primary);">
+                                        Description
+                                    </div>
+                                    <div class="col-1 text-center py-2 rounded-top-3"
+                                         style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                                        Designer
+                                    </div>
+                                    <div class="col-1 text-center py-2 rounded-top-3"
+                                         style="background-color: var(--primary);">
+                                        Caption Writter
+                                    </div>
+                                    <div class="col-1 text-center py-2 rounded-top-3"
+                                         style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
+                                        Verify
+                                    </div>
+                                    <div class="col-1">
+
                                     </div>
                                 </div>
 
-                                <?php
-                                $teamMemberNo++
-                                ?>
+                            </div>
 
+                            <div class="card-body pt-0 bg-dark-subtle scrollable-div Flipped"
+                                 style="background-color: var(--secondary);">
+                                <div class="container p-0 scrollable-div-inside">
+
+                                    <?php
+
+                                    foreach ($PRTasks as $PRTask) {
+                                        $PRTask = new PRTask($PRTask->getprID(), null, null, $PRTask->gettopic(), $PRTask->getdescription(), $PRTask->getdesignerID(), $PRTask->gettopic(), null, $PRTask->getcaptionWriterID(), null, null, null, $PRTask->getprojectID(), null);
+                                    }
+                                    ?>
+                                    <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
+
+                                        <div class="col-1 tabel-column-type-1 d-flex">
+                                            <input type="checkbox" name="published" value="published">
+                                        </div>
+                                        <div class="col-1 tabel-column-type-1 d-flex">
+
+                                        </div>
+                                        <div class="col-1 tabel-column-type-1 d-flex">
+
+                                        </div>
+                                        <div class="col-2 tabel-column-type-1 d-flex">
+
+                                        </div>
+                                        <div class="col-3 tabel-column-type-1 d-flex">
+
+                                        </div>
+                                        <div class="col-1 tabel-column-type-1 d-flex">
+
+                                        </div>
+                                        <div class="col-1 d-flex tabel-column-type-2">
+
+                                        </div>
+                                        <div class="col-1 d-flex tabel-column-type-1">
+                                            <input type="checkbox" name="verify" value="verify">
+                                        </div>
+                                        <div class="col-1 d-flex tabel-column-type-1">
+                                            <ion-icon class="my-auto" type="button"
+                                                      data-bs-toggle="modal"
+                                                      data-bs-target="#delete-project-member-<?= $teamMemberNo ?>"
+                                                      name="trash-outline"></ion-icon>
+                                        </div>
+
+                                        <div class="col-1 tabel-column-type-1 d-flex">
+                                            <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <?php
+                                    $teamMemberNo++
+                                    ?>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -559,6 +586,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     function saveImgSubmit() {
         document.getElementById('image_save_submit').click();
+    }
+</script>
+<!--========= execute define PR Team submit button ======== -->
+<script>
+    function defineSubmit() {
+        document.getElementById('define_submit').click();
     }
 </script>
 <script>
