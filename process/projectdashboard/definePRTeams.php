@@ -14,6 +14,13 @@ if (isset($_POST['define_submit'])){
     $designTeamCategoryID = $_POST['design_team_id'];
     $writingTeamCategoryID = $_POST['sec_team_id'];
 
+    if ($designTeamCategoryID == "null"){
+        $designTeamCategoryID = null;
+    }
+    if ($writingTeamCategoryID == "null"){
+        $writingTeamCategoryID = null;
+    }
+
     $project = new Project($projectID,null,null,null,null,null,null);
     $project->loadDataFromProjectID($con);
     $project->setDesignTeamID($designTeamCategoryID);

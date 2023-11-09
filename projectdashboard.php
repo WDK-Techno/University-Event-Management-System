@@ -295,7 +295,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                             style="width: 50%;"
                                             name="design_team_id" id="" required>
 
-                                        <option class="text-center" value="">-- Define Design Team --
+                                        <option class="text-center" value="null">-- Define Design Team --
                                         </option>
                                         <?php
                                         $isSelected = "";
@@ -315,7 +315,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                     <select id="sec_team_id" class="form-select ms-2" onchange="defineSubmit()"
                                             style="width: 50%;"
                                             name="sec_team_id" id="" required>
-                                        <option class="text-center" value="" selected>-- Define Writing Team --
+                                        <option class="text-center" value="null" selected>-- Define Writing Team --
                                         </option>
                                         <?php
                                         $isSelected = "";
@@ -342,7 +342,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             </div>
 
                             <!-- ======= add task button ======== -->
-                            <div class="btn fw-bold my-auto me-0 ms-auto d-flex"
+                            <?php
+                            $isDisabled = "disabled";
+                            if ($project->getDesignTeamID() != null && $project->getWritingTeamID() != null){
+                                $isDisabled = "";
+                            }
+                            ?>
+                            <div class="btn fw-bold my-auto me-0 ms-auto d-flex <?=$isDisabled?>"
                                  style="color: var(--lighter-secondary) !important; background-color: var(--primary); height: fit-content"
                                  type="button" data-bs-toggle="modal"
                                  data-bs-target="#add-new-task">
