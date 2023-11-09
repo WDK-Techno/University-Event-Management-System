@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                         <div class="text-center"><a class="small" href="forgot-password.html">Forgot
                                                 Password?</a></div><!-- End: Forgot Password -->
                                         <!-- Start: Register -->
-                                        <div class="text-center"><a class="small" href="register.html">Create an
+                                        <div class="text-center"><a class="small" href="register.php">Create an
                                                 Account!</a></div><!-- End: Register -->
                                     </div>
                                 </div>

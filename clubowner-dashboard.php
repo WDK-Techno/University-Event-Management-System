@@ -671,7 +671,7 @@ if (isset($_SESSION['user_id'])) {
             <!--===view flyer part-->
 
 
-            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
+            <div class="row ms-1 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
 
                 <?php
                 $flyerNo = 1;
@@ -703,7 +703,7 @@ if (isset($_SESSION['user_id'])) {
                                 <h5 class="card-title"><?= $publicFlyerObj->getCaption() ?></h5>
                             </div>
                             <!----------------- card  footer ------------------->
-                            <div class="card-footer" style="color: var(--lighter-secondary)!important; background-color: var(--accent-color3);">
+                            <div class="card-footer d-flex justify-content-end bg-warning-subtle card-list-option-buttons " style="font-size: 1.7rem;">
                                 <!----------------- edit button ------------------->
                                 <button type="button" class="btn " data-bs-toggle="modal"
                                         data-bs-target="#edit<?= $publicFlyerObj->getFlyerID() ?>">

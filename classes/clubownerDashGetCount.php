@@ -3,7 +3,7 @@
 namespace classes;
 
 
-use mysql_xdevapi\Exception;
+
 use PDOException;
 use PDO;
 

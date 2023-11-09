@@ -2,10 +2,14 @@
 require_once "classes/DBConnector.php";
 require_once "classes/Event.php";
 require_once "classes/User.php";
+require_once "classes/PublicFlyer.php";
 
 use classes\DBConnector;
 use classes\Event;
 use classes\Club;
+use classes\PublicFlyer;
+
+
 
 $con = DBConnector::getConnection();
 $query = "SELECT * FROM event";
@@ -51,6 +55,14 @@ if (!empty($rs)) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <!----owl carosel----->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+          integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css"
+          integrity="sha512-OTcub78R3msOCtY3Tc6FzeDJ8N9qvQn1Ph49ou13xgA9VsH9+LRxoFU6EqLhW4+PKRfU+/HReXmSZXHEkpYoOA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 </head>
@@ -346,6 +358,49 @@ if (!empty($rs)) {
 </div>
 
 
+<hr/>
+
+
+
+<!--flyer show new part--->
+<?php
+$publicFlyer = new PublicFlyer(null,null,null,null,null,null,null,null,null);
+$flyers= $publicFlyer->loadPublicFlyerList($con);
+
+
+
+
+?>
+<section class="game-section">
+
+    <div class="owl-carousel custom-carousel owl-theme">
+        <?php
+        foreach ($flyers as $use) {
+
+        ?>
+        <div class="item"
+             style="background-image: url(assets/images/flyer_img/<?php echo $use->getFlyerImg()?>);">
+            <div class="item-desc">
+                <h3><?php echo $use->getFlyerTopic()?></h3>
+                <p><?php echo $use->getCaption()?>
+                </p>
+                <button class="item-button"><a href="<?php echo $use->getLink()?>">Register</a></button>
+
+            </div>
+        </div>
+
+        <?php
+        }
+        ?>
+
+    </div>
+
+</section>
+
+
+
+
+
 <div class="row">
     <div class="title">
         <h1>Our Services</h1>
@@ -582,12 +637,56 @@ if (!empty($rs)) {
 <!-- ========= Ionicons Scripts ===== -->
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<!-------owl carosel-------->
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"
+        integrity="sha512-gY25nC63ddE0LcLPhxUJGFxa2GoIyA5FLym4UJqHDEMHjp8RET6Zn/SHo1sltt3WuVtqfyxECP38/daUc/WVEA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- ====== Script files ===== -->
 <script src="assets/js/script.js"></script>
 <script>
     var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')
 </script>
+<!-- =====owl====-->
+<script>
+    var owl = $('.owl-carousel');
+    $(".custom-carousel").owlCarousel({
+        autoWidth: true,
+        loop: true,
+        nav:true,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            960:{
+                items:5
+            },
+            1200:{
+                items:6
+            }
+        }
+    });
+    owl.on('mousewheel', '.owl-stage', function (e) {
+        if (e.deltaY>0) {
+            owl.trigger('next.owl');
+        } else {
+            owl.trigger('prev.owl');
+        }
+        e.preventDefault();
+    });
+
+
+</script>
+
 <!-- =====back to top button====-->
 <script>
     $(document).ready(function () {
@@ -606,6 +705,7 @@ if (!empty($rs)) {
             return false;
         });
     });
+
 
 </script>
 
