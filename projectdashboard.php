@@ -524,72 +524,73 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                     foreach ($PRTasks as $PRTask) {
                                         $task = new PRTask($PRTask->getprID(), null, null, null, null, null, null);
                                         $task->loadTaskFromPRId($con);
+
+                                        ?>
+                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
+
+                                            <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
+                                                 style="font-size: 1.8rem; ">
+                                                <input type="checkbox" class="my-auto ms-3 me-auto form-check-input"
+                                                       style="background-color: var(--primary);border-color: var(--accent-color3) ; border-width: 2.5px;"
+                                                       name="published"
+                                                       value="published">
+                                            </div>
+                                            <div class="col-1 tabel-column-type-2 d-flex justify-content-center">
+                                                <div class="my-auto"><?= $task->getpublishDate() ?></div>
+                                            </div>
+                                            <div class="col-1 tabel-column-type-1 d-flex justify-content-center">
+                                                <div class="my-auto"><?= $task->getpublishDate() ?></div>
+                                            </div>
+                                            <div class="col-2 tabel-column-type-2 d-flex justify-content-center">
+                                                <div class="my-auto fw-bold"><?= $task->gettopic() ?></div>
+                                            </div>
+                                            <div class="col-3 tabel-column-type-1 d-flex justify-content-center">
+                                                <div class="my-auto"><?= $task->getdescription() ?></div>
+                                            </div>
+                                            <div class="col-1 tabel-column-type-2 d-flex justify-content-center"
+                                                 style="font-size: 0.8rem; text-align: center">
+                                                <?php
+                                                $disgner = new Undergraduate(null, null, null, null, null, null);
+                                                $disgner->setUserId($task->getdesignerID());
+                                                $disgner->loadDataFromUserID($con);
+                                                ?>
+                                                <div class="my-auto"><?= $disgner->getFirstName() ?>
+                                                    <br><?= $disgner->getLastName() ?></div>
+                                            </div>
+                                            <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
+                                                 style="font-size:0.8rem ;text-align: center;">
+                                                <?php
+                                                $writer = new Undergraduate(null, null, null, null, null, null);
+                                                $writer->setUserId($task->getcaptionWriterID());
+                                                $writer->loadDataFromUserID($con);
+                                                ?>
+                                                <div class="my-auto"><?= $writer->getFirstName() ?>
+                                                    <br><?= $writer->getLastName() ?></div>
+                                            </div>
+
+                                            <div class="col-1 tabel-column-type-2 d-flex justify-content-center"
+                                                 style="font-size: 1.3rem;">
+                                                <input type="checkbox"
+                                                       class="my-auto form-check-input"
+                                                       style="background-color: var(--accent-color3); border-color: yellow;border-width: 1.2px"
+                                                       name="verify" value="verify">
+                                            </div>
+                                            <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
+                                                 style="font-size: 1.5rem">
+                                                <ion-icon class="my-auto me-2" type="button"
+                                                          data-bs-toggle="modal"
+                                                          data-bs-target="#edit-pr-task-<?= $prTaskNo ?>"
+                                                          name="create-outline"></ion-icon>
+                                                <ion-icon class="my-auto" type="button"
+                                                          data-bs-toggle="modal"
+                                                          data-bs-target="#delete-pr-task-<?= $prTaskNo ?>"
+                                                          name="trash-outline"></ion-icon>
+                                            </div>
+                                        </div>
+
+                                        <?php
+                                        $prTaskNo++;
                                     }
-                                    ?>
-                                    <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
-
-                                        <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
-                                             style="font-size: 1.8rem; ">
-                                            <input type="checkbox" class="my-auto ms-3 me-auto form-check-input"
-                                                   style="background-color: var(--primary);border-color: var(--accent-color3) ; border-width: 2.5px;"
-                                                   name="published"
-                                                   value="published">
-                                        </div>
-                                        <div class="col-1 tabel-column-type-2 d-flex justify-content-center">
-                                            <div class="my-auto"><?= $task->getpublishDate() ?></div>
-                                        </div>
-                                        <div class="col-1 tabel-column-type-1 d-flex justify-content-center">
-                                            <div class="my-auto"><?= $task->getpublishDate() ?></div>
-                                        </div>
-                                        <div class="col-2 tabel-column-type-2 d-flex justify-content-center">
-                                            <div class="my-auto fw-bold"><?= $task->gettopic() ?></div>
-                                        </div>
-                                        <div class="col-3 tabel-column-type-1 d-flex justify-content-center">
-                                            <div class="my-auto"><?= $task->getdescription() ?></div>
-                                        </div>
-                                        <div class="col-1 tabel-column-type-2 d-flex justify-content-center"
-                                             style="font-size: 0.8rem; text-align: center">
-                                            <?php
-                                            $disgner = new Undergraduate(null, null, null, null, null, null);
-                                            $disgner->setUserId($task->getdesignerID());
-                                            $disgner->loadDataFromUserID($con);
-                                            ?>
-                                            <div class="my-auto"><?= $disgner->getFirstName() ?>
-                                                <br><?= $disgner->getLastName() ?></div>
-                                        </div>
-                                        <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
-                                             style="font-size:0.8rem ;text-align: center;">
-                                            <?php
-                                            $writer = new Undergraduate(null, null, null, null, null, null);
-                                            $writer->setUserId($task->getcaptionWriterID());
-                                            $writer->loadDataFromUserID($con);
-                                            ?>
-                                            <div class="my-auto"><?= $writer->getFirstName() ?>
-                                                <br><?= $writer->getLastName() ?></div>
-                                        </div>
-
-                                        <div class="col-1 tabel-column-type-2 d-flex justify-content-center"
-                                             style="font-size: 1.3rem;">
-                                            <input type="checkbox"
-                                                   class="my-auto form-check-input"
-                                                   style="background-color: var(--accent-color3); border-color: yellow;border-width: 1.2px"
-                                                   name="verify" value="verify">
-                                        </div>
-                                        <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
-                                             style="font-size: 1.5rem">
-                                            <ion-icon class="my-auto me-2" type="button"
-                                                      data-bs-toggle="modal"
-                                                      data-bs-target="#edit-pr-task-<?= $prTaskNo ?>"
-                                                      name="create-outline"></ion-icon>
-                                            <ion-icon class="my-auto" type="button"
-                                                      data-bs-toggle="modal"
-                                                      data-bs-target="#delete-pr-task-<?= $prTaskNo ?>"
-                                                      name="trash-outline"></ion-icon>
-                                        </div>
-                                    </div>
-
-                                    <?php
-                                    $prTaskNo++
                                     ?>
 
                                 </div>

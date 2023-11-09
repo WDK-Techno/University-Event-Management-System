@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
     if ($_POST['description'] == "") {
         $PRDescription = null;
     }
-    $PRTask = new PRTask(null, null, null, $PRTopic, $PRDescription, $DesignerID, null, $CaptionWriterID, null, null, null, $projectId, null);
+    $PRTask = new PRTask(null,null,$PRTopic,$PRDescription,$DesignerID,$CaptionWriterID,$projectId);
     $result = $PRTask->addNewTask($con);
 
     if ($result) {
