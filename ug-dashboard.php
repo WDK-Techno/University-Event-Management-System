@@ -373,11 +373,9 @@ if (isset($_SESSION['user_id'])) {
                 </div>
             </div>
 
-        </div>
-        <div id="menu-content-2" class="main-content hide">
-            <div class="m-4">
-                <h1>Task </h1>
-            </div>
+        
+        
+            
 
 
             <div class="card mx-4" style="">
@@ -415,7 +413,7 @@ if (isset($_SESSION['user_id'])) {
                         <?php
                         foreach ($subTasks as $subTask) {
                         $subTaskObj = new SubTask($subTask->getSubTaskID(), null, null, null, null, null, null, null);
-                        $subTaskObj->loadSubTaskFromSubTaskID($con);
+                        $subTaskObj->loadCompeatSubTaskFromSubTaskID($con);
                         $project = new Project($subTaskObj->getProjectID(), null, null, null, null, null, null);
                         $project->loadDataFromProjectID($con);
                         ?>
@@ -439,20 +437,8 @@ if (isset($_SESSION['user_id'])) {
                                 <div class="col-2 d-flex tabel-column-type-1">
                                     <div class="my-auto mx-auto"><?=$subTaskObj->getDeadline() ?></div>
                                 </div>
-                                <div class="col-2 d-flex tabel-column-type-2">
-                                    <div class="my-auto mx-auto">
-                                        <input type="checkbox" id="cheak" name='checkTask[]' value="<?=$subTaskObj->getSubTaskID() ?>"></div>
-                                </div>
-                                <div class="col-1 tabel-column-type-1 d-flex">
-                                    <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
 
 
-                                        <ion-icon class="my-auto" type="button"
-                                                  data-bs-toggle="modal"
-                                                  data-bs-target=""
-                                                  name="trash-outline"></ion-icon>
-                                    </div>
-                                </div>
                             </div>
 
                             <?php
