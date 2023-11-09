@@ -100,21 +100,15 @@ class PRTask
         $this->status = $status;
     }
 
-    public function __construct($prID,$isPublished,$publishDate,$topic,$description,$designerID,$isDesignCompleted,$captionWriterID,$isCaptionCompleted,$designCompletingDeadline,$isVerifyByProjectChair,$projectID,$status)
+    public function __construct($prID,$publishDate,$topic,$description,$designerID,$captionWriterID,$projectID)
     {
         $this->prID = $prID;
-        $this->isPublished = $isPublished;
         $this->publishDate = $publishDate;
         $this->topic = $topic;
         $this->description = $description;
         $this->designerID = $designerID;
-        $this->isDesignCompleted = $isDesignCompleted;
         $this->captionWriterID = $captionWriterID;
-        $this->isCaptionCompleted = $isCaptionCompleted;
-        $this->designCompletingDeadline = $designCompletingDeadline;
-        $this->isVerifyByProjectChair = $isVerifyByProjectChair;
         $this->projectID = $projectID;
-        $this->status = $status;
     }
 
     public function addNewTask($con){
@@ -131,7 +125,8 @@ class PRTask
 
             if ($pstmt->rowCount() > 0) {
                 $this->prID = $con->lastInsertId();
-                $this->loadTaskFromPRId($con);
+                return $this->loadTaskFromPRId($con);
+
             } else {
                 return false;
             }
@@ -150,8 +145,8 @@ class PRTask
             $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
             if (!empty($rs)) {
                 foreach ($rs as $row) {
-                    $PRTask = new PRTask($row->prID, $row->isPublished,
-                        $row->publishDate, $row->topic,$row->description, $row->designerID, $row->isDesignCompleted, $row->captionWriterID, $row->isCaptionCompleted, $row->designCompletingDeadline, $row->isVerifyByProjectChair, $row->projectID, $row->status);
+                    $PRTask = new PRTask($row->pr_id,$row->publish_date,$row->topic,
+                        $row->description,$row->designer_id,$row->caption_writer_id,$row->project_id);
                     $PRTasks[] = $PRTask;
                 }
             }
