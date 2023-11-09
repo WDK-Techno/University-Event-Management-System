@@ -17,35 +17,38 @@ class TeamMember
         $this->ugID = $ugID;
     }
 
-    public function addUserToProject($con){
+    public function addUserToProject($con)
+    {
         try {
 
             $query = "INSERT INTO project_team (category_id, ug_id) VALUES (?,?)";
             $pstmt = $con->prepare($query);
-            $pstmt->bindValue(1,$this->categoryID);
-            $pstmt->bindValue(2,$this->ugID);
+            $pstmt->bindValue(1, $this->categoryID);
+            $pstmt->bindValue(2, $this->ugID);
             $pstmt->execute();
 
-            return $pstmt->rowCount()>0;
+            return $pstmt->rowCount() > 0;
 
-        }catch (PDOException $exc){
+        } catch (PDOException $exc) {
             return false;
         }
 
     }
-    public function deleteUserFromProjectTeam($con){
+
+    public function deleteUserFromProjectTeam($con)
+    {
         try {
 
             $query = "DELETE FROM project_team WHERE ug_id=? AND category_id=?";
             $pstmt = $con->prepare($query);
-            $pstmt->bindValue(1,$this->ugID);
-            $pstmt->bindValue(2,$this->categoryID);
+            $pstmt->bindValue(1, $this->ugID);
+            $pstmt->bindValue(2, $this->categoryID);
             $pstmt->execute();
 
-            return $pstmt->rowCount()>0;
+            return $pstmt->rowCount() > 0;
 
-        }catch (PDOException $exc){
-            die("Error in deleting member from project team ". $exc->getMessage());
+        } catch (PDOException $exc) {
+            die("Error in deleting member from project team " . $exc->getMessage());
         }
     }
 
@@ -94,6 +97,44 @@ class TeamMember
         }
         return $teamMembers;
     }
+
+//    public static function getTeamMembersByCategoryID($con, $categoryID)
+//    {
+//        $teamMembers = array();
+//        try {
+//            $query = "SELECT u.* FROM undergraduate u JOIN project_team pt ON u.user_id = pt.ug_id WHERE pt.category_id = ?;";
+//            $pstmt = $con->prepare($query);
+//            $pstmt->bindValue(1, $categoryID);
+//            $pstmt->execute();
+//            $rs = $pstmt->fetchAll(PDO::FETCH_ASSOC);
+//
+//            $teamMembers[] = $rs;
+//
+//        } catch
+//        (PDOException $exc) {
+//            die("Error in Member Data Loading " . $exc->getMessage());
+//        }
+//        return $teamMembers;
+//    }
+
+//    public static function getSecrataryMembersByCategoryID($con, $categoryID)
+//    {
+//        $teamMembers = array();
+//        try {
+//            $query = "SELECT u.* FROM undergraduate u JOIN project_team pt ON u.user_id = pt.ug_id WHERE pt.category_id = ?;";
+//            $pstmt = $con->prepare($query);
+//            $pstmt->bindValue(1, $categoryID);
+//            $pstmt->execute();
+//            $rs = $pstmt->fetchAll(PDO::FETCH_ASSOC);
+//
+//            $teamMembers[] = $rs;
+//
+//        } catch
+//        (PDOException $exc) {
+//            die("Error in Member Data Loading " . $exc->getMessage());
+//        }
+//        return $teamMembers;
+//    }
 
     public function getCategoryID()
     {

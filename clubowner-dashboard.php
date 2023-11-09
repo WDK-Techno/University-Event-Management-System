@@ -37,6 +37,49 @@ if (isset($_SESSION['user_id'])) {
         if (isset($_GET['tab'])) {
             $selected_menuNo = $_GET['tab'];
         }
+        //        ====== error message show ======
+        $errorMessage_settings = "";
+
+        if (isset($_GET['updateFlyer'])) {
+            $error_updateFlyer = $_GET['updateFlyer'];
+            switch ($error_updateFlyer) {
+                case 1:
+                    $errorMessage_settings = "Data not saved";
+                    break;
+                case 2:
+                    $errorMessage_settings = "Empty fields";
+                    break;
+                case 3:
+                    $errorMessage_settings = "not delete image";
+                    break;
+                case 4:
+                    $errorMessage_settings = "data not save";
+                    break;
+                case 5:
+                    $errorMessage_settings = "image not found";
+                    break;
+                case 6:
+                    $errorMessage_settings = "image size over";
+                    break;
+                case 7:
+                    $errorMessage_settings = "image upload error";
+                    break;
+                case 8:
+                    $errorMessage_settings = "image file format error";
+                    break;
+                case 9:
+                    $errorMessage_settings = "Empty fileds";
+                    break;
+                case 10:
+                    $errorMessage_settings = "Error in submit";
+                    break;
+                // Add more cases for other error codes
+            }
+        }
+
+// Debugging output
+
+
     }
 
     ?>
@@ -61,6 +104,8 @@ if (isset($_SESSION['user_id'])) {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
               crossorigin="anonymous">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
     </head>
@@ -289,15 +334,46 @@ if (isset($_SESSION['user_id'])) {
                                                 </div>
                                             </div>
 
-                                            <div>
-                                                <form action="process/clubownerdashboard/deleteProject.php"
-                                                      method="post">
-                                                    <input type="hidden" name="user_id"
-                                                           value="<?= $project->getProjectID() ?>">
-                                                    <button type="submit" name="submit" class="btn btn-danger"
-                                                            style="border: none;width: 96px;height: 38px;">Delete
-                                                    </button>
-                                                </form>
+                                            <div><!-- Button to trigger the modal -->
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                        data-bs-target="#<?= $project->getProjectID() ?>">
+                                                    Delete
+                                                </button>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="<?= $project->getProjectID() ?>"
+                                                     tabindex="-1" aria-labelledby="deleteModalLabel"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="deleteModalLabel">
+                                                                    Delete</h5>
+                                                                <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Are you sure you want to
+                                                                    delete <?= $project->getProjectName() ?>?</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Cancel
+                                                                </button>
+                                                                <form action="process/clubownerdashboard/deleteProject.php"
+                                                                      method="post">
+                                                                    <input type="hidden" name="user_id"
+                                                                           value="<?= $project->getProjectID() ?>">
+                                                                    <button type="submit" name="submit"
+                                                                            class="btn btn-danger">Delete
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -327,30 +403,98 @@ if (isset($_SESSION['user_id'])) {
 
         <div id="menu-content-2" class="main-content hide">
 
-            <div class="row">
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="row py-1">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-1">
                     <div class="card card-eco">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-8">
                                     <h4 class="title-text mt-0">Total projects</h4>
 
-                                    <h3 class="font-weight-semibold mb-1"><?php
+                                    <h3 class="font-weight-semibold mb-1">
+                                        <?php
                                         $projects = Project::getProjectListFromClubID($con, $clubid); // Assuming $con and $clubId are defined.
 
-                                        echo count($projects);?>
+                                        $activeProjects = array_filter($projects, function ($project) {
+                                            return $project->getStatus() !== 'delete';
+                                        });
+
+                                        echo count($activeProjects);
+                                        ?>
+
                                     </h3>
                                 </div>
 
                                 <!--end col-->
                                 <div class="col-4 text-center align-self-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M12.41 148.02l232.94 105.67c6.8 3.09 14.49 3.09 21.29 0l232.94-105.67c16.55-7.51 16.55-32.52 0-40.03L266.65 2.31a25.607 25.607 0 0 0-21.29 0L12.41 107.98c-16.55 7.51-16.55 32.53 0 40.04zm487.18 88.28l-58.09-26.33-161.64 73.27c-7.56 3.43-15.59 5.17-23.86 5.17s-16.29-1.74-23.86-5.17L70.51 209.97l-58.1 26.33c-16.55 7.5-16.55 32.5 0 40l232.94 105.59c6.8 3.08 14.49 3.08 21.29 0L499.59 276.3c16.55-7.5 16.55-32.5 0-40zm0 127.8l-57.87-26.23-161.86 73.37c-7.56 3.43-15.59 5.17-23.86 5.17s-16.29-1.74-23.86-5.17L70.29 337.87 12.41 364.1c-16.55 7.5-16.55 32.5 0 40l232.94 105.59c6.8 3.08 14.49 3.08 21.29 0L499.59 404.1c16.55-7.5 16.55-32.5 0-40z"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 512 512">
+                                        <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                        <path d="M12.41 148.02l232.94 105.67c6.8 3.09 14.49 3.09 21.29 0l232.94-105.67c16.55-7.51 16.55-32.52 0-40.03L266.65 2.31a25.607 25.607 0 0 0-21.29 0L12.41 107.98c-16.55 7.51-16.55 32.53 0 40.04zm487.18 88.28l-58.09-26.33-161.64 73.27c-7.56 3.43-15.59 5.17-23.86 5.17s-16.29-1.74-23.86-5.17L70.51 209.97l-58.1 26.33c-16.55 7.5-16.55 32.5 0 40l232.94 105.59c6.8 3.08 14.49 3.08 21.29 0L499.59 276.3c16.55-7.5 16.55-32.5 0-40zm0 127.8l-57.87-26.23-161.86 73.37c-7.56 3.43-15.59 5.17-23.86 5.17s-16.29-1.74-23.86-5.17L70.29 337.87 12.41 364.1c-16.55 7.5-16.55 32.5 0 40l232.94 105.59c6.8 3.08 14.49 3.08 21.29 0L499.59 404.1c16.55-7.5 16.55-32.5 0-40z"/>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-1">
+                    <div class="card card-eco">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h4 class="title-text mt-0">Active Projects</h4>
+                                    <h3 class="font-weight-semibold mb-1" id="stat-count">
+
+                                        <?php
+                                        $projects = Project::getProjectListFromClubID($con, $clubid); // Assuming $con and $clubId are defined.
+
+                                        $activeProjects = array_filter($projects, function ($project) {
+                                            return $project->getStatus() === 'active';
+                                        });
+
+                                        echo count($activeProjects);
+                                        ?>
+                                </div>
+                                <!--end col-->
+                                <div class="col-4 text-center align-self-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 640 512">
+                                        <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                        <path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-1">
+                    <div class="card card-eco">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h4 class="title-text mt-0">Deactive Projects</h4>
+                                    <h3 class="font-weight-semibold mb-1" id="stat-count">
+
+                                        <?php
+                                        $projects = Project::getProjectListFromClubID($con, $clubid); // Assuming $con and $clubId are defined.
+
+                                        $activeProjects = array_filter($projects, function ($project) {
+                                            return $project->getStatus() === 'deactive';
+                                        });
+
+                                        echo count($activeProjects);
+                                        ?>
+                                </div>
+                                <!--end col-->
+                                <div class="col-4 text-center align-self-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 640 512">
+                                        <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                        <path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-1">
                     <div class="card card-eco">
                         <div class="card-body">
                             <div class="row">
@@ -359,37 +503,43 @@ if (isset($_SESSION['user_id'])) {
                                     <h3 class="font-weight-semibold mb-1" id="stat-count">
 
                                         <?php
-                                            $clubcount=new clubownerDashGetCount(null,null);
-                                            $clubcount->setClubId($clubid);
-                                            $clubcount->loadCountToClubOwnerDashboard($con);
-                                            echo  $clubcount->getUserCount();
+                                        $clubcount = new clubownerDashGetCount(null, null);
+                                        $clubcount->setClubId($clubid);
+                                        $clubcount->loadCountToClubOwnerDashboard($con);
+                                        echo $clubcount->getUserCount();
                                         ?></h3>
                                 </div>
                                 <!--end col-->
                                 <div class="col-4 text-center align-self-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 640 512">
+                                        <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                        <path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"/>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-1">
                     <div class="card card-eco">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-8">
                                     <h4 class="title-text mt-0">Ongoing Pro</h4>
-                                    <h3 class="font-weight-semibold mb-1" >3000</h3>
+                                    <h3 class="font-weight-semibold mb-1">3000</h3>
                                 </div>
                                 <!--end col-->
                                 <div class="col-4 text-center align-self-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 32C0 14.3 14.3 0 32 0H64 320h32c17.7 0 32 14.3 32 32s-14.3 32-32 32V75c0 42.4-16.9 83.1-46.9 113.1L237.3 256l67.9 67.9c30 30 46.9 70.7 46.9 113.1v11c17.7 0 32 14.3 32 32s-14.3 32-32 32H320 64 32c-17.7 0-32-14.3-32-32s14.3-32 32-32V437c0-42.4 16.9-83.1 46.9-113.1L146.7 256 78.9 188.1C48.9 158.1 32 117.4 32 75V64C14.3 64 0 49.7 0 32zM96 64V75c0 25.5 10.1 49.9 28.1 67.9L192 210.7l67.9-67.9c18-18 28.1-42.4 28.1-67.9V64H96zm0 384H288V437c0-25.5-10.1-49.9-28.1-67.9L192 301.3l-67.9 67.9c-18 18-28.1 42.4-28.1 67.9v11z"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 384 512">
+                                        <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                        <path d="M0 32C0 14.3 14.3 0 32 0H64 320h32c17.7 0 32 14.3 32 32s-14.3 32-32 32V75c0 42.4-16.9 83.1-46.9 113.1L237.3 256l67.9 67.9c30 30 46.9 70.7 46.9 113.1v11c17.7 0 32 14.3 32 32s-14.3 32-32 32H320 64 32c-17.7 0-32-14.3-32-32s14.3-32 32-32V437c0-42.4 16.9-83.1 46.9-113.1L146.7 256 78.9 188.1C48.9 158.1 32 117.4 32 75V64C14.3 64 0 49.7 0 32zM96 64V75c0 25.5 10.1 49.9 28.1 67.9L192 210.7l67.9-67.9c18-18 28.1-42.4 28.1-67.9V64H96zm0 384H288V437c0-25.5-10.1-49.9-28.1-67.9L192 301.3l-67.9 67.9c-18 18-28.1 42.4-28.1 67.9v11z"/>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-1">
                     <div class="card card-eco">
                         <div class="card-body">
                             <div class="row">
@@ -399,7 +549,10 @@ if (isset($_SESSION['user_id'])) {
                                 </div>
                                 <!--end col-->
                                 <div class="col-4 text-center align-self-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 448 512">
+                                        <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                        <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
+                                    </svg>
                                 </div>
                             </div>
                         </div>
@@ -457,10 +610,10 @@ if (isset($_SESSION['user_id'])) {
                                 <div class="fw-bold " style="color: var(--primary);">Caption</div>
                                 <div>
 
-                                <textarea  class="form-control"   cols="25"
-                                           rows="2"
-                                       name="caption" id="caption"
-                                           placeholder="caption" required> </textarea>
+                                <textarea class="form-control" cols="25"
+                                          rows="2"
+                                          name="caption" id="caption"
+                                          placeholder="caption" required> </textarea>
                                 </div>
 
 
@@ -518,197 +671,284 @@ if (isset($_SESSION['user_id'])) {
             <!--===view flyer part-->
 
 
-            <div class="ml-1    row-cols-1 row-cols-md-3 row-cols-xl-4 " >
+            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
 
                 <?php
-                $flyerno = 1;
+                $flyerNo = 1;
 
                 foreach ($publicFlyers
 
-                as $publicFlyer){
+                         as $publicFlyer) {
 
-                $publicFlyerObj =
-                    new PublicFlyer($publicFlyer->getFlyerID(), null, null, null, null,
-                    null, null, null,null);
-                $publicFlyerObj->loadFlyerFromFlyerID($con);
+                    $publicFlyerObj =
+                        new PublicFlyer($publicFlyer->getFlyerID(), null, null, null, null,
+                            null, null, null, null);
+                    $publicFlyerObj->loadFlyerFromFlyerID($con);
 
-                ?>
+                    if ($publicFlyerObj->getStatus() != "delete"){
+
+                    ?>
                     <!--===view flyer part  card-->
+                    <div class="col">
+                        <div class="card" style="width: 18rem">
 
-                    <div class="card" style="width: 18rem">
+                            <div class="card-header fw-bold"
+                                 style=" color: var(--lighter-secondary) !important; background-color: var(--primary);"><?= $publicFlyerObj->getFlyerTopic() ?>
+                            </div>
+                            <img class="card-img-top"
+                                 src="assets/images/flyer_img/<?= $publicFlyerObj->getFlyerImg() ?>"
+                                 alt="Card image cap"/>
+                            <!----------------- card  body ------------------->
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $publicFlyerObj->getCaption() ?></h5>
+                            </div>
+                            <!----------------- card  footer ------------------->
+                            <div class="card-footer" style="color: var(--lighter-secondary)!important; background-color: var(--accent-color3);">
+                                <!----------------- edit button ------------------->
+                                <button type="button" class="btn " data-bs-toggle="modal"
+                                        data-bs-target="#edit<?= $publicFlyerObj->getFlyerID() ?>">
+                                    <ion-icon name="create-outline" size="small"></ion-icon>
+                                </button>
+                                <!----------------- delete button ------------------->
+                                <button type="button" class="btn" data-bs-toggle="modal"
+                                        data-bs-target="#<?= $publicFlyerObj->getFlyerID() ?>">
+                                    <ion-icon name="trash-outline" size="small"></ion-icon>
+                                </button>
 
-                        <div class="card-header fw-bold"  style=" color: var(--lighter-secondary) !important; background-color: var(--primary);"><?= $publicFlyerObj->getFlyerTopic() ?></div>
-                        <img class="card-img-top" src="assets/images/flyer_img/<?= $publicFlyerObj->getFlyerImg() ?>" alt="Card image cap" />
-                        <!----------------- card  body ------------------->
-                        <div class="card-body">
-                            <h5 class="card-title"><?= $publicFlyerObj->getCaption()?></h5>
-                        </div>
-                        <!----------------- card  footer ------------------->
-                        <div class="card-footer">
-                            <!----------------- edit button ------------------->
-                            <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#editflyer<?= $flyerno?>">
-                                <ion-icon name="create-outline" size="large"></ion-icon>
-                            </button>
+                                <!----------------- Modal for update flyer ------------------>
+                                <div class="modal fade" id="edit<?= $publicFlyerObj->getFlyerID() ?>" tabindex="-1" data-bs-backdrop="static"
+                                     data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header"
+                                                 style=" color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit
+                                                    Flyer <?= $flyerNo ?></h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="post" action="process/clubownerdashboard/editFlyer.php"
+                                                      enctype="multipart/form-data">
+                                                    <input type="hidden" name="menuNo" value="4">
+                                                    <input type="hidden" name="flyerId"
+                                                           value="<?= $publicFlyerObj->getFlyerID() ?>">
+                                                    <input type="hidden" name="clubId"
+                                                           value="<?= $publicFlyerObj->getClubID() ?>">
 
-                            <!----------------- Modal for flyer ------------------>
-                            <div class="modal fade" id="editflyer<?= $flyerno?>" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header" style=" color: var(--lighter-secondary) !important; background-color: var(--primary);">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Flyer  <?= $flyerno?></h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <div class="container">
+                                                        <div class="row py-1">
+                                                            <div class="col-6">
+                                                                <div class="upload">
+                                                                    <img src="assets/images/flyer_img/<?= $publicFlyerObj->getFlyerImg() ?>"
+                                                                         id="image">
+                                                                    <input type="hidden" name="flyerUpdateImg2"
+                                                                           id="fileImg2"
+                                                                           value="<?= $publicFlyerObj->getFlyerImg() ?>">
+
+                                                                    <div class="rightRound" id="upload">
+                                                                        <input type="file" name="flyerUpdateImg"
+                                                                               id="fileImg"
+                                                                               accept=".jpg, .jpeg, .png">
+                                                                        <i class="fa fa-camera"></i>
+                                                                    </div>
+                                                                    <div class="leftRound" id="cancel"
+                                                                         style="display: none;">
+                                                                        <i class="fa fa-times"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="row py-1">
+                                                                    <input type="text" name="flyerUpdateTopic"
+                                                                           class="form-control text-center"
+                                                                           value="<?= $publicFlyerObj->getFlyerTopic() ?>">
+                                                                </div>
+                                                                <div class="row py-1">
+                                                                    <input type="text" name="flyerUpdateCaption"
+                                                                           class="form-control text-center" rows="2"
+                                                                           value="<?= $publicFlyerObj->getCaption() ?>">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="row py-1">
+                                                            <input type="text" name="flyerUpdateLink"
+                                                                   class="form-control text-center"
+                                                                   value="<?= $publicFlyerObj->getLink() ?>">
+                                                        </div>
+                                                        <div class="row py-1">
+                                                            <input type="datetime-local" name="flyerUpdateStartDate"
+                                                                   class="form-control text-center"
+                                                                   onfocus="this.type='datetime-local'"
+                                                                   onblur="this.type='text'"
+                                                                   id="date"
+                                                                   value="<?= $publicFlyerObj->getStartDate() ?>">
+                                                        </div>
+                                                        <div class="row py-1">
+                                                            <input type="datetime-local" name="flyerUpdateEndDate"
+                                                                   class="form-control text-center"
+                                                                   onfocus="this.type='datetime-local'"
+                                                                   onblur="this.type='text'"
+                                                                   value="<?= $publicFlyerObj->getEndDate() ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">
+                                                            Close
+                                                        </button>
+                                                        <button type="submit" name="submit" class="btn"
+                                                                onclick="validateForm()"
+                                                                style="color: var(--accent-color2)!important;background-color: var(--primary);">
+                                                            Save changes
+                                                        </button>
+                                                    </div>
+                                                </form>
+
+                                            </div>
                                         </div>
-                                        <div class="modal-body">
-                                            <form method="post" action="process/clubownerdashboard/editFlyer.php">
-                                                <input type="hidden" name="menuNo" value="4">
-                                                <input type="hidden" name="flyerId" value="<?= $publicFlyerObj->getFlyerID() ?>">
-                                                <input type="hidden" name="clubId" value="<?= $publicFlyerObj->getClubID() ?>">
+                                    </div>
 
-                                                <div class="container">
-
-                                                    <div class="row py-1">
-                                                        <input type="text" name="flyerUpdateTopic" class="form-control text-center" value="<?= $publicFlyerObj->getFlyerTopic() ?>">
-                                                    </div>
-                                                    <div class="row py-1">
-                                                        <input type="text" name="flyerUpdateCaption" class="form-control text-center" rows="2" value="<?= $publicFlyerObj->getCaption() ?>">
-                                                    </div>
-                                                    <div class="row py-1">
-                                                        <input type="text" name="flyerUpdateLink" class="form-control text-center" value="<?= $publicFlyerObj->getLink() ?>">
-                                                    </div>
-                                                    <div class="row py-1">
-                                                        <input type="datetime-local" name="flyerUpdateStartDate" class="form-control text-center"
-                                                               onfocus="this.type='datetime-local'" onblur="this.type='text'"
-                                                               id="date" value="<?= $publicFlyerObj->getStartDate() ?>">
-                                                    </div>
-                                                    <div class="row py-1">
-                                                        <input type="datetime-local" name="flyerUpdateEndDate" class="form-control text-center"
-                                                               onfocus="this.type='datetime-local'" onblur="this.type='text'"
-                                                               value="<?= $publicFlyerObj->getEndDate() ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" name="submit" class="btn" style="color: var(--accent-color2)!important;background-color: var(--primary);">Save changes</button>
-                                                </div>
-                                            </form>
-
+                                </div>
+                                <!---------modal for delete flyer---------->
+                                <div class="modal fade" id="<?= $publicFlyerObj->getFlyerID() ?>" tabindex="-1"
+                                     aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to
+                                                    delete <?= $publicFlyerObj->getFlyerTopic() ?></p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Cancel
+                                                </button>
+                                                <form action="process/clubownerdashboard/deleteFlyer.php"
+                                                      method="post">
+                                                    <input type="hidden" name="flyer_id"
+                                                           value="<?= $publicFlyerObj->getFlyerID() ?>">
+                                                    <button type="submit" name="submit" class="btn btn-danger">Delete
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            </div>
-                    </div>
-
-
-            <?php
-                    $flyerno++;
-            }
-            ?>
-
-            </div>
-            </div>
-
-
-
-
-    </div>
-    <div id="menu-content-5" class="main-content hide">
-
-        <div class="text-center d-flex">
-            <?php
-            if ($loadClubData) {
-                ?>
-                <!-- ======= project image area ===== -->
-                <div class="d-flex flex-column mx-auto my-3">
-                    <img class="rounded-circle img-thumbnail shadow-sm"
-                         style="width: 150px; height: 150px; object-fit: cover;"
-                         src="assets/images/profile_img/club/<?= $club->getProfileImage() ?>"
-                         alt="">
-                    <form action="process/clubownerdashboard/saveProfileImage.php" method="post"
-                          enctype="multipart/form-data">
-                        <div class="btn fw-bold d-flex mx-4 mt-2 shadow-sm" type="button"
-                             onclick="fileUploadBtn()"
-                             style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
-                            <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
-                                      name="cloud-upload-outline"></ion-icon>
-                            <div class="my-auto ms-1 me-auto">Upload</div>
-                            <input type="file" class="form-control d-none" name="image_upload"
-                                   id="image_upload" onchange="saveImgSubmit()"/>
-
                         </div>
-                        <!--======= hidden ==========-->
-                        <input type="hidden" name="menuNo" value="5">
-                        <input type="hidden" name="club_id"
-                               value="<?= $club->getUserId() ?>">
-                        <input class="d-none" type="submit" name="image_save_submit"
-                               id="image_save_submit"/>
-                    </form>
-                </div>
-
-            <?php }
-            ?>
-        </div>
-
-        <div class="card shadow-sm mb-3 mx-4">
-            <div class="card-header py-3">
-                <p class="m-0 fw-bold" style="color: var(--darker-primary); font-size: 1.3rem;">Club Settings</p>
-            </div>
-            <div class="card-body">
-                <form action="process/clubownerdashboard/editClubDetails.php" method="post">
+                    </div>
                     <?php
-
-                    if ($loadClubData){
-                    ?>
-
-                    <div class="row" style="color: var(--primary);">
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label" for="club_name">
-                                    <strong>Club Name</strong>
-                                </label>
-                                <input id="club_name" class="form-control" type="text"
-                                       value="<?= $club->getClubName() ?>" name="club_name"/>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label" for="contact_no">
-                                    <strong>Contact number</strong>
-                                </label>
-                                <input id="contact_no" class="form-control" type="text"
-                                       value="<?= $club->getContactNo() ?>" name="contact_no"/>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row px-2" style="color: var(--primary);">
-                        <div class="fw-bold">Description</div>
-                        <textarea class="form-control" name="desc" id="" cols="25"
-                                  rows="7"><?= $club->getClubDescription() ?></textarea>
-                    </div>
-                    <!--======= hidden ==========-->
-                    <input type="hidden" name="menuNo" value="5">
-                    <input type="hidden" name="club_id"
-                           value="<?= $club->getUserId() ?>">
-                    <button class="btn fw-bold d-flex mt-2 ms-auto me-0"
-                            style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
-                            type="submit" name="submit">
-                        <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
-                                  name="save-outline"></ion-icon>
-                        <div class="my-auto ms-1 me-auto">Save</div>
-
-                    </button>
-                </form>
-                <?php
-                } else {
-                    echo "Club data not found for the given user ID.";
+                    }
+                    $flyerNo++;
                 }
                 ?>
             </div>
         </div>
 
+        <div id="menu-content-5" class="main-content hide">
+            <div class="text-center d-flex">
+                <?php
+                if ($loadClubData) {
+                    ?>
+                    <!-- ======= project image area ===== -->
+                    <div class="d-flex flex-column mx-auto my-3">
+                        <img class="rounded-circle img-thumbnail shadow-sm"
+                             style="width: 150px; height: 150px; object-fit: cover;"
+                             src="assets/images/profile_img/club/<?= $club->getProfileImage() ?>"
+                             alt="">
+                        <form action="process/clubownerdashboard/saveProfileImage.php" method="post"
+                              enctype="multipart/form-data">
+                            <div class="btn fw-bold d-flex mx-4 mt-2 shadow-sm" type="button"
+                                 onclick="fileUploadBtn()"
+                                 style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
+                                          name="cloud-upload-outline"></ion-icon>
+                                <div class="my-auto ms-1 me-auto">Upload</div>
+                                <input type="file" class="form-control d-none" name="image_upload"
+                                       id="image_upload" onchange="saveImgSubmit()"/>
 
-    </div>
+                            </div>
+                            <!--======= hidden ==========-->
+                            <input type="hidden" name="menuNo" value="5">
+                            <input type="hidden" name="club_id"
+                                   value="<?= $club->getUserId() ?>">
+                            <input class="d-none" type="submit" name="image_save_submit"
+                                   id="image_save_submit"/>
+                        </form>
+                    </div>
+
+                <?php }
+                ?>
+            </div>
+
+            <div class="card shadow-sm mb-3 mx-4">
+                <div class="card-header py-3">
+                    <p class="m-0 fw-bold" style="color: var(--darker-primary); font-size: 1.3rem;">Club
+                        Settings</p>
+                </div>
+                <div class="card-body">
+                    <form action="process/clubownerdashboard/editClubDetails.php" method="post">
+                        <?php
+
+                        if ($loadClubData){
+                        ?>
+
+                        <div class="row" style="color: var(--primary);">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label class="form-label" for="club_name">
+                                        <strong>Club Name</strong>
+                                    </label>
+                                    <input id="club_name" class="form-control" type="text"
+                                           value="<?= $club->getClubName() ?>" name="club_name"/>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label class="form-label" for="contact_no">
+                                        <strong>Contact number</strong>
+                                    </label>
+                                    <input id="contact_no" class="form-control" type="text"
+                                           value="<?= $club->getContactNo() ?>" name="contact_no"/>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row px-2" style="color: var(--primary);">
+                            <div class="fw-bold">Description</div>
+                            <textarea class="form-control" name="desc" id="" cols="25"
+                                      rows="7"><?= $club->getClubDescription() ?></textarea>
+                        </div>
+                        <!--======= hidden ==========-->
+                        <input type="hidden" name="menuNo" value="5">
+                        <input type="hidden" name="club_id"
+                               value="<?= $club->getUserId() ?>">
+                        <button class="btn fw-bold d-flex mt-2 ms-auto me-0"
+                                style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
+                                type="submit" name="submit">
+                            <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
+                                      name="save-outline"></ion-icon>
+                            <div class="my-auto ms-1 me-auto">Save</div>
+
+                        </button>
+                    </form>
+                    <?php
+                    } else {
+                        echo "Club data not found for the given user ID.";
+                    }
+                    ?>
+                </div>
+            </div>
+
+
+        </div>
 
     </div>
 
