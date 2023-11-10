@@ -250,18 +250,9 @@ if (isset($_SESSION['user_id'])) {
                                 </div>
                                 <div class="col-2 d-flex tabel-column-type-2">
                                     <div class="my-auto mx-auto">
-                                        <input type="checkbox" id="cheak" name='checkTask[]' value="<?=$subTaskObj->getSubTaskID() ?>"></div>
+                                        <button onclick="addToTable2(this)">Add</button></div>
                                 </div>
-                                <div class="col-1 tabel-column-type-1 d-flex">
-                                    <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
 
-
-                                        <ion-icon class="my-auto" type="button"
-                                                  data-bs-toggle="modal"
-                                                  data-bs-target=""
-                                                  name="trash-outline"></ion-icon>
-                                    </div>
-                                </div>
                             </div>
 
                             <?php
@@ -373,9 +364,9 @@ if (isset($_SESSION['user_id'])) {
                 </div>
             </div>
 
-        
-        
-            
+
+
+
 
 
             <div class="card mx-4" style="">
@@ -541,6 +532,28 @@ if (isset($_SESSION['user_id'])) {
     <?php include_once "content/preloader.php" ?>
     <!--=== Preloader Script file ===-->
     <?php include_once "content/commonJS.php" ?>
+    <!--    =============== Add complat task button ==========-->
+    <script>
+        function addToTable2(button) {
+            // Disable the button to prevent multiple additions
+            button.disabled = true;
+
+            // Get the row of the clicked button
+            var row = button.parentNode.parentNode;
+
+            // Clone the row to avoid altering the original table
+            var clonedRow = row.cloneNode(true);
+
+            // Remove the "Add" button from the cloned row
+            clonedRow.lastElementChild.innerHTML = "";
+
+            // Append the cloned row to the second table
+            document.getElementById("table2").getElementsByTagName('tbody')[0].appendChild(clonedRow);
+
+            // Optionally, you can remove the row from the first table if needed
+            // row.parentNode.removeChild(row);
+        }
+    </script>
 
     <!--    =============== execute upload image button ==========-->
     <script>
