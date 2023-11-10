@@ -531,18 +531,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                                                 <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
                                                      style="font-size: 1.8rem; ">
-                                                    <input type="checkbox" class="my-auto ms-3 me-auto form-check-input"
+                                                    <input type="checkbox"
+                                                           class="my-auto ms-3 me-auto form-check-input"
                                                            style="background-color: var(--primary);border-color: var(--accent-color3) ; border-width: 2.5px;"
                                                            name="is_published"
                                                            value="published"
+                                                        <?php if ($task->getisVerifyByProjectChair() == 0) echo "disabled"?>
                                                         <?php if ($task->getisPublished() == 1) echo "checked" ?>
                                                            onchange="updatePRSubmit(<?= $prTaskNo ?>)">
                                                 </div>
                                                 <div class="col-1 tabel-column-type-2 d-flex justify-content-center">
-                                                    <div class="my-auto"><?= $task->getpublishDate() ?></div>
+                                                    <div class="my-auto d-flex flex-column">
+                                                        <div class="d-flex mx-auto fw-lighter" style="font-size: 0.8rem;"><?= date("Y", strtotime($task->getpublishDate())) ?></div>
+                                                        <div class="d-flex mx-auto">
+                                                            <div class="me-1"><?= date("M", strtotime($task->getpublishDate())) ?></div>
+                                                            <div><?= date("d", strtotime($task->getpublishDate())) ?></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-1 tabel-column-type-1 d-flex justify-content-center">
-                                                    <div class="my-auto"><?= $task->getpublishDate() ?></div>
+                                                    <div class="my-auto"><?= date("g:i A", strtotime($task->getpublishDate())) ?></div>
                                                 </div>
                                                 <div class="col-2 tabel-column-type-2 d-flex justify-content-center">
                                                     <div class="my-auto fw-bold"><?= $task->gettopic() ?></div>
@@ -577,6 +585,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                            class="my-auto form-check-input"
                                                            style="background-color: var(--accent-color3); border-color: yellow;border-width: 1.2px"
                                                            name="is_verify" value="verified"
+                                                           <?php if ($task->getisPublished() == 1) echo "disabled"?>
                                                         <?php if ($task->getisVerifyByProjectChair() == 1) echo "checked" ?>
                                                            onchange="updatePRSubmit(<?= $prTaskNo ?>)">
                                                 </div>
