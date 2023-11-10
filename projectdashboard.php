@@ -526,68 +526,80 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                         $task->loadTaskFromPRId($con);
 
                                         ?>
-                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
+                                        <form action="process/projectdashboard/editPRTask.php" class="" method="POST">
+                                            <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
 
-                                            <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
-                                                 style="font-size: 1.8rem; ">
-                                                <input type="checkbox" class="my-auto ms-3 me-auto form-check-input"
-                                                       style="background-color: var(--primary);border-color: var(--accent-color3) ; border-width: 2.5px;"
-                                                       name="published"
-                                                       value="published">
-                                            </div>
-                                            <div class="col-1 tabel-column-type-2 d-flex justify-content-center">
-                                                <div class="my-auto"><?= $task->getpublishDate() ?></div>
-                                            </div>
-                                            <div class="col-1 tabel-column-type-1 d-flex justify-content-center">
-                                                <div class="my-auto"><?= $task->getpublishDate() ?></div>
-                                            </div>
-                                            <div class="col-2 tabel-column-type-2 d-flex justify-content-center">
-                                                <div class="my-auto fw-bold"><?= $task->gettopic() ?></div>
-                                            </div>
-                                            <div class="col-3 tabel-column-type-1 d-flex justify-content-center">
-                                                <div class="my-auto text-center"><?= $task->getdescription() ?></div>
-                                            </div>
-                                            <div class="col-1 tabel-column-type-2 d-flex justify-content-center"
-                                                 style="font-size: 0.8rem; text-align: center">
-                                                <?php
-                                                $disgner = new Undergraduate(null, null, null, null, null, null);
-                                                $disgner->setUserId($task->getdesignerID());
-                                                $disgner->loadDataFromUserID($con);
-                                                ?>
-                                                <div class="my-auto"><?= $disgner->getFirstName() ?>
-                                                    <br><?= $disgner->getLastName() ?></div>
-                                            </div>
-                                            <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
-                                                 style="font-size:0.8rem ;text-align: center;">
-                                                <?php
-                                                $writer = new Undergraduate(null, null, null, null, null, null);
-                                                $writer->setUserId($task->getcaptionWriterID());
-                                                $writer->loadDataFromUserID($con);
-                                                ?>
-                                                <div class="my-auto"><?= $writer->getFirstName() ?>
-                                                    <br><?= $writer->getLastName() ?></div>
+                                                <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
+                                                     style="font-size: 1.8rem; ">
+                                                    <input type="checkbox" class="my-auto ms-3 me-auto form-check-input"
+                                                           style="background-color: var(--primary);border-color: var(--accent-color3) ; border-width: 2.5px;"
+                                                           name="is_published"
+                                                           value="published"
+                                                        <?php if ($task->getisPublished() == 1) echo "checked" ?>
+                                                           onchange="updatePRSubmit(<?= $prTaskNo ?>)">
+                                                </div>
+                                                <div class="col-1 tabel-column-type-2 d-flex justify-content-center">
+                                                    <div class="my-auto"><?= $task->getpublishDate() ?></div>
+                                                </div>
+                                                <div class="col-1 tabel-column-type-1 d-flex justify-content-center">
+                                                    <div class="my-auto"><?= $task->getpublishDate() ?></div>
+                                                </div>
+                                                <div class="col-2 tabel-column-type-2 d-flex justify-content-center">
+                                                    <div class="my-auto fw-bold"><?= $task->gettopic() ?></div>
+                                                </div>
+                                                <div class="col-3 tabel-column-type-1 d-flex justify-content-center">
+                                                    <div class="my-auto text-center"><?= $task->getdescription() ?></div>
+                                                </div>
+                                                <div class="col-1 tabel-column-type-2 d-flex justify-content-center"
+                                                     style="font-size: 0.8rem; text-align: center">
+                                                    <?php
+                                                    $disgner = new Undergraduate(null, null, null, null, null, null);
+                                                    $disgner->setUserId($task->getdesignerID());
+                                                    $disgner->loadDataFromUserID($con);
+                                                    ?>
+                                                    <div class="my-auto"><?= $disgner->getFirstName() ?>
+                                                        <br><?= $disgner->getLastName() ?></div>
+                                                </div>
+                                                <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
+                                                     style="font-size:0.8rem ;text-align: center;">
+                                                    <?php
+                                                    $writer = new Undergraduate(null, null, null, null, null, null);
+                                                    $writer->setUserId($task->getcaptionWriterID());
+                                                    $writer->loadDataFromUserID($con);
+                                                    ?>
+                                                    <div class="my-auto"><?= $writer->getFirstName() ?>
+                                                        <br><?= $writer->getLastName() ?></div>
+                                                </div>
+
+                                                <div class="col-1 tabel-column-type-2 d-flex justify-content-center"
+                                                     style="font-size: 1.3rem;">
+                                                    <input type="checkbox"
+                                                           class="my-auto form-check-input"
+                                                           style="background-color: var(--accent-color3); border-color: yellow;border-width: 1.2px"
+                                                           name="is_verify" value="verified"
+                                                        <?php if ($task->getisVerifyByProjectChair() == 1) echo "checked" ?>
+                                                           onchange="updatePRSubmit(<?= $prTaskNo ?>)">
+                                                </div>
+                                                <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
+                                                     style="font-size: 1.5rem">
+                                                    <ion-icon class="my-auto me-2" type="button"
+                                                              data-bs-toggle="modal"
+                                                              data-bs-target="#edit-pr-task-<?= $prTaskNo ?>"
+                                                              name="create-outline"></ion-icon>
+                                                    <ion-icon class="my-auto" type="button"
+                                                              data-bs-toggle="modal"
+                                                              data-bs-target="#delete-pr-task-<?= $prTaskNo ?>"
+                                                              name="trash-outline"></ion-icon>
+                                                </div>
+                                                <!--======= hidden ==========-->
+                                                <input type="hidden" name="menuNo" value="5">
+                                                <input type="hidden" name="pr_id"
+                                                       value="<?= $task->getprID() ?>">
+                                                <input class="d-none" type="submit" name="pr_update_submit"
+                                                       id="pr_update_submit_<?= $prTaskNo ?>"/>
                                             </div>
 
-                                            <div class="col-1 tabel-column-type-2 d-flex justify-content-center"
-                                                 style="font-size: 1.3rem;">
-                                                <input type="checkbox"
-                                                       class="my-auto form-check-input"
-                                                       style="background-color: var(--accent-color3); border-color: yellow;border-width: 1.2px"
-                                                       name="verify" value="verify">
-                                            </div>
-                                            <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
-                                                 style="font-size: 1.5rem">
-                                                <ion-icon class="my-auto me-2" type="button"
-                                                          data-bs-toggle="modal"
-                                                          data-bs-target="#edit-pr-task-<?= $prTaskNo ?>"
-                                                          name="create-outline"></ion-icon>
-                                                <ion-icon class="my-auto" type="button"
-                                                          data-bs-toggle="modal"
-                                                          data-bs-target="#delete-pr-task-<?= $prTaskNo ?>"
-                                                          name="trash-outline"></ion-icon>
-                                            </div>
-                                        </div>
-
+                                        </form>
                                         <?php
                                         $prTaskNo++;
                                     }
@@ -634,6 +646,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <script>
     function defineSubmit() {
         document.getElementById('define_submit').click();
+    }
+</script>
+<!--========= execute PR table update submit button ======== -->
+<script>
+    function updatePRSubmit(prTaskNo) {
+        document.getElementById('pr_update_submit_' + prTaskNo).click();
     }
 </script>
 <script>
