@@ -391,7 +391,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                                         <div class="modal-body"
                                              style="background-color: var(--lighter-secondary);">
-                                            <!-- ====== input username ====== -->
+                                            <!-- ====== input topic and description ====== -->
                                             <div class="d-flex mt-2 px-5">
                                                 <input class="form-control text-center"
                                                        name="topic" id="add-topic"
@@ -405,7 +405,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                             <!-- ===== select team ======= -->
                                             <div class="d-flex mt-2 px-5">
 
-                                                <select id="designer_id" class="form-select ms-auto me-0"
+                                                <select id="designer_id" class="form-select ms-auto me-2"
                                                         style="width: 50%;"
                                                         name="designer_id" id="" required>
                                                     <option class="text-center" value="" selected>-- Select Designer --
@@ -445,6 +445,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                             <div class="mt-2 text-center" id="add-member-team-error"
                                                  style="color: var(--accent-color3)"></div>
 
+                                            <div class="d-flex mt-2 px-5 w-100">
+                                                <div class="d-flex w-100 rounded p-2" style="background-color: var(--secondary)">
+                                                    <div class="ms-1 me-auto my-auto fw-bold" style="font-size: 0.8rem;">Publish <br> Date & Time</div>
+                                                    <div class="d-flex ms-auto me-0">
+                                                        <input class="form-control text-center me-2" type="date" required
+                                                               style="width: fit-content"
+                                                               name="publish_date"/>
+                                                        <input class="form-control text-center" style="width: fit-content"
+                                                               type="time" required
+                                                               name="publish_time"/>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                             <!--======= hidden ==========-->
                                             <input type="hidden" name="menuNo" value="5">
                                             <input type="hidden" name="project_id"
@@ -536,13 +550,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                            style="background-color: var(--primary);border-color: var(--accent-color3) ; border-width: 2.5px;"
                                                            name="is_published"
                                                            value="published"
-                                                        <?php if ($task->getisVerifyByProjectChair() == 0) echo "disabled"?>
+                                                        <?php if ($task->getisVerifyByProjectChair() == 0) echo "disabled" ?>
                                                         <?php if ($task->getisPublished() == 1) echo "checked" ?>
                                                            onchange="updatePRSubmit(<?= $prTaskNo ?>)">
                                                 </div>
                                                 <div class="col-1 tabel-column-type-2 d-flex justify-content-center">
                                                     <div class="my-auto d-flex flex-column">
-                                                        <div class="d-flex mx-auto fw-lighter" style="font-size: 0.8rem;"><?= date("Y", strtotime($task->getpublishDate())) ?></div>
+                                                        <div class="d-flex mx-auto fw-lighter"
+                                                             style="font-size: 0.8rem;"><?= date("Y", strtotime($task->getpublishDate())) ?></div>
                                                         <div class="d-flex mx-auto">
                                                             <div class="me-1"><?= date("M", strtotime($task->getpublishDate())) ?></div>
                                                             <div><?= date("d", strtotime($task->getpublishDate())) ?></div>
@@ -585,7 +600,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                            class="my-auto form-check-input"
                                                            style="background-color: var(--accent-color3); border-color: yellow;border-width: 1.2px"
                                                            name="is_verify" value="verified"
-                                                           <?php if ($task->getisPublished() == 1) echo "disabled"?>
+                                                        <?php if ($task->getisPublished() == 1) echo "disabled" ?>
                                                         <?php if ($task->getisVerifyByProjectChair() == 1) echo "checked" ?>
                                                            onchange="updatePRSubmit(<?= $prTaskNo ?>)">
                                                 </div>

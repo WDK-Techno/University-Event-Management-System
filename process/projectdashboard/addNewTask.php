@@ -17,10 +17,21 @@ if (isset($_POST['submit'])) {
     $DesignerID = $_POST['designer_id'];
     $CaptionWriterID = $_POST['caption_writer_id'];
     $projectId = $_POST['project_id'];
+
+    $publishDate =$_POST['publish_date'];
+    $publishTime =$_POST['publish_time'];
+
+    $publishedDateTime = $publishDate." ".$publishTime;
+//    reduce two days from publish date
+    $temp_date = date_create(strval($publishedDateTime));
+    date_sub($temp_date,date_interval_create_from_date_string("2 days"));
+    $designDeadline = date_format($temp_date,"Y-m-d H:i:s");
+
     if ($_POST['description'] == "") {
         $PRDescription = null;
     }
-    $PRTask = new PRTask(null,null,$PRTopic,$PRDescription,$DesignerID,$CaptionWriterID,$projectId);
+    $PRTask = new PRTask(null,$publishedDateTime,$PRTopic,$PRDescription,$DesignerID,$CaptionWriterID,$projectId);
+    $PRTask->setdesignCompletingDeadline($designDeadline);
     $result = $PRTask->addNewTask($con);
 
     if ($result) {

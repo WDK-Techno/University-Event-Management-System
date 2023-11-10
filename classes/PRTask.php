@@ -165,13 +165,15 @@ class PRTask
     public function addNewTask($con)
     {
         try {
-            $query = "INSERT INTO pr_task (topic,description,designer_id,caption_writer_id,project_id) VALUES (?,?,?,?,?)";
+            $query = "INSERT INTO pr_task (publish_date,topic,description,designer_id,caption_writer_id,design_deadline,project_id) VALUES (?,?,?,?,?,?,?)";
             $pstmt = $con->prepare($query);
-            $pstmt->bindValue(1, $this->topic);
-            $pstmt->bindValue(2, $this->description);
-            $pstmt->bindValue(3, $this->designerID);
-            $pstmt->bindValue(4, $this->captionWriterID);
-            $pstmt->bindValue(5, $this->projectID);
+            $pstmt->bindValue(1, $this->publishDate);
+            $pstmt->bindValue(2, $this->topic);
+            $pstmt->bindValue(3, $this->description);
+            $pstmt->bindValue(4, $this->designerID);
+            $pstmt->bindValue(5, $this->captionWriterID);
+            $pstmt->bindValue(6, $this->designCompletingDeadline);
+            $pstmt->bindValue(7, $this->projectID);
             $pstmt->execute();
 
             if ($pstmt->rowCount() > 0) {
@@ -190,7 +192,7 @@ class PRTask
     {
         $PRTasks = array();
         try {
-            $query = "SELECT * FROM pr_task WHERE status = 'active' AND project_id=?";
+            $query = "SELECT * FROM pr_task WHERE status = 'active' AND project_id=? ORDER BY publish_date";
             $pstmt = $con->prepare($query);
             $pstmt->bindValue(1, $project_id);
             $pstmt->execute();
