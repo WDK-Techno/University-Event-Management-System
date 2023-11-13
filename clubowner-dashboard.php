@@ -321,17 +321,28 @@ if (isset($_SESSION['user_id'])) {
                                             </button>
                                         </form>
                                     </div>
+
                                     <div class="card-body py-4 d-flex">
                                         <div class="  flex-row">
+
                                             <div class="toggle-button-cover">
                                                 <div class="button-cover">
+                                                    <form action="process/clubownerdashboard/updateProjectStatus.php"  method="post">
                                                     <div class="button shadow-sm r" id="button-3">
+                                                        <input type="hidden" name="tab" value="1">
+                                                        <input type="hidden" name="prId" value="<?= $project->getProjectID() ?>">
+                                                        <input type="hidden" name="prChairId" value="<?= $project->getProjectChairID() ?>">
                                                         <input type="checkbox" class="checkbox status-toggle"
-                                                               name="project-id-<?= $project->getProjectID() ?>"
-                                                               checked>
+                                                               name="is_verify" value="verified"
+                                                            <?php if ($project->getStatus() == "active") echo "checked" ?>
+                                                               onchange="updateProjectStatus(<?= $project->getProjectID() ?>)"
+                                                        >
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
+                                                        <input class="d-none" type="submit" name="project_status_submit"
+                                                               id="project_status_submit_<?= $project->getProjectID() ?>"/>
+                                                    </form>
                                                 </div>
                                             </div>
 
@@ -570,7 +581,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
         <div id="menu-content-3" class="main-content hide">
 
-
+            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
            <?php
             foreach ($ugDetails as $ug) {
             // Access other properties using $ug->property_name
@@ -579,12 +590,6 @@ if (isset($_SESSION['user_id'])) {
             <div class="card" style="width: 18rem;">
                 <div class="card-header">
                    <?php  echo  $ug->user_id;?>
-
-
-
-
-
-
                 </div>
                 <div class="card-body">
                     <img src="..." class="card-img-top" alt="...">
@@ -597,6 +602,7 @@ if (isset($_SESSION['user_id'])) {
                 <?php
                }
               ?>
+            </div>
 
         </div>
 
@@ -1024,6 +1030,11 @@ if (isset($_SESSION['user_id'])) {
 
         }
     </script>
+    <script>
+        function updateProjectStatus(prStatusNo) {
+            document.getElementById('project_status_submit_' + prStatusNo).click();
+        }
+    </script>
     <!--    =============== execute upload image button ==========-->
     <script>
         function fileUploadBtn() {
@@ -1036,36 +1047,6 @@ if (isset($_SESSION['user_id'])) {
         }
     </script>
 
-    <!-- ======script button===== --->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const statusToggles = document.querySelectorAll(".status-toggle");
-
-
-            statusToggles.forEach(function (statusToggle) {
-                statusToggle.addEventListener("change", function () {
-                    const isChecked = statusToggle.checked;
-                    const projectId = statusToggle.getAttribute("project-id");
-                    updateStatus(isChecked, projectId);
-                });
-            });
-
-            function updateStatus(status, projectId) {
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", "process/clubownerdashboard/updateProjectStatus.php", true);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        const response = xhr.responseText;
-                        // Handle the response if needed
-                    }
-                };
-                xhr.send("status=" + status + "&projectId=" + projectId);
-                console.log(status);
-                console.log(projectId);
-            }
-        });
-    </script>
     <!--=========== Selected Menu change when loading ============-->
     <script>
         document.getElementById("menu-<?php echo $selected_menuNo ?>").classList.add("activate");
