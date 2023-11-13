@@ -1,4 +1,26 @@
+<?php
+if (isset($_GET['imgUploadErr'])) {
+    $error_imgUpload = $_GET['imgUploadErr'];
 
+    if ($error_imgUpload == 1) {
+        $errorMessage_settings = "Database Error";
+    }
+    if ($error_imgUpload == 2) {
+        $errorMessage_settings = "Error in Moving File";
+    }
+    if ($error_imgUpload == 3) {
+        $errorMessage_settings = "File Size larger than 10mb";
+    }
+    if ($error_imgUpload == 4) {
+        $errorMessage_settings = "Error in File Uploading";
+    }
+    if ($error_imgUpload == 5) {
+        $errorMessage_settings = "Invalid file format";
+    }
+}
+
+
+?>
 <div class="container-fluid h-100">
     <div class="row h-100">
         <!-- ====== left side section ========== -->

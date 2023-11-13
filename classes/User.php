@@ -314,6 +314,52 @@ class Undergraduate extends User
     }
 
 
+    public static function loadUgDataFromClubId($con,$clubid)
+    {
+        try {
+
+            $query = "SELECT *
+                         FROM undergraduate ug
+                           JOIN project_team pt ON ug.user_id = pt.ug_id
+                            JOIN team_category tc ON pt.category_id = tc.category_id
+                             JOIN project p ON tc.project_id = p.project_id 
+                              WHERE club_id=?";
+
+
+            $pstmt=$con->prepare($query);
+            $pstmt->bindValue(1, $clubid);
+            $pstmt->execute();
+            $rs = $pstmt->fetchAll(\PDO::FETCH_OBJ);
+            if($rs){
+                return $rs;
+
+                $ugDetails = [];
+                foreach ($rs as $row) {
+                    $ug = new Undergraduate();
+                    $ug->user_id = $row['user_id'];
+                    $ug->first_name = $row['first_name'];
+                    $ug->last_name = $row['last_name'];
+                    $ug->contact_no = $row['contact_no'];
+                    $ug->profile_image = $row['profile_Image'];
+
+                    $ugDetails[] = $ug;
+                }
+
+                return $ugDetails;
+            }else {
+                return [];
+
+            }
+        } catch (PDOException $exc) {
+            die("Error in load count of User" . $exc->getMessage());
+
+        }
+    }
+
+
+
+
+
 }
 
 class Club extends User
@@ -530,6 +576,10 @@ class Club extends User
             return false;
         }
     }
+
+
+
+
 
 
 }

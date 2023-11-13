@@ -1,17 +1,18 @@
 <?php
 session_start();
 require_once 'classes/DBConnector.php';
+require_once 'classes/User.php';
 require_once 'classes/Project.php';
 require_once 'classes/User.php';
 require_once 'classes/PublicFlyer.php';
-require_once 'classes/clubownerDashGetCount.php';
+
 
 use classes\DBConnector;
 use classes\Project;
 use classes\Club;
 use classes\Undergraduate;
 use classes\PublicFlyer;
-use classes\clubownerDashGetCount;
+
 
 
 $con = DBConnector::getConnection();
@@ -494,20 +495,25 @@ if (isset($_SESSION['user_id'])) {
                         </div>
                     </div>
                 </div>
+                <?php
+
+                $ugDetails=Undergraduate::loadUgDataFromClubId($con,$clubid);
+
+
+                ?>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-1">
                     <div class="card card-eco">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-8">
                                     <h4 class="title-text mt-0">Total members</h4>
-                                    <h3 class="font-weight-semibold mb-1" id="stat-count">
+                                   <h3 class="font-weight-semibold mb-1" id="stat-count">
 
-                                        <?php
-                                        $clubcount = new clubownerDashGetCount(null, null);
-                                        $clubcount->setClubId($clubid);
-                                        $clubcount->loadCountToClubOwnerDashboard($con);
-                                        echo $clubcount->getUserCount();
-                                        ?></h3>
+
+                                    <?php echo count($ugDetails); ?>
+
+                                      </h3>
+
                                 </div>
                                 <!--end col-->
                                 <div class="col-4 text-center align-self-center">
@@ -563,7 +569,35 @@ if (isset($_SESSION['user_id'])) {
 
         </div>
         <div id="menu-content-3" class="main-content hide">
-            <h1>Content 3</h1>
+
+
+           <?php
+            foreach ($ugDetails as $ug) {
+            // Access other properties using $ug->property_name
+
+               ?>
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                   <?php  echo  $ug->user_id;?>
+
+
+
+
+
+
+                </div>
+                <div class="card-body">
+                    <img src="..." class="card-img-top" alt="...">
+
+                    <h5 class="card-title"><?php  echo  $ug->first_name;?></h5>
+                    <p class="card-text"></p>
+
+                </div>
+            </div>
+                <?php
+               }
+              ?>
+
         </div>
 
 
@@ -671,7 +705,7 @@ if (isset($_SESSION['user_id'])) {
             <!--===view flyer part-->
 
 
-            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
+            <div class="row ms-1 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
 
                 <?php
                 $flyerNo = 1;
@@ -703,7 +737,7 @@ if (isset($_SESSION['user_id'])) {
                                 <h5 class="card-title"><?= $publicFlyerObj->getCaption() ?></h5>
                             </div>
                             <!----------------- card  footer ------------------->
-                            <div class="card-footer" style="color: var(--lighter-secondary)!important; background-color: var(--accent-color3);">
+                            <div class="card-footer d-flex justify-content-end bg-warning-subtle card-list-option-buttons " style="font-size: 1.7rem;">
                                 <!----------------- edit button ------------------->
                                 <button type="button" class="btn " data-bs-toggle="modal"
                                         data-bs-target="#edit<?= $publicFlyerObj->getFlyerID() ?>">

@@ -253,4 +253,29 @@ class PublicFlyer
 
     }
 
+
+    public function loadPublicFlyerList($con) {
+        $flyer_list = array();
+        try {
+            $query = "SELECT * FROM public_flyer";
+            $pstmt = $con->prepare($query);
+            $pstmt->execute();
+            $result = $pstmt->fetchAll(PDO::FETCH_OBJ);
+            if (!empty($result)) {
+                foreach ($result as $use) {
+                    $use=new PublicFlyer($use->flyer_id,$use->start_date,
+                        $use->end_date,$use->caption,$use->link,$use->flyer_image,
+                        $use->club_id,$use->status,$use->flyer_topic);
+                    $flyer_list[] = $use;
+                }
+            } else {
+                echo "flyer list is empty!";
+            }
+            return   $flyer_list;
+        } catch (PDOException $ex) {
+            echo "Error in showRoomDetails:" . $ex->getMessage();
+        }
+    }
+
+
 }
