@@ -601,10 +601,33 @@ if (isset($_SESSION['user_id'])) {
 
                 <div class="card-body">
                     <img src="assets/images/profile_img/ug/<?php echo $ugImage?>" class="card-img-top
-                    rounded-circle img-thumbnail shadow-sm" style="width: 150px; height: 150px; object-fit: cover;"
+                    rounded-circle img-thumbnail shadow-sm" style="width: 150px; height: 150px; object-fit: cover;position: relative"
                          alt="user Profile Image">
                     <div class="card-content">
+                       <?php
+                       //get team Category Count
+                         $rs=$undergraduate->getTeamCategory($con,$ug->user_id);
 
+
+
+
+
+                       ?>
+                        <p>
+                          Total team  <?php echo count($rs) ; ?>
+                        </p>
+                        <p>
+                            <?php
+                            foreach ($rs as $row) {
+
+
+                                $cID= $row->category_id."<br/>";
+                               // $rse=$undergraduate->getProjectId($con, $cID );
+                                echo $cID;
+                            }
+
+                            ?>
+                        </p>
                     </div>
                 </div>
             </div>

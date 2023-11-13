@@ -351,6 +351,52 @@ class Undergraduate extends User
         }
     }
 
+    public static function getTeamCategory($con,$ugId){
+
+        try{
+            $query="SELECT tc.category_id 
+               FROM team_category tc
+               JOIN project_team pt ON tc.category_id = pt.category_id
+               JOIN undergraduate u ON pt.ug_id = u.user_id
+               WHERE u.user_id = ?";
+
+            $pstmt=$con->prepare($query);
+            $pstmt->bindvalue(1,$ugId);
+            $pstmt->execute();
+            $rs = $pstmt->fetchAll(\PDO::FETCH_OBJ);
+            if($rs){
+                return $rs;
+            }else{
+                return 0;
+            }
+
+        }catch (PDOException $exc){
+            die("Error in load data form team Category". $exc->getMessage());
+        }
+    }
+
+    public static function getProjectId($con,$tcId){
+        try{
+            $query="SELECT p.project_id FROM project p
+            JOIN team_category tc on p.project_id=tc.project_id
+            WHERE tc.category_id=?;
+            ";
+            $pstmt=$con->prepare($query);
+            $pstmt->bindvalue(1,$tcId);
+            $res = $pstmt->fetchAll(\PDO::FETCH_OBJ);
+            if($res){
+                return $res;
+            }else{
+                return 0;
+            }
+
+        }catch (PDOException $exc){
+            die("error in load data from project id". $exc->getMessage());
+        }
+    }
+
+
+
 
 
 
