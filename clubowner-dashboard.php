@@ -456,13 +456,13 @@ if (isset($_SESSION['user_id'])) {
                                     <h3 class="font-weight-semibold mb-1" id="stat-count">
 
                                         <?php
-                                        $projects = Project::getProjectListFromClubID($con, $clubid); // Assuming $con and $clubId are defined.
+                                        //$projects = Project::getProjectListFromClubID($con, $clubid); // Assuming $con and $clubId are defined.
 
-                                        $activeProjects = array_filter($projects, function ($project) {
-                                            return $project->getStatus() === 'active';
-                                        });
+                                        //$activeProjects = array_filter($projects, function ($project) {
+                                           // return $project->getStatus() === 'active';
+                                        //});
 
-                                        echo count($activeProjects);
+                                        //echo count($activeProjects);
                                         ?>
                                 </div>
                                 <!--end col-->
@@ -485,13 +485,13 @@ if (isset($_SESSION['user_id'])) {
                                     <h3 class="font-weight-semibold mb-1" id="stat-count">
 
                                         <?php
-                                        $projects = Project::getProjectListFromClubID($con, $clubid); // Assuming $con and $clubId are defined.
+                                        //$projects = Project::getProjectListFromClubID($con, $clubid); // Assuming $con and $clubId are defined.
 
-                                        $activeProjects = array_filter($projects, function ($project) {
-                                            return $project->getStatus() === 'deactive';
-                                        });
+                                        //$activeProjects = array_filter($projects, function ($project) {
+                                          //  return $project->getStatus() === 'deactive';
+                                       // });
 
-                                        echo count($activeProjects);
+                                        //echo count($activeProjects);
                                         ?>
                                 </div>
                                 <!--end col-->
@@ -507,7 +507,7 @@ if (isset($_SESSION['user_id'])) {
                 </div>
                 <?php
 
-                $ugDetails=Undergraduate::loadUgDataFromClubId($con,$clubid);
+                //$ugDetails=Undergraduate::loadUgDataFromClubId($con,$clubid);
 
 
                 ?>
@@ -519,8 +519,7 @@ if (isset($_SESSION['user_id'])) {
                                     <h4 class="title-text mt-0">Total members</h4>
                                    <h3 class="font-weight-semibold mb-1" id="stat-count">
 
-
-                                    <?php echo count($ugDetails); ?>
+                                       <?php //echo ($ugDetails); ?>
 
                                       </h3>
 
