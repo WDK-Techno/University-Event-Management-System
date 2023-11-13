@@ -64,7 +64,7 @@ $PRTasks = PRTask::getTaskListFromProjectID($con, $project->getProjectID());
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $selected_menuNo = 5;
+    $selected_menuNo = 3;
     if (isset($_GET['tab'])) {
         $selected_menuNo = $_GET['tab'];
     }

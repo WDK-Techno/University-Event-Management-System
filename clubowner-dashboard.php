@@ -34,54 +34,53 @@ if (isset($_SESSION['user_id'])) {
     $loadUserData = $undergraduate->loadDataFromUserID($con);
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $selected_menuNo = 1;
+        $selected_menuNo = 3;
         if (isset($_GET['tab'])) {
             $selected_menuNo = $_GET['tab'];
         }
         //        ====== error message show ======
         $errorMessage_settings = "";
 
-        if (isset($_GET['updateFlyer'])) {
-            $error_updateFlyer = $_GET['updateFlyer'];
-            switch ($error_updateFlyer) {
-                case 1:
-                    $errorMessage_settings = "Data not saved";
-                    break;
-                case 2:
-                    $errorMessage_settings = "Empty fields";
-                    break;
-                case 3:
-                    $errorMessage_settings = "not delete image";
-                    break;
-                case 4:
-                    $errorMessage_settings = "data not save";
-                    break;
-                case 5:
-                    $errorMessage_settings = "image not found";
-                    break;
-                case 6:
-                    $errorMessage_settings = "image size over";
-                    break;
-                case 7:
-                    $errorMessage_settings = "image upload error";
-                    break;
-                case 8:
-                    $errorMessage_settings = "image file format error";
-                    break;
-                case 9:
-                    $errorMessage_settings = "Empty fileds";
-                    break;
-                case 10:
-                    $errorMessage_settings = "Error in submit";
-                    break;
-                // Add more cases for other error codes
-            }
-        }
+        //if (isset($_GET['updateFlyer'])) {
+        ////$error_updateFlyer = $_GET['updateFlyer'];
+        ////switch ($error_updateFlyer) {
+        ////    case 1:
+        ////        $errorMessage_settings = "Data not saved";
+        ////        break;
+        ////    case 2:
+        ////        $errorMessage_settings = "Empty fields";
+        ////        break;
+        ////    case 3:
+        ////        $errorMessage_settings = "not delete image";
+        ////        break;
+        ////    case 4:
+        ////        $errorMessage_settings = "data not save";
+        ////        break;
+        ////    case 5:
+        ////        $errorMessage_settings = "image not found";
+        ////        break;
+        ////    case 6:
+        ////        $errorMessage_settings = "image size over";
+        ////        break;
+        ////    case 7:
+        ////        $errorMessage_settings = "image upload error";
+        ////        break;
+        ////    case 8:
+        ////        $errorMessage_settings = "image file format error";
+        ////        break;
+        ////    case 9:
+        ////        $errorMessage_settings = "Empty fileds";
+        ////        break;
+        ////    case 10:
+        ////        $errorMessage_settings = "Error in submit";
+        ////        break;
+        ////    // Add more cases for other error codes
+        ////}
+    }
 
 // Debugging output
 
 
-    }
 
     ?>
 
@@ -581,22 +580,32 @@ if (isset($_SESSION['user_id'])) {
         </div>
         <div id="menu-content-3" class="main-content hide">
 
-            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
+            <div class="row  mx-1 mt-2 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
            <?php
             foreach ($ugDetails as $ug) {
-            // Access other properties using $ug->property_name
+            // Access to Ug data
+                ?>
 
-               ?>
-            <div class="card" style="width: 18rem;">
-                <div class="card-header">
-                   <?php  echo  $ug->user_id;?>
+            <div class="card mx-2 px-0" style="width: 18rem; height: 20rem;">
+                <?php
+                $undergraduate->setUserId($ug->user_id);
+                $undergraduate->loadDataFromUserID($con);
+                $ugFName=$undergraduate->getFirstName();
+                $ugLName=$undergraduate->getLastName();
+                $ugImage=$undergraduate->getProfileImg();
+
+                ?>
+                <div class="card-header " style="background-color: var(--primary)!important;color: var(--secondary); text-align: center;">
+                   <h5><?php echo $ugFName . " ".$ugLName;?></h5>
                 </div>
+
                 <div class="card-body">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="assets/images/profile_img/ug/<?php echo $ugImage?>" class="card-img-top
+                    rounded-circle img-thumbnail shadow-sm" style="width: 150px; height: 150px; object-fit: cover;"
+                         alt="user Profile Image">
+                    <div class="card-content">
 
-                    <h5 class="card-title"><?php  echo  $ug->first_name;?></h5>
-                    <p class="card-text"></p>
-
+                    </div>
                 </div>
             </div>
                 <?php
@@ -997,6 +1006,15 @@ if (isset($_SESSION['user_id'])) {
     <!--=== Preloader Script file ===-->
     <?php include_once "content/commonJS.php" ?>
 
+
+    <!--=========== Selected Menu change when loading ============-->
+    <script>
+        document.getElementById("menu-<?php echo $selected_menuNo ?>").classList.add("activate");
+        document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.remove("hide");
+        document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.add("show");
+    </script>
+
+
     <script>
         function createNewProject() {
             let projectName = document.getElementById("add-project-name-input").value;
@@ -1047,12 +1065,6 @@ if (isset($_SESSION['user_id'])) {
         }
     </script>
 
-    <!--=========== Selected Menu change when loading ============-->
-    <script>
-        document.getElementById("menu-<?php echo $selected_menuNo ?>").classList.add("activate");
-        document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.remove("hide");
-        document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.add("show");
-    </script>
     <!-- ==== Boostrap Script ==== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
