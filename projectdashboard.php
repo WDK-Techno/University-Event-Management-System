@@ -64,7 +64,7 @@ $PRTasks = PRTask::getTaskListFromProjectID($con, $project->getProjectID());
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $selected_menuNo = 5;
+    $selected_menuNo = 4;
     if (isset($_GET['tab'])) {
         $selected_menuNo = $_GET['tab'];
     }
@@ -692,6 +692,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         // Send the username to the PHP script
         xhr.send('username=' + encodeURIComponent(username) + '&project_team_id=' + encodeURIComponent(projectTeamID));
 
+
+    }
+</script>
+
+<!--======= display selected team members in add subtask model ==========-->
+<script>
+    function displaySelectedTeamMembers(){
+        let teamCategoryID = document.getElementById("selected-team-cat-in-add-subtask").value;
+        console.log(teamCategoryID);
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'process/projectdashboard/selectTeamMembers.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let response = JSON.parse(xhr.responseText);
+
+                // Access the original username and the result from the response object
+                let message = response.message;
+                let success = response.success;
+                let
+                if (success) {
+                    window.location.href = 'projectdashboard.php?tab=2';
+                } else {
+                    document.getElementById("add-member-team-error").innerText = message;
+                }
+
+
+            }
+        };
+
+        // Send the username to the PHP script
+        xhr.send('team_cat_id=' + encodeURIComponent(teamCategoryID));
 
     }
 </script>

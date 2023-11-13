@@ -1,8 +1,10 @@
 <?php
 
 namespace classes;
+
 use PDO;
 use PDOException;
+
 class MainTask
 {
     protected $mainTaskID;
@@ -30,20 +32,25 @@ class MainTask
 //        $this->mainTaskStatus = $mainTaskStatus;
     }
 
-    public function addMainTask($con){
+    public function addMainTask($con)
+    {
 
     }
-    public function saveChangesToDatabase($con){
+
+    public function saveChangesToDatabase($con)
+    {
 
     }
-    public function loadMainTaskFromTaskID($con){
-        $con = DBConnector::getConnection();
+
+    public function loadMainTaskFromTaskID($con)
+    {
+
         $query = "SELECT * FROM main_task WHERE main_task_id=?";
         $pstmt = $con->prepare($query);
         $pstmt->bindValue(1, $this->mainTaskID);
         $pstmt->execute();
         $rs = $pstmt->fetch(PDO::FETCH_OBJ);
-        if (!empty($rs)){
+        if (!empty($rs)) {
             $this->mainTaskID = $rs->main_task_id;
             $this->mainTaskName = $rs->main_task_name;
             $this->startDate = $rs->start_date;
@@ -51,12 +58,32 @@ class MainTask
             $this->projectID = $rs->project_id;
             $this->mainTaskStatus = $rs->status;
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    public static function getMainTaskListFromProjectID($con,$projectID){
 
+    public static function getMainTaskListFromProjectID($con, $projectID)
+    {
+        $mainTasks = array();
+
+        try {
+            $query = "SELECT * from main_task WHERE project_id=?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1, $projectID);
+            $pstmt->execute();
+            $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
+            if (!empty($rs)) {
+                foreach ($rs as $row) {
+                    $mainTask = new MainTask($row->main_task_id);
+                    $mainTasks[] = $mainTask;
+                }
+            }
+        }catch (PDOException $exc){
+            die("Error in loading main taks list by project ID ". $exc->getMessage());
+        }
+
+        return $mainTasks;
     }
 
     /**
