@@ -117,20 +117,12 @@ $subTasks = SubTask::getSubTasksListFromProjectID($con, $project->getProjectID()
 
                             <!-- ===== select Team Member ======= -->
                             <div class="d-flex mt-2 px-5">
-<!--                                <select class="form-select ms-auto me-0"-->
-<!--                                        style="width: 50%;"-->
-<!--                                        name="" id="" required>-->
-<!--                                    <option class="text-center" value="" selected>-- Select Team Category ---->
-<!--                                    </option>-->
-<!--                                    --><?php
-//
-//                                    foreach ($teamCategories as $teamCategory) {
-//                                        ?>
-<!--                                        <option value="--><?php //= $teamCategory->getCategoryID() ?><!--">--><?php //= $teamCategory->getCategoryName() ?><!--</option>-->
-<!--                                        --><?php
-//                                    }
-//                                    ?>
-<!--                                </select>-->
+                                <select class="form-select ms-auto me-0"
+                                        style="width: 50%;"
+                                        name="" id="selected-team-cat-members" required>
+                                    <option class="text-center" value="" selected>-- Select Team Member --
+                                    </option>
+                                </select>
                             </div>
 
                             <!--====== display error ========-->

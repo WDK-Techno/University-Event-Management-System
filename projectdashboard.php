@@ -713,9 +713,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 // Access the original username and the result from the response object
                 let message = response.message;
                 let success = response.success;
-                let
+                let members = response.members;
                 if (success) {
-                    window.location.href = 'projectdashboard.php?tab=2';
+                    // Access the members array here and populate the dropdown
+                    let teamMemberDropDown = document.getElementById("selected-team-cat-members");
+
+                    // Clear existing options
+                    teamMemberDropDown.innerHTML = '';
+                    for (let memberId in members) {
+                        let option = document.createElement("option");
+                        option.value = memberId;
+                        option.text = members[memberId];
+                        teamMemberDropDown.add(option);
+                    }
                 } else {
                     document.getElementById("add-member-team-error").innerText = message;
                 }
