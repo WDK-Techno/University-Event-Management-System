@@ -318,12 +318,12 @@ class Undergraduate extends User
     {
         try {
 
-            $query = "SELECT *
+            $query = "SELECT DISTINCT user_id 
                          FROM undergraduate ug
                            JOIN project_team pt ON ug.user_id = pt.ug_id
                             JOIN team_category tc ON pt.category_id = tc.category_id
                              JOIN project p ON tc.project_id = p.project_id 
-                              WHERE club_id=?";
+                              WHERE P.status= 'active' AND club_id=?";
 
 
             $pstmt=$con->prepare($query);
@@ -337,11 +337,6 @@ class Undergraduate extends User
                 foreach ($rs as $row) {
                     $ug = new Undergraduate();
                     $ug->user_id = $row['user_id'];
-                    $ug->first_name = $row['first_name'];
-                    $ug->last_name = $row['last_name'];
-                    $ug->contact_no = $row['contact_no'];
-                    $ug->profile_image = $row['profile_Image'];
-
                     $ugDetails[] = $ug;
                 }
 
