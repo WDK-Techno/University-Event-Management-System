@@ -581,31 +581,31 @@ if (isset($_SESSION['user_id'])) {
 
             <div class="row  mx-1 mt-2 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
            <?php
-            foreach ($ugDetails as $ug) {
+            //foreach ($ugDetails as $ug) {
             // Access to Ug data
                 ?>
 
             <div class="card mx-2 px-0" style="width: 18rem; height: 20rem;">
                 <?php
-                $undergraduate->setUserId($ug->user_id);
-                $undergraduate->loadDataFromUserID($con);
-                $ugFName=$undergraduate->getFirstName();
-                $ugLName=$undergraduate->getLastName();
-                $ugImage=$undergraduate->getProfileImg();
+                //$undergraduate->setUserId($ug->user_id);
+                //$undergraduate->loadDataFromUserID($con);
+                //$ugFName=$undergraduate->getFirstName();
+                //$ugLName=$undergraduate->getLastName();
+                //$ugImage=$undergraduate->getProfileImg();
 
                 ?>
                 <div class="card-header " style="background-color: var(--primary)!important;color: var(--secondary); text-align: center;">
-                   <h5><?php echo $ugFName . " ".$ugLName;?></h5>
+                   <h5><?php //echo $ugFName . " ".$ugLName;?></h5>
                 </div>
 
                 <div class="card-body">
-                    <img src="assets/images/profile_img/ug/<?php echo $ugImage?>" class="card-img-top
+                    <img src="assets/images/profile_img/ug/<?php //echo $ugImage?>" class="card-img-top
                     rounded-circle img-thumbnail shadow-sm" style="width: 150px; height: 150px; object-fit: cover;position: relative"
                          alt="user Profile Image">
                     <div class="card-content">
                        <?php
                        //get team Category Count
-                         $rs=$undergraduate->getTeamCategory($con,$ug->user_id);
+                        // $rs=$undergraduate->getTeamCategory($con,$ug->user_id);
 
 
 
@@ -613,16 +613,16 @@ if (isset($_SESSION['user_id'])) {
 
                        ?>
                         <p>
-                          Total team  <?php echo count($rs) ; ?>
+                          Total team  <?//php echo count($rs) ; ?>
                         </p>
                         <p>
-                            <?php
-                            foreach ($rs as $row) {
+                            <?//php
+                            //foreach ($rs as $row) {
 
 
-                                $cID= $row->category_id."<br/>";
+                               // $cID= $row->category_id."<br/>";
                                // $rse=$undergraduate->getProjectId($con, $cID );
-                                echo $cID;
+                                //echo $cID;
                             }
 
                             ?>
@@ -630,7 +630,7 @@ if (isset($_SESSION['user_id'])) {
                     </div>
                 </div>
             </div>
-                <?php
+                <?//php
                }
               ?>
             </div>
