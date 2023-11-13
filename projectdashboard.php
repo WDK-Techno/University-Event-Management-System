@@ -84,25 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $errorMessage_settings = "Already Added";
         }
     }
-    if (isset($_GET['imgUploadErr'])) {
-        $error_imgUpload = $_GET['imgUploadErr'];
 
-        if ($error_imgUpload == 1) {
-            $errorMessage_settings = "Database Error";
-        }
-        if ($error_imgUpload == 2) {
-            $errorMessage_settings = "Error in Moving File";
-        }
-        if ($error_imgUpload == 3) {
-            $errorMessage_settings = "File Size larger than 10mb";
-        }
-        if ($error_imgUpload == 4) {
-            $errorMessage_settings = "Error in File Uploading";
-        }
-        if ($error_imgUpload == 5) {
-            $errorMessage_settings = "Invalid file format";
-        }
-    }
 }
 ?>
 
@@ -279,7 +261,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <?php include_once "content/GrantChart.php" ?>
     </div>
     <div id="menu-content-4" class="main-content hide">
-        <h1>Content 4</h1>
+        <?php include_once  "content/projectdashboard/activityPlan.php" ?>
     </div>
     <div id="menu-content-5" class="main-content hide">
         <div class="container-fluid">
