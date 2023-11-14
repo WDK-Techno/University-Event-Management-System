@@ -18,8 +18,6 @@ $con = DBConnector::getConnection();
 if (isset($_SESSION['user_id'])) {
 
 
-
-
     $ugID = $_SESSION['user_id'];
 
     //    $club = new Club(null, null, null, null);
@@ -222,20 +220,25 @@ if (isset($_SESSION['user_id'])) {
                     <div class="container p-0 scrollable-div-inside">
 
                         <?php
-                        foreach ($subTasks as $subTask) {
-                            $subTaskObj = new SubTask($subTask->getSubTaskID(), null, null, null, null, null, null, null);
-                            $subTaskObj->loadSubTaskFromSubTaskID($con);
-                            $project = new Project($subTaskObj->getProjectID(), null, null, null, null, null, null);
-                            $project->loadDataFromProjectID($con);
-                            ?>
+                        foreach ($subTasks
 
-                            <form action="process/ug-dashboard/editTask_compleat.php" method="post">
+                        as $subTask) {
+                        $subTaskObj = new SubTask($subTask->getSubTaskID(), null, null, null, null, null, null, null);
+                        $subTaskObj->loadSubTaskFromSubTaskID($con);
+                        $project = new Project($subTaskObj->getProjectID(), null, null, null, null, null, null);
+                        $project->loadDataFromProjectID($con);
+                        ?>
+                        <?php
+                        if ($subTaskObj->getIsTaskCompleted() == 0){
+                        ?>
+
+                        <form action="process/ug-dashboard/editTask_compleat.php" method="post">
                             <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
                                 <div class="col-1 d-flex tabel-column-type-2">
                                     <div class="my-auto">
                                         <img class="rounded-circle"
                                              style="width: 40px; height: 40px; object-fit: cover;"
-                                             src="assets/images/profile_img/project/<?=$project->getProfileImage()?>"
+                                             src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
                                              alt="">
                                     </div>
                                 </div>
@@ -243,26 +246,32 @@ if (isset($_SESSION['user_id'])) {
                                     <div class="my-auto"><?= $project->getProjectName() ?></div>
                                 </div>
                                 <div class="col-3 d-flex tabel-column-type-2">
-                                    <div class="my-auto mx-auto"><?=$subTaskObj->getSubTaskName() ?></div>
+                                    <div class="my-auto mx-auto"><?= $subTaskObj->getSubTaskName() ?></div>
                                 </div>
                                 <div class="col-2 d-flex tabel-column-type-1">
-                                    <div class="my-auto mx-auto"><?=$subTaskObj->getDeadline() ?></div>
+                                    <div class="my-auto mx-auto"><?= $subTaskObj->getDeadline() ?></div>
                                 </div>
                                 <div class="col-2 d-flex tabel-column-type-2">
                                     <div class="my-auto mx-auto">
-                                        <button onclick="addToTable2(this)">Add</button></div>
+                                        <button onclick="addToTable2(this)">Add</button>
+                                    </div>
                                 </div>
 
                             </div>
+                            <?php
+                            }
+                            ?>
+
+
 
                             <?php
 
-                        }
-                        ?>
-                                <div>
-                                    <button class="update-button" type="submit" name="update">Update</button>
-                                </div>
-                            </form>
+                            }
+                            ?>
+                            <!--                                <div>-->
+                            <!--                                    <button class="update-button" type="submit" name="update">Update</button>-->
+                            <!--                                </div>-->
+                        </form>
                         <!--                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px; background-color:#A3A2EC;">-->
                         <!--                                            <div class="col-1 d-flex tabel-column-type-2">-->
                         <!--                                                <div class="my-auto">-->
@@ -365,11 +374,7 @@ if (isset($_SESSION['user_id'])) {
             </div>
 
 
-
-
-
-
-            <div class="card mx-4" style="">
+            <div class="card mx-4" style="margin-top: 20px;">
                 <div class="card-header team-member-table pb-0"
                      style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
 
@@ -402,11 +407,16 @@ if (isset($_SESSION['user_id'])) {
                     <div class="container p-0 scrollable-div-inside">
 
                         <?php
-                        foreach ($subTasks as $subTask) {
+                        foreach ($subTasks
+
+                        as $subTask) {
                         $subTaskObj = new SubTask($subTask->getSubTaskID(), null, null, null, null, null, null, null);
-                        $subTaskObj->loadCompeatSubTaskFromSubTaskID($con);
+                        $subTaskObj->loadSubTaskFromSubTaskID($con);
                         $project = new Project($subTaskObj->getProjectID(), null, null, null, null, null, null);
                         $project->loadDataFromProjectID($con);
+                        ?>
+                        <?php
+                        if ($subTaskObj->getIsTaskCompleted() == 0){
                         ?>
 
                         <form action="process/ug-dashboard/editTask_compleat.php" method="post">
@@ -415,7 +425,7 @@ if (isset($_SESSION['user_id'])) {
                                     <div class="my-auto">
                                         <img class="rounded-circle"
                                              style="width: 40px; height: 40px; object-fit: cover;"
-                                             src="assets/images/profile_img/project/<?=$project->getProfileImage()?>"
+                                             src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
                                              alt="">
                                     </div>
                                 </div>
@@ -423,12 +433,19 @@ if (isset($_SESSION['user_id'])) {
                                     <div class="my-auto"><?= $project->getProjectName() ?></div>
                                 </div>
                                 <div class="col-3 d-flex tabel-column-type-2">
-                                    <div class="my-auto mx-auto"><?=$subTaskObj->getSubTaskName() ?></div>
+                                    <div class="my-auto mx-auto"><?= $subTaskObj->getSubTaskName() ?></div>
                                 </div>
                                 <div class="col-2 d-flex tabel-column-type-1">
-                                    <div class="my-auto mx-auto"><?=$subTaskObj->getDeadline() ?></div>
+                                    <div class="my-auto mx-auto"><?= $subTaskObj->getDeadline() ?></div>
                                 </div>
-
+                                <div class="col-2 d-flex tabel-column-type-2">
+                                    <div class="my-auto mx-auto">
+                                        <button onclick="addToTable2(this)">REMOVE</button>
+                                    </div>
+                                </div>
+                                <?php
+                                }
+                                ?>
 
                             </div>
 
@@ -436,7 +453,7 @@ if (isset($_SESSION['user_id'])) {
 
                             }
                             ?>
-                          
+
 
                     </div>
                 </div>
@@ -535,23 +552,18 @@ if (isset($_SESSION['user_id'])) {
     <!--    =============== Add complat task button ==========-->
     <script>
         function addToTable2(button) {
-            // Disable the button to prevent multiple additions
+
             button.disabled = true;
 
-            // Get the row of the clicked button
             var row = button.parentNode.parentNode;
 
-            // Clone the row to avoid altering the original table
             var clonedRow = row.cloneNode(true);
 
-            // Remove the "Add" button from the cloned row
             clonedRow.lastElementChild.innerHTML = "";
 
-            // Append the cloned row to the second table
             document.getElementById("table2").getElementsByTagName('tbody')[0].appendChild(clonedRow);
 
-            // Optionally, you can remove the row from the first table if needed
-            // row.parentNode.removeChild(row);
+
         }
     </script>
 
