@@ -507,7 +507,7 @@ if (isset($_SESSION['user_id'])) {
                 </div>
                 <?php
 
-                $ugDetails=Undergraduate::loadUgDataFromClubId($con,$clubid);
+                $ugs=Undergraduate::loadUgDataFromClubId($con,$clubid);
 
 
                 ?>
@@ -519,7 +519,7 @@ if (isset($_SESSION['user_id'])) {
                                     <h4 class="title-text mt-0">Total members</h4>
                                    <h3 class="font-weight-semibold mb-1" id="stat-count">
 
-                                       <?php echo count ($ugDetails); ?>
+                                       <?php echo count ($ugs); ?>
 
                                       </h3>
 
@@ -583,8 +583,7 @@ if (isset($_SESSION['user_id'])) {
 
                 <?php
                 //$ug=new Undergraduate(null,null,null,null,null,null);
-                $ug=Undergraduate::loadUgDataFromClubId($con, $clubid);
-                foreach ($ug as  $ugDetails){
+                foreach ($ugs as  $ug){
                // $ugDetails->getUserId();
                 ?>
             <div class="card mx-2 px-0" style="width: 18rem; height: 20rem;">
@@ -592,7 +591,7 @@ if (isset($_SESSION['user_id'])) {
                 <div class="card-header " style="background-color: var(--primary)!important;color: var(--secondary); text-align: center;">
                    <h5><?php
                          //echo $ugDetails->getUserId();
-                       echo $ugDetails->getFirstName();
+                       echo $ug->getFirstName();
                        ?>
                    </h5>
                 </div>
