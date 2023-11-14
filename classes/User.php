@@ -1,7 +1,7 @@
 <?php
 
 namespace classes;
-
+use PDO;
 use PDOException;
 
 class User
@@ -274,7 +274,7 @@ class Undergraduate extends User
         $pstmt = $con->prepare($query);
         $pstmt->bindValue(1, $this->user_id);
         $pstmt->execute();
-        $rs = $pstmt->fetch(\PDO::FETCH_OBJ);
+        $rs = $pstmt->fetch(PDO::FETCH_OBJ);
         if (!empty($rs)) {
             $this->username = $rs->user_name;
             $this->role = $rs->role;
@@ -305,7 +305,8 @@ class Undergraduate extends User
 
     }
 
-    public function getUndergraduates($con){
+    public function getUndergraduates($con)
+    {
         $query = "SELECT u.user_id,u.user_name,ug.first_name,ug.last_name,ug.contact_no,ug.profile_image,u.status FROM user u JOIN undergraduate ug ON u.user_id = ug.user_id";
         $pstmt = $con->prepare($query);
         $pstmt->execute();
@@ -314,41 +315,33 @@ class Undergraduate extends User
     }
 
 
-    public static function loadUgDataFromClubId($con,$clubid)
+    public static function loadUgDataFromClubId($con, $clubid)
     {
         try {
 
-            $query = "SELECT *
+            $query = "SELECT DISTINCT user_id 
                          FROM undergraduate ug
                            JOIN project_team pt ON ug.user_id = pt.ug_id
                             JOIN team_category tc ON pt.category_id = tc.category_id
                              JOIN project p ON tc.project_id = p.project_id 
-                              WHERE club_id=?";
+                              WHERE p.status= 'active' AND club_id=?";
 
 
-            $pstmt=$con->prepare($query);
+            $pstmt = $con->prepare($query);
             $pstmt->bindValue(1, $clubid);
             $pstmt->execute();
-            $rs = $pstmt->fetchAll(\PDO::FETCH_OBJ);
-            if($rs){
-                return $rs;
+            $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
+            if ($rs) {
 
-                $ugDetails = [];
+                $ugDetails = array();
                 foreach ($rs as $row) {
-                    $ug = new Undergraduate();
-                    $ug->user_id = $row['user_id'];
-                    $ug->first_name = $row['first_name'];
-                    $ug->last_name = $row['last_name'];
-                    $ug->contact_no = $row['contact_no'];
-                    $ug->profile_image = $row['profile_Image'];
-
+                    $ug = new Undergraduate(null, null, null, null, null, null);
+                    $ug->setUserId($row->user_id);
+                    $ug->loadDataFromUserID($con);
                     $ugDetails[] = $ug;
                 }
 
                 return $ugDetails;
-            }else {
-                return [];
-
             }
         } catch (PDOException $exc) {
             die("Error in load count of User" . $exc->getMessage());
@@ -356,8 +349,51 @@ class Undergraduate extends User
         }
     }
 
+    public static function getTeamCategory($con, $ugId)
+    {
 
+        try {
+            $query = "SELECT tc.category_id 
+               FROM team_category tc
+               JOIN project_team pt ON tc.category_id = pt.category_id
+               JOIN undergraduate u ON pt.ug_id = u.user_id
+               WHERE u.user_id = ?";
 
+            $pstmt = $con->prepare($query);
+            $pstmt->bindvalue(1, $ugId);
+            $pstmt->execute();
+            $rs = $pstmt->fetchAll(\PDO::FETCH_OBJ);
+            if ($rs) {
+                return $rs;
+            } else {
+                return 0;
+            }
+
+        } catch (PDOException $exc) {
+            die("Error in load data form team Category" . $exc->getMessage());
+        }
+    }
+
+    public static function getProjectId($con, $tcId)
+    {
+        try {
+            $query = "SELECT p.project_id FROM project p
+            JOIN team_category tc on p.project_id=tc.project_id
+            WHERE tc.category_id=?;
+            ";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindvalue(1, $tcId);
+            $res = $pstmt->fetchAll(\PDO::FETCH_OBJ);
+            if ($res) {
+                return $res;
+            } else {
+                return 0;
+            }
+
+        } catch (PDOException $exc) {
+            die("error in load data from project id" . $exc->getMessage());
+        }
+    }
 
 
 }
@@ -448,7 +484,7 @@ class Club extends User
         $this->status = "new";
     }
 
-    public function registerClub($con)
+    public function registerClub($con, $pdf)
     {
         $findDuplicate = parent::checkDuplicateEmail($con); //check duplicate
         if (!$findDuplicate) {
@@ -465,11 +501,12 @@ class Club extends User
                     $regID = $con->lastInsertId();
                     $this->user_id = $regID;
 
-                    $query2 = "INSERT INTO club (user_id,name,contact_no) VALUES (?,?,?)";
+                    $query2 = "INSERT INTO club (user_id,name,contact_no,approval_documents) VALUES (?,?,?,?)";
                     $pstmt2 = $con->prepare($query2);
                     $pstmt2->bindValue(1, $regID);
                     $pstmt2->bindValue(2, $this->clubName);
                     $pstmt2->bindValue(3, $this->contactNo);
+                    $pstmt2->bindValue(4, $pdf);
                     $pstmt2->execute();
 
                     return $pstmt2->rowCount() > 0;
@@ -528,7 +565,8 @@ class Club extends User
         }
     }
 
-    public function getClubs($con){
+    public function getClubs($con)
+    {
         $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no,u.status,club.profile_image,club.description FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'active' || status = 'deactive' ";
         $pstmt = $con->prepare($query);
         $pstmt->execute();
@@ -537,20 +575,21 @@ class Club extends User
     }
 
     public function getRequests($con){
-    $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no,club.register_date FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'new'";
-    $pstmt = $con->prepare($query);
-    $pstmt->execute();
-    $rs = $pstmt->fetchAll(\PDO::FETCH_OBJ);
-    return $rs;
-    }
-
-    public function getRowCount($con){
-    $query = "SELECT * FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'new'";
-    $pstmt = $con->prepare($query);
-    $pstmt->execute();
-    $rs = $pstmt->fetchAll(\PDO::FETCH_OBJ);
-    $count = $pstmt->rowCount();
-    return $count;
+        $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no,club.register_date,club.approval_documents FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'new'";
+        $pstmt = $con->prepare($query);
+        $pstmt->execute();
+        $rs = $pstmt->fetchAll(\PDO::FETCH_OBJ);
+        return $rs;
+        }
+        
+    public function getRowCount($con)
+    {
+        $query = "SELECT * FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'new'";
+        $pstmt = $con->prepare($query);
+        $pstmt->execute();
+        $rs = $pstmt->fetchAll(\PDO::FETCH_OBJ);
+        $count = $pstmt->rowCount();
+        return $count;
     }
 
     public function loadDataFromCategoryID($con)
@@ -576,10 +615,6 @@ class Club extends User
             return false;
         }
     }
-
-
-
-
 
 
 }

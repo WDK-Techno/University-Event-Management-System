@@ -8,28 +8,45 @@ use classes\Project;
 $con = DBConnector::getConnection();
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    if (isset($_POST["project_status_submit"])) {
 
-    if(isset($_POST["status"],$_POST["projectId"])){
+        $status = $_POST["is_verify"];
+        $projectId = $_POST["prId"];
+        $projectChairId = $_POST["prChairId"];
+        $tab = $_POST["tab"];
 
-            $status = $_POST["status"];
-            $projectId = $_POST["projectId"];
-            echo $status;
-            echo $projectId;
-            var_dump($status, $projectId);
-            $project = new Project('', '', '', '', '', '', '');
-            if ($status == 'false') {
-                $newStatus = 'inactive';
-            } else {
-                $newStatus = 'active';
-            }
-            $project->setStatus($newStatus);
+        if ($status == "verified") {
+            $project = new Project(null, null, null, null, null, null, null);
+            $newStatus = "active";
+
             $project->setProjectID($projectId);
+            $project->loadDataFromProjectID($con);
+            $project->setStatus($newStatus);
+            $project->setProjectChairID($projectChairId);
             if ($project->saveChangesToDataBase($con)) {
                 echo "Status updated successfully!";
+                header("location: ../../clubowner-dashboard.php?tab=$tab");
             } else {
-                echo "Failed to update status.";
+                header("location: ../../clubowner-dashboard.php?tab=$tab&status=1");
             }
 
+        } else {
+            $project = new Project(null, null, null, null, null, null, null);
+            $newStatus = "deactive";
+
+            $project->setProjectID($projectId);
+            $project->loadDataFromProjectID($con);
+            $project->setStatus($newStatus);
+            $project->setProjectChairID($projectChairId);
+            if ($project->saveChangesToDataBase($con)) {
+                echo "Status updated successfully!";
+                header("location: ../../clubowner-dashboard.php?tab=$tab");
+            } else {
+                header("location: ../../clubowner-dashboard.php?tab=$tab&status=2");
+            }
+        }
+    } else {
+        echo "1.1.1.1";
     }
 }
 ?>

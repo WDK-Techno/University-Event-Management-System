@@ -64,7 +64,7 @@
                         </div>
 
                         <!-- Start: Register Form -->
-                        <form action="../process/signup/reg_club.php" method="post" class="user">
+                        <form action="../process/signup/reg_club.php" method="post" class="user" enctype="multipart/form-data">
                             <!-- Start: Username -->
 
                             <!-- Start: Email -->
@@ -99,6 +99,18 @@
                                 </div>
 
                             </div><!-- End: Contact No -->
+
+                            <!-- Start: File Upload -->
+                           <div class="mb-3">
+                            <label for="pdfFile" class="form-label">Upload PDF File:</label>
+                            <input type="file"  id="pdfFile" name="pdfFile">
+                            </div>
+
+                         <!-- End: File Upload -->
+
+                            
+
+                            
 
 
                             <!-- Start: Email Error Message -->
