@@ -20,7 +20,7 @@ if(isset($_POST['add_new_sub_task'])){
         $subTaskName = $_POST['sub_task'];
         $desc = $_POST['description'];
         $memberID = $_POST['selected-team-cat-members'];
-        if (empty($_POST['sub_task'] == "")){
+        if ($_POST['sub_task'] == ""){
             $desc = null;
         }
         $completionDate = $_POST['completion_date'];

@@ -239,7 +239,8 @@ $subTasks = SubTask::getSubTasksListFromProjectID($con, $project->getProjectID()
                             $task->loadSubTaskFromSubTaskID($con);
                             ?>
                             <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
-                                <div class="col-1 d-flex tabel-column-type-1 justify-content-center" style="font-size: 1.8rem;">
+                                <div class="col-1 d-flex tabel-column-type-1 justify-content-center"
+                                     style="font-size: 1.8rem;">
                                     <input type="checkbox"
                                            class="my-auto ms-3 me-auto form-check-input"
                                            style="background-color: var(--primary);border-color: var(--accent-color3);border-width:2.5px;"
@@ -249,33 +250,55 @@ $subTasks = SubTask::getSubTasksListFromProjectID($con, $project->getProjectID()
                                            onchange="updateSubTaskComplete(<?= $subTaskNo ?>)">
                                 </div>
                                 <div class="col-2 tabel-column-type-2 d-flex justify-content-center">
-                                    <div class="my-auto fw-bold"><?= $task->getMainTaskName() ?></div>
+                                    <div class="my-auto fw-bold text-center"><?= $task->getMainTaskName() ?></div>
                                 </div>
                                 <div class="col-2 d-flex tabel-column-type-1 justify-content-center">
-                                    <div class="my-auto fw-bold"><?= $task->getSubTaskName() ?></div>
+                                    <div class="my-auto fw-bold text-center"><?= $task->getSubTaskName() ?></div>
                                 </div>
                                 <div class="col-3 d-flex tabel-column-type-2 justify-content-center">
-                                    <div class="my-auto"><?= $task->getDescription() ?></div>
+                                    <div class="my-auto text-center"><?= $task->getDescription() ?></div>
                                 </div>
-                                <div class="col-1 d-flex tabel-column-type-1 justify-content-center">
-
+                                <div class="col-1 d-flex tabel-column-type-1 justify-content-center"
+                                     style="font-size: 0.8rem; text-align: center">
+                                    <?php
+                                    $asignedMember = new Undergraduate(null, null, null, null, null, null);
+                                    $asignedMember->setUserId($task->getAssignedMemberID());
+                                    $asignedMember->loadDataFromUserID($con);
+                                    ?>
+                                    <div class="my-auto"><?= $asignedMember->getFirstName() ?>
+                                        <br><?= $asignedMember->getLastName() ?></div>
                                 </div>
                                 <div class="col-2 d-flex tabel-column-type-2 justify-content-center">
-
+                                    <div class="my-auto me-4 d-flex flex-column">
+                                        <div class="d-flex mx-auto fw-lighter"
+                                             style="font-size: 0.8rem;"><?= date("Y", strtotime($task->getDeadline())) ?></div>
+                                        <div class="d-flex mx-auto">
+                                            <div class="me-1"><?= date("M", strtotime($task->getDeadline())) ?></div>
+                                            <div><?= date("d", strtotime($task->getDeadline())) ?></div>
+                                        </div>
+                                    </div>
+                                    <div class="my-auto d-flex">
+                                        <div class="my-auto"><?= date("g:i A", strtotime($task->getDeadline())) ?></div>
+                                    </div>
                                 </div>
                                 <div class="col-1 tabel-column-type-1 d-flex justify-content-center">
                                     <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
-
-                                        <!--========== Delete team Member button =========-->
+                                        <!--========== Edit Sub task button =========-->
+                                        <ion-icon class="my-auto me-2" type="button"
+                                                  data-bs-toggle="modal"
+                                                  data-bs-target="#edit-sub-task-<?= $subTaskNo ?>"
+                                                  name="create-outline"></ion-icon>
+                                        <!--========== Delete Sub task button =========-->
                                         <ion-icon class="my-auto" type="button"
                                                   data-bs-toggle="modal"
-                                                  data-bs-target="#delete-project-member-<?= $subTaskNo ?>"
+                                                  data-bs-target="#delete-sub-task-<?= $subTaskNo ?>"
                                                   name="trash-outline"></ion-icon>
                                     </div>
+                                    <!-- =========== Edit Subtask button model =========== -->
 
-                                    <!-- =========== Delete team Member button model =========== -->
+                                    <!-- =========== Delete Subtask button model =========== -->
                                     <div class="modal fade"
-                                         id="delete-project-member-<?= $teamMemberNo ?>"
+                                         id="delete-sub-task-<?= $subTaskNo ?>"
                                          tabindex="-1"
                                          role="dialog"
                                          aria-labelledby="exampleModalCenterTitle"
@@ -284,14 +307,13 @@ $subTasks = SubTask::getSubTasksListFromProjectID($con, $project->getProjectID()
                                              role="document">
                                             <div class="modal-content">
                                                 <!--=== form =====-->
-                                                <form action="process/projectdashboard/deleteTeamMember.php"
+                                                <form action="process/projectdashboard/deleteSubTask.php"
                                                       method="post">
                                                     <div class="modal-header py-2 px-2"
                                                          style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
                                                         <div class="d-flex flex-row w-100 justify-content-between">
 
-                                                            <div class="ms-2 my-auto fs-4 fw-bold">Team
-                                                                Member
+                                                            <div class="ms-2 my-auto fs-4 fw-bold">Sub Task
                                                             </div>
 
                                                             <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
@@ -304,27 +326,30 @@ $subTasks = SubTask::getSubTasksListFromProjectID($con, $project->getProjectID()
 
                                                         <!--======= hidden ==========-->
                                                         <input type="hidden" name="menuNo"
-                                                               value="2">
-                                                        <input type="hidden" name="ug_id"
-                                                               value="<?= $projectMember->getUserId() ?>">
-                                                        <input type="hidden" name="cat_id"
-                                                               value="<?= $projectMemberTeam->getCategoryID() ?>">
+                                                               value="4">
+                                                        <input type="hidden" name="sub_task_id"
+                                                               value="<?= $task->getSubTaskID() ?>">
+
                                                     </div>
 
                                                     <div class="modal-body"
                                                          style="background-color: var(--lighter-secondary);">
                                                         <div class="d-flex flex-column fw-normal fs-5">
                                                             <div class="fw-bold">
-                                                                Do you want to Delete this Team Member ?
+                                                                Do you want to Delete this Sub Task ?
                                                             </div>
-                                                            <div class="fw-bold"
-                                                                 style="color: var(--primary); font-size: 1.1rem;">
-                                                                <?= $projectMember->getFirstName() ?> <?= $projectMember->getLastName() ?>
+                                                            <div class="d-flex">
+                                                                <div class="fw-bold rounded d-flex p-1"
+                                                                     style="background-color: var(--primary);color: var(--lighter-secondary); font-size: 1.1rem;">
+                                                                    <div class="me-2 my-auto"><?= $task->getMainTaskName() ?></div>
+
+                                                                    <div class="fw-bold rounded-end p-1"
+                                                                         style="background-color: var(--lighter-secondary);color: var(--primary); font-size: 1.1rem;">
+                                                                        <?= $task->getSubTaskName() ?>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="fw-bold"
-                                                                 style="color: var(--accent-color); font-size: 1.1rem;">
-                                                                <?= $projectMemberTeam->getCategoryName() ?>
-                                                            </div>
+
 
                                                         </div>
                                                     </div>
