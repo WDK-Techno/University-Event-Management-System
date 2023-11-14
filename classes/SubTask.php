@@ -147,34 +147,34 @@ class SubTask extends MainTask
 
     }
 
-    public static function getSubTaskListFromUserID($con, $userID)
-    {
-        try {
-
-            $subTasks = array();
-
-            $query = "SELECT * FROM sub_task WHERE asign_member_id=?";
-
-            $pstmt = $con->prepare($query);
-            $pstmt->bindValue(1, $userID);
-            $pstmt->execute();
-            $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
-
-            if (!empty($rs)) {
-                foreach ($rs as $row) {
-                    $subTask = new SubTask($row->sub_task_id, $row->sub_task_name, $row->description,
-                        $row->deadline, $row->asign_member_id, $row->task_complete,
-                        $row->main_task_id, $row->status);
-                    $subTasks[] = $subTask;
-
-                }
-            }
-        } catch (PDOException $exc) {
-            die("Error In Get Sub Tasks List From Project ID " . $exc->getMessage());
-        }
-
-        return $subTasks;
-    }
+//    public static function getSubTaskListFromUserID($con, $userID)
+//    {
+//        try {
+//
+//            $subTasks = array();
+//
+//            $query = "SELECT * FROM sub_task WHERE asign_member_id=?";
+//
+//            $pstmt = $con->prepare($query);
+//            $pstmt->bindValue(1, $userID);
+//            $pstmt->execute();
+//            $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
+//
+//            if (!empty($rs)) {
+//                foreach ($rs as $row) {
+//                    $subTask = new SubTask($row->sub_task_id, $row->sub_task_name, $row->description,
+//                        $row->deadline, $row->asign_member_id, $row->task_complete,
+//                        $row->main_task_id, $row->status);
+//                    $subTasks[] = $subTask;
+//
+//                }
+//            }
+//        } catch (PDOException $exc) {
+//            die("Error In Get Sub Tasks List From Project ID " . $exc->getMessage());
+//        }
+//
+//        return $subTasks;
+//    }
 
     /**
      * @return mixed

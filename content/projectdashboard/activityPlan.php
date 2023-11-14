@@ -136,7 +136,8 @@ $subTasks = SubTask::getSubTasksListFromProjectID($con, $project->getProjectID()
                                         </div>
                                         <select class="form-select ms-auto me-0"
                                                 style="width: 50%;"
-                                                name="" id="selected-team-cat-members" required>
+                                                name="selected-team-cat-members" id="selected-team-cat-members"
+                                                required>
                                             <option class="text-center" value="" selected>-- Team Member --
                                             </option>
                                         </select>
@@ -233,136 +234,132 @@ $subTasks = SubTask::getSubTasksListFromProjectID($con, $project->getProjectID()
 
                         foreach ($subTasks
 
-                        as $subTask) {
-                        $task = new SubTask($subTask->getSubTaskID(), null, null, null, null, null, null, null);
-                        $task->loadSubTaskFromSubTaskID($con);
-                        ?>
-                        <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
-                            <div class="col-1 d-flex tabel-column-type-1" style="font-size: 1.8rem; >
-                                    <input type=" checkbox
-                            "
-                            class="my-auto ms-3 me-auto form-check-input"
-                            style="background-color: var(--primary);border-color: var(--accent-color3) ;
-                            border-width:
-                            2.5px;"
-                            name="is_published"
-                            value="published"
-                            <?php if ($task->getIsTaskCompleted() == 1) echo "checked" ?>
-                            onchange="updatePRSubmit(<?= $subTaskNo ?>)">
-                        </div>
-                        <div class="col-2 tabel-column-type-2 d-flex"
-                        ">
-                        <div><?= $task->getMainTaskName() ?></div>
-                    </div>
-                    <div class="col-2 d-flex tabel-column-type-1">
-
-                    </div>
-                    <div class="col-3 d-flex tabel-column-type-2">
-
-                    </div>
-                    <div class="col-1 d-flex tabel-column-type-1">
-
-                    </div>
-                    <div class="col-2 d-flex tabel-column-type-2">
-
-                    </div>
-                    <div class="col-1 tabel-column-type-1 d-flex">
-                        <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
-
-                            <!--========== Delete team Member button =========-->
-                            <ion-icon class="my-auto" type="button"
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#delete-project-member-<?= $subTaskNo ?>"
-                                      name="trash-outline"></ion-icon>
-                        </div>
-
-                        <!-- =========== Delete team Member button model =========== -->
-                        <div class="modal fade"
-                             id="delete-project-member-<?= $teamMemberNo ?>"
-                             tabindex="-1"
-                             role="dialog"
-                             aria-labelledby="exampleModalCenterTitle"
-                             aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered"
-                                 role="document">
-                                <div class="modal-content">
-                                    <!--=== form =====-->
-                                    <form action="process/projectdashboard/deleteTeamMember.php"
-                                          method="post">
-                                        <div class="modal-header py-2 px-2"
-                                             style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
-                                            <div class="d-flex flex-row w-100 justify-content-between">
-
-                                                <div class="ms-2 my-auto fs-4 fw-bold">Team
-                                                    Member
-                                                </div>
-
-                                                <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
-                                                <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
-                                                <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
-                                                     style="font-size: 1.3rem; color: var(--accent-color3);">
-                                                    Delete
-                                                </div>
-                                            </div>
-
-                                            <!--======= hidden ==========-->
-                                            <input type="hidden" name="menuNo"
-                                                   value="2">
-                                            <input type="hidden" name="ug_id"
-                                                   value="<?= $projectMember->getUserId() ?>">
-                                            <input type="hidden" name="cat_id"
-                                                   value="<?= $projectMemberTeam->getCategoryID() ?>">
-                                        </div>
-
-                                        <div class="modal-body"
-                                             style="background-color: var(--lighter-secondary);">
-                                            <div class="d-flex flex-column fw-normal fs-5">
-                                                <div class="fw-bold">
-                                                    Do you want to Delete this Team Member ?
-                                                </div>
-                                                <div class="fw-bold"
-                                                     style="color: var(--primary); font-size: 1.1rem;">
-                                                    <?= $projectMember->getFirstName() ?> <?= $projectMember->getLastName() ?>
-                                                </div>
-                                                <div class="fw-bold"
-                                                     style="color: var(--accent-color); font-size: 1.1rem;">
-                                                    <?= $projectMemberTeam->getCategoryName() ?>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer"
-                                             style="background-color: var(--primary);">
-                                            <button type="button"
-                                                    class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">
-                                                Close
-                                            </button>
-                                            <button type="submit"
-                                                    name="submit"
-                                                    class="btn fw-bold"
-                                                    style="background-color: var(--accent-color3); color: var(--primary);">
-                                                Delete
-                                            </button>
-
-                                        </div>
-                                    </form>
+                                 as $subTask) {
+                            $task = new SubTask($subTask->getSubTaskID(), null, null, null, null, null, null, null);
+                            $task->loadSubTaskFromSubTaskID($con);
+                            ?>
+                            <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
+                                <div class="col-1 d-flex tabel-column-type-1 justify-content-center" style="font-size: 1.8rem;">
+                                    <input type="checkbox"
+                                           class="my-auto ms-3 me-auto form-check-input"
+                                           style="background-color: var(--primary);border-color: var(--accent-color3);border-width:2.5px;"
+                                           name="is_completed"
+                                           value="completed"
+                                        <?php if ($task->getIsTaskCompleted() == 1) echo "checked" ?>
+                                           onchange="updateSubTaskComplete(<?= $subTaskNo ?>)">
                                 </div>
+                                <div class="col-2 tabel-column-type-2 d-flex justify-content-center">
+                                    <div class="my-auto fw-bold"><?= $task->getMainTaskName() ?></div>
+                                </div>
+                                <div class="col-2 d-flex tabel-column-type-1 justify-content-center">
+                                    <div class="my-auto fw-bold"><?= $task->getSubTaskName() ?></div>
+                                </div>
+                                <div class="col-3 d-flex tabel-column-type-2 justify-content-center">
+                                    <div class="my-auto"><?= $task->getDescription() ?></div>
+                                </div>
+                                <div class="col-1 d-flex tabel-column-type-1 justify-content-center">
 
+                                </div>
+                                <div class="col-2 d-flex tabel-column-type-2 justify-content-center">
+
+                                </div>
+                                <div class="col-1 tabel-column-type-1 d-flex justify-content-center">
+                                    <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">
+
+                                        <!--========== Delete team Member button =========-->
+                                        <ion-icon class="my-auto" type="button"
+                                                  data-bs-toggle="modal"
+                                                  data-bs-target="#delete-project-member-<?= $subTaskNo ?>"
+                                                  name="trash-outline"></ion-icon>
+                                    </div>
+
+                                    <!-- =========== Delete team Member button model =========== -->
+                                    <div class="modal fade"
+                                         id="delete-project-member-<?= $teamMemberNo ?>"
+                                         tabindex="-1"
+                                         role="dialog"
+                                         aria-labelledby="exampleModalCenterTitle"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered"
+                                             role="document">
+                                            <div class="modal-content">
+                                                <!--=== form =====-->
+                                                <form action="process/projectdashboard/deleteTeamMember.php"
+                                                      method="post">
+                                                    <div class="modal-header py-2 px-2"
+                                                         style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                                        <div class="d-flex flex-row w-100 justify-content-between">
+
+                                                            <div class="ms-2 my-auto fs-4 fw-bold">Team
+                                                                Member
+                                                            </div>
+
+                                                            <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                            <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                            <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                                 style="font-size: 1.3rem; color: var(--accent-color3);">
+                                                                Delete
+                                                            </div>
+                                                        </div>
+
+                                                        <!--======= hidden ==========-->
+                                                        <input type="hidden" name="menuNo"
+                                                               value="2">
+                                                        <input type="hidden" name="ug_id"
+                                                               value="<?= $projectMember->getUserId() ?>">
+                                                        <input type="hidden" name="cat_id"
+                                                               value="<?= $projectMemberTeam->getCategoryID() ?>">
+                                                    </div>
+
+                                                    <div class="modal-body"
+                                                         style="background-color: var(--lighter-secondary);">
+                                                        <div class="d-flex flex-column fw-normal fs-5">
+                                                            <div class="fw-bold">
+                                                                Do you want to Delete this Team Member ?
+                                                            </div>
+                                                            <div class="fw-bold"
+                                                                 style="color: var(--primary); font-size: 1.1rem;">
+                                                                <?= $projectMember->getFirstName() ?> <?= $projectMember->getLastName() ?>
+                                                            </div>
+                                                            <div class="fw-bold"
+                                                                 style="color: var(--accent-color); font-size: 1.1rem;">
+                                                                <?= $projectMemberTeam->getCategoryName() ?>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer"
+                                                         style="background-color: var(--primary);">
+                                                        <button type="button"
+                                                                class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">
+                                                            Close
+                                                        </button>
+                                                        <button type="submit"
+                                                                name="submit"
+                                                                class="btn fw-bold"
+                                                                style="background-color: var(--accent-color3); color: var(--primary);">
+                                                            Delete
+                                                        </button>
+
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+
+                            <?php
+                            $subTaskNo++;
+                        }
+
+                        ?>
+
                     </div>
                 </div>
-
-                <?php
-                $subTaskNo++;
-                }
-
-                ?>
-
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>
