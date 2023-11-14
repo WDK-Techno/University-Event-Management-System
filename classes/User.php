@@ -484,7 +484,7 @@ class Club extends User
         $this->status = "new";
     }
 
-    public function registerClub($con)
+    public function registerClub($con, $pdf)
     {
         $findDuplicate = parent::checkDuplicateEmail($con); //check duplicate
         if (!$findDuplicate) {
@@ -501,11 +501,12 @@ class Club extends User
                     $regID = $con->lastInsertId();
                     $this->user_id = $regID;
 
-                    $query2 = "INSERT INTO club (user_id,name,contact_no) VALUES (?,?,?)";
+                    $query2 = "INSERT INTO club (user_id,name,contact_no,approval_documents) VALUES (?,?,?,?)";
                     $pstmt2 = $con->prepare($query2);
                     $pstmt2->bindValue(1, $regID);
                     $pstmt2->bindValue(2, $this->clubName);
                     $pstmt2->bindValue(3, $this->contactNo);
+                    $pstmt2->bindValue(4, $pdf);
                     $pstmt2->execute();
 
                     return $pstmt2->rowCount() > 0;
@@ -573,15 +574,14 @@ class Club extends User
         return $rs;
     }
 
-    public function getRequests($con)
-    {
-        $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no,club.register_date FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'new'";
+    public function getRequests($con){
+        $query = "SELECT u.user_id,u.user_name,club.name,club.contact_no,club.register_date,club.approval_documents FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'new'";
         $pstmt = $con->prepare($query);
         $pstmt->execute();
         $rs = $pstmt->fetchAll(\PDO::FETCH_OBJ);
         return $rs;
-    }
-
+        }
+        
     public function getRowCount($con)
     {
         $query = "SELECT * FROM user u JOIN club club ON u.user_id = club.user_id WHERE status = 'new'";

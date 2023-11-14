@@ -326,6 +326,7 @@ $user4 = $club->getRowCount($con);
                         <th>Date</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -341,7 +342,32 @@ $user4 = $club->getRowCount($con);
                         <td><?php echo $users->contact_no; ?> </td>
                         <td><?php echo $users->register_date; ?></td>
                         <td>
+                        <button type="button" id="viewButton" class="btn btn-primary   btnedit" data-bs-toggle="modal"
+                                 data-bs-target="#viewModal-<?=$newClubNo ?>">View Pdf</button>
+                                <div class="modal fade" id="viewModal-<?=$newClubNo ?>" tabindex="-1" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="background-color:var(--darker-primary); color:white">
+                                            <h5 class="modal-title">PDF Viewer</h5>
 
+                                        </div>
+                                        <div class="modal-body" style="font-size: 20px">
+                                            <iframe style="height:400px; width:450px;marging:10px;padding-left:15px" src="assets/uploads/<?php echo $users->approval_documents;?>" frameborder="0"></iframe>
+                                        </div>
+                                        <div class="modal-footer" style="background-color:var(--darker-primary)">
+
+                                            <button type="button" class="btn btn-secondary" id="no"
+                                                    data-bs-dismiss="modal">Cancel
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+
+
+                        <td>
                          <button type="button" id="acceptButton" class="btn btn-success   btnedit" data-bs-toggle="modal"
                                  data-bs-target="#confirmModal-<?=$newClubNo ?>">Accept</button>
 

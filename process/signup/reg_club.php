@@ -20,19 +20,29 @@ if (isset($_POST["submit"],$_POST["username"],$_POST["password"],
         $password = password_hash($_POST["password"],PASSWORD_BCRYPT);
         $clubName = $_POST["club_name"];
         $contactNo = $_POST["contact_no"];
+        $targetDirectory = "../../assets/uploads/";
+        $filename = basename($_FILES["pdfFile"]["name"]);
+        $filetype = pathinfo($filename, PATHINFO_EXTENSION);
+        $targetFilePath = $targetDirectory.$filename;
 
-        $club = new Club($userName,$password,$clubName,$contactNo);
+        if(strtolower($filetype) === "pdf"){
+            if(move_uploaded_file($_FILES["pdfFile"]["tmp_name"], $targetFilePath)){
+                $club = new Club($userName,$password,$clubName,$contactNo);
 
-        if ($club->checkDuplicateEmail($con)){
-            header("location: ../../content/club_signup.php?status=3");
-        }else{
-            $result = $club->registerClub($con);
-            if ($result){
-                header("location: ../../login.php");
-            }else{
-                header("location: ../../content/club_signup.php?status=2");
+                if ($club->checkDuplicateEmail($con)){
+                    header("location: ../../content/club_signup.php?status=3");
+                }else{
+                    $result = $club->registerClub($con, $filename);
+                    if ($result){
+                        header("location: ../../login.php");
+                    }else{
+                        header("location: ../../content/club_signup.php?status=2");
+                    }
+                }
             }
         }
+       
+
 
     }
 
