@@ -36,7 +36,7 @@ class SubTask extends MainTask
         try {
 
             $query = "INSERT INTO sub_task (sub_task_name, description, deadline, asign_member_id, main_task_id)
-VALUES (?,?,?,?,?)";
+            VALUES (?,?,?,?,?)";
 
             $pstmt = $con->prepare($query);
             $pstmt->bindValue(1, $this->subTaskName);
@@ -81,7 +81,9 @@ VALUES (?,?,?,?,?)";
 
         return $subTasks;
     }
-    public function loadCompeatSubTaskFromSubTaskID($con){
+
+    public function loadCompeatSubTaskFromSubTaskID($con)
+    {
         $query = "SELECT * FROM sub_task WHERE task_complete = 1 and sub_task_id=?";
         $pstmt = $con->prepare($query);
         $pstmt->bindValue(1, $this->subTaskID);
@@ -98,12 +100,12 @@ VALUES (?,?,?,?,?)";
             $this->subTaskStatus = $rs->status;
 
             $rs1 = parent::loadMainTaskFromTaskID($con);
-            if ($rs1){
+            if ($rs1) {
                 return true;
-            }else{
+            } else {
                 return true;
             }
-        }else{
+        } else {
             return false;
         }
 
@@ -129,12 +131,12 @@ VALUES (?,?,?,?,?)";
             $this->subTaskStatus = $rs->status;
 
             $rs1 = parent::loadMainTaskFromTaskID($con);
-            if ($rs1){
+            if ($rs1) {
                 return true;
-            }else{
+            } else {
                 return true;
             }
-        }else{
+        } else {
             return false;
         }
 

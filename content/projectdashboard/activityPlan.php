@@ -41,110 +41,147 @@ $subTasks = SubTask::getSubTasksListFromProjectID($con, $project->getProjectID()
                      role="document">
                     <div class="modal-content">
                         <!--=== form =====-->
-                        <div class="modal-header py-2 px-2"
-                             style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
-                            <div class="d-flex flex-row w-100 justify-content-between">
+                        <form action="process/projectdashboard/addNewSubTask.php" method="POST">
+                            <div class="modal-header py-2 px-2"
+                                 style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                <div class="d-flex flex-row w-100 justify-content-between">
 
-                                <div class="ms-2 my-auto fs-4 fw-bold">
-                                    Sub Task
+                                    <div class="ms-2 my-auto fs-4 fw-bold">
+                                        Sub Task
+                                    </div>
+
+                                    <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                    <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                    <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                         style="font-size: 1.3rem; color: var(--accent-color2);">
+                                        New
+                                    </div>
                                 </div>
 
-                                <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
-                                <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
-                                <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
-                                     style="font-size: 1.3rem; color: var(--accent-color2);">
-                                    New
+                                <!--======= hidden ==========-->
+                                <input type="hidden" name="menuNo" value="4">
+                            </div>
+
+                            <div class="modal-body"
+                                 style="background-color: var(--lighter-secondary);">
+
+                                <!-- ===== select Main Task ======= -->
+                                <div class="d-flex mt-2 px-5">
+                                    <div class="d-flex w-100 rounded p-2" style="background-color: var(--secondary)">
+                                        <div class="ms-1 me-auto my-auto fw-bold" style="font-size: 0.8rem;">Select <br>
+                                            Main Task
+                                        </div>
+                                        <select class="form-select ms-auto me-0"
+                                                style="width: 50%;"
+                                                name="main_task" id="" required>
+                                            <option class="text-center" value="" selected>-- Main Task --
+                                            </option>
+                                            <?php
+                                            foreach ($mainTasks as $mainTask) {
+                                                $mainT = new MainTask($mainTask->getMainTaskID());
+                                                $mainT->loadMainTaskFromTaskID($con);
+                                                ?>
+                                                <option value="<?= $mainT->getMainTaskID() ?>"><?= $mainT->getMainTaskName() ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
                                 </div>
+
+                                <!-- ====== input Sub Task & Description ====== -->
+                                <div class="d-flex mt-2 px-5">
+                                    <input class="form-control text-center"
+                                           name="sub_task"
+                                           placeholder="Sub Task" required/>
+                                </div>
+                                <div class="d-flex mt-2 px-5">
+                                    <input class="form-control text-center"
+                                           name="description"
+                                           placeholder="Description"/>
+                                </div>
+
+                                <!-- ===== select Team Category ======= -->
+                                <div class="d-flex mt-2 px-5">
+                                    <div class="d-flex w-100 rounded p-2" style="background-color: var(--secondary)">
+                                        <div class="ms-1 me-auto my-auto fw-bold" style="font-size: 0.8rem;">Select <br>
+                                            Team Category
+
+                                        </div>
+                                        <select class="form-select ms-auto me-0"
+                                                style="width: 50%;"
+                                                name="team_category"
+                                                onchange="displaySelectedTeamMembers()"
+                                                id="selected-team-cat-in-add-subtask" required>
+                                            <option class="text-center" value="" selected>-- Team Category --
+                                            </option>
+                                            <?php
+
+                                            foreach ($teamCategories as $teamCategory) {
+                                                ?>
+                                                <option value="<?= $teamCategory->getCategoryID() ?>"><?= $teamCategory->getCategoryName() ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- ===== select Team Member ======= -->
+                                <div class="d-flex mt-2 px-5">
+                                    <div class="d-flex w-100 rounded p-2" style="background-color: var(--secondary)">
+                                        <div class="ms-1 me-auto my-auto fw-bold" style="font-size: 0.8rem;">Select <br>
+                                            Team Member
+
+                                        </div>
+                                        <select class="form-select ms-auto me-0"
+                                                style="width: 50%;"
+                                                name="" id="selected-team-cat-members" required>
+                                            <option class="text-center" value="" selected>-- Team Member --
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex mt-2 px-5 w-100">
+                                    <div class="d-flex w-100 rounded p-2" style="background-color: var(--secondary)">
+                                        <div class="ms-1 me-auto my-auto fw-bold" style="font-size: 0.8rem;">completion
+                                            <br>
+                                            Date & Time
+                                        </div>
+                                        <div class="d-flex ms-auto me-0">
+                                            <input class="form-control text-center me-2" type="date" required
+                                                   style="width: fit-content"
+                                                   name="completion_date"/>
+                                            <input class="form-control text-center" style="width: fit-content"
+                                                   type="time" required
+                                                   name="completion_time"/>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--====== display error ========-->
+                                <div class="mt-2 text-center" id="add-member-team-error"
+                                     style="color: var(--accent-color3)"></div>
+
                             </div>
+                            <div class="modal-footer" style="background-color: var(--primary);">
+                                <button type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="submit"
+                                        name="add_new_sub_task"
+                                        class="btn fw-bold"
+                                        style="background-color: var(--secondary); color: var(--primary);">
+                                    ADD
+                                </button>
 
-                            <!--======= hidden ==========-->
-                            <input type="hidden" name="menuNo" value="4">
-                        </div>
-
-                        <div class="modal-body"
-                             style="background-color: var(--lighter-secondary);">
-
-                            <!-- ===== select Main Task ======= -->
-                            <div class="d-flex mt-2 px-5">
-                                <select class="form-select ms-auto me-0"
-                                        style="width: 50%;"
-                                        name="" id="" required>
-                                    <option class="text-center" value="" selected>-- Select Main Task --
-                                    </option>
-                                    <?php
-                                    foreach ($mainTasks as $mainTask) {
-                                        $mainT = new MainTask($mainTask->getMainTaskID());
-                                        $mainT->loadMainTaskFromTaskID($con);
-                                        ?>
-                                        <option value="<?= $mainT->getMainTaskID() ?>"><?= $mainT->getMainTaskName() ?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
                             </div>
-
-                            <!-- ====== input Sub Task & Description ====== -->
-                            <div class="d-flex mt-2 px-5">
-                                <input class="form-control text-center"
-                                       name="sub_task"
-                                       placeholder="Sub Task" required/>
-                            </div>
-                            <div class="d-flex mt-2 px-5">
-                                <input class="form-control text-center"
-                                       name="description"
-                                       placeholder="Description"/>
-                            </div>
-
-                            <!-- ===== select Team Category ======= -->
-                            <div class="d-flex mt-2 px-5">
-                                <select class="form-select ms-auto me-0"
-                                        style="width: 50%;"
-                                        name="team_category"
-                                        onchange="displaySelectedTeamMembers()"
-                                        id="selected-team-cat-in-add-subtask" required>
-                                    <option class="text-center" value="" selected>-- Select Team Category --
-                                    </option>
-                                    <?php
-
-                                    foreach ($teamCategories as $teamCategory) {
-                                        ?>
-                                        <option value="<?= $teamCategory->getCategoryID() ?>"><?= $teamCategory->getCategoryName() ?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-
-                            <!-- ===== select Team Member ======= -->
-                            <div class="d-flex mt-2 px-5">
-                                <select class="form-select ms-auto me-0"
-                                        style="width: 50%;"
-                                        name="" id="selected-team-cat-members" required>
-                                    <option class="text-center" value="" selected>-- Select Team Member --
-                                    </option>
-                                </select>
-                            </div>
-
-                            <!--====== display error ========-->
-                            <div class="mt-2 text-center" id="add-member-team-error"
-                                 style="color: var(--accent-color3)"></div>
-
-                        </div>
-                        <div class="modal-footer" style="background-color: var(--primary);">
-                            <button type="button"
-                                    class="btn btn-secondary"
-                                    data-bs-dismiss="modal">
-                                Close
-                            </button>
-                            <button type="button"
-                                    onclick="addMemberToProject()"
-                                    class="btn fw-bold"
-                                    style="background-color: var(--secondary); color: var(--primary);">
-                                ADD
-                            </button>
-
-                        </div>
+                        </form>
                     </div>
+
 
                 </div>
             </div>
@@ -205,7 +242,8 @@ $subTasks = SubTask::getSubTasksListFromProjectID($con, $project->getProjectID()
                                     <input type=" checkbox
                             "
                             class="my-auto ms-3 me-auto form-check-input"
-                            style="background-color: var(--primary);border-color: var(--accent-color3) ; border-width:
+                            style="background-color: var(--primary);border-color: var(--accent-color3) ;
+                            border-width:
                             2.5px;"
                             name="is_published"
                             value="published"
