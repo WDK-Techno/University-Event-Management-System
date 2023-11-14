@@ -273,5 +273,16 @@ class PRTask
             die("Error in PR Table save changes " . $exc->getMessage());
         }
     }
+    public function deleteTask($con){
+        try {
+            $query = "DELETE FROM pr_task WHERE pr_id =?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1, $this->prID);
+            $pstmt->execute();
+            return $pstmt->rowCount() > 0;
+        } catch (PDOException $exc) {
+            die("Error in Update Database" . $exc->getMessage());
+        }
+    }
 
 }

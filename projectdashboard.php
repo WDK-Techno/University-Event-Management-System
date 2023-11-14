@@ -592,6 +592,134 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                               data-bs-toggle="modal"
                                                               data-bs-target="#edit-pr-task-<?= $prTaskNo ?>"
                                                               name="create-outline"></ion-icon>
+
+                                                    <!-- ========= edit task button model ========== -->
+                                                    <div class="modal fade"
+                                                         id="edit-pr-task-<?= $prTaskNo ?>"
+                                                         tabindex="-1"
+                                                         role="dialog"
+                                                         aria-labelledby="exampleModalCenterTitle"
+                                                         aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered"
+                                                             role="document">
+                                                            <div class="modal-content">
+                                                                <!--=== form =====-->
+                                                                <form action="process/projectdashboard/editPRTask.php" method="POST">
+                                                                    <div class="modal-header py-2 px-2"
+                                                                         style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                                                        <div class="d-flex flex-row w-100 justify-content-between">
+
+                                                                            <div class="ms-2 my-auto fs-4 fw-bold">
+                                                                                Task
+                                                                            </div>
+
+                                                                            <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                                            <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                                            <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                                                 style="font-size: 1.3rem; color: var(--accent-color2);">
+                                                                                Edit
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!--======= hidden ==========-->
+                                                                        <input type="hidden" name="menuNo" value="5">
+                                                                    </div>
+
+                                                                    <div class="modal-body"
+                                                                         style="background-color: var(--lighter-secondary);">
+                                                                        <!-- ====== edit topic and description ====== -->
+                                                                        <div class="d-flex mt-2 px-5">
+                                                                            <input class="form-control text-center"
+                                                                                   name="topic" id="edit-topic"
+                                                                                   placeholder="Topic" required/>
+                                                                        </div>
+                                                                        <div class="d-flex mt-2 px-5">
+                                                                            <input class="form-control text-center"
+                                                                                   name="description" id="edit-description"
+                                                                                   placeholder="Description"/>
+                                                                        </div>
+                                                                        <!-- ===== select team ======= -->
+                                                                        <div class="d-flex mt-2 px-5">
+
+                                                                            <select id="designer_id" class="form-select ms-auto me-2"
+                                                                                    style="width: 50%;"
+                                                                                    name="designer_id" id="" required>
+                                                                                <option class="text-center" value="" selected>-- Select Designer --
+                                                                                </option>
+                                                                                <?php
+                                                                                foreach ($desingTeamMembers as $desingTeamMember) {
+                                                                                    $member = new Undergraduate(null, null, null, null, null, null);
+                                                                                    $member->setUserId($desingTeamMember->getUgID());
+                                                                                    $member->loadDataFromUserID($con);
+                                                                                    ?>
+                                                                                    <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
+                                                                                    <?php
+                                                                                }
+                                                                                ?>
+                                                                            </select>
+
+                                                                            <select id="caption_writer_id" class="form-select ms-auto me-0"
+                                                                                    style="width: 50%;"
+                                                                                    name="caption_writer_id" id="" required>
+                                                                                <option class="text-center" value="" selected>-- Select Caption
+                                                                                    Writter
+                                                                                    --
+                                                                                </option>
+                                                                                <?php
+                                                                                foreach ($writingTeamMembers as $writingTeamMember) {
+                                                                                    $member = new Undergraduate(null, null, null, null, null, null);
+                                                                                    $member->setUserId($writingTeamMember->getUgID());
+                                                                                    $member->loadDataFromUserID($con);
+                                                                                    ?>
+                                                                                    <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
+                                                                                    <?php
+                                                                                }
+                                                                                ?>
+                                                                            </select>
+
+                                                                        </div>
+                                                                        <div class="mt-2 text-center" id="add-member-team-error"
+                                                                             style="color: var(--accent-color3)"></div>
+
+                                                                        <div class="d-flex mt-2 px-5 w-100">
+                                                                            <div class="d-flex w-100 rounded p-2" style="background-color: var(--secondary)">
+                                                                                <div class="ms-1 me-auto my-auto fw-bold" style="font-size: 0.8rem;">Publish <br> Date & Time</div>
+                                                                                <div class="d-flex ms-auto me-0">
+                                                                                    <input class="form-control text-center me-2" type="date" required
+                                                                                           style="width: fit-content"
+                                                                                           name="publish_date"/>
+                                                                                    <input class="form-control text-center" style="width: fit-content"
+                                                                                           type="time" required
+                                                                                           name="publish_time"/>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--======= hidden ==========-->
+                                                                        <input type="hidden" name="menuNo" value="5">
+                                                                        <input type="hidden" name="project_id"
+                                                                               value="<?= $project->getProjectID() ?>">
+
+                                                                    </div>
+                                                                    <div class="modal-footer" style="background-color: var(--primary);">
+                                                                        <button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-bs-dismiss="modal">
+                                                                            Close
+                                                                        </button>
+                                                                        <button type="submit"
+                                                                                name="submit"
+                                                                                class="btn fw-bold"
+                                                                                style="background-color: var(--secondary); color: var(--primary);">
+                                                                            Edit
+                                                                        </button>
+
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <ion-icon class="my-auto" type="button"
                                                               data-bs-toggle="modal"
                                                               data-bs-target="#delete-pr-task-<?= $prTaskNo ?>"
