@@ -585,7 +585,7 @@ if (isset($_SESSION['user_id'])) {
                 //$ug=new Undergraduate(null,null,null,null,null,null);
                 $ug=Undergraduate::loadUgDataFromClubId($con, $clubid);
                 foreach ($ug as  $ugDetails){
-                $ugDetails->getUserId();
+               // $ugDetails->getUserId();
                 ?>
             <div class="card mx-2 px-0" style="width: 18rem; height: 20rem;">
 
