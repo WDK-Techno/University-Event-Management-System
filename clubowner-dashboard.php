@@ -507,7 +507,7 @@ if (isset($_SESSION['user_id'])) {
                 </div>
                 <?php
 
-                //$ugDetails=Undergraduate::loadUgDataFromClubId($con,$clubid);
+                $ugDetails=Undergraduate::loadUgDataFromClubId($con,$clubid);
 
 
                 ?>
@@ -519,7 +519,7 @@ if (isset($_SESSION['user_id'])) {
                                     <h4 class="title-text mt-0">Total members</h4>
                                    <h3 class="font-weight-semibold mb-1" id="stat-count">
 
-                                       <?php //echo ($ugDetails); ?>
+                                       <?php echo count ($ugDetails); ?>
 
                                       </h3>
 
@@ -580,22 +580,21 @@ if (isset($_SESSION['user_id'])) {
         <div id="menu-content-3" class="main-content hide">
 
             <div class="row  mx-1 mt-2 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
-           <?php
-            //foreach ($ugDetails as $ug) {
-            // Access to Ug data
-                ?>
 
-            <div class="card mx-2 px-0" style="width: 18rem; height: 20rem;">
                 <?php
-                //$undergraduate->setUserId($ug->user_id);
-                //$undergraduate->loadDataFromUserID($con);
-                //$ugFName=$undergraduate->getFirstName();
-                //$ugLName=$undergraduate->getLastName();
-                //$ugImage=$undergraduate->getProfileImg();
-
+                //$ug=new Undergraduate(null,null,null,null,null,null);
+                $ug=Undergraduate::loadUgDataFromClubId($con, $clubid);
+                foreach ($ug as  $ugDetails){
+                $ugDetails->getUserId();
                 ?>
+            <div class="card mx-2 px-0" style="width: 18rem; height: 20rem;">
+
                 <div class="card-header " style="background-color: var(--primary)!important;color: var(--secondary); text-align: center;">
-                   <h5><?php //echo $ugFName . " ".$ugLName;?></h5>
+                   <h5><?php
+                         //echo $ugDetails->getUserId();
+                       echo $ugDetails->getFirstName();
+                       ?>
+                   </h5>
                 </div>
 
                 <div class="card-body">
@@ -603,36 +602,15 @@ if (isset($_SESSION['user_id'])) {
                     rounded-circle img-thumbnail shadow-sm" style="width: 150px; height: 150px; object-fit: cover;position: relative"
                          alt="user Profile Image">
                     <div class="card-content">
-                       <?php
-                       //get team Category Count
-                        // $rs=$undergraduate->getTeamCategory($con,$ug->user_id);
 
 
 
-
-
-                       ?>
-                        <p>
-                          Total team  <?//php echo count($rs) ; ?>
-                        </p>
-                        <p>
-                            <?//php
-                            //foreach ($rs as $row) {
-
-
-                               // $cID= $row->category_id."<br/>";
-                               // $rse=$undergraduate->getProjectId($con, $cID );
-                                //echo $cID;
-                            }
-
-                            ?>
-                        </p>
                     </div>
                 </div>
             </div>
-                <?php//
-               }
-              ?>
+            <?php
+                }
+            ?>
             </div>
 
         </div>
