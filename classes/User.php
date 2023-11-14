@@ -324,7 +324,7 @@ class Undergraduate extends User
                            JOIN project_team pt ON ug.user_id = pt.ug_id
                             JOIN team_category tc ON pt.category_id = tc.category_id
                              JOIN project p ON tc.project_id = p.project_id 
-                              WHERE P.status= 'active' AND club_id=?";
+                              WHERE p.status= 'active' AND club_id=?";
 
 
             $pstmt = $con->prepare($query);
