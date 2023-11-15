@@ -13,26 +13,37 @@ if (isset($_POST['pr_update_submit'])) {
     $prID = $_POST['pr_id'];
     $published = 0;
     $verified = 0;
-
+//    if (isset($_POST['is_published'])) {
+//        if ($_POST['is_published'] == 'published') {
+//            $published = 1;
+//        } else {
+//            $published = 0;
+//            $verified = 0;
+//        }
+//    }
     if ($_POST['is_published'] == 'published') {
         $published = 1;
-    }
-    if ($_POST['is_verify'] == 'verified') {
         $verified = 1;
+    } else if ($_POST['is_verify'] == 'verified') {
+        $published = 0;
+        $verified = 1;
+    } else {
+        $verified =0;
+        $published =0;
     }
 
+//if (isset($_POST['is_verify'])) {
+//    if ($_POST['is_verify'] == 'verified') {
+//        $verified = 1;
+//    } else {
+//        $verified = 0;
+//        $published = 0;
+//    }
+//}
 
     $PRTask = new PRTask($prID, null, null, null, null, null, null);
     $PRTask->loadTaskFromPRId($con);
-    echo "publish date : " . $PRTask->getpublishDate();
-    echo "topic " . $PRTask->gettopic();
     $PRTask->setisPublished($published);
-    $PRTask->setisVerifyByProjectChair($verified);
-//    $PRTask->setpublishDate($publishedDate);
-//    $PRTask->setdesignCompletingDeadline($designDeadline);
-    if ($PRTask->getdescription() == "") {
-        $PRTask->setdescription(null);
-    }
     $rs = $PRTask->saveChangesToDatabase($con);
 
     if ($rs) {

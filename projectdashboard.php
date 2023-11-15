@@ -261,7 +261,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <?php include_once "content/GrantChart.php" ?>
     </div>
     <div id="menu-content-4" class="main-content hide">
-<!--        --><?php //include_once  "content/projectdashboard/activityPlan.php" ?>
+        <!--        --><?php //include_once  "content/projectdashboard/activityPlan.php" ?>
     </div>
     <div id="menu-content-5" class="main-content hide">
         <div class="container-fluid">
@@ -529,10 +529,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                         ?>
 
                                         <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
-                                            <form action="process/projectdashboard/editPRTask.php"
-                                                  method="POST">
-                                                <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
-                                                     style="font-size: 1.8rem; ">
+
+                                            <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
+                                                 style="font-size: 1.8rem; ">
+                                                <form action="process/projectdashboard/editPRTask.php"
+                                                      method="POST">
                                                     <input type="checkbox"
                                                            class="my-auto ms-3 me-auto form-check-input"
                                                            style="background-color: var(--primary);border-color: var(--accent-color3) ; border-width: 2.5px;"
@@ -540,65 +541,75 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                            value="published"
                                                         <?php if ($task->getisVerifyByProjectChair() == 0) echo "disabled" ?>
                                                         <?php if ($task->getisPublished() == 1) echo "checked" ?>
-                                                           onchange="updatePRSubmit(<?= $prTaskNo ?>)">
-                                                </div>
-                                                <div class="col-1 tabel-column-type-2 d-flex justify-content-center">
-                                                    <div class="my-auto d-flex flex-column">
-                                                        <div class="d-flex mx-auto fw-lighter"
-                                                             style="font-size: 0.8rem;"><?= date("Y", strtotime($task->getpublishDate())) ?></div>
-                                                        <div class="d-flex mx-auto">
-                                                            <div class="me-1"><?= date("M", strtotime($task->getpublishDate())) ?></div>
-                                                            <div><?= date("d", strtotime($task->getpublishDate())) ?></div>
-                                                        </div>
+                                                           onchange="updatePRSubmit(<?= $prTaskNo ?>,1)">
+                                                    <!--======= hidden ==========-->
+                                                    <input type="hidden" name="menuNo" value="5">
+                                                    <input type="hidden" name="pr_id"
+                                                           value="<?= $task->getprID() ?>">
+                                                    <input class="d-none" type="submit" name="pr_update_submit"
+                                                           id="pr_update_submit_1_<?= $prTaskNo ?>"/>
+                                                </form>
+                                            </div>
+                                            <div class="col-1 tabel-column-type-2 d-flex justify-content-center">
+                                                <div class="my-auto d-flex flex-column">
+                                                    <div class="d-flex mx-auto fw-lighter"
+                                                         style="font-size: 0.8rem;"><?= date("Y", strtotime($task->getpublishDate())) ?></div>
+                                                    <div class="d-flex mx-auto">
+                                                        <div class="me-1"><?= date("M", strtotime($task->getpublishDate())) ?></div>
+                                                        <div><?= date("d", strtotime($task->getpublishDate())) ?></div>
                                                     </div>
                                                 </div>
-                                                <div class="col-1 tabel-column-type-1 d-flex justify-content-center">
-                                                    <div class="my-auto"><?= date("g:i A", strtotime($task->getpublishDate())) ?></div>
-                                                </div>
-                                                <div class="col-2 tabel-column-type-2 d-flex justify-content-center">
-                                                    <div class="my-auto fw-bold"><?= $task->gettopic() ?></div>
-                                                </div>
-                                                <div class="col-3 tabel-column-type-1 d-flex justify-content-center">
-                                                    <div class="my-auto text-center"><?= $task->getdescription() ?></div>
-                                                </div>
-                                                <div class="col-1 tabel-column-type-2 d-flex justify-content-center"
-                                                     style="font-size: 0.8rem; text-align: center">
-                                                    <?php
-                                                    $disgner = new Undergraduate(null, null, null, null, null, null);
-                                                    $disgner->setUserId($task->getdesignerID());
-                                                    $disgner->loadDataFromUserID($con);
-                                                    ?>
-                                                    <div class="my-auto"><?= $disgner->getFirstName() ?>
-                                                        <br><?= $disgner->getLastName() ?></div>
-                                                </div>
-                                                <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
-                                                     style="font-size:0.8rem ;text-align: center;">
-                                                    <?php
-                                                    $writer = new Undergraduate(null, null, null, null, null, null);
-                                                    $writer->setUserId($task->getcaptionWriterID());
-                                                    $writer->loadDataFromUserID($con);
-                                                    ?>
-                                                    <div class="my-auto"><?= $writer->getFirstName() ?>
-                                                        <br><?= $writer->getLastName() ?></div>
-                                                </div>
+                                            </div>
+                                            <div class="col-1 tabel-column-type-1 d-flex justify-content-center">
+                                                <div class="my-auto"><?= date("g:i A", strtotime($task->getpublishDate())) ?></div>
+                                            </div>
+                                            <div class="col-2 tabel-column-type-2 d-flex justify-content-center">
+                                                <div class="my-auto fw-bold"><?= $task->gettopic() ?></div>
+                                            </div>
+                                            <div class="col-3 tabel-column-type-1 d-flex justify-content-center">
+                                                <div class="my-auto text-center"><?= $task->getdescription() ?></div>
+                                            </div>
+                                            <div class="col-1 tabel-column-type-2 d-flex justify-content-center"
+                                                 style="font-size: 0.8rem; text-align: center">
+                                                <?php
+                                                $disgner = new Undergraduate(null, null, null, null, null, null);
+                                                $disgner->setUserId($task->getdesignerID());
+                                                $disgner->loadDataFromUserID($con);
+                                                ?>
+                                                <div class="my-auto"><?= $disgner->getFirstName() ?>
+                                                    <br><?= $disgner->getLastName() ?></div>
+                                            </div>
+                                            <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
+                                                 style="font-size:0.8rem ;text-align: center;">
+                                                <?php
+                                                $writer = new Undergraduate(null, null, null, null, null, null);
+                                                $writer->setUserId($task->getcaptionWriterID());
+                                                $writer->loadDataFromUserID($con);
+                                                ?>
+                                                <div class="my-auto"><?= $writer->getFirstName() ?>
+                                                    <br><?= $writer->getLastName() ?></div>
+                                            </div>
 
-                                                <div class="col-1 tabel-column-type-2 d-flex justify-content-center"
-                                                     style="font-size: 1.3rem;">
+                                            <div class="col-1 tabel-column-type-2 d-flex justify-content-center"
+                                                 style="font-size: 1.3rem;">
+                                                <form action="process/projectdashboard/editPRTask.php"
+                                                      method="POST">
                                                     <input type="checkbox"
                                                            class="my-auto form-check-input"
                                                            style="background-color: var(--accent-color3); border-color: yellow;border-width: 1.2px"
                                                            name="is_verify" value="verified"
                                                         <?php if ($task->getisPublished() == 1) echo "disabled" ?>
                                                         <?php if ($task->getisVerifyByProjectChair() == 1) echo "checked" ?>
-                                                           onchange="updatePRSubmit(<?= $prTaskNo ?>)">
-                                                </div>
-                                                <!--======= hidden ==========-->
-                                                <input type="hidden" name="menuNo" value="5">
-                                                <input type="hidden" name="pr_id"
-                                                       value="<?= $task->getprID() ?>">
-                                                <input class="d-none" type="submit" name="pr_update_submit"
-                                                       id="pr_update_submit_<?=$prTaskNo?>"/>
-                                            </form>
+                                                           onchange="updatePRSubmit(<?= $prTaskNo ?>,2)">
+                                                    <!--======= hidden ==========-->
+                                                    <input type="hidden" name="menuNo" value="5">
+                                                    <input type="hidden" name="pr_id"
+                                                           value="<?= $task->getprID() ?>">
+                                                    <input class="d-none" type="submit" name="pr_update_submit"
+                                                           id="pr_update_submit_2_<?= $prTaskNo ?>"/>
+                                                </form>
+                                            </div>
+
                                             <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
                                                  style="font-size: 1.5rem">
                                                 <!-- ========= edit task button ========== -->
@@ -757,20 +768,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                                     <input type="hidden" name="project_id"
                                                                            value="<?= $project->getProjectID() ?>">
 
-                                                                    </div>
-                                                                    <div class="modal-footer"
-                                                                         style="background-color: var(--primary);">
-                                                                        <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-bs-dismiss="modal">
-                                                                            Close
-                                                                        </button>
-                                                                        <button type="submit"
-                                                                                name="pr_edit_submit"
-                                                                                class="btn fw-bold"
-                                                                                style="background-color: var(--secondary); color: var(--primary);">
-                                                                            Update
-                                                                        </button>
+                                                                </div>
+                                                                <div class="modal-footer"
+                                                                     style="background-color: var(--primary);">
+                                                                    <button type="button"
+                                                                            class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">
+                                                                        Close
+                                                                    </button>
+                                                                    <button type="submit"
+                                                                            name="pr_edit_submit"
+                                                                            class="btn fw-bold"
+                                                                            style="background-color: var(--secondary); color: var(--primary);">
+                                                                        Update
+                                                                    </button>
 
                                                                 </div>
                                                             </form>
@@ -900,8 +911,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 </script>
 <!--========= execute PR table update submit button ======== -->
 <script>
-    function updatePRSubmit(prTaskNo) {
-        document.getElementById('pr_update_submit_' + prTaskNo).click();
+    function updatePRSubmit(prTaskNo, no) {
+        document.getElementById('pr_update_submit_' + no + '_' + prTaskNo).click();
     }
 </script>
 <script>
