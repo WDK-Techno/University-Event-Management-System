@@ -261,7 +261,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <?php include_once "content/GrantChart.php" ?>
     </div>
     <div id="menu-content-4" class="main-content hide">
-        <?php include_once "content/projectdashboard/activityPlan.php" ?>
+<!--        --><?php //include_once  "content/projectdashboard/activityPlan.php" ?>
     </div>
     <div id="menu-content-5" class="main-content hide">
         <div class="container-fluid">
@@ -757,20 +757,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                                     <input type="hidden" name="project_id"
                                                                            value="<?= $project->getProjectID() ?>">
 
-                                                                </div>
-                                                                <div class="modal-footer"
-                                                                     style="background-color: var(--primary);">
-                                                                    <button type="button"
-                                                                            class="btn btn-secondary"
-                                                                            data-bs-dismiss="modal">
-                                                                        Close
-                                                                    </button>
-                                                                    <button type="submit"
-                                                                            name="submit"
-                                                                            class="btn fw-bold"
-                                                                            style="background-color: var(--secondary); color: var(--primary);">
-                                                                        Edit
-                                                                    </button>
+                                                                    </div>
+                                                                    <div class="modal-footer"
+                                                                         style="background-color: var(--primary);">
+                                                                        <button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-bs-dismiss="modal">
+                                                                            Close
+                                                                        </button>
+                                                                        <button type="submit"
+                                                                                name="pr_edit_submit"
+                                                                                class="btn fw-bold"
+                                                                                style="background-color: var(--secondary); color: var(--primary);">
+                                                                            Update
+                                                                        </button>
 
                                                                 </div>
                                                             </form>
