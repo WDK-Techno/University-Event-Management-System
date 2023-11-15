@@ -299,4 +299,39 @@ class Project
     }
 
 
+    public static function getProjectListFromUgId($con, $clubId, $ugId)
+    {
+        try {
+            $query = "SELECT DISTINCT project.project_id
+                   FROM project
+                   JOIN team_category tc ON project.project_id = tc.project_id
+                   JOIN project_team pt ON tc.category_id = pt.category_id
+                   JOIN undergraduate ug ON pt.ug_id = ug.user_id
+                   WHERE ug.user_id = ?
+                     AND project.club_id = ?
+                     AND project.status = 'active';
+
+                ";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindvalue(1, $ugId);
+            $pstmt->bindvalue(2, $clubId);
+            $pstmt->execute();
+            $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
+            if($rs){
+                $projectDetails=array();
+                foreach ($rs as $use ){
+                    $pr=new Project(null,null,null,null,null,null,null);
+                    $pr->setProjectID($use->project_id);
+                    $projectDetails[]=$projectDetails;
+                }
+                return $projectDetails;
+            }
+
+        } catch (PDOException $exc) {
+            die("Error in load count of Project" . $exc->getMessage());
+        }
+
+    }
+
+
 }

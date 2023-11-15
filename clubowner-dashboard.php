@@ -5,6 +5,7 @@ require_once 'classes/User.php';
 require_once 'classes/Project.php';
 require_once 'classes/User.php';
 require_once 'classes/PublicFlyer.php';
+require_once 'classes/TeamCategory.php';
 
 
 use classes\DBConnector;
@@ -12,7 +13,7 @@ use classes\Project;
 use classes\Club;
 use classes\Undergraduate;
 use classes\PublicFlyer;
-
+use classes\TeamCategory;
 
 
 $con = DBConnector::getConnection();
@@ -79,7 +80,6 @@ if (isset($_SESSION['user_id'])) {
     }
 
 // Debugging output
-
 
 
     ?>
@@ -326,19 +326,22 @@ if (isset($_SESSION['user_id'])) {
 
                                             <div class="toggle-button-cover">
                                                 <div class="button-cover">
-                                                    <form action="process/clubownerdashboard/updateProjectStatus.php"  method="post">
-                                                    <div class="button shadow-sm r" id="button-3">
-                                                        <input type="hidden" name="tab" value="1">
-                                                        <input type="hidden" name="prId" value="<?= $project->getProjectID() ?>">
-                                                        <input type="hidden" name="prChairId" value="<?= $project->getProjectChairID() ?>">
-                                                        <input type="checkbox" class="checkbox status-toggle"
-                                                               name="is_verify" value="verified"
-                                                            <?php if ($project->getStatus() == "active") echo "checked" ?>
-                                                               onchange="updateProjectStatus(<?= $project->getProjectID() ?>)"
-                                                        >
-                                                        <div class="knobs"></div>
-                                                        <div class="layer"></div>
-                                                    </div>
+                                                    <form action="process/clubownerdashboard/updateProjectStatus.php"
+                                                          method="post">
+                                                        <div class="button shadow-sm r" id="button-3">
+                                                            <input type="hidden" name="tab" value="1">
+                                                            <input type="hidden" name="prId"
+                                                                   value="<?= $project->getProjectID() ?>">
+                                                            <input type="hidden" name="prChairId"
+                                                                   value="<?= $project->getProjectChairID() ?>">
+                                                            <input type="checkbox" class="checkbox status-toggle"
+                                                                   name="is_verify" value="verified"
+                                                                <?php if ($project->getStatus() == "active") echo "checked" ?>
+                                                                   onchange="updateProjectStatus(<?= $project->getProjectID() ?>)"
+                                                            >
+                                                            <div class="knobs"></div>
+                                                            <div class="layer"></div>
+                                                        </div>
                                                         <input class="d-none" type="submit" name="project_status_submit"
                                                                id="project_status_submit_<?= $project->getProjectID() ?>"/>
                                                     </form>
@@ -459,7 +462,7 @@ if (isset($_SESSION['user_id'])) {
                                         $projects = Project::getProjectListFromClubID($con, $clubid); // Assuming $con and $clubId are defined.
 
                                         $activeProjects = array_filter($projects, function ($project) {
-                                           return $project->getStatus() === 'active';
+                                            return $project->getStatus() === 'active';
                                         });
 
                                         echo count($activeProjects);
@@ -507,7 +510,7 @@ if (isset($_SESSION['user_id'])) {
                 </div>
                 <?php
 
-                $ugs=Undergraduate::loadUgDataFromClubId($con,$clubid);
+                $ugs = Undergraduate::loadUgDataFromClubId($con, $clubid);
 
 
                 ?>
@@ -517,11 +520,11 @@ if (isset($_SESSION['user_id'])) {
                             <div class="row">
                                 <div class="col-8">
                                     <h4 class="title-text mt-0">Total members</h4>
-                                   <h3 class="font-weight-semibold mb-1" id="stat-count">
+                                    <h3 class="font-weight-semibold mb-1" id="stat-count">
 
-                                       <?php echo count ($ugs); ?>
+                                        <?php echo count($ugs); ?>
 
-                                      </h3>
+                                    </h3>
 
                                 </div>
                                 <!--end col-->
@@ -584,156 +587,185 @@ if (isset($_SESSION['user_id'])) {
                 <?php
                 //$ug=new Undergraduate(null,null,null,null,null,null);
                 foreach ($ugs as  $ug){
-               // $ugDetails->getUserId();
+
                 ?>
-            <div class="card mx-2 px-0" style="width: 18rem; height: 20rem;">
+                <div class="card mx-2 px-0" style="width: 18rem; height: 20rem;">
 
-                <div class="card-header " style="background-color: var(--primary)!important;color: var(--secondary); text-align: center;">
-                   <h5><?php
-                         //echo $ugDetails->getUserId();
-                       echo $ug->getFirstName();
-                       ?>
-                   </h5>
-                </div>
+                    <div class="card-header "
+                         style="background-color: var(--primary)!important;color: var(--secondary); text-align: center;">
+                        <h5><?php
+                            //echo $ugDetails->getUserId();
+                            echo $ug->getFirstName() . " " . $ug->getLastName();
+                            ?>
+                        </h5>
+                    </div>
 
-                <div class="card-body">
-                    <img src="assets/images/profile_img/ug/<?php //echo $ugImage?>" class="card-img-top
-                    rounded-circle img-thumbnail shadow-sm" style="width: 150px; height: 150px; object-fit: cover;position: relative"
-                         alt="user Profile Image">
-                    <div class="card-content">
+                    <div class="card-body">
+                        <img src="assets/images/profile_img/ug/<?php echo $ug->getProfileImg() ?>" class="card-img-top
+                    rounded-circle img-thumbnail shadow-sm"
+                             style="width: 150px; height: 150px; object-fit: cover;position: relative"
+                             alt="user Profile Image">
+                        <div class="card-content">
+                            <?php
+                            $ugId = $ug->getUserId();
+                            $pds = Project::getProjectListFromUgId($con, $clubid, $ugId);
 
 
+                            ?>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Enrolled Projects
+                                    <span class="badge  rounded-pill"
+                                          style="background-color: var(--primary);!important;color: var(--secondary);">
+                                        <?php
+                                        echo count($pds);
 
+                                        ?>
+                                    </span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Enrolled Team
+                                    <span class="badge rounded-pill"
+                                          style="background-color: var(--primary);!important;color: var(--secondary);">
+                                         <?php
+                                         $tcds= TeamCategory::getTeamCategoryFromUgId($con,$clubid,$ugId);
+                                         echo count($tcds);
+
+                                         ?>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <?php
+                    <?php
                 }
-            ?>
+                ?>
             </div>
 
         </div>
 
 
-        <!-- ======= flyer  added area ===== -->
-        <div id="menu-content-4" class="main-content hide">
 
-            <div class="d-flex pt-2 mt-3 mb-2 ">
-                <button class="btn fw-bold d-flex ms-2 shadow-sm"
-                        style=" color: var(--lighter-secondary) !important; background-color: var(--primary);"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                    <ion-icon class="my-auto" name="add-outline"
-                              style="font-size: 1.4rem;"></ion-icon>
-                    <div class="my-auto ms-1 me-auto">New Flyer</div>
-                </button>
-            </div>
-            <!-- ======= flyer  added area  hidden part===== -->
-            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header py-2 px-2"
-                             style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
-                            <!--                                <h5 class="modal-title" id="exampleModalLabel">Project details</h5>-->
-                            <div class="ms-2 my-auto fs-4 fw-bold">
-                                Create Flyer
-                            </div>
-                            <!--                                <button type="button" class="btn-close" data-bs-dismiss="modal"-->
-                            <!--                                        aria-label="Close"></button>-->
+    <!-- ======= flyer  added area ===== -->
+    <div id="menu-content-4" class="main-content hide">
+
+        <div class="d-flex pt-2 mt-3 mb-2 ">
+            <button class="btn fw-bold d-flex ms-2 shadow-sm"
+                    style=" color: var(--lighter-secondary) !important; background-color: var(--primary);"
+                    data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                <ion-icon class="my-auto" name="add-outline"
+                          style="font-size: 1.4rem;"></ion-icon>
+                <div class="my-auto ms-1 me-auto">New Flyer</div>
+            </button>
+        </div>
+        <!-- ======= flyer  added area  hidden part===== -->
+        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header py-2 px-2"
+                         style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                        <!--                                <h5 class="modal-title" id="exampleModalLabel">Project details</h5>-->
+                        <div class="ms-2 my-auto fs-4 fw-bold">
+                            Create Flyer
                         </div>
-                        <form action="process/clubownerdashboard/addFlyer.php" method="POST"
-                              enctype="multipart/form-data">
-                            <div class="modal-body" style="background-color: var(--lighter-secondary);">
-                                <input type="hidden" name="club_id"
-                                       value="<?= $clubid ?>">
+                        <!--                                <button type="button" class="btn-close" data-bs-dismiss="modal"-->
+                        <!--                                        aria-label="Close"></button>-->
+                    </div>
+                    <form action="process/clubownerdashboard/addFlyer.php" method="POST"
+                          enctype="multipart/form-data">
+                        <div class="modal-body" style="background-color: var(--lighter-secondary);">
+                            <input type="hidden" name="club_id"
+                                   value="<?= $clubid ?>">
 
 
-                                <div class="fw-bold " style="color: var(--primary);">Topic</div>
+                            <div class="fw-bold " style="color: var(--primary);">Topic</div>
 
-                                <input class="form-control text-center" type="text"
-                                       name="topic" id="topic"
-                                       placeholder="Topic" required/>
+                            <input class="form-control text-center" type="text"
+                                   name="topic" id="topic"
+                                   placeholder="Topic" required/>
 
 
-                                <div class="fw-bold " style="color: var(--primary);">Caption</div>
-                                <div>
+                            <div class="fw-bold " style="color: var(--primary);">Caption</div>
+                            <div>
 
                                 <textarea class="form-control" cols="25"
                                           rows="2"
                                           name="caption" id="caption"
                                           placeholder="caption" required> </textarea>
-                                </div>
+                            </div>
 
 
-                                <div class="fw-bold my-2" style="color: var(--primary);">Flyer Image</div>
-                                <input type="file" class="form-control custom-file-input" id="fl_image" name="fl_image"
-                                       required/>
-                                <div class="d-flex mx-auto my-3">
+                            <div class="fw-bold my-2" style="color: var(--primary);">Flyer Image</div>
+                            <input type="file" class="form-control custom-file-input" id="fl_image" name="fl_image"
+                                   required/>
+                            <div class="d-flex mx-auto my-3">
                                     <span class="d-flex">
                                     <div class="fw-bold mx-2" style="color: var(--primary);">Start Date</div>
                                     <input class="form-control w-50" type="date" name="start_date" required>
                                         <div class="fw-bold mx-2" style="color: var(--primary);">Start Time</div>
                                     <input class="form-control w-50" type="time" name="start_time" required>
                                     </span>
-                                </div>
+                            </div>
 
-                                <div class="d-flex mx-auto my-3">
+                            <div class="d-flex mx-auto my-3">
                                     <span class="d-flex">
                                 <div class="fw-bold mx-2" style="color: var(--primary);">End Date</div>
                                 <input class="form-control w-50" type="date" name="end_date" required>
                                         <div class="fw-bold mx-2" style="color: var(--primary);">End Time</div>
                                     <input class="form-control w-50" type="time" name="end_time" required>
                                     </span>
-                                </div>
-
-
-                                <div class="fw-bold my-2" style="color: var(--primary);">Link</div>
-                                <input type="url" name="url" id="url"
-                                       placeholder="https://example.com" pattern="https://.*" size="30" required/>
-
-
-                                <div class="mt-2 text-center" id="add-flyer-error"
-                                     style="color: var(--accent-color3)">
-                                </div>
-
                             </div>
-                            <div class="modal-footer" style="background-color: var(--primary);">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                </button>
-                                <button
-                                        onclick=""
-                                        class="btn fw-bold"
-                                        type="submit" name="submit"
-                                        style="background-color: var(--secondary); color: var(--primary);">
-                                    ADD
-                                </button>
+
+
+                            <div class="fw-bold my-2" style="color: var(--primary);">Link</div>
+                            <input type="url" name="url" id="url"
+                                   placeholder="https://example.com" pattern="https://.*" size="30" required/>
+
+
+                            <div class="mt-2 text-center" id="add-flyer-error"
+                                 style="color: var(--accent-color3)">
                             </div>
-                        </form>
-                    </div>
+
+                        </div>
+                        <div class="modal-footer" style="background-color: var(--primary);">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                            </button>
+                            <button
+                                    onclick=""
+                                    class="btn fw-bold"
+                                    type="submit" name="submit"
+                                    style="background-color: var(--secondary); color: var(--primary);">
+                                ADD
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
+        </div>
 
 
-            <hr/>
+        <hr/>
 
-            <!--===view flyer part-->
+        <!--===view flyer part-->
 
 
-            <div class="row ms-1 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
+        <div class="row ms-1 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
 
-                <?php
-                $flyerNo = 1;
+            <?php
+            $flyerNo = 1;
 
-                foreach ($publicFlyers
+            foreach ($publicFlyers
 
-                         as $publicFlyer) {
+                     as $publicFlyer) {
 
-                    $publicFlyerObj =
-                        new PublicFlyer($publicFlyer->getFlyerID(), null, null, null, null,
-                            null, null, null, null);
-                    $publicFlyerObj->loadFlyerFromFlyerID($con);
+                $publicFlyerObj =
+                    new PublicFlyer($publicFlyer->getFlyerID(), null, null, null, null,
+                        null, null, null, null);
+                $publicFlyerObj->loadFlyerFromFlyerID($con);
 
-                    if ($publicFlyerObj->getStatus() != "delete"){
+                if ($publicFlyerObj->getStatus() != "delete") {
 
                     ?>
                     <!--===view flyer part  card-->
@@ -751,7 +783,8 @@ if (isset($_SESSION['user_id'])) {
                                 <h5 class="card-title"><?= $publicFlyerObj->getCaption() ?></h5>
                             </div>
                             <!----------------- card  footer ------------------->
-                            <div class="card-footer d-flex justify-content-end bg-warning-subtle card-list-option-buttons " style="font-size: 1.7rem;">
+                            <div class="card-footer d-flex justify-content-end bg-warning-subtle card-list-option-buttons "
+                                 style="font-size: 1.7rem;">
                                 <!----------------- edit button ------------------->
                                 <button type="button" class="btn " data-bs-toggle="modal"
                                         data-bs-target="#edit<?= $publicFlyerObj->getFlyerID() ?>">
@@ -764,7 +797,8 @@ if (isset($_SESSION['user_id'])) {
                                 </button>
 
                                 <!----------------- Modal for update flyer ------------------>
-                                <div class="modal fade" id="edit<?= $publicFlyerObj->getFlyerID() ?>" tabindex="-1" data-bs-backdrop="static"
+                                <div class="modal fade" id="edit<?= $publicFlyerObj->getFlyerID() ?>" tabindex="-1"
+                                     data-bs-backdrop="static"
                                      data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
@@ -893,110 +927,110 @@ if (isset($_SESSION['user_id'])) {
                         </div>
                     </div>
                     <?php
-                    }
-                    $flyerNo++;
                 }
-                ?>
-            </div>
+                $flyerNo++;
+            }
+            ?>
         </div>
+    </div>
 
-        <div id="menu-content-5" class="main-content hide">
-            <div class="text-center d-flex">
-                <?php
-                if ($loadClubData) {
-                    ?>
-                    <!-- ======= project image area ===== -->
-                    <div class="d-flex flex-column mx-auto my-3">
-                        <img class="rounded-circle img-thumbnail shadow-sm"
-                             style="width: 150px; height: 150px; object-fit: cover;"
-                             src="assets/images/profile_img/club/<?= $club->getProfileImage() ?>"
-                             alt="">
-                        <form action="process/clubownerdashboard/saveProfileImage.php" method="post"
-                              enctype="multipart/form-data">
-                            <div class="btn fw-bold d-flex mx-4 mt-2 shadow-sm" type="button"
-                                 onclick="fileUploadBtn()"
-                                 style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
-                                <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
-                                          name="cloud-upload-outline"></ion-icon>
-                                <div class="my-auto ms-1 me-auto">Upload</div>
-                                <input type="file" class="form-control d-none" name="image_upload"
-                                       id="image_upload" onchange="saveImgSubmit()"/>
-
-                            </div>
-                            <!--======= hidden ==========-->
-                            <input type="hidden" name="menuNo" value="5">
-                            <input type="hidden" name="club_id"
-                                   value="<?= $club->getUserId() ?>">
-                            <input class="d-none" type="submit" name="image_save_submit"
-                                   id="image_save_submit"/>
-                        </form>
-                    </div>
-
-                <?php }
+    <div id="menu-content-5" class="main-content hide">
+        <div class="text-center d-flex">
+            <?php
+            if ($loadClubData) {
                 ?>
-            </div>
+                <!-- ======= project image area ===== -->
+                <div class="d-flex flex-column mx-auto my-3">
+                    <img class="rounded-circle img-thumbnail shadow-sm"
+                         style="width: 150px; height: 150px; object-fit: cover;"
+                         src="assets/images/profile_img/club/<?= $club->getProfileImage() ?>"
+                         alt="">
+                    <form action="process/clubownerdashboard/saveProfileImage.php" method="post"
+                          enctype="multipart/form-data">
+                        <div class="btn fw-bold d-flex mx-4 mt-2 shadow-sm" type="button"
+                             onclick="fileUploadBtn()"
+                             style="color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                            <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
+                                      name="cloud-upload-outline"></ion-icon>
+                            <div class="my-auto ms-1 me-auto">Upload</div>
+                            <input type="file" class="form-control d-none" name="image_upload"
+                                   id="image_upload" onchange="saveImgSubmit()"/>
 
-            <div class="card shadow-sm mb-3 mx-4">
-                <div class="card-header py-3">
-                    <p class="m-0 fw-bold" style="color: var(--darker-primary); font-size: 1.3rem;">Club
-                        Settings</p>
-                </div>
-                <div class="card-body">
-                    <form action="process/clubownerdashboard/editClubDetails.php" method="post">
-                        <?php
-
-                        if ($loadClubData){
-                        ?>
-
-                        <div class="row" style="color: var(--primary);">
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label class="form-label" for="club_name">
-                                        <strong>Club Name</strong>
-                                    </label>
-                                    <input id="club_name" class="form-control" type="text"
-                                           value="<?= $club->getClubName() ?>" name="club_name"/>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label class="form-label" for="contact_no">
-                                        <strong>Contact number</strong>
-                                    </label>
-                                    <input id="contact_no" class="form-control" type="text"
-                                           value="<?= $club->getContactNo() ?>" name="contact_no"/>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row px-2" style="color: var(--primary);">
-                            <div class="fw-bold">Description</div>
-                            <textarea class="form-control" name="desc" id="" cols="25"
-                                      rows="7"><?= $club->getClubDescription() ?></textarea>
                         </div>
                         <!--======= hidden ==========-->
                         <input type="hidden" name="menuNo" value="5">
                         <input type="hidden" name="club_id"
                                value="<?= $club->getUserId() ?>">
-                        <button class="btn fw-bold d-flex mt-2 ms-auto me-0"
-                                style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
-                                type="submit" name="submit">
-                            <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
-                                      name="save-outline"></ion-icon>
-                            <div class="my-auto ms-1 me-auto">Save</div>
-
-                        </button>
+                        <input class="d-none" type="submit" name="image_save_submit"
+                               id="image_save_submit"/>
                     </form>
-                    <?php
-                    } else {
-                        echo "Club data not found for the given user ID.";
-                    }
-                    ?>
                 </div>
-            </div>
 
-
+            <?php }
+            ?>
         </div>
+
+        <div class="card shadow-sm mb-3 mx-4">
+            <div class="card-header py-3">
+                <p class="m-0 fw-bold" style="color: var(--darker-primary); font-size: 1.3rem;">Club
+                    Settings</p>
+            </div>
+            <div class="card-body">
+                <form action="process/clubownerdashboard/editClubDetails.php" method="post">
+                    <?php
+
+                    if ($loadClubData){
+                    ?>
+
+                    <div class="row" style="color: var(--primary);">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="form-label" for="club_name">
+                                    <strong>Club Name</strong>
+                                </label>
+                                <input id="club_name" class="form-control" type="text"
+                                       value="<?= $club->getClubName() ?>" name="club_name"/>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="form-label" for="contact_no">
+                                    <strong>Contact number</strong>
+                                </label>
+                                <input id="contact_no" class="form-control" type="text"
+                                       value="<?= $club->getContactNo() ?>" name="contact_no"/>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row px-2" style="color: var(--primary);">
+                        <div class="fw-bold">Description</div>
+                        <textarea class="form-control" name="desc" id="" cols="25"
+                                  rows="7"><?= $club->getClubDescription() ?></textarea>
+                    </div>
+                    <!--======= hidden ==========-->
+                    <input type="hidden" name="menuNo" value="5">
+                    <input type="hidden" name="club_id"
+                           value="<?= $club->getUserId() ?>">
+                    <button class="btn fw-bold d-flex mt-2 ms-auto me-0"
+                            style="width: 127px; color: var(--lighter-secondary) !important; background-color: var(--primary);"
+                            type="submit" name="submit">
+                        <ion-icon class="my-auto ms-auto me-1" style="font-size: 1.4rem;"
+                                  name="save-outline"></ion-icon>
+                        <div class="my-auto ms-1 me-auto">Save</div>
+
+                    </button>
+                </form>
+                <?php
+                } else {
+                    echo "Club data not found for the given user ID.";
+                }
+                ?>
+            </div>
+        </div>
+
+
+    </div>
 
     </div>
 

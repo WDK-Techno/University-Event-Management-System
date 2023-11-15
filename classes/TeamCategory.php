@@ -1,7 +1,7 @@
 <?php
 
 namespace classes;
-
+use PDO;
 use PDOException;
 
 class TeamCategory
@@ -165,6 +165,41 @@ class TeamCategory
             return $pstmt->rowCount() > 0;
         } catch (PDOException $exc) {
             die("Error in Team Category Changes Updating " . $exc->getMessage());
+        }
+
+    }
+
+
+    public static function getTeamCategoryFromUgId($con, $clubId, $ugId)
+    {
+        try {
+            $query = "SELECT tc.*
+                           FROM undergraduate ug
+                           JOIN project_team pt ON ug.user_id = pt.ug_id
+                           JOIN team_category tc ON pt.category_id = tc.category_id
+                           JOIN project p ON tc.project_id = p.project_id
+                           WHERE ug.user_id = ?
+                             AND p.club_id = ? AND P.status='active';
+
+                ";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindvalue(1, $ugId);
+            $pstmt->bindvalue(2, $clubId);
+            $pstmt->execute();
+            $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
+            if($rs){
+                $teamDetails=array();
+                foreach ($rs as $use ){
+                    $pr=new TeamCategory(null,null,null,null);
+                    $pr->setCategoryID($use->category_id);
+                    $pr->setCategoryName($use->category_name);
+                     $teamDetails[]=$teamDetails;
+                }
+                return $teamDetails;
+            }
+
+        } catch (PDOException $exc) {
+            die("Error in load count of Project" . $exc->getMessage());
         }
 
     }
