@@ -650,7 +650,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                                         </div>
                                                                         <!-- ===== select team ======= -->
                                                                         <div class="d-flex ms-0 me-auto my-auto py-2 px-2">
-                                                                            <form action="process/projectdashboard/definePRTeams.php"
+                                                                            <form action="process/projectdashboard/editPRTask.php"
                                                                                   method="POST" class="d-flex"
                                                                                   style="height: fit-content">
                                                                                 <select id="design_team_id"
@@ -757,10 +757,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                                             Close
                                                                         </button>
                                                                         <button type="submit"
-                                                                                name="submit"
+                                                                                name="pr_edit_submit"
                                                                                 class="btn fw-bold"
                                                                                 style="background-color: var(--secondary); color: var(--primary);">
-                                                                            Edit
+                                                                            Update
                                                                         </button>
 
                                                                     </div>
