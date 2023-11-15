@@ -44,3 +44,17 @@ if (isset($_POST['pr_update_submit'])){
         header("location: ../../projectdashboard.php?tab={$selectedMenuNo}&err=1");
     }
 }
+
+elseif (isset($_POST['pr_edit_submit'])){
+    $PRId = $_POST['pr_id'];
+   $PRTopic = $_POST['topic'];
+   $PRDescription = $_POST['description'];
+
+    $PRTask = new PRTask($PRId,null,null,null,null,null,null);
+    $PRTask->loadTaskFromPRId($con);
+    $PRTask->settopic($PRTopic);
+    $PRTask->setdescription($PRDescription);
+
+    $result = $PRTask->saveChangesToDatabase($con);
+
+}
