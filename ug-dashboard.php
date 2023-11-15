@@ -220,58 +220,51 @@ if (isset($_SESSION['user_id'])) {
                     <div class="container p-0 scrollable-div-inside">
 
                         <?php
-                        foreach ($subTasks
+                        foreach ($subTasks as $subTask) {
+                            $subTaskObj = new SubTask($subTask->getSubTaskID(), null, null, null, null, null, null, null);
+                            $subTaskObj->loadSubTaskFromSubTaskID($con);
+                            $project = new Project($subTaskObj->getProjectID(), null, null, null, null, null, null);
+                            $project->loadDataFromProjectID($con);
 
-                        as $subTask) {
-                        $subTaskObj = new SubTask($subTask->getSubTaskID(), null, null, null, null, null, null, null);
-                        $subTaskObj->loadSubTaskFromSubTaskID($con);
-                        $project = new Project($subTaskObj->getProjectID(), null, null, null, null, null, null);
-                        $project->loadDataFromProjectID($con);
-                        ?>
-                        <?php
-                        if ($subTaskObj->getIsTaskCompleted() == 0){
-                        ?>
+                            if ($subTaskObj->getIsTaskCompleted() == 0) {
+                                ?>
 
-                        <form action="process/ug-dashboard/editTask_compleat.php" method="post">
-                            <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
-                                <div class="col-1 d-flex tabel-column-type-2">
-                                    <div class="my-auto">
-                                        <img class="rounded-circle"
-                                             style="width: 40px; height: 40px; object-fit: cover;"
-                                             src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
-                                             alt="">
+                                <form action="process/ug-dashboard/editTask_compleat.php" method="post">
+                                    <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
+                                        <div class="col-1 d-flex tabel-column-type-2">
+                                            <div class="my-auto">
+                                                <img class="rounded-circle"
+                                                     style="width: 40px; height: 40px; object-fit: cover;"
+                                                     src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
+                                                     alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-3 tabel-column-type-1 d-flex">
+                                            <div class="my-auto"><?= $project->getProjectName() ?></div>
+                                        </div>
+                                        <div class="col-3 d-flex tabel-column-type-2">
+                                            <div class="my-auto mx-auto"><?= $subTaskObj->getSubTaskName() ?></div>
+                                        </div>
+                                        <div class="col-2 d-flex tabel-column-type-1">
+                                            <div class="my-auto mx-auto"><?= $subTaskObj->getDeadline() ?></div>
+                                        </div>
+                                        <div class="col-2 d-flex tabel-column-type-2">
+                                            <div class="my-auto mx-auto">
+                                                <button>Add</button>
+                                            </div>
+                                        </div>
+
                                     </div>
-                                </div>
-                                <div class="col-3 tabel-column-type-1 d-flex">
-                                    <div class="my-auto"><?= $project->getProjectName() ?></div>
-                                </div>
-                                <div class="col-3 d-flex tabel-column-type-2">
-                                    <div class="my-auto mx-auto"><?= $subTaskObj->getSubTaskName() ?></div>
-                                </div>
-                                <div class="col-2 d-flex tabel-column-type-1">
-                                    <div class="my-auto mx-auto"><?= $subTaskObj->getDeadline() ?></div>
-                                </div>
-                                <div class="col-2 d-flex tabel-column-type-2">
-                                    <div class="my-auto mx-auto">
-                                        <button onclick="addToTable2(this)">Add</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <?php
+                                </form>
+                                <?php
                             }
-                            ?>
 
+                        }
+                        ?>
+                        <!--                                <div>-->
+                        <!--                                    <button class="update-button" type="submit" name="update">Update</button>-->
+                        <!--                                </div>-->
 
-
-                            <?php
-
-                            }
-                            ?>
-                            <!--                                <div>-->
-                            <!--                                    <button class="update-button" type="submit" name="update">Update</button>-->
-                            <!--                                </div>-->
-                        </form>
                         <!--                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px; background-color:#A3A2EC;">-->
                         <!--                                            <div class="col-1 d-flex tabel-column-type-2">-->
                         <!--                                                <div class="my-auto">-->
@@ -407,52 +400,47 @@ if (isset($_SESSION['user_id'])) {
                     <div class="container p-0 scrollable-div-inside">
 
                         <?php
-                        foreach ($subTasks
+                        foreach ($subTasks as $subTask) {
+                            $subTaskObj = new SubTask($subTask->getSubTaskID(), null, null, null, null, null, null, null);
+                            $subTaskObj->loadSubTaskFromSubTaskID($con);
+                            $project = new Project($subTaskObj->getProjectID(), null, null, null, null, null, null);
+                            $project->loadDataFromProjectID($con);
 
-                        as $subTask) {
-                        $subTaskObj = new SubTask($subTask->getSubTaskID(), null, null, null, null, null, null, null);
-                        $subTaskObj->loadSubTaskFromSubTaskID($con);
-                        $project = new Project($subTaskObj->getProjectID(), null, null, null, null, null, null);
-                        $project->loadDataFromProjectID($con);
-                        ?>
-                        <?php
-                        if ($subTaskObj->getIsTaskCompleted() == 0){
-                        ?>
-
-                        <form action="process/ug-dashboard/editTask_compleat.php" method="post">
-                            <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
-                                <div class="col-1 d-flex tabel-column-type-2">
-                                    <div class="my-auto">
-                                        <img class="rounded-circle"
-                                             style="width: 40px; height: 40px; object-fit: cover;"
-                                             src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
-                                             alt="">
-                                    </div>
-                                </div>
-                                <div class="col-3 tabel-column-type-1 d-flex">
-                                    <div class="my-auto"><?= $project->getProjectName() ?></div>
-                                </div>
-                                <div class="col-3 d-flex tabel-column-type-2">
-                                    <div class="my-auto mx-auto"><?= $subTaskObj->getSubTaskName() ?></div>
-                                </div>
-                                <div class="col-2 d-flex tabel-column-type-1">
-                                    <div class="my-auto mx-auto"><?= $subTaskObj->getDeadline() ?></div>
-                                </div>
-                                <div class="col-2 d-flex tabel-column-type-2">
-                                    <div class="my-auto mx-auto">
-                                        <button onclick="addToTable2(this)">REMOVE</button>
-                                    </div>
-                                </div>
-                                <?php
-                                }
+                            if ($subTaskObj->getIsTaskCompleted() == 1) {
                                 ?>
 
-                            </div>
-
-                            <?php
-
+                                <form action="process/ug-dashboard/editTask_compleat.php" method="post">
+                                    <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
+                                        <div class="col-1 d-flex tabel-column-type-2">
+                                            <div class="my-auto">
+                                                <img class="rounded-circle"
+                                                     style="width: 40px; height: 40px; object-fit: cover;"
+                                                     src="assets/images/profile_img/project/<?= $project->getProfileImage() ?>"
+                                                     alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-3 tabel-column-type-1 d-flex">
+                                            <div class="my-auto"><?= $project->getProjectName() ?></div>
+                                        </div>
+                                        <div class="col-3 d-flex tabel-column-type-2">
+                                            <div class="my-auto mx-auto"><?= $subTaskObj->getSubTaskName() ?></div>
+                                        </div>
+                                        <div class="col-2 d-flex tabel-column-type-1">
+                                            <div class="my-auto mx-auto"><?= $subTaskObj->getDeadline() ?></div>
+                                        </div>
+                                        <div class="col-2 d-flex tabel-column-type-2">
+                                            <div class="my-auto mx-auto">
+                                                <button onclick="addToTable2(this)">REMOVE</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <?php
                             }
-                            ?>
+
+
+                        }
+                        ?>
 
 
                     </div>

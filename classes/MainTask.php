@@ -12,7 +12,6 @@ class MainTask
     protected $startDate;
     protected $endDate;
     protected $projectID;
-    protected $mainTaskStatus;
 
     /**
      * @param $mainTaskID
@@ -20,7 +19,6 @@ class MainTask
      * @param $startDate
      * @param $endDate
      * @param $projectID
-     * @param $status
      */
     public function __construct($mainTaskID)
     {
@@ -56,7 +54,7 @@ class MainTask
             $this->startDate = $rs->start_date;
             $this->endDate = $rs->end_date;
             $this->projectID = $rs->project_id;
-            $this->mainTaskStatus = $rs->status;
+
             return true;
         } else {
             return false;

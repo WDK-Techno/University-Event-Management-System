@@ -11,9 +11,9 @@ $con = DBConnector::getConnection();
 if (isset($_POST['submit'])) {
 
     $selectedMenuNo = $_POST['menuNo'];
-    $eventId = $_POST['event_id'];
+    $prID = $_POST['pr_id'];
 
-    $task = new PRTask($eventId,null,null ,null, null, null,"active");
+    $task = new PRTask($prID,null,null ,null, null, null,null);
     $task->loadTaskFromPRId($con);
     $result = $task->deleteTask($con);
 

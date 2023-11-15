@@ -428,13 +428,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                  style="color: var(--accent-color3)"></div>
 
                                             <div class="d-flex mt-2 px-5 w-100">
-                                                <div class="d-flex w-100 rounded p-2" style="background-color: var(--secondary)">
-                                                    <div class="ms-1 me-auto my-auto fw-bold" style="font-size: 0.8rem;">Publish <br> Date & Time</div>
+                                                <div class="d-flex w-100 rounded p-2"
+                                                     style="background-color: var(--secondary)">
+                                                    <div class="ms-1 me-auto my-auto fw-bold"
+                                                         style="font-size: 0.8rem;">Publish <br> Date & Time
+                                                    </div>
                                                     <div class="d-flex ms-auto me-0">
-                                                        <input class="form-control text-center me-2" type="date" required
+                                                        <input class="form-control text-center me-2" type="date"
+                                                               required
                                                                style="width: fit-content"
                                                                name="publish_date"/>
-                                                        <input class="form-control text-center" style="width: fit-content"
+                                                        <input class="form-control text-center"
+                                                               style="width: fit-content"
                                                                type="time" required
                                                                name="publish_time"/>
                                                     </div>
@@ -604,7 +609,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                              role="document">
                                                             <div class="modal-content">
                                                                 <!--=== form =====-->
-                                                                <form action="process/projectdashboard/editPRTask.php" method="POST">
+                                                                <form action="process/projectdashboard/editPRTask.php"
+                                                                      method="POST">
                                                                     <div class="modal-header py-2 px-2"
                                                                          style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
                                                                         <div class="d-flex flex-row w-100 justify-content-between">
@@ -623,6 +629,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                                                                         <!--======= hidden ==========-->
                                                                         <input type="hidden" name="menuNo" value="5">
+
                                                                     </div>
 
                                                                     <div class="modal-body"
@@ -631,65 +638,106 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                                         <div class="d-flex mt-2 px-5">
                                                                             <input class="form-control text-center"
                                                                                    name="topic" id="edit-topic"
-                                                                                   placeholder="Topic" required/>
+                                                                                   value="<?= $task->gettopic() ?>"/>
+
                                                                         </div>
                                                                         <div class="d-flex mt-2 px-5">
                                                                             <input class="form-control text-center"
-                                                                                   name="description" id="edit-description"
-                                                                                   placeholder="Description"/>
+                                                                                   name="description"
+                                                                                   id="edit-description"
+                                                                                   value="<?= $task->getdescription() ?>"/>
+
                                                                         </div>
                                                                         <!-- ===== select team ======= -->
-                                                                        <div class="d-flex mt-2 px-5">
+                                                                        <div class="d-flex ms-0 me-auto my-auto py-2 px-2">
+                                                                            <form action="process/projectdashboard/editPRTask.php"
+                                                                                  method="POST" class="d-flex"
+                                                                                  style="height: fit-content">
+                                                                                <select id="design_team_id"
+                                                                                        class="form-select"
+                                                                                        onchange="defineSubmit()"
+                                                                                        style="width: 50%;"
+                                                                                        name="design_team_id" id=""
+                                                                                        required>
 
-                                                                            <select id="designer_id" class="form-select ms-auto me-2"
-                                                                                    style="width: 50%;"
-                                                                                    name="designer_id" id="" required>
-                                                                                <option class="text-center" value="" selected>-- Select Designer --
-                                                                                </option>
-                                                                                <?php
-                                                                                foreach ($desingTeamMembers as $desingTeamMember) {
-                                                                                    $member = new Undergraduate(null, null, null, null, null, null);
-                                                                                    $member->setUserId($desingTeamMember->getUgID());
-                                                                                    $member->loadDataFromUserID($con);
-                                                                                    ?>
-                                                                                    <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
+                                                                                    <option class="text-center"
+                                                                                            value="null">-- Define
+                                                                                        Design Team --
+                                                                                    </option>
                                                                                     <?php
-                                                                                }
-                                                                                ?>
-                                                                            </select>
+                                                                                    $isSelected = "";
+                                                                                    foreach ($desingTeamMembers as $desingTeamMember) {
+                                                                                        $member = new Undergraduate(null,null,null,null,null,null);
+                                                                                        $member->setUserId($PRTask->getdesignerID());
+                                                                                        $member->loadDataFromUserID($con);
 
-                                                                            <select id="caption_writer_id" class="form-select ms-auto me-0"
-                                                                                    style="width: 50%;"
-                                                                                    name="caption_writer_id" id="" required>
-                                                                                <option class="text-center" value="" selected>-- Select Caption
-                                                                                    Writter
-                                                                                    --
-                                                                                </option>
-                                                                                <?php
-                                                                                foreach ($writingTeamMembers as $writingTeamMember) {
-                                                                                    $member = new Undergraduate(null, null, null, null, null, null);
-                                                                                    $member->setUserId($writingTeamMember->getUgID());
-                                                                                    $member->loadDataFromUserID($con);
+                                                                                        if ($PRTask->getdesignerID() == $member->getUserId()) {
+                                                                                            $isSelected = "selected";
+                                                                                        } else {
+                                                                                            $isSelected = "";
+                                                                                        }
+                                                                                        ?>
+                                                                                        <option value="<?= $member->getUserId() ?>" <?= $isSelected ?>><?= $member->getFirstName()?> <?= $member->getLastName()?></option>
+                                                                                        <?php
+
+                                                                                    }
                                                                                     ?>
-                                                                                    <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
-                                                                                    <?php
-                                                                                }
-                                                                                ?>
-                                                                            </select>
+                                                                                </select>
 
+
+                                                                                <select id="sec_team_id"
+                                                                                        class="form-select ms-2"
+                                                                                        onchange="defineSubmit()"
+                                                                                        style="width: 50%;"
+                                                                                        name="sec_team_id" id=""
+                                                                                        required>
+                                                                                    <option class="text-center"
+                                                                                            value="null" selected>--
+                                                                                        Define Writing Team --
+                                                                                    </option>
+                                                                                    <?php
+                                                                                    $isSelected = "";
+                                                                                    foreach ($writingTeamMembers as $writingTeamMember) {
+
+                                                                                        $member = new Undergraduate(null,null,null,null,null,null);
+                                                                                        $member->setUserId($PRTask->getcaptionWriterID());
+                                                                                        $member->loadDataFromUserID($con);
+                                                                                        if ($PRTask->getcaptionWriterID() == $member->getUserId()) {
+                                                                                            $isSelected = "selected";
+                                                                                        } else {
+                                                                                            $isSelected = "";
+                                                                                        }
+                                                                                        ?>
+                                                                                        <option value="<?= $member->getUserId() ?>" <?= $isSelected ?>><?= $member->getFirstName()?> <?= $member->getLastName()?></option>
+                                                                                        <?php
+                                                                                    }
+                                                                                    ?>
+                                                                                </select>
+                                                                            </form>
                                                                         </div>
-                                                                        <div class="mt-2 text-center" id="add-member-team-error"
+
+
+                                                                        <div class="mt-2 text-center"
+                                                                             id="add-member-team-error"
                                                                              style="color: var(--accent-color3)"></div>
 
                                                                         <div class="d-flex mt-2 px-5 w-100">
-                                                                            <div class="d-flex w-100 rounded p-2" style="background-color: var(--secondary)">
-                                                                                <div class="ms-1 me-auto my-auto fw-bold" style="font-size: 0.8rem;">Publish <br> Date & Time</div>
+                                                                            <div class="d-flex w-100 rounded p-2"
+                                                                                 style="background-color: var(--secondary)">
+                                                                                <div class="ms-1 me-auto my-auto fw-bold"
+                                                                                     style="font-size: 0.8rem;">Publish
+                                                                                    <br> Date & Time
+                                                                                </div>
                                                                                 <div class="d-flex ms-auto me-0">
-                                                                                    <input class="form-control text-center me-2" type="date" required
+                                                                                    <input class="form-control text-center me-2"
+                                                                                           type="date" required
                                                                                            style="width: fit-content"
+                                                                                           value="<?= date('Y-m-d', strtotime($task->getpublishDate())); ?>"
                                                                                            name="publish_date"/>
-                                                                                    <input class="form-control text-center" style="width: fit-content"
+                                                                                    <input class="form-control text-center"
+                                                                                           style="width: fit-content"
                                                                                            type="time" required
+                                                                                           value="<?= date('H:i', strtotime($task->getisPublished())); ?>"
                                                                                            name="publish_time"/>
                                                                                 </div>
 
@@ -701,17 +749,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                                                value="<?= $project->getProjectID() ?>">
 
                                                                     </div>
-                                                                    <div class="modal-footer" style="background-color: var(--primary);">
+                                                                    <div class="modal-footer"
+                                                                         style="background-color: var(--primary);">
                                                                         <button type="button"
                                                                                 class="btn btn-secondary"
                                                                                 data-bs-dismiss="modal">
                                                                             Close
                                                                         </button>
                                                                         <button type="submit"
-                                                                                name="submit"
+                                                                                name="pr_edit_submit"
                                                                                 class="btn fw-bold"
                                                                                 style="background-color: var(--secondary); color: var(--primary);">
-                                                                            Edit
+                                                                            Update
                                                                         </button>
 
                                                                     </div>
@@ -720,17 +769,75 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                         </div>
                                                     </div>
 
+                                                    <!--======= delete pr task button ==========-->
                                                     <ion-icon class="my-auto" type="button"
                                                               data-bs-toggle="modal"
                                                               data-bs-target="#delete-pr-task-<?= $prTaskNo ?>"
                                                               name="trash-outline"></ion-icon>
+
+                                                    <!-- =========== Delete pr task button model =========== -->
+                                                    <div class="modal fade"
+                                                         id="delete-pr-task-<?= $prTaskNo ?>"
+                                                         tabindex="-1"
+                                                         role="dialog"
+                                                         aria-labelledby="exampleModalCenterTitle"
+                                                         aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered"
+                                                             role="document">
+                                                            <div class="modal-content">
+                                                                <!--=== form =====-->
+                                                                <form action="process/projectdashboard/deleteTask.php"
+                                                                      method="post">
+                                                                    <div class="modal-header py-2 px-2"
+                                                                         style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
+                                                                        <div class="d-flex flex-row w-100 justify-content-between">
+
+                                                                            <div class="ms-2 my-auto fs-4 fw-bold">
+                                                                                <?= $task->gettopic() ?>
+                                                                            </div>
+
+                                                                            <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-primary text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">New</div> -->
+                                                                            <!-- <div class="me-3 ms-auto my-auto px-3 py-1 bg-dark text-light fw-bold rounded-3 shadow-sm" style="font-size: 1.1rem;">Ongoing</div> -->
+                                                                            <div class="me-3 ms-auto my-auto px-1 py-1 fw-bold rounded-3 shadow-sm"
+                                                                                 style="font-size: 1.3rem; color: var(--accent-color3);">
+                                                                                Delete
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!--======= hidden ==========-->
+                                                                        <input type="hidden" name="menuNo"
+                                                                               value="5">
+                                                                        <input type="hidden" name="pr_id"
+                                                                               value="<?= $task->getprID() ?>">
+                                                                    </div>
+
+                                                                    <div class="modal-body"
+                                                                         style="background-color: var(--lighter-secondary);">
+                                                                        <div class="d-flex fw-normal fs-5">
+                                                                            Do you want to Delete this Task ?
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer"
+                                                                         style="background-color: var(--primary);">
+                                                                        <button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-bs-dismiss="modal">
+                                                                            Close
+                                                                        </button>
+                                                                        <button type="submit"
+                                                                                name="submit"
+                                                                                class="btn fw-bold"
+                                                                                style="background-color: var(--accent-color3); color: var(--primary);">
+                                                                            Delete
+                                                                        </button>
+
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <!--======= hidden ==========-->
-                                                <input type="hidden" name="menuNo" value="5">
-                                                <input type="hidden" name="pr_id"
-                                                       value="<?= $task->getprID() ?>">
-                                                <input class="d-none" type="submit" name="pr_update_submit"
-                                                       id="pr_update_submit_<?= $prTaskNo ?>"/>
                                             </div>
 
                                         </form>
@@ -826,7 +933,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 <!--======= display selected team members in add subtask model ==========-->
 <script>
-    function displaySelectedTeamMembers(){
+    function displaySelectedTeamMembers() {
         let teamCategoryID = document.getElementById("selected-team-cat-in-add-subtask").value;
         console.log(teamCategoryID);
 
