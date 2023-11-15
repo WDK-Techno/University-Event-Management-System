@@ -7,11 +7,12 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once 'classes/DBConnector.php';
 require_once "classes/User.php";
-
+require_once "classes/Mail.php";
 
 use classes\DBConnector;
 use classes\Club;
 use classes\Undergraduate;
+use classes\Mail;
 
 $con = DBConnector::getConnection();
 
@@ -22,6 +23,14 @@ $club = new Club('','','','');
 $user2 = $club->getClubs($con);
 $user3 = $club->getRequests($con);
 $user4 = $club->getRowCount($con);
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $name = $_POST["name"];
+    $email = $_POST["mail"];
+    $mailObj = new Mail();
+    $mailObj->sendMail($name, $email);
+    $mailObj->updateUserPassword($con, $email);
+}
 
 ?>
 <?php
@@ -215,9 +224,13 @@ $user4 = $club->getRowCount($con);
                               
                             </td>
                             <td>
+                            <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+                                <input type="hidden" name="name" value="<?php echo $users->first_name . " ".$users->last_name; ?>">
+                                <input type="hidden" name="mail" value="<?php echo $users->user_name; ?>">
                                 <button type="submit" class="btn btn-primary "
                                         style="border: none;width: 96px;height: 38px;">Edit
                                 </button>
+                                </form>
                             </td>
                 
                             <td>
