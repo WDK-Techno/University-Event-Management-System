@@ -261,7 +261,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         <?php include_once "content/GrantChart.php" ?>
     </div>
     <div id="menu-content-4" class="main-content hide">
-        <?php include_once  "content/projectdashboard/activityPlan.php" ?>
+<!--        --><?php //include_once  "content/projectdashboard/activityPlan.php" ?>
     </div>
     <div id="menu-content-5" class="main-content hide">
         <div class="container-fluid">
