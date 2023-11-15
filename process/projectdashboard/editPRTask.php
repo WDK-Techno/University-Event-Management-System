@@ -11,11 +11,8 @@ $con = DBConnector::getConnection();
 if (isset($_POST['pr_update_submit'])){
     $selectedMenuNo = $_POST['menuNo'];
     $prID = $_POST['pr_id'];
-    echo "pr id ".$prID;
     $published = 0;
     $verified = 0;
-//    $publishedDate = null;
-//    $designDeadline = null;
 
     if ($_POST['is_published'] == 'published'){
         $published = 1;
