@@ -145,7 +145,6 @@ class SubTask extends MainTask
     public function savChangesToDatabase($con)
     {
         try {
-            $con = DBConnector::getConnection();
             $query = "UPDATE sub_task SET sub_task_name=?,description=?,deadline=?,
                     asign_member_id=?,task_complete=?,main_task_id=?,status=? WHERE sub_task_id=?";
             $pstmt = $con->prepare($query);
