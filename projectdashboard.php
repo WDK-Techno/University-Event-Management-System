@@ -868,6 +868,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 </script>
 
+<!--======= display selected team members in Edit subtask model ==========-->
+<script>
+    function displaySelectedTeamMembersInEdit(subTaskNo){
+        let teamCategoryID = document.getElementById("selected-team-cat-in-edit-subtask-"+subTaskNo).value;
+        console.log(teamCategoryID);
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'process/projectdashboard/selectTeamMembers.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let response = JSON.parse(xhr.responseText);
+
+                // Access the original username and the result from the response object
+                let message = response.message;
+                let success = response.success;
+                let members = response.members;
+                if (success) {
+                    // Access the members array here and populate the dropdown
+                    let teamMemberDropDown = document.getElementById("selected-team-cat-members-in-edit-"+subTaskNo);
+
+                    // Clear existing options
+                    teamMemberDropDown.innerHTML = '';
+                    for (let memberId in members) {
+                        let option = document.createElement("option");
+                        option.value = memberId;
+                        option.text = members[memberId];
+                        teamMemberDropDown.add(option);
+                    }
+                } else {
+                    document.getElementById("add-member-team-error").innerText = message;
+                }
+
+
+            }
+        };
+
+        // Send the username to the PHP script
+        xhr.send('team_cat_id=' + encodeURIComponent(teamCategoryID));
+
+    }
+</script>
+
 <!-- ==== Boostrap Script ==== -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"

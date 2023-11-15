@@ -37,10 +37,10 @@ class MainTask
 
     }
 
-    public function saveChangesToDatabase($con)
-    {
-
-    }
+    //    public function saveChangesToDatabase($con)
+    //    {
+    //
+    //    }
 
     public function loadMainTaskFromTaskID($con)
     {

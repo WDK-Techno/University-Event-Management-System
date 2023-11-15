@@ -60,8 +60,8 @@ class SubTask extends MainTask
 
             $subTasks = array();
 
-            $query = "SELECT * FROM sub_task WHERE main_task_id in 
-                             (SELECT main_task_id FROM main_task WHERE project_id = ?)";
+            $query = "SELECT * FROM sub_task WHERE main_task_id in
+                             (SELECT main_task_id FROM main_task WHERE project_id = ?) ORDER BY main_task_id";
             $pstmt = $con->prepare($query);
             $pstmt->bindValue(1, $projectID);
             $pstmt->execute();
@@ -144,7 +144,24 @@ class SubTask extends MainTask
 
     public function savChangesToDatabase($con)
     {
-
+        try {
+            $con = DBConnector::getConnection();
+            $query = "UPDATE sub_task SET sub_task_name=?,description=?,deadline=?,
+                    asign_member_id=?,task_complete=?,main_task_id=?,status=? WHERE sub_task_id=?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1,$this->subTaskName);
+            $pstmt->bindValue(2,$this->description);
+            $pstmt->bindValue(3,$this->deadline);
+            $pstmt->bindValue(4,$this->assignedMemberID);
+            $pstmt->bindValue(5,$this->isTaskCompleted);
+            $pstmt->bindValue(6,$this->mainTaskID);
+            $pstmt->bindValue(7,$this->subTaskStatus);
+            $pstmt->bindValue(8,$this->subTaskID);
+            $pstmt->execute();
+            return $pstmt->rowCount()>0;
+        }catch (PDOException $exc){
+            die("Error in Subtask Save changes to DB ".$exc->getMessage());
+        }
     }
 
 //    public static function getSubTaskListFromUserID($con, $userID)
