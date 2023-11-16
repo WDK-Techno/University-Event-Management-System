@@ -179,7 +179,7 @@ class TeamCategory
                            JOIN team_category tc ON pt.category_id = tc.category_id
                            JOIN project p ON tc.project_id = p.project_id
                            WHERE ug.user_id = ?
-                             AND p.club_id = ? AND P.status='active';
+                             AND p.club_id = ? AND p.status='active';
 
                 ";
             $pstmt = $con->prepare($query);
