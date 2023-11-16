@@ -703,18 +703,20 @@ if (isset($_SESSION['user_id'])) {
                             <div class="d-flex mx-auto my-3">
                                     <span class="d-flex">
                                     <div class="fw-bold mx-2" style="color: var(--primary);">Start Date</div>
-                                    <input class="form-control w-50" type="date" name="start_date" required>
+                                    <input class="form-control w-50" type="date" id="dateFlyerAdd" name="start_date"
+                                           onchange="addStartDate()"
+                                           required>
                                         <div class="fw-bold mx-2" style="color: var(--primary);">Start Time</div>
-                                    <input class="form-control w-50" type="time" name="start_time" required>
+                                    <input class="form-control w-50" type="time" name="start_time"  id="start_time" required>
                                     </span>
                             </div>
 
                             <div class="d-flex mx-auto my-3">
                                     <span class="d-flex">
                                 <div class="fw-bold mx-2" style="color: var(--primary);">End Date</div>
-                                <input class="form-control w-50" type="date" name="end_date" required>
+                                <input class="form-control w-50" type="date"  id="dateFlyerEnd" name="end_date" required>
                                         <div class="fw-bold mx-2" style="color: var(--primary);">End Time</div>
-                                    <input class="form-control w-50" type="time" name="end_time" required>
+                                    <input class="form-control w-50" type="time" name="end_time"  id="end_time" required>
                                     </span>
                             </div>
 
@@ -1097,7 +1099,42 @@ if (isset($_SESSION['user_id'])) {
             document.getElementById('image_save_submit').click();
         }
     </script>
+    <!-- ====== Script files for flyer calender ===== -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
 
+        $(function(){
+            var dtToday = new Date();
+
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if(month < 10)
+                month = '0' + month.toString();
+            if(day < 10)
+                day = '0' + day.toString();
+
+            var minDate= year + '-' + month + '-' + day;
+
+            $('#dateFlyerAdd').attr('min', minDate);
+        });
+    </script>
+
+
+    <!-- ====== Script files for End flyer calender ===== -->
+    <script>
+
+
+        function addStartDate(){
+
+             //Assigning the variable to the user input
+            var dfa = document.getElementById('dateFlyerAdd').value;
+
+             // to print the input here
+            document.getElementById("dateFlyerEnd").min = dfa;
+        }
+
+    </script>
     <!-- ==== Boostrap Script ==== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
@@ -1114,6 +1151,7 @@ if (isset($_SESSION['user_id'])) {
 
     <!-- ====== Script files ===== -->
     <script src="assets/js/clubownerdashboard.js"></script>
+
 
 
     </body>

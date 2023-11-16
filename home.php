@@ -658,7 +658,6 @@ $flyers= $publicFlyer->loadPublicFlyerList($con);
     var owl = $('.owl-carousel');
     $(".custom-carousel").owlCarousel({
         autoWidth: true,
-        loop: true,
         nav:true,
         responsive:{
             0:{
