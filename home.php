@@ -161,7 +161,7 @@ if (!empty($rs)) {
     <!-- Event Details Modal -->
 
     <!-- <div class="container3-fluid py-6 mb-6"> -->
-    <div class="container p-5">
+   <!-- <div class="container p-5">
         <h2 class="title">
             <span class="title-word title-word-1">Upcomming</span>
             <span class="title-word title-word-2">News</span>
@@ -355,7 +355,7 @@ if (!empty($rs)) {
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 
 <hr/>

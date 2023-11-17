@@ -544,7 +544,7 @@ if (isset($_SESSION['user_id'])) {
                             <div class="row">
                                 <div class="col-8">
                                     <h4 class="title-text mt-0">Ongoing Pro</h4>
-                                    <h3 class="font-weight-semibold mb-1">3000</h3>
+                                    <h3 class="font-weight-semibold mb-1">0</h3>
                                 </div>
                                 <!--end col-->
                                 <div class="col-4 text-center align-self-center">
@@ -563,7 +563,7 @@ if (isset($_SESSION['user_id'])) {
                             <div class="row">
                                 <div class="col-8">
                                     <h4 class="title-text mt-0">Complete</h4>
-                                    <h3 class="font-weight-semibold mb-1">1000</h3>
+                                    <h3 class="font-weight-semibold mb-1">0</h3>
                                 </div>
                                 <!--end col-->
                                 <div class="col-4 text-center align-self-center">
