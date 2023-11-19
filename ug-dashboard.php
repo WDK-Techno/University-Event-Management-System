@@ -230,6 +230,8 @@ if (isset($_SESSION['user_id'])) {
                                 ?>
 
                                 <form action="process/ug-dashboard/editTask_compleat.php" method="post">
+
+                                    <input type="hidden" name="subTaskID" value="<?= $subTaskObj->getSubTaskID() ?>">
                                     <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
                                         <div class="col-1 d-flex tabel-column-type-2">
                                             <div class="my-auto">
@@ -250,7 +252,7 @@ if (isset($_SESSION['user_id'])) {
                                         </div>
                                         <div class="col-2 d-flex tabel-column-type-2">
                                             <div class="my-auto mx-auto">
-                                                <button>Add</button>
+                                                <button type="submit" name="completeTask">Add</button>
                                             </div>
                                         </div>
 
@@ -394,6 +396,10 @@ if (isset($_SESSION['user_id'])) {
                     </div>
 
                 </div>
+                <div id="menu-content-2" class="main-content hide">
+                    <div class="m-4">
+                        <h1>Compleated Task </h1>
+                    </div>
 
                 <div class="card-body pt-0 bg-dark-subtle scrollable-div Flipped"
                      style="background-color: var(--secondary);">
