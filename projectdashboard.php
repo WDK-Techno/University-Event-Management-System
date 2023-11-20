@@ -530,9 +530,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                                         <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
 
-                                            <div class="col-1 tabel-column-type-1 d-flex justify-content-center"
+                                            <div class="col-1 tabel-column-type-1 d-flex"
                                                  style="font-size: 1.8rem; ">
-                                                <form action="process/projectdashboard/editPRTask.php"
+                                                <form action="process/projectdashboard/editPRTask.php" class="d-flex"
                                                       method="POST">
                                                     <input type="checkbox"
                                                            class="my-auto ms-3 me-auto form-check-input"
@@ -546,7 +546,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                     <input type="hidden" name="menuNo" value="5">
                                                     <input type="hidden" name="pr_id"
                                                            value="<?= $task->getprID() ?>">
-                                                    <input class="d-none" type="submit" name="pr_update_submit"
+                                                    <input class="d-none" type="submit" name="pr_update_submit_1"
                                                            id="pr_update_submit_1_<?= $prTaskNo ?>"/>
                                                 </form>
                                             </div>
@@ -592,7 +592,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                                             <div class="col-1 tabel-column-type-2 d-flex justify-content-center"
                                                  style="font-size: 1.3rem;">
-                                                <form action="process/projectdashboard/editPRTask.php"
+                                                <form action="process/projectdashboard/editPRTask.php" class="d-flex"
                                                       method="POST">
                                                     <input type="checkbox"
                                                            class="my-auto form-check-input"
@@ -605,7 +605,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                     <input type="hidden" name="menuNo" value="5">
                                                     <input type="hidden" name="pr_id"
                                                            value="<?= $task->getprID() ?>">
-                                                    <input class="d-none" type="submit" name="pr_update_submit"
+                                                    <input class="d-none" type="submit" name="pr_update_submit_2"
                                                            id="pr_update_submit_2_<?= $prTaskNo ?>"/>
                                                 </form>
                                             </div>
