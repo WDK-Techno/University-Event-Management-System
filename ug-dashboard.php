@@ -453,6 +453,7 @@ if (isset($_SESSION['user_id'])) {
                 </div>
             </div>
 
+            </div>
         </div>
         <div id="menu-content-3" class="main-content hide">
             <h1>Content 3</h1>
