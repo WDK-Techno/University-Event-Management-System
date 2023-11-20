@@ -1,36 +1,32 @@
 <?php
 require_once "../../classes/DBConnector.php";
 
-require_once 'classes/Project.php';
-require_once 'classes/User.php';
-require_once 'classes/MainTask.php';
-require_once 'classes/SubTask.php';
+
+
+require_once '../../classes/SubTask.php';
 
 use classes\DBConnector;
 
 
-use classes\Project;
-use classes\Club;
-use classes\Undergraduate;
-use classes\MainTask;
+
 use classes\SubTask;
 
-if (isset($_POST['completeTask'])) {
-    $subTaskID = $_POST['subTaskID'];
-    $con = DBConnector::getConnection();
-    $query = "UPDATE your_table_name SET task_complete = 1 WHERE SubTaskID = ?";
-
-    // Using prepared statement to prevent SQL injection
-    $stmt = $con->prepare($query);
-    $stmt->bindParam(':subTaskID', $subTaskID, PDO::PARAM_INT);
-
-    // Execute the query
-    $stmt->execute();
-
-    // Redirect or display a success message as needed
-    header("Location: your_success_page.php");
-    exit();
-}
+//if (isset($_POST['completeTask'])) {
+//    $subTaskID = $_POST['subTaskID'];
+//    $con = DBConnector::getConnection();
+//    $query = "UPDATE your_table_name SET task_complete = 1 WHERE SubTaskID = ?";
+//
+//    // Using prepared statement to prevent SQL injection
+//    $stmt = $con->prepare($query);
+//    $stmt->bindParam(':subTaskID', $subTaskID, PDO::PARAM_INT);
+//
+//    // Execute the query
+//    $stmt->execute();
+//
+//    // Redirect or display a success message as needed
+//    header("Location: your_success_page.php");
+//    exit();
+//}
 
 if($_SERVER['REQUEST_METHOD']==="POST"){
     if(isset($_POST['completeTask'])){
@@ -41,24 +37,25 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
 
 
         if($subTaskIDobj->getIsTaskCompleted() == 0){
-            
+            $subTaskIDobj->setIsTaskCompleted(1);
+            $rs = $subTaskIDobj->savChangesToDatabase($con);
         }
 
 
 //            echo "work";
-            $ug = new Undergraduate(null,null,null,null,null,null);
-            $ug->setUserId($ug_id);
-            $ug->loadDataFromUserID($con);
-            $ug->setFirstName($fname);
-            $ug->setLastName($lname);
-            $ug->setContactNo($contact_no);
-            $rs = $ug->saveChangesToDatabase($con);
+//            $ug = new Undergraduate(null,null,null,null,null,null);
+//            $ug->setUserId($ug_id);
+//            $ug->loadDataFromUserID($con);
+//            $ug->setFirstName($fname);
+//            $ug->setLastName($lname);
+//            $ug->setContactNo($contact_no);
+//            $rs = $ug->saveChangesToDatabase($con);
 
-            if ($rs){
-                header("location: ../../ug-dashboard.php?tab={$selectedMenuNo}");
-            }else{
-                header("location: ../../ug-dashboard.php?tab={$selectedMenuNo}&saveEditErr=1");
-            }
+//            if ($rs){
+//                header("location: ../../ug-dashboard.php?tab={$selectedMenuNo}");
+//            }else{
+//                header("location: ../../ug-dashboard.php?tab={$selectedMenuNo}&saveEditErr=1");
+//            }
 
 
     }

@@ -397,9 +397,7 @@ if (isset($_SESSION['user_id'])) {
 
                 </div>
                 <div id="menu-content-2" class="main-content hide">
-                    <div class="m-4">
-                        <h1>Compleated Task </h1>
-                    </div>
+
 
                 <div class="card-body pt-0 bg-dark-subtle scrollable-div Flipped"
                      style="background-color: var(--secondary);">
@@ -453,6 +451,7 @@ if (isset($_SESSION['user_id'])) {
                 </div>
             </div>
 
+            </div>
         </div>
         <div id="menu-content-3" class="main-content hide">
             <h1>Content 3</h1>
