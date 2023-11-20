@@ -8,38 +8,13 @@ use classes\PRTask;
 
 $con = DBConnector::getConnection();
 
-if (isset($_POST['pr_update_submit'])) {
+if (isset($_POST['pr_update_submit_1'])) {
     $selectedMenuNo = $_POST['menuNo'];
     $prID = $_POST['pr_id'];
     $published = 0;
-    $verified = 0;
-//    if (isset($_POST['is_published'])) {
-//        if ($_POST['is_published'] == 'published') {
-//            $published = 1;
-//        } else {
-//            $published = 0;
-//            $verified = 0;
-//        }
-//    }
     if ($_POST['is_published'] == 'published') {
         $published = 1;
-        $verified = 1;
-    } else if ($_POST['is_verify'] == 'verified') {
-        $published = 0;
-        $verified = 1;
-    } else {
-        $verified =0;
-        $published =0;
     }
-
-//if (isset($_POST['is_verify'])) {
-//    if ($_POST['is_verify'] == 'verified') {
-//        $verified = 1;
-//    } else {
-//        $verified = 0;
-//        $published = 0;
-//    }
-//}
 
     $PRTask = new PRTask($prID, null, null, null, null, null, null);
     $PRTask->loadTaskFromPRId($con);
@@ -52,6 +27,26 @@ if (isset($_POST['pr_update_submit'])) {
         header("location: ../../projectdashboard.php?tab={$selectedMenuNo}&err=1");
     }
 }
+if (isset($_POST['pr_update_submit_2'])) {
+    $selectedMenuNo = $_POST['menuNo'];
+    $prID = $_POST['pr_id'];
+    $verified = 0;
+    if ($_POST['is_verify'] == 'verified') {
+        $verified = 1;
+    }
+
+    $PRTask = new PRTask($prID, null, null, null, null, null, null);
+    $PRTask->loadTaskFromPRId($con);
+    $PRTask->setisVerifyByProjectChair($verified);
+    $rs = $PRTask->saveChangesToDatabase($con);
+
+    if ($rs) {
+        header("location: ../../projectdashboard.php?tab={$selectedMenuNo}");
+    } else {
+        header("location: ../../projectdashboard.php?tab={$selectedMenuNo}&err=1");
+    }
+}
+
 
 if (isset($_POST['pr_edit_submit'])) {
     $selectedMenuNo = $_POST['menuNo'];
