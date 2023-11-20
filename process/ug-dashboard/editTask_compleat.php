@@ -2,11 +2,9 @@
 require_once "../../classes/DBConnector.php";
 
 
-
 require_once '../../classes/SubTask.php';
 
 use classes\DBConnector;
-
 
 
 use classes\SubTask;
@@ -28,18 +26,15 @@ use classes\SubTask;
 //    exit();
 //}
 
-if($_SERVER['REQUEST_METHOD']==="POST"){
-    if(isset($_POST['completeTask'])){
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    if (isset($_POST['completeTask'])) {
         $subTaskID = $_POST['subTaskID'];
         $con = DBConnector::getConnection();
-
-        $subTaskIDobj = new SubTask(null,null,null,null,null,null,null,null,);
-
-
-        if($subTaskIDobj->getIsTaskCompleted() == 0){
-            $subTaskIDobj->setIsTaskCompleted(1);
-            $rs = $subTaskIDobj->savChangesToDatabase($con);
-        }
+        $selectedMenuNo = 2;
+        $subTaskIDobj = new SubTask($subTaskID, null, null, null, null, null, null, null);
+        $subTaskIDobj->loadSubTaskFromSubTaskID($con);
+        $subTaskIDobj->setIsTaskCompleted(1);
+        $rs = $subTaskIDobj->savChangesToDatabase($con);
 
 
 //            echo "work";
@@ -51,11 +46,11 @@ if($_SERVER['REQUEST_METHOD']==="POST"){
 //            $ug->setContactNo($contact_no);
 //            $rs = $ug->saveChangesToDatabase($con);
 
-//            if ($rs){
-//                header("location: ../../ug-dashboard.php?tab={$selectedMenuNo}");
-//            }else{
-//                header("location: ../../ug-dashboard.php?tab={$selectedMenuNo}&saveEditErr=1");
-//            }
+            if ($rs){
+                header("location: ../../ug-dashboard.php?tab={$selectedMenuNo}");
+            }else{
+                header("location: ../../ug-dashboard.php?tab={$selectedMenuNo}&saveEditErr=1");
+            }
 
 
     }
