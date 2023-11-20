@@ -676,17 +676,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                                                 class="form-select ms-auto me-2"
                                                                                 style="width: 50%;"
                                                                                 name="designer_id" id="" required>
-                                                                            <option class="text-center" value=""
-                                                                                    selected>-- Select Designer --
+                                                                            <?php
+                                                                            $member = new Undergraduate(null, null, null, null, null, null);
+                                                                            $member->setUserId($task->getdesignerID());
+                                                                            $member->loadDataFromUserID($con);
+                                                                            ?>
+                                                                            <option
+                                                                                    value="<?= $member->getUserId() ?>"
+                                                                                    selected><?= $member->getFirstName() ?> <?= $member->getLastName() ?>
                                                                             </option>
                                                                             <?php
                                                                             foreach ($desingTeamMembers as $desingTeamMember) {
                                                                                 $member = new Undergraduate(null, null, null, null, null, null);
                                                                                 $member->setUserId($desingTeamMember->getUgID());
                                                                                 $member->loadDataFromUserID($con);
-                                                                                ?>
-                                                                                <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
-                                                                                <?php
+                                                                                if ($task->getdesignerID() !== $member->getUserId()) { // prevent print same name twice
+                                                                                    ?>
+                                                                                    <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
+                                                                                    <?php
+                                                                                }
                                                                             }
                                                                             ?>
                                                                         </select>
@@ -695,19 +703,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                                                 class="form-select ms-auto me-0"
                                                                                 style="width: 50%;"
                                                                                 name="caption_writer_id" id="" required>
-                                                                            <option class="text-center" value=""
-                                                                                    selected>-- Select Caption
-                                                                                Writter
-                                                                                --
+                                                                            <?php
+                                                                            $member = new Undergraduate(null, null, null, null, null, null);
+                                                                            $member->setUserId($task->getcaptionWriterID());
+                                                                            $member->loadDataFromUserID($con);
+                                                                            ?>
+                                                                            <option
+                                                                                    value="<?= $member->getUserId() ?>"
+                                                                                    selected><?= $member->getFirstName() ?> <?= $member->getLastName() ?>
                                                                             </option>
                                                                             <?php
                                                                             foreach ($writingTeamMembers as $writingTeamMember) {
                                                                                 $member = new Undergraduate(null, null, null, null, null, null);
                                                                                 $member->setUserId($writingTeamMember->getUgID());
                                                                                 $member->loadDataFromUserID($con);
-                                                                                ?>
-                                                                                <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
-                                                                                <?php
+                                                                                if ($task->getcaptionWriterID() !== $member->getUserId()) { // prevent print same name twice
+                                                                                    ?>
+                                                                                    <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
+                                                                                    <?php
+                                                                                }
                                                                             }
                                                                             ?>
                                                                         </select>
