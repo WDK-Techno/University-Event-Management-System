@@ -1,6 +1,6 @@
 <?php
 require_once "../../classes/DBConnector.php";
-
+require_once "../../classes/MainTask.php";
 
 require_once '../../classes/SubTask.php';
 

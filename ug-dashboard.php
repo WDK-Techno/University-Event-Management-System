@@ -252,17 +252,20 @@ if (isset($_SESSION['user_id'])) {
                                         </div>
                                         <div class="col-2 d-flex tabel-column-type-2">
                                             <div class="my-auto mx-auto">
-                                                <button type="submit" name="completeTask">Add</button>
+                                                <button type="submit" name="completeTask" class="btn btn-success">Add</button>
                                             </div>
                                         </div>
 
                                     </div>
                                 </form>
                                 <?php
+                            }else{
+
                             }
 
                         }
                         ?>
+
                         <!--                                <div>-->
                         <!--                                    <button class="update-button" type="submit" name="update">Update</button>-->
                         <!--                                </div>-->
@@ -367,7 +370,9 @@ if (isset($_SESSION['user_id'])) {
                     </div>
                 </div>
             </div>
-
+            <div class="m-4">
+                <h1>Compleated Task </h1>
+            </div>
 
             <div class="card mx-4" style="margin-top: 20px;">
                 <div class="card-header team-member-table pb-0"
@@ -396,7 +401,7 @@ if (isset($_SESSION['user_id'])) {
                     </div>
 
                 </div>
-                <div id="menu-content-2" class="main-content hide">
+
 
 
                 <div class="card-body pt-0 bg-dark-subtle scrollable-div Flipped"
@@ -413,7 +418,8 @@ if (isset($_SESSION['user_id'])) {
                             if ($subTaskObj->getIsTaskCompleted() == 1) {
                                 ?>
 
-                                <form action="process/ug-dashboard/editTask_compleat.php" method="post">
+                                <form action="process/ug-dashboard/remove_compleatTask.php" method="post">
+                                    <input type="hidden" name="subTaskID" value="<?= $subTaskObj->getSubTaskID() ?>">
                                     <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
                                         <div class="col-1 d-flex tabel-column-type-2">
                                             <div class="my-auto">
@@ -434,7 +440,7 @@ if (isset($_SESSION['user_id'])) {
                                         </div>
                                         <div class="col-2 d-flex tabel-column-type-2">
                                             <div class="my-auto mx-auto">
-                                                <button onclick="addToTable2(this)">REMOVE</button>
+                                                <button class="btn btn-danger" name="removeTask">REMOVE</button>
                                             </div>
                                         </div>
                                     </div>
@@ -449,7 +455,7 @@ if (isset($_SESSION['user_id'])) {
 
                     </div>
                 </div>
-            </div>
+
 
             </div>
         </div>
