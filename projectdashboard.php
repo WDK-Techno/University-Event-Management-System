@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <li id="menu-3" class="sideBar-btn" onclick="showMenuContent(3)">
                 <a href="#" class="nav-link d-flex justify-content-start">
                     <ion-icon name="calendar-outline"></ion-icon>
-                    <span class="sideBar-btn-text my-auto">Grantt Chart</span>
+                    <span class="sideBar-btn-text my-auto">Gantt Chart</span>
                 </a>
             </li>
             <li id="menu-4" class="sideBar-btn" onclick="showMenuContent(4)">
@@ -630,6 +630,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                         <div class="modal-content">
                                                             <!--=== form =====-->
                                                             <form action="process/projectdashboard/editPRTask.php"
+                                                                  class=""
                                                                   method="POST">
                                                                 <div class="modal-header py-2 px-2"
                                                                      style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
@@ -646,10 +647,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                                             Edit
                                                                         </div>
                                                                     </div>
-
                                                                     <!--======= hidden ==========-->
                                                                     <input type="hidden" name="menuNo" value="5">
-
+                                                                    <input type="hidden" name="pr_id"
+                                                                           value="<?= $task->getprID() ?>">
                                                                 </div>
 
                                                                 <div class="modal-body"
@@ -669,71 +670,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                                                                     </div>
                                                                     <!-- ===== select team ======= -->
-                                                                    <div class="d-flex ms-0 me-auto my-auto py-2 px-2">
-                                                                        <form action="process/projectdashboard/definePRTeams.php"
-                                                                              method="POST" class="d-flex"
-                                                                              style="height: fit-content">
-                                                                            <select id="design_team_id"
-                                                                                    class="form-select"
-                                                                                    onchange="defineSubmit()"
-                                                                                    style="width: 50%;"
-                                                                                    name="design_team_id" id=""
-                                                                                    required>
+                                                                    <div class="d-flex mt-2 px-5">
 
-                                                                                <option class="text-center"
-                                                                                        value="null">-- Define
-                                                                                    Design Team --
-                                                                                </option>
-                                                                                <?php
-                                                                                $isSelected = "";
-                                                                                foreach ($desingTeamMembers as $desingTeamMember) {
-                                                                                    $member = new Undergraduate(null, null, null, null, null, null);
-                                                                                    $member->setUserId($PRTask->getdesignerID());
-                                                                                    $member->loadDataFromUserID($con);
-
-                                                                                    if ($PRTask->getdesignerID() == $member->getUserId()) {
-                                                                                        $isSelected = "selected";
-                                                                                    } else {
-                                                                                        $isSelected = "";
-                                                                                    }
-                                                                                    ?>
-                                                                                    <option value="<?= $member->getUserId() ?>" <?= $isSelected ?>><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
-                                                                                    <?php
-
-                                                                                }
+                                                                        <select id="designer_id"
+                                                                                class="form-select ms-auto me-2"
+                                                                                style="width: 50%;"
+                                                                                name="designer_id" id="" required>
+                                                                            <option class="text-center" value=""
+                                                                                    selected>-- Select Designer --
+                                                                            </option>
+                                                                            <?php
+                                                                            foreach ($desingTeamMembers as $desingTeamMember) {
+                                                                                $member = new Undergraduate(null, null, null, null, null, null);
+                                                                                $member->setUserId($desingTeamMember->getUgID());
+                                                                                $member->loadDataFromUserID($con);
                                                                                 ?>
-                                                                            </select>
-
-
-                                                                            <select id="sec_team_id"
-                                                                                    class="form-select ms-2"
-                                                                                    onchange="defineSubmit()"
-                                                                                    style="width: 50%;"
-                                                                                    name="sec_team_id" id=""
-                                                                                    required>
-                                                                                <option class="text-center"
-                                                                                        value="null" selected>--
-                                                                                    Define Writing Team --
-                                                                                </option>
+                                                                                <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
                                                                                 <?php
-                                                                                $isSelected = "";
-                                                                                foreach ($writingTeamMembers as $writingTeamMember) {
+                                                                            }
+                                                                            ?>
+                                                                        </select>
 
-                                                                                    $member = new Undergraduate(null, null, null, null, null, null);
-                                                                                    $member->setUserId($PRTask->getcaptionWriterID());
-                                                                                    $member->loadDataFromUserID($con);
-                                                                                    if ($PRTask->getcaptionWriterID() == $member->getUserId()) {
-                                                                                        $isSelected = "selected";
-                                                                                    } else {
-                                                                                        $isSelected = "";
-                                                                                    }
-                                                                                    ?>
-                                                                                    <option value="<?= $member->getUserId() ?>" <?= $isSelected ?>><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
-                                                                                    <?php
-                                                                                }
+                                                                        <select id="caption_writer_id"
+                                                                                class="form-select ms-auto me-0"
+                                                                                style="width: 50%;"
+                                                                                name="caption_writer_id" id="" required>
+                                                                            <option class="text-center" value=""
+                                                                                    selected>-- Select Caption
+                                                                                Writter
+                                                                                --
+                                                                            </option>
+                                                                            <?php
+                                                                            foreach ($writingTeamMembers as $writingTeamMember) {
+                                                                                $member = new Undergraduate(null, null, null, null, null, null);
+                                                                                $member->setUserId($writingTeamMember->getUgID());
+                                                                                $member->loadDataFromUserID($con);
                                                                                 ?>
-                                                                            </select>
-                                                                        </form>
+                                                                                <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
+                                                                                <?php
+                                                                            }
+                                                                            ?>
+                                                                        </select>
+
                                                                     </div>
 
 
