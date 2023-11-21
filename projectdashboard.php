@@ -647,10 +647,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                                             Edit
                                                                         </div>
                                                                     </div>
-                                                                    <!--======= hidden ==========-->
-                                                                    <input type="hidden" name="menuNo" value="5">
-                                                                    <input type="hidden" name="pr_id"
-                                                                           value="<?= $task->getprID() ?>">
+
                                                                 </div>
 
                                                                 <div class="modal-body"
@@ -669,62 +666,83 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                                                value="<?= $task->getdescription() ?>"/>
 
                                                                     </div>
-                                                                    <!-- ===== select team ======= -->
+                                                                    <!-- ===== select design team member ======= -->
                                                                     <div class="d-flex mt-2 px-5">
+                                                                        <div class="d-flex w-100 rounded p-2"
+                                                                             style="background-color: var(--secondary)">
+                                                                            <div class="ms-1 me-auto my-auto fw-bold"
+                                                                                 style="font-size: 0.8rem;">Select
+                                                                                Design <br>
+                                                                                Team Member
 
-                                                                        <select id="designer_id"
-                                                                                class="form-select ms-auto me-2"
-                                                                                style="width: 50%;"
-                                                                                name="designer_id" id="" required>
-                                                                            <?php
-                                                                            $member = new Undergraduate(null, null, null, null, null, null);
-                                                                            $member->setUserId($task->getdesignerID());
-                                                                            $member->loadDataFromUserID($con);
-                                                                            ?>
-                                                                            <option
-                                                                                    value="<?= $member->getUserId() ?>"
-                                                                                    selected><?= $member->getFirstName() ?> <?= $member->getLastName() ?>
-                                                                            </option>
-                                                                            <?php
-                                                                            foreach ($desingTeamMembers as $desingTeamMember) {
+                                                                            </div>
+                                                                            <select id="designer_id"
+                                                                                    class="form-select ms-auto me-0"
+                                                                                    style="width: 50%;"
+                                                                                    name="designer_id" required>
+                                                                                <?php
                                                                                 $member = new Undergraduate(null, null, null, null, null, null);
-                                                                                $member->setUserId($desingTeamMember->getUgID());
+                                                                                $member->setUserId($task->getdesignerID());
                                                                                 $member->loadDataFromUserID($con);
-                                                                                if ($task->getdesignerID() !== $member->getUserId()) { // prevent print same name twice
-                                                                                    ?>
-                                                                                    <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
-                                                                                    <?php
+                                                                                ?>
+                                                                                <option
+                                                                                        value="<?= $member->getUserId() ?>"
+                                                                                        selected><?= $member->getFirstName() ?> <?= $member->getLastName() ?>
+                                                                                </option>
+                                                                                <?php
+                                                                                foreach ($desingTeamMembers as $desingTeamMember) {
+                                                                                    $member = new Undergraduate(null, null, null, null, null, null);
+                                                                                    $member->setUserId($desingTeamMember->getUgID());
+                                                                                    $member->loadDataFromUserID($con);
+                                                                                    if ($task->getdesignerID() !== $member->getUserId()) { // prevent print same name twice
+                                                                                        ?>
+                                                                                        <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
+                                                                                        <?php
+                                                                                    }
                                                                                 }
-                                                                            }
-                                                                            ?>
-                                                                        </select>
+                                                                                ?>
+                                                                            </select>
+                                                                        </div>
 
-                                                                        <select id="caption_writer_id"
-                                                                                class="form-select ms-auto me-0"
-                                                                                style="width: 50%;"
-                                                                                name="caption_writer_id" id="" required>
-                                                                            <?php
-                                                                            $member = new Undergraduate(null, null, null, null, null, null);
-                                                                            $member->setUserId($task->getcaptionWriterID());
-                                                                            $member->loadDataFromUserID($con);
-                                                                            ?>
-                                                                            <option
-                                                                                    value="<?= $member->getUserId() ?>"
-                                                                                    selected><?= $member->getFirstName() ?> <?= $member->getLastName() ?>
-                                                                            </option>
-                                                                            <?php
-                                                                            foreach ($writingTeamMembers as $writingTeamMember) {
+                                                                    </div>
+                                                                    <!-- ===== select design team member ======= -->
+                                                                    <div class="d-flex mt-2 px-5">
+                                                                        <div class="d-flex w-100 rounded p-2"
+                                                                             style="background-color: var(--secondary)">
+                                                                            <div class="ms-1 me-auto my-auto fw-bold"
+                                                                                 style="font-size: 0.8rem;">Select Writing <br>
+                                                                                Team Member
+
+                                                                            </div>
+                                                                            <select id="caption_writer_id"
+                                                                                    class="form-select ms-auto me-0"
+                                                                                    style="width: 50%;"
+                                                                                    name="caption_writer_id" id=""
+                                                                                    required>
+                                                                                <?php
                                                                                 $member = new Undergraduate(null, null, null, null, null, null);
-                                                                                $member->setUserId($writingTeamMember->getUgID());
+                                                                                $member->setUserId($task->getcaptionWriterID());
                                                                                 $member->loadDataFromUserID($con);
-                                                                                if ($task->getcaptionWriterID() !== $member->getUserId()) { // prevent print same name twice
-                                                                                    ?>
-                                                                                    <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
-                                                                                    <?php
+                                                                                ?>
+                                                                                <option
+                                                                                        value="<?= $member->getUserId() ?>"
+                                                                                        selected><?= $member->getFirstName() ?> <?= $member->getLastName() ?>
+                                                                                </option>
+                                                                                <?php
+                                                                                foreach ($writingTeamMembers as $writingTeamMember) {
+                                                                                    $member = new Undergraduate(null, null, null, null, null, null);
+                                                                                    $member->setUserId($writingTeamMember->getUgID());
+                                                                                    $member->loadDataFromUserID($con);
+                                                                                    if ($task->getcaptionWriterID() !== $member->getUserId()) { // prevent print same name twice
+                                                                                        ?>
+                                                                                        <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
+                                                                                        <?php
+                                                                                    }
                                                                                 }
-                                                                            }
-                                                                            ?>
-                                                                        </select>
+                                                                                ?>
+                                                                            </select>
+
+                                                                        </div>
 
                                                                     </div>
 
@@ -749,7 +767,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                                                 <input class="form-control text-center"
                                                                                        style="width: fit-content"
                                                                                        type="time" required
-                                                                                       value="<?= date('H:i', strtotime($task->getisPublished())); ?>"
+                                                                                       value="<?= date('H:i', strtotime($task->getpublishDate())); ?>"
                                                                                        name="publish_time"/>
                                                                             </div>
 
@@ -757,9 +775,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                                     </div>
                                                                     <!--======= hidden ==========-->
                                                                     <input type="hidden" name="menuNo" value="5">
-                                                                    <input type="hidden" name="project_id"
-                                                                           value="<?= $project->getProjectID() ?>">
-
+                                                                    <input type="hidden" name="pr_id"
+                                                                           value="<?= $task->getprID() ?>">
                                                                 </div>
                                                                 <div class="modal-footer"
                                                                      style="background-color: var(--primary);">
