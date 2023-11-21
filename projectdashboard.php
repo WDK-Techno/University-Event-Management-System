@@ -273,46 +273,61 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <div class="d-flex ms-0 me-auto my-auto">
                                 <form action="process/projectdashboard/definePRTeams.php" method="POST" class="d-flex"
                                       style="height: fit-content">
-                                    <select id="design_team_id" class="form-select" onchange="defineSubmit()"
-                                            style="width: 50%;"
-                                            name="design_team_id" id="" required>
+                                    <div class="d-flex w-100 rounded p-2"
+                                         style="background-color: var(--secondary)">
+                                        <div class="ms-1 me-auto my-auto fw-bold"
+                                             style="font-size: 0.8rem;">Define<br>Design Team
 
-                                        <option class="text-center" value="null">-- Define Design Team --
-                                        </option>
-                                        <?php
-                                        $isSelected = "";
-                                        foreach ($teamCategories as $teamCategory) {
-                                            if ($project->getDesignTeamID() == $teamCategory->getCategoryID()) {
-                                                $isSelected = "selected";
-                                            } else {
-                                                $isSelected = "";
+                                        </div>
+                                        <select id="design_team_id" class="form-select" onchange="defineSubmit()"
+                                                style="width: 50%;"
+                                                name="design_team_id" id="" required>
+
+                                            <option class="text-center" value="null">-- Define Design Team --
+                                            </option>
+                                            <?php
+                                            $isSelected = "";
+                                            foreach ($teamCategories as $teamCategory) {
+                                                if ($project->getDesignTeamID() == $teamCategory->getCategoryID()) {
+                                                    $isSelected = "selected";
+                                                } else {
+                                                    $isSelected = "";
+                                                }
+                                                ?>
+                                                <option value="<?= $teamCategory->getCategoryID() ?>" <?= $isSelected ?>><?= $teamCategory->getCategoryName() ?></option>
+                                                <?php
+
                                             }
                                             ?>
-                                            <option value="<?= $teamCategory->getCategoryID() ?>" <?= $isSelected ?>><?= $teamCategory->getCategoryName() ?></option>
-                                            <?php
+                                        </select>
+                                    </div>
 
-                                        }
-                                        ?>
-                                    </select>
-                                    <select id="sec_team_id" class="form-select ms-2" onchange="defineSubmit()"
-                                            style="width: 50%;"
-                                            name="sec_team_id" id="" required>
-                                        <option class="text-center" value="null" selected>-- Define Writing Team --
-                                        </option>
-                                        <?php
-                                        $isSelected = "";
-                                        foreach ($teamCategories as $teamCategory) {
-                                            if ($project->getWritingTeamID() == $teamCategory->getCategoryID()) {
-                                                $isSelected = "selected";
-                                            } else {
-                                                $isSelected = "";
+                                    <div class="d-flex ms-2 w-100 rounded p-2"
+                                         style="background-color: var(--secondary)">
+                                        <select id="sec_team_id" class="form-select ms-2" onchange="defineSubmit()"
+                                                style="width: 50%;"
+                                                name="sec_team_id" id="" required>
+                                            <option class="text-center" value="null" selected>-- Define Writing Team --
+                                            </option>
+                                            <?php
+                                            $isSelected = "";
+                                            foreach ($teamCategories as $teamCategory) {
+                                                if ($project->getWritingTeamID() == $teamCategory->getCategoryID()) {
+                                                    $isSelected = "selected";
+                                                } else {
+                                                    $isSelected = "";
+                                                }
+                                                ?>
+                                                <option value="<?= $teamCategory->getCategoryID() ?>" <?= $isSelected ?>><?= $teamCategory->getCategoryName() ?></option>
+                                                <?php
                                             }
                                             ?>
-                                            <option value="<?= $teamCategory->getCategoryID() ?>" <?= $isSelected ?>><?= $teamCategory->getCategoryName() ?></option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
+                                        </select>
+                                        <div class="ms-auto me-1 my-auto fw-bold text-end"
+                                             style="font-size: 0.8rem;">Define<br>Writing Team
+
+                                        </div>
+                                    </div>
                                     <!--======= hidden ==========-->
                                     <input type="hidden" name="menuNo" value="5">
                                     <input type="hidden" name="project_id"
@@ -386,42 +401,61 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                             </div>
                                             <!-- ===== select team ======= -->
                                             <div class="d-flex mt-2 px-5">
+                                                <div class="d-flex w-100 rounded p-2"
+                                                     style="background-color: var(--secondary)">
+                                                    <div class="ms-1 me-auto my-auto fw-bold"
+                                                         style="font-size: 0.8rem;">Select
+                                                        Design <br>
+                                                        Team Member
 
-                                                <select id="designer_id" class="form-select ms-auto me-2"
-                                                        style="width: 50%;"
-                                                        name="designer_id" id="" required>
-                                                    <option class="text-center" value="" selected>-- Select Designer --
-                                                    </option>
-                                                    <?php
-                                                    foreach ($desingTeamMembers as $desingTeamMember) {
-                                                        $member = new Undergraduate(null, null, null, null, null, null);
-                                                        $member->setUserId($desingTeamMember->getUgID());
-                                                        $member->loadDataFromUserID($con);
-                                                        ?>
-                                                        <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
+                                                    </div>
+                                                    <select id="designer_id" class="form-select ms-auto me-0"
+                                                            style="width: 50%;"
+                                                            name="designer_id" id="" required>
+                                                        <option class="text-center" value="" selected>-- Select Designer
+                                                            --
+                                                        </option>
                                                         <?php
-                                                    }
-                                                    ?>
-                                                </select>
+                                                        foreach ($desingTeamMembers as $desingTeamMember) {
+                                                            $member = new Undergraduate(null, null, null, null, null, null);
+                                                            $member->setUserId($desingTeamMember->getUgID());
+                                                            $member->loadDataFromUserID($con);
+                                                            ?>
+                                                            <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex mt-2 px-5">
+                                                <div class="d-flex w-100 rounded p-2"
+                                                     style="background-color: var(--secondary)">
+                                                    <div class="ms-1 me-auto my-auto fw-bold"
+                                                         style="font-size: 0.8rem;">Select
+                                                        Writing <br>
+                                                        Team Member
 
-                                                <select id="caption_writer_id" class="form-select ms-auto me-0"
-                                                        style="width: 50%;"
-                                                        name="caption_writer_id" id="" required>
-                                                    <option class="text-center" value="" selected>-- Select Caption
-                                                        Writter
-                                                        --
-                                                    </option>
-                                                    <?php
-                                                    foreach ($writingTeamMembers as $writingTeamMember) {
-                                                        $member = new Undergraduate(null, null, null, null, null, null);
-                                                        $member->setUserId($writingTeamMember->getUgID());
-                                                        $member->loadDataFromUserID($con);
-                                                        ?>
-                                                        <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
+                                                    </div>
+                                                    <select id="caption_writer_id" class="form-select ms-auto me-0"
+                                                            style="width: 50%;"
+                                                            name="caption_writer_id" id="" required>
+                                                        <option class="text-center" value="" selected>-- Select Caption
+                                                            Writter
+                                                            --
+                                                        </option>
                                                         <?php
-                                                    }
-                                                    ?>
-                                                </select>
+                                                        foreach ($writingTeamMembers as $writingTeamMember) {
+                                                            $member = new Undergraduate(null, null, null, null, null, null);
+                                                            $member->setUserId($writingTeamMember->getUgID());
+                                                            $member->loadDataFromUserID($con);
+                                                            ?>
+                                                            <option value="<?= $member->getUserId() ?>"><?= $member->getFirstName() ?> <?= $member->getLastName() ?></option>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
 
                                             </div>
                                             <div class="mt-2 text-center" id="add-member-team-error"
@@ -710,7 +744,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                                         <div class="d-flex w-100 rounded p-2"
                                                                              style="background-color: var(--secondary)">
                                                                             <div class="ms-1 me-auto my-auto fw-bold"
-                                                                                 style="font-size: 0.8rem;">Select Writing <br>
+                                                                                 style="font-size: 0.8rem;">Select
+                                                                                Writing <br>
                                                                                 Team Member
 
                                                                             </div>
