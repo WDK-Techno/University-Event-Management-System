@@ -253,9 +253,9 @@ $subTasks = SubTask::getSubTasksListFromProjectID($con, $project->getProjectID()
                                         <!--======= hidden ==========-->
                                         <input type="hidden" name="menuNo" value="5">
                                         <input type="hidden" name="pr_id"
-                                               value="<?= $task->getprID() ?>">
+                                               value="<?= $task->getSubTaskID() ?>">
                                         <input class="d-none" type="submit" name="pr_update_submit"
-                                               id="pr_update_submit_<?= $prTaskNo ?>"/>
+                                               id="pr_update_submit_<?= $subTaskNo ?>"/>
 
                                     </form>
                                 </div>
@@ -562,14 +562,14 @@ $subTasks = SubTask::getSubTasksListFromProjectID($con, $project->getProjectID()
                                                         </button>
 
                                                     </div>
-
+                                                </form>
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            </form>
+
                             <?php
                             $subTaskNo++;
                         }
