@@ -6,7 +6,8 @@ require_once 'classes/Project.php';
 require_once 'classes/User.php';
 require_once 'classes/PublicFlyer.php';
 require_once 'classes/TeamCategory.php';
-
+require_once 'classes/MainTask.php';
+require_once 'classes/SubTask.php';
 
 use classes\DBConnector;
 use classes\Project;
@@ -14,6 +15,8 @@ use classes\Club;
 use classes\Undergraduate;
 use classes\PublicFlyer;
 use classes\TeamCategory;
+use classes\MainTask;
+use classes\SubTask;
 
 
 $con = DBConnector::getConnection();
@@ -35,7 +38,7 @@ if (isset($_SESSION['user_id'])) {
     $loadUserData = $undergraduate->loadDataFromUserID($con);
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $selected_menuNo = 2;
+        $selected_menuNo = 3;
         if (isset($_GET['tab'])) {
             $selected_menuNo = $_GET['tab'];
         }
@@ -587,6 +590,7 @@ if (isset($_SESSION['user_id'])) {
                 foreach ($projects as $project) {
                     if ($project->getStatus() !== "delete") {
                         ?>
+
                         <div class="col">
                             <div class="card d-block shadow-sm">
                                 <div class="card-header p-3 text-white" style="background-color: var(--primary)">
@@ -595,7 +599,22 @@ if (isset($_SESSION['user_id'])) {
                                 <div class="card-body mb-2">
                                     <div id="chart-<?php echo $project->getProjectID(); ?>"> <!-- Fixed the concatenation -->
                                     </div>
+                                    <?php
+                                          $subTasks=SubTask::getSubTasksListFromProjectID($con, $project->getProjectID());
+                                           foreach( $subTasks as  $subTask){
+                                              $sc= $subTask->getSubTaskID();
 
+
+                                    ?>
+                                    <div>
+                                        <?php echo $sc;?>
+
+                                    </div>
+                                               <?php
+                                           }
+
+                                    ?>
+                                    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
                                     <script>
                                         var options = {
                                             chart: {
@@ -604,7 +623,7 @@ if (isset($_SESSION['user_id'])) {
                                             },
 
 
-                                            series: [10],
+                                            series: [18],
                                             colors: ["#20E647"],
                                             plotOptions: {
                                                 radialBar: {
@@ -660,11 +679,11 @@ if (isset($_SESSION['user_id'])) {
                                     <script>
                                         console.log('chart-<?php echo $project->getProjectID(); ?>');
                                     </script>
-                                    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
                                 </div>
+
                             </div>
                         </div>
+
                         <?php
                         $is++;
                     }
@@ -681,52 +700,68 @@ if (isset($_SESSION['user_id'])) {
 
                 <?php
                 //$ug=new Undergraduate(null,null,null,null,null,null);
-                foreach ($ugs as $ug) {
+
+                $tds=SubTask::getmemberIdUsingClubId($con, $clubid);
+
+                foreach ($tds as $td) {
 
                     ?>
-                    <div class="card mx-2 px-0" style="width: 18rem; height: 20rem;">
+                    <div class="card mx-2 px-0" style="width: 18rem; height: 25rem;">
 
                         <div class="card-header "
                              style="background-color: var(--primary)!important;color: var(--secondary); text-align: center;">
                             <h5><?php
                                 //echo $ugDetails->getUserId();
-                                echo $ug->getFirstName() . " " . $ug->getLastName();
+                               // echo $td->getFirstName() . " " . $ug->getLastName();
+                                //echo $td->getAssignedMemberID();
+                                $ug=new Undergraduate(null,null,null,null,null,null);
+                                $ug->setUserId($td->getAssignedMemberID());
+                                $ug->loadDataFromUserID($con);
+                                $usFName=$ug->getFirstName();
+                                $usLName=$ug->getLastName();
+                                $usProImg=$ug->getProfileImg();
+
+                                echo $usFName." ". $usLName;
                                 ?>
+
+
                             </h5>
                         </div>
 
                         <div class="card-body">
-                            <img src="assets/images/profile_img/ug/<?php echo $ug->getProfileImg() ?>" class="card-img-top
+                           <img src="assets/images/profile_img/ug/<?php echo  $usProImg?>" class="card-img-top
                     rounded-circle img-thumbnail shadow-sm"
                                  style="width: 150px; height: 150px; object-fit: cover;position: relative"
                                  alt="user Profile Image">
                             <div class="card-content">
-                                <?php
-                                $ugId = $ug->getUserId();
-                                $pds = Project::getProjectListFromUgId($con, $clubid, $ugId);
 
-
-                                ?>
                                 <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Complete sub Tasks
+                                        <span class="badge  rounded-pill"
+                                              style="background-color: var(--accent-color4);!important;color: var(--secondary);">
+                                             <?php echo  $td->getTaskCompleteCount(); ?>
+                                    </span>
+                                    </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         Enrolled Projects
                                         <span class="badge  rounded-pill"
-                                              style="background-color: var(--primary);!important;color: var(--secondary);">
+                                              style="background-color: var(--accent-color5);!important;color: var(--secondary);">
                                         <?php
+                                        $pds = Project::getProjectListFromUgId($con, $clubid, $td->getAssignedMemberID());
                                         echo count($pds);
-
                                         ?>
                                     </span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         Enrolled Team
                                         <span class="badge rounded-pill"
-                                              style="background-color: var(--primary);!important;color: var(--secondary);">
-                                         <?php
-                                         $tcds = TeamCategory::getTeamCategoryFromUgId($con, $clubid, $ugId);
-                                         echo count($tcds);
+                                              style="background-color: var(--accent-color6);!important;color: var(--secondary);">
+                                            <?php
+                                            $tcds = TeamCategory::getTeamCategoryFromUgId($con, $clubid, $td->getAssignedMemberID());
+                                            echo count($tcds);
+                                            ?>
 
-                                         ?>
                                     </span>
                                     </li>
                                 </ul>

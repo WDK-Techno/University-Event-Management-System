@@ -15,6 +15,7 @@ class SubTask extends MainTask
     private $assignedMemberID;
     private $isTaskCompleted;
     private $subTaskStatus;
+    private $task_complete_count;
 
 
     public function __construct($subTaskID, $subTaskName, $description, $deadline, $assignedMemberID, $isTaskCompleted, $mainTaskID, $status)
@@ -192,6 +193,46 @@ class SubTask extends MainTask
         return $subTasks;
     }
 
+    public static function getmemberIdUsingClubId($con, $clubId)
+    {
+        try {
+            $query = "SELECT st.asign_member_id, COUNT(*) AS task_complete_count
+                                    FROM sub_task st
+                                    JOIN undergraduate u ON st.asign_member_id = u.user_id
+                                     WHERE st.main_task_id IN (
+                                          SELECT mt.main_task_id
+                                          FROM main_task mt
+                                          WHERE mt.project_id IN (
+                                              SELECT p.project_id
+                                              FROM project p
+                                              WHERE p.club_id = ?
+                                          )
+                                       )
+                                       AND st.task_complete = 1
+                                       GROUP BY st.asign_member_id
+                                       ORDER BY task_complete_count DESC;";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindvalue(1, $clubId);
+            $pstmt->execute();
+            $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
+            if($rs){
+                $teamDetails=array();
+                foreach ($rs as $use ){
+                    $teamDetail=new SubTask(null,null,null,null,null,
+                    null,null,null);
+                    $teamDetail->setAssignedMemberID($use->asign_member_id);
+                    $teamDetail->setTaskCompleteCount($use->task_complete_count);
+                    $teamDetails[]=$teamDetail;
+                }
+                return $teamDetails;
+            }
+
+        } catch (PDOException $exc) {
+            die("Error in load count of Project" . $exc->getMessage());
+        }
+
+    }
+
     /**
      * @return mixed
      */
@@ -302,6 +343,16 @@ class SubTask extends MainTask
     public function setSubTaskStatus($subTaskStatus)
     {
         $this->subTaskStatus = $subTaskStatus;
+    }
+
+    public function setTaskCompleteCount($count)
+    {
+        $this->task_complete_count = $count;
+    }
+
+    public function getTaskCompleteCount()
+    {
+        return $this->task_complete_count;
     }
 
 
