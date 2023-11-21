@@ -20,7 +20,7 @@ if (isset($_POST["submit"],$_POST["username"],$_POST["password"],
         $password = password_hash($_POST["password"],PASSWORD_BCRYPT);
         $clubName = $_POST["club_name"];
         $contactNo = $_POST["contact_no"];
-        $targetDirectory = "../../assets/uploads/";
+        $targetDirectory = "../../assets/upload/";
         $filename = basename($_FILES["pdfFile"]["name"]);
         $filetype = pathinfo($filename, PATHINFO_EXTENSION);
         $targetFilePath = $targetDirectory.$filename;

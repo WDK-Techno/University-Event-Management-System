@@ -10,12 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         if ($error == 2) {
             $errMessage = "Invalid Username or Password";
         }
-        if ($error == 3) {
-            $errMessage = "Reset link successfully sent to your email.";
-        }
-        if ($error == 4) {
-            $errMessage = "Password reset Successfully.";
-        }
     }
 }
 ?>
@@ -79,18 +73,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 <div class="col-lg-12 ">
                                     <div class="p-4">
                                         <div class="text-center">
-                                            <h4 class="text-dark mb-4">User Login</h4>
+                                            <h4 class="text-dark mb-4">Forgot Password</h4>
                                         </div><!-- Start: Login Form -->
-                                        <form action="process/login.php" method="post" class="user">
+                                        <form action="process/forgotpswd.php" method="post" class="user">
                                             <div class="mb-3 mx-2">
                                                 <input class="form-control form-control-user"  type="email"
                                                        id="email" aria-describedby="emailHelp"
                                                        placeholder="Enter Email Address" name="username" required="">
                                             </div>
-                                            <div class="mb-3 mx-2">
+                                            <!-- <div class="mb-3 mx-2">
                                                 <input class="form-control form-control-user" type="password"
                                                        placeholder="Password" name="password" required="">
-                                            </div>
+                                            </div> -->
                                             <!-- Start: Error Message -->
                                             <div class="text-center" id="login-error"
                                                  style="color: var(--accent-color3)"><?=$errMessage ?></div>
@@ -100,15 +94,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                                             <button
                                                     class="btn btn-primary d-block btn-user w-100" id="submitBtn"
-                                                    name="submit" type="submit">Login
+                                                    name="submit" type="submit">Send reset Link
                                             </button>
                                             <hr>
                                         </form><!-- End: Login Form --><!-- Start: Forgot Password -->
-                                        <div class="text-center"><a class="small" href="forgotPassword.php">Forgot
-                                                Password?</a></div><!-- End: Forgot Password -->
                                         <!-- Start: Register -->
-                                        <div class="text-center"><a class="small" href="register.php">Create an
-                                                Account!</a></div><!-- End: Register -->
+                                        <div class="text-center"><a class="small" href="login.php">Back to Login</a></div><!-- End: Register -->
                                     </div>
                                 </div>
                             </div>
