@@ -200,6 +200,7 @@ class SubTask extends MainTask
 
     public static function getmemberIdUsingClubId($con, $clubId)
     {
+        $teamDetails=array();
         try {
             $query = "SELECT st.asign_member_id, COUNT(*) AS task_complete_count
                                     FROM sub_task st
@@ -221,7 +222,7 @@ class SubTask extends MainTask
             $pstmt->execute();
             $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
             if($rs){
-                $teamDetails=array();
+
                 foreach ($rs as $use ){
                     $teamDetail=new SubTask(null,null,null,null,null,
                     null,null,null);
@@ -229,8 +230,10 @@ class SubTask extends MainTask
                     $teamDetail->setTaskCompleteCount($use->task_complete_count);
                     $teamDetails[]=$teamDetail;
                 }
-                return $teamDetails;
-            }
+
+            }else {
+                echo "No projects in club!";
+            }return $teamDetails;
 
         } catch (PDOException $exc) {
             die("Error in load count of Project" . $exc->getMessage());
