@@ -31,7 +31,7 @@ class Mail
             // Content
             $mail->isHTML(true);                    // Set email format to HTML
             $mail->Subject = 'Reset Account Password';
-            $newlink = '<a href="http://localhost/ishara/resetPassword.php?email='.$email.'"> <b>Click here</b></a> to Reset Your Password';
+            $newlink = '<a href="http://localhost/project1/resetPassword.php?email='.$email.'"> <b>Click here</b></a> to Reset Your Password';
             $mail->Body = $newlink;
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
             // Your account password is reset and your new password is <b>pwd@123456</b>

@@ -92,8 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                        placeholder="Password" name="password" required="">
                                             </div>
                                             <!-- Start: Error Message -->
-                                            <div class="text-center" id="login-error"
-                                                 style="color: var(--accent-color3)"><?=$errMessage ?></div>
+                                            <div class="text-center text-success" id="login-error"
+                                                 style=""><b><?=$errMessage ?></b></div>
                                             <div class="row mb-3">
                                                 <p id="errorMsg" class="text-danger" style="display:none;">Paragraph</p>
                                             </div><!-- End: Error Message -->
