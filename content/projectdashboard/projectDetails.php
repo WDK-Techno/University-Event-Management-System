@@ -43,7 +43,7 @@
 
                                 <div class="d-flex mt-0 flex-column" style="height: 200px">
                                     <div class="fw-bold">Project Description</div>
-                                    <div class="bg-body-tertiary mt-2 mb-2 shadow-sm p-1 rounded" style="height: 100%"><?= $project->getDescription() ?></div>
+                                    <div class="mt-2 mb-2 p-1 rounded" style="height: 100%"><?= $project->getDescription() ?></div>
                                 </div>
 
                             </div>
