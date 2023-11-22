@@ -242,21 +242,20 @@ $subTasks = SubTask::getSubTasksListFromProjectID($con, $project->getProjectID()
                             <div class="row mb-2 shadow-sm set-border" style="height: 50px;">
                                 <div class="col-1 d-flex tabel-column-type-1 justify-content-center"
                                      style="font-size: 1.8rem;">
-                                    <form action="process/projectdashboard/editSubTask.php" method="POST">
+                                    <form action="process/projectdashboard/editSubTask.php" class="d-flex" method="POST">
                                         <input type="checkbox"
-                                               class="my-auto ms-3 me-auto form-check-input"
+                                               class="my-auto ms-0 me-auto form-check-input"
                                                style="background-color: var(--primary);border-color: var(--accent-color3);border-width:2.5px;"
                                                name="is_completed"
                                                value="completed"
                                             <?php if ($task->getIsTaskCompleted() == 1) echo "checked" ?>
                                                onchange="updateSubTaskComplete(<?= $subTaskNo ?>)">
                                         <!--======= hidden ==========-->
-                                        <input type="hidden" name="menuNo" value="5">
-                                        <input type="hidden" name="pr_id"
+                                        <input type="hidden" name="menuNo" value="4">
+                                        <input type="hidden" name="sub_task_id"
                                                value="<?= $task->getSubTaskID() ?>">
-                                        <input class="d-none" type="submit" name="pr_update_submit"
-                                               id="pr_update_submit_<?= $subTaskNo ?>"/>
-
+                                        <input class="d-none" type="submit" name="sub_task_update_submit"
+                                               id="sub_task_update_submit_<?= $subTaskNo ?>"/>
                                     </form>
                                 </div>
                                 <div class="col-2 tabel-column-type-2 d-flex justify-content-center">

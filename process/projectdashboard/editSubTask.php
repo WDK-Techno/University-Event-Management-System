@@ -46,3 +46,25 @@ if (isset($_POST['edit_sub_task'])) {
     }
 
 }
+
+if (isset($_POST['sub_task_update_submit'])){
+    $selectedMenuNo = $_POST['menuNo'];
+    $subTaskID = $_POST['sub_task_id'];
+    $completed = 0;
+
+    if ($_POST['is_completed'] == "completed"){
+        $completed = 1;
+    }
+
+    $subTask = new SubTask($subTaskID,null,null,null,null,null,null,null);
+    $subTask->loadSubTaskFromSubTaskID($con);
+    $subTask->setIsTaskCompleted($completed);
+    $rs = $subTask->savChangesToDatabase($con);
+
+    if ($rs) {
+        header("location: ../../projectdashboard.php?tab={$selectedMenuNo}");
+    } else {
+        header("location: ../../projectdashboard.php?tab={$selectedMenuNo}&err=2");
+    }
+
+}

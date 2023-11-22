@@ -307,6 +307,12 @@ if (!$project->loadDataFromProjectID($con)) {
             document.getElementById('pr_update_submit_' + no + '_' + prTaskNo).click();
         }
     </script>
+    <!--========= execute sub task complete update submit button ======== -->
+    <script>
+        function updateSubTaskComplete(subTaskNo) {
+            document.getElementById('sub_task_update_submit_'+subTaskNo).click();
+        }
+    </script>
     <script>
         function addMemberToProject() {
             let username = document.getElementById("add-member-username-input").value;
