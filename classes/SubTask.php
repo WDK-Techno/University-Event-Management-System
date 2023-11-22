@@ -18,6 +18,8 @@ class SubTask extends MainTask
     private $task_complete_count;
 
 
+
+
     public function __construct($subTaskID, $subTaskName, $description, $deadline, $assignedMemberID, $isTaskCompleted, $mainTaskID, $status)
     {
         parent::__construct($mainTaskID);
@@ -82,6 +84,9 @@ class SubTask extends MainTask
 
         return $subTasks;
     }
+
+
+
 
 //    public function loadCompeatSubTaskFromSubTaskID($con)
 //    {
@@ -233,6 +238,21 @@ class SubTask extends MainTask
 
     }
 
+    public static function getSubTasksCountProjectID($con, $projectID){
+        try {
+            $querry="SELECT COUNT(sub_task_id)AS sub_task_count FROM sub_task WHERE main_task_id in (SELECT main_task_id FROM main_task WHERE project_id = ?);";
+            $pstmt = $con->prepare($querry);
+            $pstmt->bindValue(1, $projectID);
+            $pstmt->execute();
+            $rs = $pstmt->fetch(PDO::FETCH_ASSOC);
+            if($rs){
+                return $rs['sub_task_count'];
+            }
+        }catch (PDOException $exc) {
+            die("Error In Get Sub Tasks count From Project ID " . $exc->getMessage());
+        }
+    }
+
     /**
      * @return mixed
      */
@@ -354,6 +374,9 @@ class SubTask extends MainTask
     {
         return $this->task_complete_count;
     }
+
+
+
 
 
 }

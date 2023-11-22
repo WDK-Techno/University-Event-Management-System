@@ -38,7 +38,7 @@ if (isset($_SESSION['user_id'])) {
     $loadUserData = $undergraduate->loadDataFromUserID($con);
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $selected_menuNo = 3;
+        $selected_menuNo = 2;
         if (isset($_GET['tab'])) {
             $selected_menuNo = $_GET['tab'];
         }
@@ -418,7 +418,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
 
 
-        <div id="menu-content-2" class="main-content hide">
+        <div id="menu-content-2" class="main-content hide" style="overflow-y: scroll; height: 100vh">
 
             <div class="row py-1">
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-1">
@@ -582,7 +582,7 @@ if (isset($_SESSION['user_id'])) {
 
             </div>
             <hr/>
-            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
+            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4" >
 
 
                 <?php
@@ -600,20 +600,18 @@ if (isset($_SESSION['user_id'])) {
                                     <div id="chart-<?php echo $project->getProjectID(); ?>"> <!-- Fixed the concatenation -->
                                     </div>
                                     <?php
-                                          $subTasks=SubTask::getSubTasksListFromProjectID($con, $project->getProjectID());
-                                           foreach( $subTasks as  $subTask){
-                                              $sc= $subTask->getSubTaskID();
-
-
+                                    $subTasksCount = SubTask::getSubTasksCountProjectID($con, $project->getProjectID());
+                                     // Retrieve the count
                                     ?>
                                     <div>
-                                        <?php echo $sc;?>
 
+                                          <?php
+                                          echo $subTasksCount;
+                                          ?>
                                     </div>
-                                               <?php
-                                           }
 
-                                    ?>
+
+
                                     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
                                     <script>
                                         var options = {
@@ -730,7 +728,7 @@ if (isset($_SESSION['user_id'])) {
 
                         <div class="card-body">
                            <img src="assets/images/profile_img/ug/<?php echo  $usProImg?>" class="card-img-top
-                    rounded-circle img-thumbnail shadow-sm"
+                    rounded-circle img-thumbnail shadow-sm mx-5 mb-2"
                                  style="width: 150px; height: 150px; object-fit: cover;position: relative"
                                  alt="user Profile Image">
                             <div class="card-content">
