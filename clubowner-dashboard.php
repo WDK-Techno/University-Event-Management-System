@@ -525,7 +525,7 @@ if (isset($_SESSION['user_id'])) {
                                     <h4 class="title-text mt-0">Total members</h4>
                                     <h3 class="font-weight-semibold mb-1" id="stat-count">
 
-                                        <?php echo count($ugs); ?>
+                                        <?php // echo count($ugs); ?>
 
                                     </h3>
 
@@ -601,12 +601,21 @@ if (isset($_SESSION['user_id'])) {
                                     </div>
                                     <?php
                                     $subTasksCount = SubTask::getSubTasksCountProjectID($con, $project->getProjectID());
+
+                                    $subTaskCompleteCount=SubTask::getSubCompleteTasksCountProjectID($con, $project->getProjectID());
                                      // Retrieve the count
                                     ?>
                                     <div>
 
                                           <?php
-                                          echo $subTasksCount;
+                                          echo $subTasksCount."<br/>";
+                                          echo  $subTaskCompleteCount."<br/>";
+                                          if($subTasksCount==0 &&$subTaskCompleteCount==0){
+
+                                          }else{
+                                          $precent= (($subTaskCompleteCount/$subTasksCount)*100);
+                                          echo $precent;
+                                          }
                                           ?>
                                     </div>
 
@@ -614,14 +623,14 @@ if (isset($_SESSION['user_id'])) {
 
                                     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
                                     <script>
-                                        var options = {
+                                        var options  = {
                                             chart: {
                                                 height: 280,
                                                 type: "radialBar",
                                             },
 
 
-                                            series: [18],
+                                            series: [<?php echo isset($precent) ? (int)$precent : 0; ?>],
                                             colors: ["#20E647"],
                                             plotOptions: {
                                                 radialBar: {
