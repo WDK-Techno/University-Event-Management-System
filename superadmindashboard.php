@@ -503,7 +503,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                                             <div class="modal-footer" style="background-color:var(--darker-primary)">
 
                                                 <button type="button" class="btn btn-secondary" id="no"
-                                                    data-bs-dismiss="modal">Cancel
+                                                    data-bs-dismiss="modal">Ok
                                                 </button>
 
                                             </div>
