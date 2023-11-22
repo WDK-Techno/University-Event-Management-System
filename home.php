@@ -38,14 +38,11 @@ if (!empty($rs)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <!-- ====== CSS Files ==== -->
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./fullcalendar/lib/main.min.css">
+       <link rel="stylesheet" href="./fullcalendar/lib/main.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/scss/style.scss">
     <link rel="stylesheet" href="./assets/css/home.css">
-    <link rel="stylesheet" href="./assets/css/calender.css">
     <link rel="stylesheet" href="./assets/css/carousel.css">
-    <link rel="stylesheet" href="./assets/css/footer.css">
+    <!--<link rel="stylesheet" href="./assets/css/footer.css">-->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
@@ -101,8 +98,47 @@ if (!empty($rs)) {
 </nav>
 
 <!-- ======= Main Content ====== -->
+<!-----------image carosel-------------->
+<section class="my-3 mx-0">
+    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="5000">
+
+                <img src="assets/images/homepage/Picture1.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption text-center text-md-center mb-5">
+                    <h1>Welcome to UWU Eventz</h1>
+                </div>
+
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <img src="assets/images/homepage/Picture2.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption text-center text-md-center mb-5">
+                    <h1>Welcome to UWU Eventz</h1>
+                </div>
+            </div>
+
+            <div class="carousel-item" data-bs-interval="1000">
+                <img src="assets/images/homepage/Picture4.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption text-center text-md-center mb-5">
+                    <h1>Welcome to UWU Eventz</h1>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+
+
+<!-----------calender--------------->
 <div>
-    <div class="container m-0">
+    <div class="container mx-6">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -158,6 +194,7 @@ if (!empty($rs)) {
             </div>
         </div>
     </div>
+</div>
     <!-- Event Details Modal -->
 
     <!-- <div class="container3-fluid py-6 mb-6"> -->
@@ -358,9 +395,10 @@ if (!empty($rs)) {
 </div>-->
 
 
+
 <hr/>
 
-
+<div>
 
 <!--flyer show new part--->
 <?php
@@ -426,9 +464,7 @@ $flyers= $publicFlyer->loadPublicFlyerList($con);
                         the assignment
                         Dates for an event.
                     </p>
-                    <div class="content-btn">
-                        <a href="">Read More</a>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -447,9 +483,7 @@ $flyers= $publicFlyer->loadPublicFlyerList($con);
                         The system can provide a platform for managing PR tasks, assigning responsibilities, and setting
                         deadlines.
                     </p>
-                    <div class="content-btn">
-                        <a href="">Read More</a>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -468,9 +502,7 @@ $flyers= $publicFlyer->loadPublicFlyerList($con);
                         Project members are able to update the timeline as the project progresses, making adjustments to
                         task timelines or dependencies as needed.
                     </p>
-                    <div class="content-btn">
-                        <a href="">Read More</a>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -490,9 +522,7 @@ $flyers= $publicFlyer->loadPublicFlyerList($con);
                         overall progress of the project.
 
                     </p>
-                    <div class="content-btn">
-                        <a href="#">Read More</a>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -615,14 +645,58 @@ $flyers= $publicFlyer->loadPublicFlyerList($con);
     </div>
 
 </div>
-<script src="./fullcalendar/lib/main.min.js"></script>
+
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <p class="navbar-brand text-primary" href="../home.php">UWU<span class="text-white">Event</span><span
+                                class="text-warning">z</span></p>
+                </div>
+
+                <div class="col-md-3">
+                    <h3>Office <div class="underline"><span></span></div></h3>
+                    <p class="email-id">uwueventz23@gmail.com</p>
+                    <h4>+94 - 1117771979</h4>
+                </div>
+
+                <div class="col-md-3">
+                    <h3>Links <div class="underline"><span></span></div></h3>
+                    <ul class="list-unstyled">
+                        <li><a href="" class="text-white text-decoration-none">Home</a></li>
+                        <li><a href="" class="text-white text-decoration-none">Services</a></li>
+                        <li><a href="" class="text-white text-decoration-none">Contact Us</a></li>
+                        <li><a href="" class="text-white text-decoration-none">Features</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3">
+                    <h3>Newsletter <div class="underline"><span></span></div></h3>
+
+                    <div class="icons">
+                        <a href="#" class="text-white text-decoration-none me-2"><ion-icon name="logo-facebook"></ion-icon></a>
+                        <a href="#" class="text-white text-decoration-none me-2"><ion-icon name="logo-instagram"></ion-icon></a>
+                        <a href="#" class="text-white text-decoration-none me-2"><ion-icon name="logo-twitter"></ion-icon></a>
+                        <a href="#" class="text-white text-decoration-none me-2"><ion-icon name="logo-google"></ion-icon></a>
+                        <a href="#" class="text-white text-decoration-none"><ion-icon name="logo-skype"></ion-icon></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="container">
+            <p class="text-center">&copy; Copyright 2023 - UWU Eventz, Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="./fullcalendar/lib/main.min.js"></script>
 <script src="./assets/js/jquery-3.6.0.min.js"></script>
 <script src="./assets/js/bootstrap.min.js"></script>
 <!-- =====back to top button====-->
 <a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top border border-dark" role="button"><i
             class="fas fa-chevron-up"></i></a>
 <!-- ======== Footer ======== -->
-<?php include('content/footer.php') ?>
+<?php // include('content/footer.php') ?>
 
 <!--=== pre loader ===-->
 <?php include_once "content/preloader.php" ?>

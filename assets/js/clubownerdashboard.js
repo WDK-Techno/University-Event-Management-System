@@ -109,26 +109,28 @@ function showMenuContent(menuNo) {
 }
 
 
-document.getElementById("fileImg").onchange = function () {
-    document.getElementById("image").src = URL.createObjectURL(fileImg.files[0]); // Preview new image
+document.getElementById("fileImg").onchange = function (event) {
+    const fileInput = event.target;
 
-    document.getElementById("cancel").style.display = "block";
-    document.getElementById("upload").style.display = "none";
+    if (fileInput.files.length > 0) {
+        document.getElementById("image").src = URL.createObjectURL(fileInput.files[0]);
 
-}
-
+        document.getElementById("cancel").style.display = "block";
+        document.getElementById("upload").style.display = "none";
+    }
+};
 
 var userImage = document.getElementById('image').src;
 document.getElementById("cancel").onclick = function () {
-    document.getElementById("image").src = userImage; // Back to previous image
+    document.getElementById("image").src = userImage;
 
     document.getElementById("cancel").style.display = "none";
     document.getElementById("upload").style.display = "block";
-    const file =
-        document.querySelector('#fileImg');
-    file.value = '';
 
-}
+    const fileInput = document.querySelector('#fileImg');
+    fileInput.value = '';
+};
+
 
 
 

@@ -22,7 +22,7 @@ footer{
 }
 
 .footer-container{
-    width:85%;
+    width:auto;
     margin:auto;
     display:flex;
     flex-wrap: wrap;

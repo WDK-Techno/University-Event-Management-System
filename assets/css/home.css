@@ -24,11 +24,11 @@
 }
 .card-content{
     background-color: white;
-    height: 300px;
+    height: auto;
     border: none;
  }
   img{
-     height: 350px;
+
      width: 350px;
       align-items: center;
       justify-content: center;

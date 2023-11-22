@@ -525,7 +525,9 @@ if (isset($_SESSION['user_id'])) {
                                     <h4 class="title-text mt-0">Total members</h4>
                                     <h3 class="font-weight-semibold mb-1" id="stat-count">
 
-                                        <?php // echo count($ugs); ?>
+                                        <?//php if(count($ugs)==null){
+                                            //echo 0;
+                                       // }else{ echo count($ugs);} ?>
 
                                     </h3>
 
@@ -608,13 +610,15 @@ if (isset($_SESSION['user_id'])) {
                                     <div>
 
                                           <?php
-                                          echo $subTasksCount."<br/>";
-                                          echo  $subTaskCompleteCount."<br/>";
+                                         // echo $subTasksCount."<br/>";
+                                          //echo  $subTaskCompleteCount."<br/>";
                                           if($subTasksCount==0 &&$subTaskCompleteCount==0){
+                                              $precent=0;
+                                             // echo $precent;
 
                                           }else{
                                           $precent= (($subTaskCompleteCount/$subTasksCount)*100);
-                                          echo $precent;
+                                          //echo $precent;
                                           }
                                           ?>
                                     </div>
@@ -919,7 +923,18 @@ if (isset($_SESSION['user_id'])) {
                                      alt="Card image cap"/>
                                 <!----------------- card  body ------------------->
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= $publicFlyerObj->getCaption() ?></h5>
+                                    <h5 class="card-title"><?=
+                                        $caption = $publicFlyerObj->getCaption();
+                                        $words = explode(' ', $caption); // Split the caption into an array of words
+
+                                        // Display the first 10 words (change 10 to your desired word limit)
+                                        $limitedCaption = implode(' ', array_slice($words, 0, 5));
+
+                                        echo $limitedCaption;
+                                        if (count($words) > 10) {
+                                            echo '...'; // Add ellipsis if the caption exceeds the word limit
+                                        }
+                                        ?></h5>
                                 </div>
                                 <!----------------- card  footer ------------------->
                                 <div class="card-footer d-flex justify-content-end bg-warning-subtle card-list-option-buttons "
