@@ -63,9 +63,6 @@ if (isset($_SESSION['user_id'])) {
               integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
               crossorigin="anonymous">
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-              crossorigin="anonymous">
 
 
     </head>
@@ -185,13 +182,13 @@ if (isset($_SESSION['user_id'])) {
 
         <div id="menu-content-1" class="main-content hide ms-1">
         </div>
-        <div id="menu-content-2" class="main-content hide">
+        <div id="menu-content-2" class="main-content hide"  >
             <div class="m-4">
                 <h1>Task </h1>
             </div>
 
 
-            <div class="card mx-4" style="">
+            <div class="card mx-4"  >
                 <div class="card-header team-member-table pb-0"
                      style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
 
@@ -296,8 +293,6 @@ if (isset($_SESSION['user_id'])) {
                                 </form>
 
                                 <?php
-                            }else{
-
                             }
 
                         }
@@ -546,10 +541,7 @@ if (isset($_SESSION['user_id'])) {
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    <!-- ==== Boostrap Script ==== -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-            crossorigin="anonymous"></script>
+   
     <!-- ==== Boostrap Modal Script ==== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
