@@ -246,7 +246,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                             </td>
                             <td>
                             <button type="button" id="ugReset" class="btn btn-primary btnedit" data-bs-toggle="modal"
-                                    data-bs-target="#editModal-<?=$newundrNo ?>"><i class="fa-solid fa-pen-to-square"></i>Edit
+                                    data-bs-target="#editModal-<?=$newundrNo ?>">Reset
                                 </button>
 
                                          <!-- Bootstrap Modal for Decline -->
@@ -280,8 +280,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
                             <td>
                             <button type="button" id="clubDelete" class="btn btn-danger btnedit" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal-<?=$newundrNo ?>"> <i
-                                        class="fa-solid fa-trash"></i>Delete
+                                    data-bs-target="#deleteModal-<?=$newundrNo ?>"> Delete
                                 </button>
 
 
@@ -375,7 +374,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                             </td>
                             <td>
                             <button type="button" id="clubReset" class="btn btn-primary btnedit" data-bs-toggle="modal"
-                                    data-bs-target="#clubEditModal-<?=$oldClubNum ?>"><i class="fa-solid fa-pen-to-square"></i>Edit
+                                    data-bs-target="#clubEditModal-<?=$oldClubNum ?>">Reset
                                 </button> 
 
                                 <!-- Bootstrap Modal for Decline -->
@@ -408,8 +407,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
                             <td>
                             <button type="button" class="btn btn-danger btnedit" data-bs-toggle="modal"
-                                    data-bs-target="#dltModalClub-<?=$oldClubNum ?>"> <i
-                                        class="fa-solid fa-trash"></i>Delete
+                                    data-bs-target="#dltModalClub-<?=$oldClubNum ?>"> Delete
                                 </button>
 
 
