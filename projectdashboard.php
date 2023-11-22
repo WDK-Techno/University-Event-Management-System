@@ -64,7 +64,7 @@ if (!$project->loadDataFromProjectID($con)) {
 
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $selected_menuNo = 4;
+        $selected_menuNo = 1;
         if (isset($_GET['tab'])) {
             $selected_menuNo = $_GET['tab'];
         }
@@ -251,7 +251,7 @@ if (!$project->loadDataFromProjectID($con)) {
 
 
         <div id="menu-content-1" class="main-content w-100 h-100 hide">
-            <h1>Content 1</h1>
+            <?php include_once "content/projectdashboard/projectDetails.php" ?>
         </div>
         <!--======== Content 2 - Team Members ======-->
         <div id="menu-content-2" class="main-content hide">
