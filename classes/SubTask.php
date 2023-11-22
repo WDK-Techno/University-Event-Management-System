@@ -253,6 +253,25 @@ class SubTask extends MainTask
         }
     }
 
+    public static function getSubCompleteTasksCountProjectID($con, $projectID){
+        try {
+            $querry = "SELECT COUNT(sub_task_id) AS sub_task_complete_count 
+           FROM sub_task 
+           WHERE main_task_id IN (SELECT main_task_id FROM main_task WHERE project_id = ?) 
+           AND task_complete = 1;";
+
+            $pstmt = $con->prepare($querry);
+            $pstmt->bindValue(1, $projectID);
+            $pstmt->execute();
+            $rs = $pstmt->fetch(PDO::FETCH_ASSOC);
+            if($rs){
+                return $rs['sub_task_complete_count'];
+            }
+        }catch (PDOException $exc) {
+            die("Error In Get Sub Tasks count From Project ID " . $exc->getMessage());
+        }
+    }
+
     /**
      * @return mixed
      */
