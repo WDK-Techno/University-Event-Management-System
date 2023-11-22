@@ -58,6 +58,10 @@ if (isset($_SESSION['user_id'])) {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
         <!-- ===== Boostrap CSS ==== -->
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+              crossorigin="anonymous">
         <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
@@ -193,20 +197,25 @@ if (isset($_SESSION['user_id'])) {
 
                     <div class="row p-0 fw-bold">
                         <div class="col-1"></div>
-                        <div class="col-3 text-center py-2 rounded-top-3"
+                        <div class="col-2 text-center py-2 rounded-top-3"
                              style="background-color: var(--primary);">Project Name
                         </div>
-                        <div class="col-3 text-center py-2 rounded-top-3"
+                        <div class="col-2 text-center py-2 rounded-top-3"
                              style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
                             Task
                         </div>
                         <div class="col-2 text-center py-2 rounded-top-3"
                              style="background-color: var(--primary);">DeadLine
                         </div>
+
                         <div class="col-2 text-center py-2 rounded-top-3"
                              style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
                             Task Complete
                         </div>
+                        <div class="col-2 text-center py-2 rounded-top-3"
+                             style="background-color: var(--primary);">Instruction
+                        </div>
+
 
                         <div class="col-1">
 
@@ -241,10 +250,10 @@ if (isset($_SESSION['user_id'])) {
                                                      alt="">
                                             </div>
                                         </div>
-                                        <div class="col-3 tabel-column-type-1 d-flex">
+                                        <div class="col-2 tabel-column-type-1 d-flex">
                                             <div class="my-auto"><?= $project->getProjectName() ?></div>
                                         </div>
-                                        <div class="col-3 d-flex tabel-column-type-2">
+                                        <div class="col-2 d-flex tabel-column-type-2">
                                             <div class="my-auto mx-auto"><?= $subTaskObj->getSubTaskName() ?></div>
                                         </div>
                                         <div class="col-2 d-flex tabel-column-type-1">
@@ -255,9 +264,37 @@ if (isset($_SESSION['user_id'])) {
                                                 <button type="submit" name="completeTask" class="btn btn-success">Add</button>
                                             </div>
                                         </div>
+                                        <div class="col-2 d-flex tabel-column-type-2">
+                                            <div class="my-auto mx-auto">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<?= $subTaskObj->getSubTaskID() ?>">
+                                                    View
+                                                </button>
+                                                <div class="modal fade" id="exampleModal<?= $subTaskObj->getSubTaskID() ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Discription</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <?=$subTaskObj ->getDescription()?>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                     </div>
                                 </form>
+
                                 <?php
                             }else{
 
@@ -266,112 +303,15 @@ if (isset($_SESSION['user_id'])) {
                         }
                         ?>
 
-                        <!--                                <div>-->
-                        <!--                                    <button class="update-button" type="submit" name="update">Update</button>-->
-                        <!--                                </div>-->
 
-                        <!--                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px; background-color:#A3A2EC;">-->
-                        <!--                                            <div class="col-1 d-flex tabel-column-type-2">-->
-                        <!--                                                <div class="my-auto">-->
-                        <!--                                                    <img class="rounded-circle"-->
-                        <!--                                                         style="width: 40px; height: 40px; object-fit: cover;"-->
-                        <!--                                                         src="assets/images/profile_img/project/64e77ce044cd33.38133607.png"-->
-                        <!--                                                         alt="">-->
-                        <!--                                                </div>-->
-                        <!--                                            </div>-->
-                        <!--                                            <div class="col-3 tabel-column-type-1 d-flex">-->
-                        <!--                                                <div class="my-auto">JamborIEEE23</div>-->
-                        <!--                                            </div>-->
-                        <!--                                            <div class="col-3 d-flex tabel-column-type-2">-->
-                        <!--                                                <div class="my-auto mx-auto">Design flyer</div>-->
-                        <!--                                            </div>-->
-                        <!--                                            <div class="col-2 d-flex tabel-column-type-1">-->
-                        <!--                                                <div class="my-auto mx-auto">2023/10/20</div>-->
-                        <!--                                            </div>-->
-                        <!--                                            <div class="col-2 d-flex tabel-column-type-2">-->
-                        <!--                                                <div class="my-auto mx-auto"><input type="checkbox" id="cheak" name="vehicle1" value="finished"></i></div>-->
-                        <!--                                            </div>-->
-                        <!--                                            <div class="col-1 tabel-column-type-1 d-flex">-->
-                        <!--                                                <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">-->
-                        <!---->
-                        <!--                                                   -->
-                        <!--                                                    <ion-icon class="my-auto" type="button"-->
-                        <!--                                                              data-bs-toggle="modal"-->
-                        <!--                                                              data-bs-target=""-->
-                        <!--                                                              name="trash-outline"></ion-icon>-->
-                        <!--                                                </div>-->
-                        <!--                                            </div>-->
-                        <!--                                        </div>-->
-                        <!--                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px;">-->
-                        <!--                                            <div class="col-1 d-flex tabel-column-type-2">-->
-                        <!--                                                <div class="my-auto">-->
-                        <!--                                                    <img class="rounded-circle"-->
-                        <!--                                                         style="width: 40px; height: 40px; object-fit: cover;"-->
-                        <!--                                                         src="assets/images/profile_img/project/64e87d4ab4ca82.40177324.png"-->
-                        <!--                                                         alt="">-->
-                        <!--                                                </div>-->
-                        <!--                                            </div>-->
-                        <!--                                            <div class="col-3 tabel-column-type-1 d-flex">-->
-                        <!--                                                <div class="my-auto">IEEE INNAVATION NATION SRI LANKA</div>-->
-                        <!--                                            </div>-->
-                        <!--                                            <div class="col-3 d-flex tabel-column-type-2">-->
-                        <!--                                                <div class="my-auto mx-auto">Create Logo</div>-->
-                        <!--                                            </div>-->
-                        <!--                                            <div class="col-2 d-flex tabel-column-type-1">-->
-                        <!--                                                <div class="my-auto mx-auto">2023/11/10</div>-->
-                        <!--                                            </div>-->
-                        <!--                                            <div class="col-2 d-flex tabel-column-type-2">-->
-                        <!--                                                <div class="my-auto mx-auto"><input type="checkbox" id="cheak" name="vehicle1" value="finished"></div>-->
-                        <!--                                            </div>-->
-                        <!--                                            <div class="col-1 tabel-column-type-1 d-flex">-->
-                        <!--                                                <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">-->
-                        <!---->
-                        <!--                                                   -->
-                        <!--                                                    <ion-icon class="my-auto" type="button"-->
-                        <!--                                                              data-bs-toggle="modal"-->
-                        <!--                                                              data-bs-target=""-->
-                        <!--                                                              name="trash-outline"></ion-icon>-->
-                        <!--                                                </div>-->
-                        <!--                                            </div>-->
-                        <!--                                        </div>-->
-                        <!--                                        <div class="row mb-2 shadow-sm set-border" style="height: 50px; background-color:#A3A2EC;" >-->
-                        <!--                                            <div class="col-1 d-flex tabel-column-type-2">-->
-                        <!--                                                <div class="my-auto">-->
-                        <!--                                                    <img class="rounded-circle"-->
-                        <!--                                                         style="width: 40px; height: 40px; object-fit: cover;"-->
-                        <!--                                                         src="assets/images/profile_img/project/64e87d4ab4ca82.40177324.png"-->
-                        <!--                                                         alt="">-->
-                        <!--                                                </div>-->
-                        <!--                                            </div>-->
-                        <!--                                            <div class="col-3 tabel-column-type-1 d-flex">-->
-                        <!--                                                <div class="my-auto">IEEE INNAVATION NATION SRI LANKA</div>-->
-                        <!--                                            </div>-->
-                        <!--                                            <div class="col-3 d-flex tabel-column-type-2">-->
-                        <!--                                                <div class="my-auto mx-auto">Design flyer</div>-->
-                        <!--                                            </div>-->
-                        <!--                                            <div class="col-2 d-flex tabel-column-type-1">-->
-                        <!--                                                <div class="my-auto mx-auto">2023/11/23</div>-->
-                        <!--                                            </div>-->
-                        <!--                                            <div class="col-2 d-flex tabel-column-type-2">-->
-                        <!--                                                <div class="my-auto mx-auto"><input type="checkbox" id="cheak" name="vehicle1" value="finished"></i></div>-->
-                        <!--                                            </div>-->
-                        <!--                                            <div class="col-1 tabel-column-type-1 d-flex">-->
-                        <!--                                                <div class="d-flex my-auto mx-auto" style="font-size: 1.5rem;">-->
-                        <!---->
-                        <!--                                                   -->
-                        <!--                                                    <ion-icon class="my-auto" type="button"-->
-                        <!--                                                              data-bs-toggle="modal"-->
-                        <!--                                                              data-bs-target=""-->
-                        <!--                                                              name="trash-outline"></ion-icon>-->
-                        <!--                                                </div>-->
-                        <!--                                            </div>-->
-                        <!--                                        </div>-->
+
+
 
                     </div>
                 </div>
             </div>
             <div class="m-4">
-                <h1>Compleated Task </h1>
+                <h1>Completed Task </h1>
             </div>
 
             <div class="card mx-4" style="margin-top: 20px;">
@@ -380,10 +320,10 @@ if (isset($_SESSION['user_id'])) {
 
                     <div class="row p-0 fw-bold">
                         <div class="col-1"></div>
-                        <div class="col-3 text-center py-2 rounded-top-3"
+                        <div class="col-2 text-center py-2 rounded-top-3"
                              style="background-color: var(--primary);">Project Name
                         </div>
-                        <div class="col-3 text-center py-2 rounded-top-3"
+                        <div class="col-2 text-center py-2 rounded-top-3"
                              style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
                             Task
                         </div>
@@ -393,6 +333,9 @@ if (isset($_SESSION['user_id'])) {
                         <div class="col-2 text-center py-2 rounded-top-3"
                              style="background-color: var(--lighter-secondary); color: var(--darker-primary);">
                             Task Complete
+                        </div>
+                        <div class="col-2 text-center py-2 rounded-top-3"
+                             style="background-color: var(--primary);">Instruction
                         </div>
 
                         <div class="col-1">
@@ -429,10 +372,10 @@ if (isset($_SESSION['user_id'])) {
                                                      alt="">
                                             </div>
                                         </div>
-                                        <div class="col-3 tabel-column-type-1 d-flex">
+                                        <div class="col-2 tabel-column-type-1 d-flex">
                                             <div class="my-auto"><?= $project->getProjectName() ?></div>
                                         </div>
-                                        <div class="col-3 d-flex tabel-column-type-2">
+                                        <div class="col-2 d-flex tabel-column-type-2">
                                             <div class="my-auto mx-auto"><?= $subTaskObj->getSubTaskName() ?></div>
                                         </div>
                                         <div class="col-2 d-flex tabel-column-type-1">
@@ -441,6 +384,33 @@ if (isset($_SESSION['user_id'])) {
                                         <div class="col-2 d-flex tabel-column-type-2">
                                             <div class="my-auto mx-auto">
                                                 <button class="btn btn-danger" name="removeTask">REMOVE</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-2 d-flex tabel-column-type-2">
+                                            <div class="my-auto mx-auto">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<?= $subTaskObj->getSubTaskID() ?>">
+                                                    View
+                                                </button>
+                                                <div class="modal fade" id="exampleModal<?= $subTaskObj->getSubTaskID() ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Discription</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <?=$subTaskObj ->getDescription()?>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -548,23 +518,7 @@ if (isset($_SESSION['user_id'])) {
     <?php include_once "content/preloader.php" ?>
     <!--=== Preloader Script file ===-->
     <?php include_once "content/commonJS.php" ?>
-    <!--    =============== Add complat task button ==========-->
-    <script>
-        function addToTable2(button) {
 
-            button.disabled = true;
-
-            var row = button.parentNode.parentNode;
-
-            var clonedRow = row.cloneNode(true);
-
-            clonedRow.lastElementChild.innerHTML = "";
-
-            document.getElementById("table2").getElementsByTagName('tbody')[0].appendChild(clonedRow);
-
-
-        }
-    </script>
 
     <!--    =============== execute upload image button ==========-->
     <script>
@@ -584,8 +538,19 @@ if (isset($_SESSION['user_id'])) {
         document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.remove("hide");
         document.getElementById("menu-content-<?php echo $selected_menuNo ?>").classList.add("show");
     </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+    <!-- Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <!-- ==== Boostrap Script ==== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+    <!-- ==== Boostrap Modal Script ==== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
             crossorigin="anonymous"></script>
