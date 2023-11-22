@@ -319,7 +319,7 @@ class Undergraduate extends User
     public static function loadUgDataFromClubId($con, $clubid)
     {
         try {
-
+            $ugDetails = array();
             $query = "SELECT DISTINCT user_id 
                          FROM undergraduate ug
                            JOIN project_team pt ON ug.user_id = pt.ug_id
@@ -334,7 +334,7 @@ class Undergraduate extends User
             $rs = $pstmt->fetchAll(PDO::FETCH_OBJ);
             if ($rs) {
 
-                $ugDetails = array();
+
                 foreach ($rs as $row) {
                     $ug = new Undergraduate(null, null, null, null, null, null);
                     $ug->setUserId($row->user_id);
@@ -342,8 +342,10 @@ class Undergraduate extends User
                     $ugDetails[] = $ug;
                 }
 
-                return $ugDetails;
-            }
+
+            }else{
+                echo "No projects in club!";
+            }return $ugDetails;
         } catch (PDOException $exc) {
             die("Error in load count of User" . $exc->getMessage());
 

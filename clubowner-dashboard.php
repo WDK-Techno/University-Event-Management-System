@@ -525,9 +525,7 @@ if (isset($_SESSION['user_id'])) {
                                     <h4 class="title-text mt-0">Total members</h4>
                                     <h3 class="font-weight-semibold mb-1" id="stat-count">
 
-                                        <?//php if(count($ugs)==null){
-                                            //echo 0;
-                                       // }else{ echo count($ugs);} ?>
+                                        <?php echo count($ugs); ?>
 
                                     </h3>
 
