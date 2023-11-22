@@ -169,6 +169,18 @@ class SubTask extends MainTask
         }
     }
 
+    public function deleteSubTask($con){
+        try {
+            $query = "DELETE FROM sub_task WHERE sub_task_id=?";
+            $pstmt = $con->prepare($query);
+            $pstmt->bindValue(1, $this->subTaskID);
+            $pstmt->execute();
+            return $pstmt->rowCount() > 0;
+        }catch (PDOException $exc){
+            die("Error in Delete SubTask " . $exc->getMessage());
+        }
+    }
+
     public static function getSubTaskListFromUserID($con, $userID)
     {
         try {
