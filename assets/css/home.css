@@ -191,7 +191,7 @@ h3 {
     position: relative;
     z-index: 1;
     overflow: hidden;
-    transform: translateY(calc(100% - 54px));
+    transform: translateY(calc(100% - 30px));
     transition: all 0.4s ease-in-out;
 }
 .game-section .item.active .item-desc {
@@ -199,7 +199,7 @@ h3 {
 }
 .game-section .item:hover .item-desc  {
     transform: none;
-    transform: translateY(-60%);
+    transform: translateY(-10%);
 
 }
 .game-section .item-desc p {

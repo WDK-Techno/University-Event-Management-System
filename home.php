@@ -422,7 +422,10 @@ $flyers= $publicFlyer->loadPublicFlyerList($con);
                 <h3><?php echo $use->getFlyerTopic()?></h3>
                 <p><?php echo $use->getCaption()?>
                 </p>
-                <button class="item-button"><a href="<?php echo $use->getLink()?>">Register</a></button>
+                <button class="item-button"
+                        style="background-color: var(--secondary); color: var(--primary);"
+                ><a href="<?php echo $use->getLink()?>">Register</a></button>
+
 
             </div>
         </div>
