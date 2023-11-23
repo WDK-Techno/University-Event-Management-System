@@ -592,7 +592,7 @@ use classes\Undergraduate;
                                                  role="document">
                                                 <div class="modal-content">
                                                     <!--=== form =====-->
-                                                    <form action="process/projectdashboard/deleteTask.php"
+                                                    <form action="process/projectdashboard/deletePRTask.php"
                                                           method="post">
                                                         <div class="modal-header py-2 px-2"
                                                              style="background-color: var(--darker-primary); color: var(--lighter-secondary);">
