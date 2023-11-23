@@ -38,7 +38,7 @@ if (isset($_SESSION['user_id'])) {
     $loadUserData = $undergraduate->loadDataFromUserID($con);
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $selected_menuNo = 2;
+        $selected_menuNo = 1;
         if (isset($_GET['tab'])) {
             $selected_menuNo = $_GET['tab'];
         }
@@ -292,7 +292,7 @@ if (isset($_SESSION['user_id'])) {
             <hr/>
 
 
-            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4" style="overflow-y: scroll; height: 80vh">
+            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4 ms-1" style="overflow-y: scroll; height: 80vh">
 
 
                 <?php
@@ -418,9 +418,9 @@ if (isset($_SESSION['user_id'])) {
         </div>
 
 
-        <div id="menu-content-2" class="main-content hide" style="overflow-y: scroll; height: 100vh">
+        <div id="menu-content-2" class="main-content hide" style="overflow-y: scroll; height: 90vh">
 
-            <div class="row py-1">
+            <div class="row py-1 ms-2">
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 py-1">
                     <div class="card card-eco">
                         <div class="card-body">
@@ -582,7 +582,7 @@ if (isset($_SESSION['user_id'])) {
 
             </div>
             <hr/>
-            <div class="row gy-2 row-cols-1 row-cols-md-2 row-cols-xl-4" >
+            <div class="row gy-2 ms-2 row-cols-1 row-cols-md-2 row-cols-xl-4" >
 
 
                 <?php
@@ -592,7 +592,7 @@ if (isset($_SESSION['user_id'])) {
                         ?>
 
                         <div class="col">
-                            <div class="card d-block shadow-sm">
+                            <div class="card my-2 d-block shadow-sm">
                                 <div class="card-header p-3 text-white" style="background-color: var(--primary)">
                                     <h5 class="card-title fw-bold" style="font-size: 1.5rem"><?= $project->getProjectName() ?></h5>
                                 </div>
@@ -711,6 +711,7 @@ if (isset($_SESSION['user_id'])) {
                 //$ug=new Undergraduate(null,null,null,null,null,null);
 
                 $tds=SubTask::getmemberIdUsingClubId($con, $clubid);
+                $x=1;
 
                 foreach ($tds as $td) {
 
@@ -737,11 +738,16 @@ if (isset($_SESSION['user_id'])) {
                             </h5>
                         </div>
 
-                        <div class="card-body">
+                        <div class="card-body ">
+                            <span class="  badge  square-pill "
+                                  style="background-color: var(--accent-color);!important;color: var(--secondary);">
+                                             <?php echo  $x ?>
+                                    </span>
                            <img src="assets/images/profile_img/ug/<?php echo  $usProImg?>" class="card-img-top
                     rounded-circle img-thumbnail shadow-sm mx-5 mb-2"
                                  style="width: 150px; height: 150px; object-fit: cover;position: relative"
                                  alt="user Profile Image">
+
                             <div class="card-content">
 
                                 <ul class="list-group">
@@ -778,6 +784,7 @@ if (isset($_SESSION['user_id'])) {
                         </div>
                     </div>
                     <?php
+                    $x++;
                 }
                 ?>
             </div>
@@ -920,23 +927,15 @@ if (isset($_SESSION['user_id'])) {
                                      src="assets/images/flyer_img/<?= $publicFlyerObj->getFlyerImg() ?>"
                                      alt="Card image cap"/>
                                 <!----------------- card  body ------------------->
-                                <div class="card-body">
-                                    <h5 class="card-title"><?=
-                                        $caption = $publicFlyerObj->getCaption();
-                                        $words = explode(' ', $caption); // Split the caption into an array of words
 
-                                        // Display the first 10 words (change 10 to your desired word limit)
-                                        $limitedCaption = implode(' ', array_slice($words, 0, 5));
-
-                                        echo $limitedCaption;
-                                        if (count($words) > 10) {
-                                            echo '...'; // Add ellipsis if the caption exceeds the word limit
-                                        }
-                                        ?></h5>
-                                </div>
                                 <!----------------- card  footer ------------------->
                                 <div class="card-footer d-flex justify-content-end bg-warning-subtle card-list-option-buttons "
                                      style="font-size: 1.7rem;">
+                                    <!----------------- info button ------------------->
+                                    <button type="button" class="btn " data-bs-toggle="modal"
+                                            data-bs-target="#info<?= $publicFlyerObj->getFlyerID() ?>">
+                                        <ion-icon name="chevron-up-circle-outline" size="small"></ion-icon>
+                                    </button>
                                     <!----------------- edit button ------------------->
                                     <button type="button" class="btn " data-bs-toggle="modal"
                                             data-bs-target="#edit<?= $publicFlyerObj->getFlyerID() ?>">
@@ -947,6 +946,55 @@ if (isset($_SESSION['user_id'])) {
                                             data-bs-target="#<?= $publicFlyerObj->getFlyerID() ?>">
                                         <ion-icon name="trash-outline" size="small"></ion-icon>
                                     </button>
+
+                                    <!----------------- Modal for info flyer ------------------>
+
+                                    <div class="modal fade" id="info<?= $publicFlyerObj->getFlyerID() ?>" tabindex="-1"
+                                         data-bs-backdrop="static"
+                                         data-bs-keyboard="false" aria-labelledby="staticBackdropLabel"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header"
+                                                     style=" color: var(--lighter-secondary) !important; background-color: var(--primary);">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Info
+                                                        Flyer <?= $flyerNo ?></h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                        <div class="container">
+                                                                    <div class="row py-1">
+                                                                        <input type="text" name="flyerUpdateTopic"
+                                                                               class="form-control text-center"
+                                                                               value="<?= $publicFlyerObj->getFlyerTopic() ?>" disabled>
+                                                                    </div>
+                                                                    <div class="row py-1">
+                                                                        <textarea class="form-control form-control-sm"
+                                                                                  rows="7" placeholder=" <?= $publicFlyerObj->getCaption() ?>"
+                                                                                  disabled></textarea>
+
+
+                                                                    </div>
+
+
+                                                            <div class="row py-1">
+                                                                <input type="text" name="flyerUpdateLink"
+                                                                       class="form-control text-center"
+                                                                       value="<?= $publicFlyerObj->getLink() ?>" disabled>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">
+                                                                Close
+                                                            </button>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
 
                                     <!----------------- Modal for update flyer ------------------>
                                     <div class="modal fade" id="edit<?= $publicFlyerObj->getFlyerID() ?>" tabindex="-1"
